@@ -1,0 +1,49 @@
+{
+  "abiDefinition": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "className": "ERC165",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "",
+  "realArgs": [],
+  "code": "",
+  "runtimeBytecode": "",
+  "linkReferences": {},
+  "swarmHash": "",
+  "gasEstimates": null,
+  "functionHashes": {
+    "supportsInterface(bytes4)": "01ffc9a7"
+  },
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/introspection/ERC165.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/introspection/ERC165.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/introspection/ERC165.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

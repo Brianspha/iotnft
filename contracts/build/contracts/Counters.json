@@ -1,0 +1,33 @@
+{
+  "abiDefinition": [],
+  "className": "Counters",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122001980e8baf12b9ca90",
+  "realArgs": [],
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122001980e8baf12b9ca90c2b12399d207b2f27d014244f494aa7575c8b2c1f197e664736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122001980e8baf12b9ca90c2b12399d207b2f27d014244f494aa7575c8b2c1f197e664736f6c63430006020033",
+  "linkReferences": {},
+  "swarmHash": "c2b12399d207b2f27d014244f494aa7575c8b2c1f197e664736f6c6343000602",
+  "gasEstimates": {
+    "creation": {
+      "codeDepositCost": "17200",
+      "executionCost": "97",
+      "totalCost": "17297"
+    },
+    "internal": {
+      "current(struct Counters.Counter storage pointer)": "infinite",
+      "decrement(struct Counters.Counter storage pointer)": "infinite",
+      "increment(struct Counters.Counter storage pointer)": "infinite"
+    }
+  },
+  "functionHashes": {},
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Counters.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Counters.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Counters.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

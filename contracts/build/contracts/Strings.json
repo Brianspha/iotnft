@@ -1,0 +1,31 @@
+{
+  "abiDefinition": [],
+  "className": "Strings",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b52a6a0659fd96df20",
+  "realArgs": [],
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b52a6a0659fd96df203a8eaf7151445790abfb59939020ef87d682cee7db8dbc64736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220b52a6a0659fd96df203a8eaf7151445790abfb59939020ef87d682cee7db8dbc64736f6c63430006020033",
+  "linkReferences": {},
+  "swarmHash": "3a8eaf7151445790abfb59939020ef87d682cee7db8dbc64736f6c6343000602",
+  "gasEstimates": {
+    "creation": {
+      "codeDepositCost": "17200",
+      "executionCost": "97",
+      "totalCost": "17297"
+    },
+    "internal": {
+      "toString(uint256)": "infinite"
+    }
+  },
+  "functionHashes": {},
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Strings.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Strings.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Strings.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

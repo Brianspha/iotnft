@@ -1,0 +1,41 @@
+{
+  "abiDefinition": [],
+  "className": "Address",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212204031feb446f88090c1",
+  "realArgs": [],
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212204031feb446f88090c13de6e5f8e4544cc5c34f43a44147adec3786d9fa79ee0b64736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212204031feb446f88090c13de6e5f8e4544cc5c34f43a44147adec3786d9fa79ee0b64736f6c63430006020033",
+  "linkReferences": {},
+  "swarmHash": "3de6e5f8e4544cc5c34f43a44147adec3786d9fa79ee0b64736f6c6343000602",
+  "gasEstimates": {
+    "creation": {
+      "codeDepositCost": "17200",
+      "executionCost": "97",
+      "totalCost": "17297"
+    },
+    "internal": {
+      "_verifyCallResult(bool,bytes memory,string memory)": "infinite",
+      "functionCall(address,bytes memory)": "infinite",
+      "functionCall(address,bytes memory,string memory)": "infinite",
+      "functionCallWithValue(address,bytes memory,uint256)": "infinite",
+      "functionCallWithValue(address,bytes memory,uint256,string memory)": "infinite",
+      "functionDelegateCall(address,bytes memory)": "infinite",
+      "functionDelegateCall(address,bytes memory,string memory)": "infinite",
+      "functionStaticCall(address,bytes memory)": "infinite",
+      "functionStaticCall(address,bytes memory,string memory)": "infinite",
+      "isContract(address)": "infinite",
+      "sendValue(address payable,uint256)": "infinite"
+    }
+  },
+  "functionHashes": {},
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Address.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Address.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/utils/Address.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

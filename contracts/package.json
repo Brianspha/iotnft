@@ -1,0 +1,36 @@
+{
+  "name": "contracts",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "embark test --node http://localhost:8546",
+    "start": "embark reset && embark run --nodashboard",
+    "dev": "embark reset && embark run development --nodashboard",
+    "gendocs": "npx solidity-docgen --solc-module solc-0.8.4",
+    "prod": "embark reset && embark build iotex",
+    "ropsten": "embark reset && embark build ropsten",
+    "harmony": "embark reset && embark build harmony"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@openzeppelin/contracts": "^3.4.1",
+    "@openzeppelin/contracts-ethereum-package": "^2.5.0",
+    "@openzeppelin/upgrades": "^2.8.0",
+    "dotenv": "^10.0.0",
+    "embark": "^6.0.0",
+    "embark-geth": "^6.0.0",
+    "embarkjs": "^6.0.0",
+    "embarkjs-ens": "^6.0.0",
+    "embarkjs-web3": "^6.0.0"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.1",
+    "dotenv": "^10.0.0",
+    "ether-converter": "^0.0.16",
+    "web3-eth": "^1.5.2",
+    "web3-eth-accounts": "^1.5.3",
+    "web3-utils": "^1.5.3"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "abiDefinition": [],
+  "className": "EnumerableSet",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122083399089c335903794",
+  "realArgs": [],
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122083399089c335903794721f6ae5eb3904f2165514a23a094a9853f2b66832186064736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122083399089c335903794721f6ae5eb3904f2165514a23a094a9853f2b66832186064736f6c63430006020033",
+  "linkReferences": {},
+  "swarmHash": "721f6ae5eb3904f2165514a23a094a9853f2b66832186064736f6c6343000602",
+  "gasEstimates": {
+    "creation": {
+      "codeDepositCost": "17200",
+      "executionCost": "97",
+      "totalCost": "17297"
+    },
+    "internal": {
+      "_add(struct EnumerableSet.Set storage pointer,bytes32)": "infinite",
+      "_at(struct EnumerableSet.Set storage pointer,uint256)": "infinite",
+      "_contains(struct EnumerableSet.Set storage pointer,bytes32)": "infinite",
+      "_length(struct EnumerableSet.Set storage pointer)": "infinite",
+      "_remove(struct EnumerableSet.Set storage pointer,bytes32)": "infinite",
+      "add(struct EnumerableSet.AddressSet storage pointer,address)": "infinite",
+      "add(struct EnumerableSet.Bytes32Set storage pointer,bytes32)": "infinite",
+      "add(struct EnumerableSet.UintSet storage pointer,uint256)": "infinite",
+      "at(struct EnumerableSet.AddressSet storage pointer,uint256)": "infinite",
+      "at(struct EnumerableSet.Bytes32Set storage pointer,uint256)": "infinite",
+      "at(struct EnumerableSet.UintSet storage pointer,uint256)": "infinite",
+      "contains(struct EnumerableSet.AddressSet storage pointer,address)": "infinite",
+      "contains(struct EnumerableSet.Bytes32Set storage pointer,bytes32)": "infinite",
+      "contains(struct EnumerableSet.UintSet storage pointer,uint256)": "infinite",
+      "length(struct EnumerableSet.AddressSet storage pointer)": "infinite",
+      "length(struct EnumerableSet.Bytes32Set storage pointer)": "infinite",
+      "length(struct EnumerableSet.UintSet storage pointer)": "infinite",
+      "remove(struct EnumerableSet.AddressSet storage pointer,address)": "infinite",
+      "remove(struct EnumerableSet.Bytes32Set storage pointer,bytes32)": "infinite",
+      "remove(struct EnumerableSet.UintSet storage pointer,uint256)": "infinite"
+    }
+  },
+  "functionHashes": {},
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/EnumerableSet.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/utils/EnumerableSet.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/utils/EnumerableSet.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

@@ -1,0 +1,544 @@
+{
+  "data": [
+    {
+      "message": {
+        "snr": 84,
+        "vbat": 1.95328,
+        "latitude": -30.5019226,
+        "longitude": -152.1513977,
+        "gasResistance": 3500,
+        "temperature": 40.02911,
+        "pressure": 1097.5968,
+        "humidity": 61.14655,
+        "light": 1319.56,
+        "temperature2": 20.03583,
+        "gyroscope": [11, -2668, -13],
+        "accelerometer": [2391, 2668, 2946],
+        "timestamp": "1632599906",
+        "random": "6c1c77812bf07bbc"
+      }
+    },
+    {
+      "message": {
+        "snr": 97,
+        "vbat": 3.16937,
+        "latitude": -63.8018188,
+        "longitude": -111.1652527,
+        "gasResistance": 1673,
+        "temperature": 21.88538,
+        "pressure": 640.81781,
+        "humidity": 38.43436,
+        "light": 862.85,
+        "temperature2": 42.52109,
+        "gyroscope": [8, -9, -4373],
+        "accelerometer": [3819, 4096, 4373],
+        "timestamp": "1632599907",
+        "random": "e8000364258effa5"
+      }
+    },
+    {
+      "message": {
+        "snr": 191,
+        "vbat": 4.78677,
+        "latitude": 74.5292053,
+        "longitude": -124.7360535,
+        "gasResistance": 2296,
+        "temperature": 27.66199,
+        "pressure": 796.30389,
+        "humidity": 45.76981,
+        "light": 1018.27,
+        "temperature2": 51.55811,
+        "gyroscope": [-9, -2055, 3],
+        "accelerometer": [1777, 2055, 2332],
+        "timestamp": "1632599908",
+        "random": "5a79d3a0d23e9ef5"
+      }
+    },
+    {
+      "message": {
+        "snr": 101,
+        "vbat": 5.25723,
+        "latitude": -72.1856995,
+        "longitude": 26.9784546,
+        "gasResistance": 5938,
+        "temperature": 64.38983,
+        "pressure": 1706.95511,
+        "humidity": 42.50775,
+        "light": 956.21,
+        "temperature2": 5.02554,
+        "gyroscope": [9, -1761, -10],
+        "accelerometer": [1484, 1761, 2038],
+        "timestamp": "1632599909",
+        "random": "827e8d3a54c0d7c8"
+      }
+    },
+    {
+      "message": {
+        "snr": 65,
+        "vbat": 2.1257,
+        "latitude": 28.4806213,
+        "longitude": 7.4395447,
+        "gasResistance": 5101,
+        "temperature": 56.30383,
+        "pressure": 1498.12933,
+        "humidity": 80.42398,
+        "light": 1719.1,
+        "temperature2": 36.31058,
+        "gyroscope": [-14, 15, -3947],
+        "accelerometer": [3392, 3669, 3947],
+        "timestamp": "1632599910",
+        "random": "4cb1cd032c838b1d"
+      }
+    },
+    {
+      "message": {
+        "snr": 17,
+        "vbat": 1.34415,
+        "latitude": -78.2696228,
+        "longitude": -168.9700623,
+        "gasResistance": 4263,
+        "temperature": 47.31104,
+        "pressure": 1287.98419,
+        "humidity": 70.33585,
+        "light": 1509.95,
+        "temperature2": 27.31775,
+        "gyroscope": [13, 13, -3423],
+        "accelerometer": [2868, 3145, 3423],
+        "timestamp": "1632599911",
+        "random": "fca7bd168fbb745b"
+      }
+    },
+    {
+      "message": {
+        "snr": 157,
+        "vbat": 4.19781,
+        "latitude": -28.2921753,
+        "longitude": -79.6045532,
+        "gasResistance": 308,
+        "temperature": 8.384,
+        "pressure": 299.77737,
+        "humidity": 20.52112,
+        "light": 520.8,
+        "temperature2": 68.39072,
+        "gyroscope": [-396, -6, 7],
+        "accelerometer": [396, 673, 950],
+        "timestamp": "1632599912",
+        "random": "f17662de48e223d0"
+      }
+    },
+    {
+      "message": {
+        "snr": 16,
+        "vbat": 0.99005,
+        "latitude": 19.1269531,
+        "longitude": 179.2615967,
+        "gasResistance": 4706,
+        "temperature": 52.06973,
+        "pressure": 1398.97336,
+        "humidity": 76.20108,
+        "light": 1620.94,
+        "temperature2": 34.33441,
+        "gyroscope": [-13, 14, -3699],
+        "accelerometer": [3145, 3422, 3699],
+        "timestamp": "1632599913",
+        "random": "b8e59dc1e250371a"
+      }
+    },
+    {
+      "message": {
+        "snr": 157,
+        "vbat": 3.44727,
+        "latitude": -25.0654907,
+        "longitude": 106.6466675,
+        "gasResistance": 1501,
+        "temperature": 19.51154,
+        "pressure": 597.36978,
+        "humidity": 87.53876,
+        "light": 1847.63,
+        "temperature2": 1.77625,
+        "gyroscope": [-15, 1, -4266],
+        "accelerometer": [3712, 3989, 4266],
+        "timestamp": "1632599915",
+        "random": "8d62dfe45707c366"
+      }
+    },
+    {
+      "message": {
+        "snr": 164,
+        "vbat": 4.47794,
+        "latitude": 48.7392578,
+        "longitude": 94.539978,
+        "gasResistance": 945,
+        "temperature": 14.34824,
+        "pressure": 458.78848,
+        "humidity": 29.07959,
+        "light": 680.82,
+        "temperature2": 34.98395,
+        "gyroscope": [-6, 7, -3919],
+        "accelerometer": [3364, 3642, 3919],
+        "timestamp": "1632599916",
+        "random": "380696d4c6edc426"
+      }
+    },
+    {
+      "message": {
+        "snr": 203,
+        "vbat": 4.96481,
+        "latitude": -49.2033386,
+        "longitude": -134.0948792,
+        "gasResistance": 2707,
+        "temperature": 31.89322,
+        "pressure": 899.02881,
+        "humidity": 1.93069,
+        "light": 148.29,
+        "temperature2": 52.52649,
+        "gyroscope": [-4465, 3, 4],
+        "accelerometer": [4465, 4742, 19],
+        "timestamp": "1632599917",
+        "random": "5e202a3b1d79feeb"
+      }
+    },
+    {
+      "message": {
+        "snr": 71,
+        "vbat": 2.4697,
+        "latitude": 2.735199,
+        "longitude": -123.0568542,
+        "gasResistance": 2227,
+        "temperature": 26.84644,
+        "pressure": 778.84528,
+        "humidity": 44.78152,
+        "light": 1000.87,
+        "temperature2": 53.00055,
+        "gyroscope": [-1595, 10, -10],
+        "accelerometer": [1595, 4720, 4997],
+        "timestamp": "1632599918",
+        "random": "c9dce5ad77da11b0"
+      }
+    },
+    {
+      "message": {
+        "snr": 127,
+        "vbat": 3.71875,
+        "latitude": 40.1713867,
+        "longitude": -58.8540039,
+        "gasResistance": 7392,
+        "temperature": 79.0928,
+        "pressure": 70.46664,
+        "humidity": 9.935,
+        "light": 292.49,
+        "temperature2": 59.09955,
+        "gyroscope": [-4824, -4, 5],
+        "accelerometer": [4824, 100, 377],
+        "timestamp": "1632599919",
+        "random": "5495965025291aee"
+      }
+    },
+    {
+      "message": {
+        "snr": 90,
+        "vbat": 2.664,
+        "latitude": 47.2718811,
+        "longitude": 13.9674377,
+        "gasResistance": 5356,
+        "temperature": 60.9122,
+        "pressure": 644.28467,
+        "humidity": 38.12921,
+        "light": 866.25,
+        "temperature2": 1.54791,
+        "gyroscope": [8, -1536, 9],
+        "accelerometer": [1259, 1536, 1813],
+        "timestamp": "1632599920",
+        "random": "974f053ea30e556f"
+      }
+    },
+    {
+      "message": {
+        "snr": 206,
+        "vbat": 4.65585,
+        "latitude": -49.331665,
+        "longitude": -32.5183716,
+        "gasResistance": 6201,
+        "temperature": 66.63754,
+        "pressure": 1772.36929,
+        "humidity": 94.50668,
+        "light": 1994.34,
+        "temperature2": 8.27325,
+        "gyroscope": [-1, -1926, 3],
+        "accelerometer": [1648, 1926, 2203],
+        "timestamp": "1632599921",
+        "random": "acedcf63c44eb569"
+      }
+    },
+    {
+      "message": {
+        "snr": 52,
+        "vbat": 1.36902,
+        "latitude": -60.8128357,
+        "longitude": -123.2773438,
+        "gasResistance": 6342,
+        "temperature": 68.65259,
+        "pressure": 1808.19049,
+        "humidity": 96.87146,
+        "light": 29.22,
+        "temperature2": 9.2883,
+        "gyroscope": [-2, -4445, 3],
+        "accelerometer": [4168, 4445, 4722],
+        "timestamp": "1632599923",
+        "random": "45185fbcf520d694"
+      }
+    },
+    {
+      "message": {
+        "snr": 209,
+        "vbat": 4.69046,
+        "latitude": -70.6502075,
+        "longitude": 176.9155579,
+        "gasResistance": 4624,
+        "temperature": 50.75214,
+        "pressure": 1377.84863,
+        "humidity": 77.48999,
+        "light": 1655.34,
+        "temperature2": 33.01685,
+        "gyroscope": [-14, 15, -3787],
+        "accelerometer": [3232, 3509, 3787],
+        "timestamp": "1632599924",
+        "random": "cd5c0121e6c72275"
+      }
+    },
+    {
+      "message": {
+        "snr": 133,
+        "vbat": 3.36154,
+        "latitude": -73.8991699,
+        "longitude": 78.274292,
+        "gasResistance": 4797,
+        "temperature": 53.01895,
+        "pressure": 1421.83667,
+        "humidity": 77.3786,
+        "light": 1643.8,
+        "temperature2": 73.65466,
+        "gyroscope": [-771, -14, 15],
+        "accelerometer": [771, 1048, 1325],
+        "timestamp": "1632599925",
+        "random": "40cc9175d0e6b117"
+      }
+    },
+    {
+      "message": {
+        "snr": 49,
+        "vbat": 1.99011,
+        "latitude": -33.3215942,
+        "longitude": 20.8811035,
+        "gasResistance": 5665,
+        "temperature": 61.69885,
+        "pressure": 1638.81735,
+        "humidity": 39.1344,
+        "light": 888.01,
+        "temperature2": 6.85541,
+        "gyroscope": [-8, -4160, 2],
+        "accelerometer": [3883, 4160, 4438],
+        "timestamp": "1632599926",
+        "random": "39f60f917c0b58a2"
+      }
+    },
+    {
+      "message": {
+        "snr": 70,
+        "vbat": 2.35339,
+        "latitude": -59.6850891,
+        "longitude": 64.0221863,
+        "gasResistance": 3718,
+        "temperature": 42.18854,
+        "pressure": 1152.13663,
+        "humidity": 63.84921,
+        "light": 1374.1,
+        "temperature2": 62.82425,
+        "gyroscope": [-97, -12, 13],
+        "accelerometer": [97, 374, 651],
+        "timestamp": "1632599927",
+        "random": "c18f9441c501c434"
+      }
+    },
+    {
+      "message": {
+        "snr": 228,
+        "vbat": 5.19031,
+        "latitude": -71.9734497,
+        "longitude": 52.7421265,
+        "gasResistance": 7078,
+        "temperature": 75.90854,
+        "pressure": 1991.87222,
+        "humidity": 5.96823,
+        "light": 213.9,
+        "temperature2": 16.54425,
+        "gyroscope": [3, -2473, -5],
+        "accelerometer": [2196, 2473, 2751],
+        "timestamp": "1632599928",
+        "random": "e7df82809c65658d"
+      }
+    },
+    {
+      "message": {
+        "snr": 240,
+        "vbat": 5.2345,
+        "latitude": -86.7645874,
+        "longitude": 145.1890869,
+        "gasResistance": 3197,
+        "temperature": 36.85709,
+        "pressure": 1021.65134,
+        "humidity": 57.21646,
+        "light": 1243.62,
+        "temperature2": 57.4928,
+        "gyroscope": [-4771, -11, 12],
+        "accelerometer": [4771, 48, 325],
+        "timestamp": "1632599929",
+        "random": "53b85dd9209a5d0e"
+      }
+    },
+    {
+      "message": {
+        "snr": 108,
+        "vbat": 3.37952,
+        "latitude": 2.4355469,
+        "longitude": -24.3218689,
+        "gasResistance": 5853,
+        "temperature": 63.80444,
+        "pressure": 1685.80328,
+        "humidity": 89.79898,
+        "light": 1906.77,
+        "temperature2": 43.80872,
+        "gyroscope": [-1, 1, -4416],
+        "accelerometer": [3862, 4139, 4416],
+        "timestamp": "1632599930",
+        "random": "819de0e7c0493fb3"
+      }
+    },
+    {
+      "message": {
+        "snr": 76,
+        "vbat": 2.70328,
+        "latitude": 28.9986267,
+        "longitude": 154.8559875,
+        "gasResistance": 3655,
+        "temperature": 41.80194,
+        "pressure": 1136.39844,
+        "humidity": 63.3027,
+        "light": 1357.43,
+        "temperature2": 62.43765,
+        "gyroscope": [-2488, 12, -13],
+        "accelerometer": [2488, 2765, 611],
+        "timestamp": "1632599932",
+        "random": "55381010c3bf13eb"
+      }
+    },
+    {
+      "message": {
+        "snr": 226,
+        "vbat": 5.40335,
+        "latitude": -43.5462952,
+        "longitude": -118.1138611,
+        "gasResistance": 2004,
+        "temperature": 24.69275,
+        "pressure": 723.19794,
+        "humidity": 42.06995,
+        "light": 945.16,
+        "temperature2": 46.32846,
+        "gyroscope": [8, 9, -2011],
+        "accelerometer": [1456, 1733, 2011],
+        "timestamp": "1632599933",
+        "random": "474c34be4178d293"
+      }
+    },
+    {
+      "message": {
+        "snr": 106,
+        "vbat": 3.29742,
+        "latitude": -1.8447266,
+        "longitude": -24.7425537,
+        "gasResistance": 5862,
+        "temperature": 63.10364,
+        "pressure": 1687.32907,
+        "humidity": 90.12442,
+        "light": 1909.36,
+        "temperature2": 43.11038,
+        "gyroscope": [-1, 1, -4422],
+        "accelerometer": [3867, 4145, 4422],
+        "timestamp": "1632599934",
+        "random": "0bb6e8f3916d32a1"
+      }
+    },
+    {
+      "message": {
+        "snr": 165,
+        "vbat": 3.92657,
+        "latitude": 80.4523315,
+        "longitude": 80.2798157,
+        "gasResistance": 341,
+        "temperature": 8.64728,
+        "pressure": 307.95081,
+        "humidity": 21.86374,
+        "light": 528.98,
+        "temperature2": 68.65158,
+        "gyroscope": [-416, -6, 7],
+        "accelerometer": [416, 694, 971],
+        "timestamp": "1632599935",
+        "random": "2d32ea186cad886a"
+      }
+    },
+    {
+      "message": {
+        "snr": 142,
+        "vbat": 3.85431,
+        "latitude": -58.1423645,
+        "longitude": 113.1956177,
+        "gasResistance": 1763,
+        "temperature": 22.78598,
+        "pressure": 663.51529,
+        "humidity": 39.55896,
+        "light": 885.48,
+        "temperature2": 2.79028,
+        "gyroscope": [8, -1583, 10],
+        "accelerometer": [1305, 1583, 1860],
+        "timestamp": "1632599936",
+        "random": "f83848601b7b3197"
+      }
+    },
+    {
+      "message": {
+        "snr": 166,
+        "vbat": 4.11658,
+        "latitude": 75.2470703,
+        "longitude": 173.4599304,
+        "gasResistance": 574,
+        "temperature": 10.92987,
+        "pressure": 366.24902,
+        "humidity": 24.72983,
+        "light": 588.22,
+        "temperature2": 70.93417,
+        "gyroscope": [-562, -7, 7],
+        "accelerometer": [562, 840, 1117],
+        "timestamp": "1632599937",
+        "random": "9a6cf36a7b8490b2"
+      }
+    },
+    {
+      "message": {
+        "snr": 53,
+        "vbat": 1.758,
+        "latitude": 87.9087219,
+        "longitude": -75.9881897,
+        "gasResistance": 111,
+        "temperature": 6.22125,
+        "pressure": 250.50528,
+        "humidity": 18.86765,
+        "light": 472.53,
+        "temperature2": 31.37537,
+        "gyroscope": [-273, -6, 7],
+        "accelerometer": [273, 689, 966],
+        "timestamp": "1632599938",
+        "random": "f0998ebc02cf5b57"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "abiDefinition": [],
+  "className": "SafeMath",
+  "args": [],
+  "gas": "auto",
+  "silent": false,
+  "track": true,
+  "deploy": false,
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424",
+  "realArgs": [],
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c63430006020033",
+  "linkReferences": {},
+  "swarmHash": "c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c6343000602",
+  "gasEstimates": {
+    "creation": {
+      "codeDepositCost": "17200",
+      "executionCost": "97",
+      "totalCost": "17297"
+    },
+    "internal": {
+      "add(uint256,uint256)": "infinite",
+      "div(uint256,uint256)": "infinite",
+      "div(uint256,uint256,string memory)": "infinite",
+      "mod(uint256,uint256)": "infinite",
+      "mod(uint256,uint256,string memory)": "infinite",
+      "mul(uint256,uint256)": "infinite",
+      "sub(uint256,uint256)": "infinite",
+      "sub(uint256,uint256,string memory)": "infinite",
+      "tryAdd(uint256,uint256)": "infinite",
+      "tryDiv(uint256,uint256)": "infinite",
+      "tryMod(uint256,uint256)": "infinite",
+      "tryMul(uint256,uint256)": "infinite",
+      "trySub(uint256,uint256)": "infinite"
+    }
+  },
+  "functionHashes": {},
+  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "type": "file",
+  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0"
+}

@@ -17,9 +17,10 @@
             @click="connectWallet"
             text
           >
-            <v-icon left>
-              mdi-ethereum
-            </v-icon>
+            <v-img
+              src="https://siasky.net/EADM1s02BfgR8zJtenrCkBuWs81PuDIkNhYdUsUulTaB4A"
+            >
+            </v-img>
             Connect
           </v-btn>
           <v-btn
@@ -27,9 +28,10 @@
             v-if="$store.state.connected || $store.state.userAddress.length > 0"
             text
           >
-            <v-icon left>
-              mdi-ethereum
-            </v-icon>
+           <v-img   contain width="0"
+              src="https://siasky.net/GAAER3g7kfmLZF6FoUsbA07MRX9-2ulu5rkvp6CN2sBEcg"
+            >
+            </v-img>
             {{
               $store.state.userAddress.substring(0, 6) +
                 ".." +
@@ -197,7 +199,7 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <!-- If using vue-router -->
-        <keep-alive >
+        <keep-alive>
           <router-view></router-view>
         </keep-alive>
       </v-container>
@@ -294,7 +296,7 @@ export default {
         console.info(performance.navigation.type);
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
           console.info("This page is reloaded");
-          this.$router.push("/mapview");
+          this.$router.push("/");
         } else {
           console.info("This page is not reloaded");
         }
@@ -324,22 +326,6 @@ export default {
             switch (netId.toString()) {
               case "4690":
                 this.$store.state.connected = true;
-                window.ethereum.request({
-                  method: "wallet_addEthereumChain",
-                  params: [
-                    {
-                      chainId: "0x1252",
-                      chainName: "IOTEXT Testnet",
-                      nativeCurrency: {
-                        name: "IOTEXT",
-                        symbol: "IOTX",
-                        decimals: 18,
-                      },
-                      rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                      blockExplorerUrls: ["https://testnet.iotexscan.io/"],
-                    },
-                  ],
-                });
                 break;
               default:
                 window.ethereum.request({
@@ -358,7 +344,7 @@ export default {
                     },
                   ],
                 });
-                break;/* */
+                break; /* */
             }
           });
           window.ethereum.on("accountsChanged", function(accounts) {

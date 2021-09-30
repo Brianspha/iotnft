@@ -25,7 +25,7 @@ Generative NFT where the features are represented by actual device readings usin
 2. TokenContract -https://testnest.iotexscan.io/address/address/0x876B1e8ca12EF6454035Da8C0F3519766c621921
 
 ## Deployments (DApp)
-1. https://brianspha.github.io/sky-painter/
+1. https://brianspha.github.io/ionft/
 ### Customize configuration
 
 

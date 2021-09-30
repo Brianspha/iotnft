@@ -26,7 +26,7 @@ Generative NFT where the features are represented by actual device readings usin
 
 ## Deployments (DApp)
 1. https://brianspha.github.io/ionft/
-2. https://vigorous-kalam-a6014d.netlify.app/mapview (This works more consitently)
+2. https://vigorous-kalam-a6014d.netlify.app (This works more consitently)
 ### Customize configuration
 
 

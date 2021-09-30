@@ -103,9 +103,9 @@ export default {
       _this.$store.state.dappNFTs = [];
       this.$store.state.isLoading = true;
       var content = await this.$store.dispatch("getCeramicData");
-      /* content.data = [];
+      content.data = [];
       content.leaderboard = [];
-      await this.$store.dispatch("saveCeramicData", content);*/
+      await this.$store.dispatch("saveCeramicData", content);/* */
       for (var index in content.data) {
         var data = content.data[index];
         if (data.userAddress === _this.$store.state.userAddress) {

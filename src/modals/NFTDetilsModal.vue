@@ -95,7 +95,7 @@
                 $store.state.userAddress === $store.state.selectedNFT.owner
             "
             :color="$store.state.primaryColor"
-            @click="purchase"
+            @click="burnNFT"
           >
             Burn
           </v-btn>
@@ -176,10 +176,6 @@ export default {
               value: price,
             })
             .then(async (receipt, error) => {
-              _this.$store.dispatch(
-                "success",
-                "Succesfully purchased IOTNFT token"
-              );
               var content = await this.$store.dispatch("getCeramicData");
               var found = false;
               content.leaderboard.map((user) => {
@@ -201,6 +197,10 @@ export default {
               }
               await _this.$store.dispatch("saveCeramicData", content);
               _this.$store.state.isLoading = false;
+              _this.$store.dispatch(
+                "success",
+                "Succesfully purchased IOTNFT token"
+              );
             })
             .catch((error) => {
               console.log("error: ", error);
@@ -232,6 +232,70 @@ export default {
           console.log("data,error: ", data, error);
         });
       /* open Dev tools to see the result */
+    },
+    burnNFT() {
+      let _this = this;
+      _this.$store.state.isLoading = true;
+      _this.$store.state.ionftContract.methods
+        .burnToken(_this.$store.state.selectedNFT.tokenId)
+        .send({
+          from: _this.$store.state.userAddress,
+          gas: 6000000,
+        })
+        .then(async (receipt, error) => {
+          var content = await this.$store.dispatch("getCeramicData");
+          content.leaderboard.map((user) => {
+            if (user.wallet === _this.$store.state.userAddress) {
+              user.ionfts_minted--;
+            }
+            return user;
+          });
+
+          for (var index in content.data) {
+            var data = content.data[index];
+            data.data.map((nft) => {
+              nft = nft.nfts.map((minted, index) => {
+                console.log(
+                  "minted: ",
+                  minted,
+                  "_this.$store.state.selectedNFT.tokenId: ",
+                  _this.$store.state.selectedNFT.tokenId,
+                  "equal: ",
+                  minted.tokenId.toString() !==
+                    _this.$store.state.selectedNFT.tokenId.toString()
+                );
+                if (
+                  minted.tokenId.toString() !==
+                  _this.$store.state.selectedNFT.tokenId.toString()
+                ) {
+                  return minted;
+                } else {
+                  delete nft.nfts[index];
+                }
+              });
+              console.log("filtered: ", nft);
+              return nft;
+            });
+            content.data[index] = data;
+            console.log("content.data[index]: ", content.data[index]);
+          }
+
+          await _this.$store.dispatch("saveCeramicData", content);
+          _this.$store.state.isLoading = false;
+          _this.$store.dispatch("success", "Succesfully burnt IOTNFT token");
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+          _this.$store.state.isLoading = false;
+          var message = {
+            error:
+              "Something went wrong whilst burning your IOTNFT, please try again",
+            onTap: () => {
+              this.state.showNFTDetailsDialog = true;
+            },
+          };
+          this.$store.dispatch("error", message);
+        });
     },
   },
 };

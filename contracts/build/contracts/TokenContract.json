@@ -610,7 +610,7 @@
       "signature": "0xf2fde38b"
     }
   ],
-  "deployedAddress": "0x41aEd7d1f225d90580F06F114F66e886c23dD76E",
+  "deployedAddress": "0x876B1e8ca12EF6454035Da8C0F3519766c621921",
   "className": "TokenContract",
   "args": [
     "IOTNFT",
@@ -694,6 +694,6 @@
   "originalFilename": "contracts/TokenContract.sol",
   "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/TokenContract.sol",
   "type": "file",
-  "deploymentAccount": "0xcf5b4e30bC1aD46DDb6B593b427A457AF449e0f0",
-  "transactionHash": "0xed22ab16e3127a3388c2bc272c196601318d0f0c056b8b5e59b0dd2e2d6ff58a"
+  "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483",
+  "transactionHash": "0xd9bee6bed793bac4b8f26497ee15aaf5b1988c3c2f98c82b83f3734ea590578f"
 }

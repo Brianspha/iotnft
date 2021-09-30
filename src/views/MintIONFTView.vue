@@ -12,7 +12,7 @@
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-col>
           <v-text-field
-          :color="$store.state.primaryColor"
+            :color="$store.state.primaryColor"
             v-model="search"
             append-icon="mdi-magnify"
             label="Search"
@@ -67,7 +67,7 @@
               <v-container>
                 <v-row>
                   <v-text-field
-                  :color="$store.state.primaryColor"
+                    :color="$store.state.primaryColor"
                     maxlength="15"
                     type="number"
                     v-model="editedItem.IMEI"

@@ -94,6 +94,9 @@ return tokenIndexes;
       return (currentIONFTs[tokenId].owner,currentIONFTs[tokenId].price,currentIONFTs[tokenId].originalPrice,currentIONFTs[tokenId].previousOwners,currentIONFTs[tokenId].exists);
   }
 
+function burnToken(uint256 tokenId) public {
+    ionft.burnToken(tokenId);
+}
 
 function getContractCut(uint256 value)  internal view returns (uint256)  {
     uint256 roundValue = value.ceil(100);

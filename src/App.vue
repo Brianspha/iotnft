@@ -68,7 +68,7 @@
           align="center"
           justify="center"
         >
-          <v-btn @click="$router.push('MINTIONFT')" block plain>
+          <v-btn @click="$router.push('/mintionft')" block plain>
             <v-icon
               color="black"
               style="padding-right:30px; padding-left:20px;"
@@ -85,7 +85,7 @@
           align="center"
           justify="center"
         >
-          <v-btn @click="$router.push('MapView')" block plain>
+          <v-btn @click="$router.push('/mapview')" block plain>
             <v-icon
               color="black"
               style="padding-right:30px; padding-left:20px;"
@@ -102,7 +102,7 @@
           align="center"
           justify="center"
         >
-          <v-btn @click="$router.push('Leaderboard')" block plain>
+          <v-btn @click="$router.push('/leaderboard')" block plain>
             <v-icon
               color="black"
               style="padding-right:30px; padding-left:20px;"
@@ -119,7 +119,7 @@
           align="center"
           justify="center"
         >
-          <v-btn @click="$router.push('OwnedView')" block plain>
+          <v-btn @click="$router.push('/ownedview')" block plain>
             <v-icon
               color="black"
               style="padding-right:30px; padding-left:20px;"
@@ -136,7 +136,7 @@
           align="center"
           justify="center"
         >
-          <v-btn @click="$router.push('visualiseview')" block plain>
+          <v-btn @click="$router.push('/visualiseview')" block plain>
             <v-icon
               color="black"
               style="padding-right:30px; padding-left:20px;"
@@ -294,7 +294,7 @@ export default {
         console.info(performance.navigation.type);
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
           console.info("This page is reloaded");
-          this.$router.push({ name: "MapView" });
+          this.$router.push("/mapview");
         } else {
           console.info("This page is not reloaded");
         }
@@ -341,7 +341,7 @@ export default {
                   ],
                 });
                 break;
-              /* default:
+              default:
                 window.ethereum.request({
                   method: "wallet_addEthereumChain",
                   params: [
@@ -358,7 +358,7 @@ export default {
                     },
                   ],
                 });
-                break;*/
+                break;/* */
             }
           });
           window.ethereum.on("accountsChanged", function(accounts) {

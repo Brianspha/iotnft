@@ -44,6 +44,13 @@ yarn serve
 ```
 yarn build
 ```
+### Running contracts locally 
+
+Please ensure you have an instance of ganache running on port 8546 (Although embark does spin up an instance this is just to make importing accounts to metamask easier copy pasting private keys etc)
+
+1. cd into ``contracts``
+2. run ``yarn start``
+3. running tests ``yarn test``
 
 ### Lints and fixes files
 ```

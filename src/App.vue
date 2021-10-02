@@ -28,7 +28,9 @@
             v-if="$store.state.connected || $store.state.userAddress.length > 0"
             text
           >
-           <v-img   contain width="0"
+            <v-img
+              contain
+              width="0"
               src="https://siasky.net/GAAER3g7kfmLZF6FoUsbA07MRX9-2ulu5rkvp6CN2sBEcg"
             >
             </v-img>
@@ -296,7 +298,7 @@ export default {
         console.info(performance.navigation.type);
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
           console.info("This page is reloaded");
-          this.$router.push("/");
+          window.location.href = "/index.html";
         } else {
           console.info("This page is not reloaded");
         }

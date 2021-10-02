@@ -144,9 +144,8 @@ export default {
 
       if (_this.$store.state.dappNFTs.length === 0) {
         this.$store.dispatch("warning", {
-          warning: "Seems like arent any listed IONFTs",
+          warning: "Seems like there arent any listed IONFTs",
           onTap: function() {
-            window.location.replace("/mintionft");
           },
         });
       }

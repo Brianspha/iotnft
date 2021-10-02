@@ -190,16 +190,8 @@ const store = new Vuex.Store({
           icon: "info",
           title: "No IONFTS",
           text: message.warning,
-          confirmButtonText: "Mint",
           denyButtonText: `Close`,
-          showDenyButton: true,
         })
-        .then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            message.onTap();
-          }
-        });
     },
     error(context, message) {
       swal.fire("Error!", message.error, "error").then((result) => {

@@ -152,7 +152,6 @@ export default {
         this.$store.dispatch("warning", {
           warning: "Seems like you currently dont own any IONFTs",
           onTap: function() {
-            window.location.replace("/mintionft");
           },
         });
       }

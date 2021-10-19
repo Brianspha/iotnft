@@ -194,6 +194,7 @@ export default {
                   },
                 ],
               };
+              content.data = [_this.$store.state.userData];
               content.leaderboard = [
                 {
                   wallet: _this.$store.state.userAddress,
@@ -203,7 +204,7 @@ export default {
                   ionfts_bought: 0,
                 },
               ];
-              content.data.push(_this.$store.state.userData);
+              // content.data.push(_this.$store.state.userData);
             } else {
               for (var index in content.data) {
                 //@dev for some reason for works better than map

@@ -178,6 +178,7 @@ export default {
             .then(async (receipt, error) => {
               var content = await this.$store.dispatch("getCeramicData");
               var found = false;
+              content.data=content.data.data
               content.leaderboard.map((user) => {
                 if (user.wallet === _this.$store.state.userAddress) {
                   user.ionfts_bought = new bigNumber(user.ionfts_bought).plus(

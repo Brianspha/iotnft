@@ -133,7 +133,8 @@ const store = new Vuex.Store({
     tile: {},
     dappNFTs: [],
     deviceDetailsDialog:false,
-    selectedDevice:{}
+    selectedDevice:{},
+    revision:1
   },
   plugins: [createPersistedState()],
   modules: {},
@@ -164,14 +165,19 @@ const store = new Vuex.Store({
         this.state.publicKey,
         this.state.appSecret
       );
+      if(test.data === null){
+        test = {
+          data:[],
+          leaderboard:[]
+        }
+      }
       return test;
     },
-    saveData: async function(context, data) {
+    saveSkyData: async function(context, data) {
       const results = await client.db.setJSON(
         this.state.privateKey,
         this.state.appSecret,
-        data,
-        BigInt(this.state.revision)
+        data
       );
     },
     success(context, message) {
@@ -188,7 +194,7 @@ const store = new Vuex.Store({
       swal
         .fire({
           icon: "info",
-          title: "No IONFTS",
+          title: "Info",
           text: message.warning,
           denyButtonText: `Close`,
         })

@@ -195,6 +195,7 @@ export default {
 
   methods: {
     getGraphData: async function() {
+      // below ordinary XHR request with console.log
       const gql = require("graphql-tag").default;
       let _this = this;
       _this.$store.state.isLoading = true;
@@ -220,7 +221,6 @@ export default {
           for (var index in queryResult.data.deviceRecords) {
             const dataPoint = queryResult.data.deviceRecords[index];
             const protobuf = require("protobufjs");
-
             // Load the protobuf definition, it's on GitHub at
             // https://github.com/iotexproject/iott-dapp-example/blob/main/service/proto/pebble.proto
             const pebbleProtoDef = await protobuf.parse(
@@ -268,10 +268,16 @@ export default {
             nfts: [],
           });
           this.deviceData = deviceData;
+
           // Log the telemetry
           console.log(deviceData, "userData: ", _this.$store.state.userData);
           _this.$store.state.isLoading = false;
           this.dialog = false;
+          if (this.deviceData.length == 0) {
+            _this.$store.dispatch("warning", {
+              warning: "No Data found for this IMEI number",
+            });
+          }
         })
         .catch((error) => {
           console.log("error: ", error);

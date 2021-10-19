@@ -151,8 +151,7 @@ export default {
       if (_this.ownedNFTs.length === 0) {
         this.$store.dispatch("warning", {
           warning: "Seems like you currently dont own any IONFTs",
-          onTap: function() {
-          },
+          onTap: function() {},
         });
       }
       this.$store.state.isLoading = false;

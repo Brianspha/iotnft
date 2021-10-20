@@ -324,10 +324,10 @@
       "signature": "0xf2fde38b"
     }
   ],
-  "deployedAddress": "0x65Cd0E7D20C897DCf5B17D6f4117EB2eeCF75C4B",
+  "deployedAddress": "0xDA5daa7cd5d393bC7978Cb76793C32c125124AB1",
   "className": "IOTNFT",
   "args": [
-    "0xA6524e3B4A0F85AAe9E487753A7592c9c21F847E"
+    "0x94369212C30fb03E53d40630D8A094d4A0B37A50"
   ],
   "gas": "6000000",
   "gasPrice": "250",
@@ -385,5 +385,5 @@
   "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/IOTNFT.sol",
   "type": "file",
   "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483",
-  "transactionHash": "0xf8819a6b46c88346212b981a4918500b2f34cbabafc0a5bd47369a2bde8225b5"
+  "transactionHash": "0xf5caa040356db1f36e4c60c262b486f196cfc5aedd338ad29f5f4460babeaf35"
 }

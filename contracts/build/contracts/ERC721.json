@@ -450,7 +450,7 @@
       "signature": "0x23b872dd"
     }
   ],
-  "deployedAddress": "0x5F236CAc4e5baBEdE19c59a23623099c2c8250D3",
+  "deployedAddress": "0x7A355A3F1C65870Cd32eD1919A23dF363A6272C2",
   "className": "ERC721",
   "args": [
     "IOTNFT",
@@ -532,5 +532,5 @@
   "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
   "type": "file",
   "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483",
-  "transactionHash": "0xf5af356a2670c3a9e01c140ea919d79c0ad38f588ff7b429b56a0cd34d606b95"
+  "transactionHash": "0x41e8d49e806f164b301ea980cbd430f374ce0616ad2a87b5e85625708728e449"
 }

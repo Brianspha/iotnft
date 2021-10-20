@@ -326,7 +326,7 @@
       "signature": "0x23b872dd"
     }
   ],
-  "deployedAddress": "0x7a84e653D8CfFE6525eEf7079D919f2A52045E3D",
+  "deployedAddress": "0x5e8fcBbdC15f1B0cDAcd982b31f3f51664D4248F",
   "className": "ERC20Token",
   "args": [],
   "gas": "6000000",
@@ -387,5 +387,5 @@
   "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/ERC20Token.sol",
   "type": "file",
   "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483",
-  "transactionHash": "0x9e09841aeb6f11dfb2639c174d1d0eeeb0b2785e5954173c3eebfdca8f6599c4"
+  "transactionHash": "0x3fb1263def271c7bc2a5d8fa9171e9e6053f8f3734d0913ff56058f36e48a755"
 }

@@ -129,6 +129,7 @@ export default {
       console.log("in mint nft dialog: ", this.$store.state.selectedNFT);
       let _this = this;
       var colorPallet = [
+        _this.generateColor(_this.$store.state.selectedNFT.timestamp),
         _this.generateColor(_this.$store.state.selectedNFT.snr),
         _this.generateColor(_this.$store.state.selectedNFT.vbat),
         _this.generateColor(_this.$store.state.selectedNFT.latitude),

@@ -7,6 +7,12 @@
         </v-card-title>
         <v-card-text
           ><v-form ref="form" lazy-validation>
+               <v-text-field
+              v-model="$store.state.selectedDevice.timestamp"
+              label="Date"
+              readonly
+              :color="$store.state.primaryColor"
+            ></v-text-field>
             <v-text-field
               v-model="$store.state.selectedDevice.latitude"
               label="Latitude"

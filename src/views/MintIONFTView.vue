@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="deviceData"
-    sort-by="snr"
+    sort-by="timestamp"
     class="elevation-1"
     :search="search"
   >
@@ -146,10 +146,9 @@ export default {
     MintNFTModaldialog: false,
     dialogDelete: false,
     headers: [
+      { text: "Timestamp", value: "timestamp", sortable: true, align: "start" },
       {
         text: "Snr",
-        align: "start",
-        sortable: true,
         value: "snr",
       },
       { text: "Vbat", value: "vbat" },
@@ -161,9 +160,9 @@ export default {
       { text: "Humidity", value: "humidity" },
       { text: "Light", value: "light" },
       { text: "Temperature 2 (Celcius)", value: "temperature2" },
+      { text: "Random", value: "random" },
       { text: "Gyroscope", value: "gyroscope" },
       { text: "Accelerometer", value: "accelerometer" },
-      { text: "Random", value: "random" },
       { text: "Actions", value: "actions", sortable: false },
     ],
     deviceData: [],
@@ -186,13 +185,13 @@ export default {
     },
     "$store.state.userAddress": function() {
       this.mapKey++;
-      this.loadData()
-    }
+      // this.loadData();
+    },
   },
 
   created() {
     this.initialize();
-    this.loadData()
+    this.loadData();
   },
 
   methods: {
@@ -203,7 +202,6 @@ export default {
       _this.$store.state.isLoading = true;
       const axios = require("axios").default;
       axios({
-    
         method: "post",
         url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
         data: JSON.stringify({
@@ -215,6 +213,7 @@ export default {
         },
       })
         .then(async (queryResult) => {
+          const moment = require("moment");
           console.log(queryResult.data.data.deviceRecords);
           var deviceData = [];
           for (var index in queryResult.data.data.deviceRecords) {
@@ -235,6 +234,7 @@ export default {
               JSON.stringify(point),
               encodedTelemetry
             );
+
             var lat = _this.getRandomInRange(-90, 90, 7);
             var long = _this.getRandomInRange(-180, 180, 7);
             deviceData.push({
@@ -242,16 +242,17 @@ export default {
               latitude: lat,
               longitude: long,
               latLong: latLng(long, lat),
-              gasResistance: point.gasResistance,
-              pressure: point.pressure,
-              humidity: point.humidity,
+              gasResistance: point.gasResistance / 100,
+              pressure: point.pressure / 100,
+              humidity: point.humidity / 100,
               light: point.light,
-              temperature: point.temperature,
+              temperature: point.temperature / 100,
               gyroscope: point.gyroscope,
               accelerometer: point.accelerometer,
               random: point.random,
               snr: point.snr,
-              temperature2: point.temperature2,
+              temperature2: point.temperature2 / 100,
+              timestamp: moment.unix(dataPoint.timestamp).format("LLLL"),
             });
           }
           if (_this.$store.state.userData === null) {
@@ -306,7 +307,10 @@ export default {
       await this.$store.dispatch("saveCeramicData", content); */
       for (var index in content.data) {
         var data = content.data[index];
-        if (data.userAddress.toUpperCase() === _this.$store.state.userAddress.toUpperCase()) {
+        if (
+          data.userAddress.toUpperCase() ===
+          _this.$store.state.userAddress.toUpperCase()
+        ) {
           _this.$store.state.userData = data;
         }
       }

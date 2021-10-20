@@ -122,6 +122,7 @@ export default {
       let _this = this;
       _this.$store.state.isLoading = true;
       const axios = require("axios").default;
+                const moment = require("moment");
       axios({
         method: "post",
         url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
@@ -156,21 +157,22 @@ export default {
             );
             var lat = _this.getRandomInRange(-90, 90, 7);
             var long = _this.getRandomInRange(-180, 180, 7);
-            deviceData.push({
+             deviceData.push({
               owner: _this.$store.state.userAddress,
               latitude: lat,
               longitude: long,
               latLong: latLng(long, lat),
-              gasResistance: point.gasResistance,
-              pressure: point.pressure,
-              humidity: point.humidity,
+              gasResistance: (point.gasResistance)/100,
+              pressure: (point.pressure)/100,
+              humidity: (point.humidity)/100,
               light: point.light,
-              temperature: point.temperature,
+              temperature: (point.temperature)/100,
               gyroscope: point.gyroscope,
               accelerometer: point.accelerometer,
               random: point.random,
               snr: point.snr,
-              temperature2: point.temperature2,
+              temperature2: (point.temperature2)/100,
+              timestamp: moment.unix(dataPoint.timestamp).format("LLLL"),
             });
           }
           _this.deviceLocations = deviceData;

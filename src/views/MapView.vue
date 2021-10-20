@@ -63,7 +63,7 @@ export default {
     },
     "$store.state.userAddress": function() {
       this.mapKey++;
-      this.loadData()
+     // this.loadData()
     },
   },
   data() {

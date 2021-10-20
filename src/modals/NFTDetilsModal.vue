@@ -178,7 +178,6 @@ export default {
             .then(async (receipt, error) => {
               var content = await this.$store.dispatch("getCeramicData");
               var found = false;
-              content.data=content.data.data
               content.leaderboard.map((user) => {
                 if (user.wallet === _this.$store.state.userAddress) {
                   user.ionfts_bought = new bigNumber(user.ionfts_bought).plus(
@@ -254,7 +253,7 @@ export default {
 
           for (var index in content.data) {
             var data = content.data[index];
-            data.data.map((nft) => {
+            data.map((nft) => {
               nft = nft.nfts.map((minted, index) => {
                 console.log(
                   "minted: ",

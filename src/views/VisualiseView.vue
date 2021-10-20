@@ -54,9 +54,9 @@
             </l-tooltip>
           </l-marker>
         </l-map>
-       </div
-    ></v-row>
-     <DeviceDetailsModal />
+      </div></v-row
+    >
+    <DeviceDetailsModal />
   </v-container>
 </template>
 
@@ -119,66 +119,79 @@ export default {
       // .toFixed() returns string, so ' * 1' is a trick to convert to number
     },
     getGraphData: async function() {
-      const gql = require("graphql-tag").default;
       let _this = this;
       _this.$store.state.isLoading = true;
-      // Run the query
-      const queryResult = await this.$store.state.graphClient.query({
-        query: gql`
-    {
-      deviceRecords(where: { imei:"${this.deviceIMEI}"}) {
-        raw # !! Protobuf encoded sensors values
-        imei
-        signature
-      }
-    }`,
-      });
+      const axios = require("axios").default;
+      axios({
+        method: "post",
+        url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
+        data: JSON.stringify({
+          imei: this.deviceIMEI,
+        }),
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      })
+        .then(async (queryResult) => {
+          console.log(queryResult.data.data.deviceRecords);
+          var deviceData = [];
+          for (var index in queryResult.data.data.deviceRecords) {
+            const dataPoint = queryResult.data.data.deviceRecords[index];
+            const protobuf = require("protobufjs");
+            // Load the protobuf definition, it's on GitHub at
+            // https://github.com/iotexproject/iott-dapp-example/blob/main/service/proto/pebble.proto
+            const pebbleProtoDef = await protobuf.parse(
+              this.$store.state.pebble
+            ).root;
+            // We need the SensorData proto definition, let's import it
+            const SensorData = pebbleProtoDef.lookupType("SensorData");
+            // Decode the telemetry
+            const encodedTelemetry = dataPoint.raw.replace(/0x/g, "");
+            var point = SensorData.decode(Buffer.from(encodedTelemetry, "hex"));
+            console.log(
+              "point in telemtry: ",
+              JSON.stringify(point),
+              encodedTelemetry
+            );
+            var lat = _this.getRandomInRange(-90, 90, 7);
+            var long = _this.getRandomInRange(-180, 180, 7);
+            deviceData.push({
+              owner: _this.$store.state.userAddress,
+              latitude: lat,
+              longitude: long,
+              latLong: latLng(long, lat),
+              gasResistance: point.gasResistance,
+              pressure: point.pressure,
+              humidity: point.humidity,
+              light: point.light,
+              temperature: point.temperature,
+              gyroscope: point.gyroscope,
+              accelerometer: point.accelerometer,
+              random: point.random,
+              snr: point.snr,
+              temperature2: point.temperature2,
+            });
+          }
+          _this.deviceLocations = deviceData;
 
-      // Log all the data points to the console
-      console.log(queryResult.data.deviceRecords);
-
-      // Let's decode the first data message
-
-      var deviceData = [];
-      for (var index in queryResult.data.deviceRecords) {
-        const dataPoint = queryResult.data.deviceRecords[index];
-        const protobuf = require("protobufjs");
-
-        // Load the protobuf definition, it's on GitHub at
-        // https://github.com/iotexproject/iott-dapp-example/blob/main/service/proto/pebble.proto
-        const pebbleProtoDef = await protobuf.parse(this.$store.state.pebble)
-          .root;
-        // We need the SensorData proto definition, let's import it
-        const SensorData = pebbleProtoDef.lookupType("SensorData");
-        // Decode the telemetry
-        const encodedTelemetry = dataPoint.raw.replace(/0x/g, "");
-        var point = SensorData.decode(Buffer.from(encodedTelemetry, "hex"));
-        console.log(
-          "point in telemtry: ",
-          JSON.stringify(point),
-          encodedTelemetry
-        );
-        var lat = _this.getRandomInRange(-90, 90, 7);
-        var long = _this.getRandomInRange(-180, 180, 7);
-        deviceData.push({
-          owner: _this.$store.state.userAddress,
-          latitude: lat,
-          longitude: long,
-          latLong: latLng(long, lat),
-          gasResistance: point.gasResistance,
-          pressure: point.pressure,
-          humidity: point.humidity,
-          light: point.light,
-          temperature: point.temperature,
-          gyroscope: point.gyroscope,
-          accelerometer: point.accelerometer,
-          random: point.random,
-          snr: point.snr,
-          temperature2: point.temperature2,
+          // Log the telemetry
+          _this.$store.state.isLoading = false;
+          this.dialog = false;
+          if (deviceData.length == 0) {
+            _this.$store.dispatch("warning", {
+              warning: "No Data found for this IMEI number",
+            });
+          }
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+          _this.$store.state.isLoading = false;
+          _this.$store.dispatch("error", {
+            error: "Something went wrong whilst fetching device data",
+            onTap: function() {},
+          });
         });
-      }
-      _this.deviceLocations = deviceData;
-      _this.$store.state.isLoading = false;
     },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;

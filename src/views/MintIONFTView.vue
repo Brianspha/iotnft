@@ -25,7 +25,7 @@
           ><v-col class="d-flex" cols="12" sm="3">
             <v-select
               dense
-              :value="editedItem.IMEI"
+              :value="imei"
               solo
               :items="$store.state.userData ? $store.state.userData.imeis : []"
               filled
@@ -34,11 +34,7 @@
           </v-col>
           <v-col style="padding-top:15px;" class="d-flex" cols="12" sm="3">
             <v-btn
-              v-if="
-                editedItem.IMEI != '' &&
-                  editedItem.IMEI &&
-                  editedItem.IMEI.length == 15
-              "
+              v-if="imei != '' && imei && imei.length == 15"
               :color="$store.state.primaryColor"
               @click="getGraphData"
               dark
@@ -70,7 +66,7 @@
                     :color="$store.state.primaryColor"
                     maxlength="15"
                     type="number"
-                    v-model="editedItem.IMEI"
+                    v-model="imei"
                     label="IMEI"
                     hint="Device IMEI e.g. 000000000000000"
                   ></v-text-field>
@@ -83,7 +79,7 @@
                 Close
               </v-btn>
               <v-btn
-                v-if="editedItem.IMEI && editedItem.IMEI.length == 15"
+                v-if="imei && imei.length == 15"
                 :color="$store.state.primaryColor"
                 text
                 @click="getGraphData"
@@ -175,6 +171,7 @@ export default {
     editedItem: {
       IMEI: "",
     },
+    imei: "",
   }),
 
   computed: {},
@@ -187,10 +184,15 @@ export default {
       console.log("changed value: ", val);
       val || this.close();
     },
+    "$store.state.userAddress": function() {
+      this.mapKey++;
+      this.loadData()
+    }
   },
 
   created() {
     this.initialize();
+    this.loadData()
   },
 
   methods: {
@@ -199,27 +201,24 @@ export default {
       const gql = require("graphql-tag").default;
       let _this = this;
       _this.$store.state.isLoading = true;
-      // Run the query
-      await this.$store.state.graphClient
-        .query({
-          query: gql`
-    {
-      deviceRecords(where: { imei:"${this.editedItem.IMEI}"}) {
-        raw # !! Protobuf encoded sensors values
-        imei
-        signature
-      }
-    }`,
-        })
-        .then(async (queryResult, error) => {
-          // Log all the data points to the console
-          console.log(queryResult.data.deviceRecords);
-
-          // Let's decode the first data message
-
+      const axios = require("axios").default;
+      axios({
+    
+        method: "post",
+        url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
+        data: JSON.stringify({
+          imei: this.imei,
+        }),
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      })
+        .then(async (queryResult) => {
+          console.log(queryResult.data.data.deviceRecords);
           var deviceData = [];
-          for (var index in queryResult.data.deviceRecords) {
-            const dataPoint = queryResult.data.deviceRecords[index];
+          for (var index in queryResult.data.data.deviceRecords) {
+            const dataPoint = queryResult.data.data.deviceRecords[index];
             const protobuf = require("protobufjs");
             // Load the protobuf definition, it's on GitHub at
             // https://github.com/iotexproject/iott-dapp-example/blob/main/service/proto/pebble.proto
@@ -262,9 +261,9 @@ export default {
               data: [],
             };
           }
-          _this.$store.state.userData.imeis.push(_this.editedItem.IMEI);
+          _this.$store.state.userData.imeis.push(_this.imei);
           _this.$store.state.userData.data.push({
-            imei: _this.editedItem.IMEI,
+            imei: _this.imei,
             nfts: [],
           });
           this.deviceData = deviceData;
@@ -294,12 +293,27 @@ export default {
         this.$store.state.userData.data.length > 0
       ) {
         this.deviceData = this.$store.state.userData.data[0].data;
-        this.editedItem.IMEI = this.$store.state.userData.data[0].imei;
+        this.imei = this.$store.state.userData.data[0].imei;
         console.log("this.$store.state.userData: ", this.$store.state.userData);
       }
     },
+    loadData: async function() {
+      let _this = this;
+      this.$store.state.isLoading = true;
+      var content = await this.$store.dispatch("getCeramicData");
+      /* content.data = [];
+      content.leaderboard = [];
+      await this.$store.dispatch("saveCeramicData", content); */
+      for (var index in content.data) {
+        var data = content.data[index];
+        if (data.userAddress.toUpperCase() === _this.$store.state.userAddress.toUpperCase()) {
+          _this.$store.state.userData = data;
+        }
+      }
+      this.$store.state.isLoading = false;
+    },
     mintNFT(item) {
-      item.imei = this.editedItem.IMEI;
+      item.imei = this.imei;
       this.$store.state.selectedNFT = item;
       this.$store.state.mintNFTDialog = true;
     },

@@ -230,7 +230,7 @@ export default {
   name: "App",
 
   components: { MintNFTModal },
-  beforeMount() {
+  created() {
     this.authenticate();
   },
   methods: {
@@ -326,8 +326,9 @@ export default {
           window.web3.eth.net.getId((err, netId) => {
             console.log("netId: ", netId);
             switch (netId.toString()) {
-              case "4690":
+             case "4690":
                 this.$store.state.connected = true;
+               
                 break;
               default:
                 window.ethereum.request({
@@ -335,18 +336,18 @@ export default {
                   params: [
                     {
                       chainId: "0x1252",
-                      chainName: "Local Ganache Node",
+                      chainName: "IOTEXT Testnet",
                       nativeCurrency: {
-                        name: "Locahost",
-                        symbol: "Localhost",
+                        name: "IOTEXT",
+                        symbol: "IOTX",
                         decimals: 18,
                       },
-                      rpcUrls: ["https://localhost:8546"],
-                      blockExplorerUrls: ["https://localhost:8546/"],
+                      rpcUrls: ["https://babel-api.testnet.iotex.io"],
+                      blockExplorerUrls: ["https://testnet.iotexscan.io/"],
                     },
                   ],
                 });
-                break; /* */
+                break /*;*/
             }
           });
           window.ethereum.on("accountsChanged", function(accounts) {

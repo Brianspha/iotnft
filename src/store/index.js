@@ -10,7 +10,6 @@ import KeyDidResolver from "key-did-resolver";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
-console.log("process.env.VUE_APP_TRUSTREAM_SUBGRAPH: ",process.env.VUE_APP_TRUSTREAM_SUBGRAPH)
 const resolver = {
   ...KeyDidResolver.getResolver(),
   ...ThreeIdResolver.getResolver(ceramic),

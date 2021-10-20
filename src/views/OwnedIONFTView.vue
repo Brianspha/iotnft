@@ -12,7 +12,7 @@
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-marker
         v-for="(icon, index) in $store.state.dappNFTs"
-        :key="index"
+        :key="index + Date.now()"
         :lat-lng="[icon.latitude, icon.longitude]"
       >
         <l-tooltip :options="{ permanent: true, interactive: true }">

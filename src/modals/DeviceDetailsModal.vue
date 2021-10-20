@@ -79,6 +79,7 @@
               attach
               chips
               readonly
+              multiple
               label="Accelerometer"
               :color="$store.state.primaryColor"
             ></v-select> </v-form

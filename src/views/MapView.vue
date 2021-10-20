@@ -61,6 +61,10 @@ export default {
       this.mapKey++;
       console.log("updated dappNFTs: ", this.$store.state.dappNFTs);
     },
+    "$store.state.userAddress": function() {
+      this.mapKey++;
+      this.loadData()
+    },
   },
   data() {
     return {
@@ -90,7 +94,7 @@ export default {
       return [this.iconSize / 2, this.iconSize * 1.15];
     },
   },
-  mounted() {
+  created() {
     this.loadData();
   },
   methods: {
@@ -108,7 +112,7 @@ export default {
       await this.$store.dispatch("saveCeramicData", content); */
       for (var index in content.data) {
         var data = content.data[index];
-        if (data.userAddress === _this.$store.state.userAddress) {
+        if (data.userAddress.toUpperCase() === _this.$store.state.userAddress.toUpperCase()) {
           _this.$store.state.userData = data;
         }
         data.data.map((nft) => {

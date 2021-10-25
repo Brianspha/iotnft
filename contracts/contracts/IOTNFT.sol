@@ -72,6 +72,7 @@ function buyToken(uint256 tokenId) override public payable nonReentrant{
     minters[currentIONFTs[tokenId].owner].totalStaked=minters[currentIONFTs[tokenId].owner].totalStaked.add(remaining);
     address previousOwner=currentIONFTs[tokenId].owner;
     currentIONFTs[tokenId].owner=msg.sender;
+    ionft.transferFrom(address(this),msg.sender,tokenId);
   //  pixel.transferFrom(address(this),msg.sender,tokenId);
     emit transferTokenOwnerShip(msg.sender,previousOwner,msg.value,tokenId,tempPrice); 
 }

@@ -88,20 +88,25 @@ message ConfirmPackage {
 /* eslint-disable no-new */
 const store = new Vuex.Store({
   state: {
+    showMyLocationsOnly:false,
     totalStaked: 0,
     ionftContract: require("../../contracts/embarkArtifacts/contracts/IOTNFT")
       .default,
     loadinZIndex: 500,
     mintNFTDialog: false,
     testIMEI: process.env.VUE_APP_DEVICE_IMEI,
-    userData: null,
+    userData: {
+      imeis:[],
+      data:[]
+    },
     ceramicClient: ceramic,
     ceremicProvider: ceremicProvider,
     pebble: pebble,
     graphClient: new ApolloClient({
       link: createHttpLink({
-        uri: "http://34.146.117.200:8000/subgraphs/name/iotex/pebble-subgraph",
+        uri: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
         fetch: crossFetch,
+        cache: new InMemoryCache(),
       }),
       cache: new InMemoryCache(),
     }),
@@ -125,7 +130,7 @@ const store = new Vuex.Store({
     selectedDataPoint: {},
     data: [],
     isLoading: false,
-    userAddress: "",
+    userAddress: "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11",
     primaryColor: "green darken-1",
     selectedNFT: {},
     streamId: process.env.VUE_APP_CEREMIC_SECRET,
@@ -133,7 +138,8 @@ const store = new Vuex.Store({
     dappNFTs: [],
     deviceDetailsDialog:false,
     selectedDevice:{},
-    revision:1
+    revision:1,
+    connected:false
   },
   plugins: [createPersistedState()],
   modules: {},

@@ -8,8 +8,6 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>Pebble Device Data</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
         <v-col>
           <v-text-field
             :color="$store.state.primaryColor"
@@ -21,74 +19,54 @@
           ></v-text-field>
         </v-col>
         <v-spacer></v-spacer>
-        <v-row style="padding-top:22px;"
-          ><v-col class="d-flex" cols="12" sm="3">
-            <v-select
-              dense
-              :value="imei"
-              solo
-              :items="$store.state.userData ? $store.state.userData.imeis : []"
-              filled
-              label="Registered Devices"
-            ></v-select>
-          </v-col>
-          <v-col style="padding-top:15px;" class="d-flex" cols="12" sm="3">
-            <v-btn
-              v-if="imei != '' && imei && imei.length == 15"
-              :color="$store.state.primaryColor"
-              @click="getGraphData"
-              dark
-              class="mb-2"
-            >
-              Get Data
-            </v-btn>
-          </v-col>
-          <v-col style="padding-top:15px;" class="d-flex" cols="12" sm="3">
-            <v-btn
-              :color="$store.state.primaryColor"
-              @click="dialog = true"
-              dark
-              class="mb-2"
-            >
-              Add IMEI
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-dialog v-model="dialog" max-width="500px">
-          <v-card>
-            <v-card-title>
-              <span class="text-h5">Get Device Data</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-text-field
-                    :color="$store.state.primaryColor"
-                    maxlength="15"
-                    type="number"
-                    v-model="imei"
-                    label="IMEI"
-                    hint="Device IMEI e.g. 000000000000000"
-                  ></v-text-field>
-                </v-row>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn text @click="close">
-                Close
-              </v-btn>
-              <v-btn
-                v-if="imei && imei.length == 15"
-                :color="$store.state.primaryColor"
-                text
-                @click="getGraphData"
-              >
-                Get Data
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-col class="d-flex" cols="12" sm="3">
+          <v-select
+            dense
+            :value="imei"
+            solo
+            :items="$store.state.userData ? $store.state.userData.imeis : []"
+            filled
+            label="Registered Devices"
+            @change="loadDeviceData"
+          ></v-select>
+          <div style="padding-right:5px;"></div>
+          <v-btn
+            v-if="imei.length !== ''"
+            style="
+            background-color:#6bdcc6;color:
+            white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:white;
+        "
+            outlined
+            text
+            @click="loadDeviceData(imei)"
+          >
+            Get Data
+          </v-btn>
+          <v-btn
+            v-else
+            style="
+            background-color:#6bdcc6;color:
+            white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:white;
+        "
+            outlined
+            text
+            disabled
+          >
+            Get data
+          </v-btn>
+        </v-col>
       </v-toolbar>
     </template>
     <template #item.gyroscope="{ value }">
@@ -105,8 +83,16 @@
           mintNFT(item);
           $store.state.mintNFTDialog = true;
         "
+        style=" background-color:#6bdcc6;color:
+            white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:white;"
       >
-        Mint as NFT
+        Mint
       </v-btn>
     </template>
   </v-data-table>
@@ -115,7 +101,7 @@
 <script>
 import { latLng } from "leaflet";
 const moment = require("moment");
-const bigNumber = require('bignumber.js')
+const bigNumber = require("bignumber.js");
 export default {
   data: () => ({
     nftName: "",
@@ -176,6 +162,12 @@ export default {
   computed: {},
 
   watch: {
+    "$store.state.userData.imeis": async function(imeis) {
+      console.log("$store.state.userData.imeis  changed value: ", imeis);
+      if (imeis.length > 0) {
+        this.imei = imeis[0];
+      }
+    },
     dialog(val) {
       val || this.close();
     },
@@ -195,6 +187,53 @@ export default {
   },
 
   methods: {
+    loadDeviceData: async function(imei) {
+      console.log("device imei: ", imei);
+//      imei = "151358810263573"; //@dev for dev purposes
+      this.$store.state.isLoading = true;
+      const axios = require("axios").default;
+      axios({
+        url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
+        method: "post",
+        data: {
+          query: `
+      query pebble_device_record(
+    order_by: { timestamp: desc }
+    where: { imei: { _eq: "${imei}" } }
+  ) {
+    longitude
+    latitude
+    timestamp
+    temperature
+    temperature2
+    created_at
+    gyroscope
+    accelerometer
+    gyroscope
+    light
+    vbat
+    gas_resistance
+    snr
+    pressure
+    id
+    humidity
+    hash
+  }
+      `,
+        },
+      })
+        .then((result) => {
+          console.log("device Data: ", result.data);
+          this.$store.dispatch("warning", {
+            warning: "The device does not have any data",
+          });
+          this.$store.state.isLoading = false;
+        })
+        .catch((error) => {
+          console.log("error fetching device data: ", error);
+          this.$store.state.isLoading = false;
+        });
+    },
     getGraphData: async function() {
       // below ordinary XHR request with console.log
       const gql = require("graphql-tag").default;
@@ -235,8 +274,12 @@ export default {
               encodedTelemetry
             );
 
-            var lat = new bigNumber(point.latitude).dividedBy(new bigNumber(10).pow(7)).toFixed(3);
-            var long = new bigNumber(point.longitude).dividedBy(new bigNumber(10).pow(7)).toFixed(3);
+            var lat = new bigNumber(point.latitude)
+              .dividedBy(new bigNumber(10).pow(7))
+              .toFixed(3);
+            var long = new bigNumber(point.longitude)
+              .dividedBy(new bigNumber(10).pow(7))
+              .toFixed(3);
             deviceData.push({
               owner: _this.$store.state.userAddress,
               latitude: lat,
@@ -294,7 +337,6 @@ export default {
         this.$store.state.userData.data.length > 0
       ) {
         this.deviceData = this.$store.state.userData.data[0].data;
-        this.imei = this.$store.state.userData.data[0].imei;
         console.log("this.$store.state.userData: ", this.$store.state.userData);
       }
     },
@@ -343,14 +385,7 @@ export default {
       return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
       // .toFixed() returns string, so ' * 1' is a trick to convert to number
     },
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
-      } else {
-        this.desserts.push(this.editedItem);
-      }
-      this.close();
-    },
+    save() {},
   },
 };
 </script>

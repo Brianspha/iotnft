@@ -5,6 +5,25 @@
       "inputs": [
         {
           "indexed": true,
+          "internalType": "uint256",
+          "name": "date",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "adminFeeCollection",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
           "internalType": "address",
           "name": "owner",
           "type": "address"
@@ -138,11 +157,6 @@
           "type": "uint256"
         },
         {
-          "internalType": "address[]",
-          "name": "",
-          "type": "address[]"
-        },
-        {
           "internalType": "bool",
           "name": "",
           "type": "bool"
@@ -175,11 +189,23 @@
           "internalType": "uint256",
           "name": "tokenPrice",
           "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "delegate",
+          "type": "bool"
         }
       ],
       "name": "mintToken",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdrawFees",
+      "outputs": [],
+      "stateMutability": "payable",
       "type": "function"
     }
   ],
@@ -202,11 +228,12 @@
     "getMinterKeys()": "49051275",
     "getTokenDetails(uint256)": "c1e03728",
     "getTokenIndexes()": "c92bcffd",
-    "mintToken(string,uint256)": "c046372c"
+    "mintToken(string,uint256,bool)": "318261fd",
+    "withdrawFees()": "476343ee"
   },
-  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/contracts/interfaces/IOTNFTInterface.sol",
+  "filename": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/.embark/contracts/interfaces/IOTNFTInterface.sol",
   "originalFilename": "contracts/interfaces/IOTNFTInterface.sol",
-  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/interfaces/IOTNFTInterface.sol",
+  "path": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/contracts/interfaces/IOTNFTInterface.sol",
   "type": "file",
-  "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483"
+  "deploymentAccount": "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11"
 }

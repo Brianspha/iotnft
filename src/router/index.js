@@ -5,13 +5,22 @@ import Leaderboard from "../views/LeaderboardView.vue";
 import MINTIONFT from "../views/MintIONFTView.vue";
 import OwnedIONFTView from "../views/OwnedIONFTView.vue";
 import VisualiseView from "../views/VisualiseView.vue";
+import MainAppView from "../views/MainAppView.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/mapview",
+    redirect: "/app",
+  },
+  {
+    path: "/app",
+    name: "MainAppView",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: MainAppView,
   },
   {
     path: "/visualiseview",

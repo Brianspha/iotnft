@@ -7,7 +7,7 @@
     "start": "embark reset && embark run --nodashboard",
     "dev": "embark reset && embark run development --nodashboard",
     "gendocs": "npx solidity-docgen --solc-module solc-0.8.4",
-    "prod": "embark reset && embark build iotex",
+    "iotex": "embark reset && embark build iotex",
     "ropsten": "embark reset && embark build ropsten",
     "harmony": "embark reset && embark build harmony"
   },

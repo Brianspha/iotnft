@@ -155,8 +155,8 @@ export default {
               JSON.stringify(point),
               encodedTelemetry
             );
-            var lat = _this.getRandomInRange(-90, 90, 7);
-            var long = _this.getRandomInRange(-180, 180, 7);
+            var lat = new bigNumber(point.latitude).dividedBy(new bigNumber(10).pow(7)).toFixed(3);
+            var long = new bigNumber(point.longitude).dividedBy(new bigNumber(10).pow(7)).toFixed(3);
              deviceData.push({
               owner: _this.$store.state.userAddress,
               latitude: lat,

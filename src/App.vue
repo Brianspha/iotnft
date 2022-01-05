@@ -1,212 +1,16 @@
 <template>
   <!-- App.vue -->
+  <!-- App.vue -->
+
   <v-app>
-    <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-navigation-drawer v-model="drawer" absolute bottom temporary app>
-      <v-col>
-        <v-row justify="center" style="padding-bottom: 30px;">
-          <div class="font-weight-black font-italic text-h3">IOTNFT</div>
-        </v-row>
-        <v-spacer></v-spacer>
-        <v-row justify="center" align="center">
-          <v-btn
-            width="230"
-            v-if="
-              !$store.state.connected && $store.state.userAddress.length === 0
-            "
-            @click="connectWallet"
-            text
-          >
-            <v-img
-              src="https://siasky.net/EADM1s02BfgR8zJtenrCkBuWs81PuDIkNhYdUsUulTaB4A"
-            >
-            </v-img>
-            Connect
-          </v-btn>
-          <v-btn
-            width="230"
-            v-if="$store.state.connected || $store.state.userAddress.length > 0"
-            text
-          >
-            <v-img
-              contain
-              width="0"
-              src="https://siasky.net/GAAER3g7kfmLZF6FoUsbA07MRX9-2ulu5rkvp6CN2sBEcg"
-            >
-            </v-img>
-            {{
-              $store.state.userAddress.substring(0, 6) +
-                ".." +
-                $store.state.userAddress.substring(
-                  $store.state.userAddress - 4,
-                  $store.state.userAddress.length
-                )
-            }}
-          </v-btn>
-        </v-row>
-        <v-row
-          style="padding-top:20px; padding-bottom:30px;"
-          align="center"
-          justify="center"
-        >
-          <v-icon
-            color="black"
-            style="padding-right:30px; padding-left:20px;"
-            right
-            dark
-          >
-            mdi-wallet
-          </v-icon>
-          <v-col
-            ><v-row>Total Earnings</v-row>
-            <v-row>{{ $store.state.totalStaked }} IOTEX</v-row></v-col
-          >
-        </v-row>
-        <v-row
-          ><v-divider
-            style="padding-top:20px;padding-left:40px;padding-right:40px;"
-          ></v-divider
-        ></v-row>
-        <v-row
-          style="padding-top:10px; padding-bottom:10px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="$router.push('/mintionft')" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-pen
-            </v-icon>
-            <v-col><v-row style="color:black">MINT IONNFT</v-row></v-col>
-          </v-btn>
-        </v-row>
-        <v-row
-          style="padding-top:10px; padding-bottom:10px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="$router.push('/mapview')" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-map
-            </v-icon>
-            <v-col><v-row style="color:black">IONFT MAP</v-row></v-col>
-          </v-btn>
-        </v-row>
-        <v-row
-          style="padding-top:10px; padding-bottom:10px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="$router.push('/leaderboard')" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-ladder
-            </v-icon>
-            <v-col><v-row style="color:black">Leaderboard</v-row></v-col>
-          </v-btn>
-        </v-row>
-        <v-row
-          style="padding-top:10px; padding-bottom:10px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="$router.push('/ownedview')" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-account-check
-            </v-icon>
-            <v-col><v-row style="color:black">Owned IONFTS</v-row></v-col>
-          </v-btn>
-        </v-row>
-        <v-row
-          style="padding-top:10px; padding-bottom:10px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="$router.push('/visualiseview')" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-map-marker
-            </v-icon>
-            <v-col><v-row style="color:black">Device Map</v-row></v-col>
-          </v-btn>
-        </v-row>
-
-        <!--  
-        <v-row
-          style="padding-top:10px; padding-bottom:30px;"
-          align="center"
-          justify="center"
-        >
-          <v-btn @click="goto(4)" block plain>
-            <v-icon
-              color="black"
-              style="padding-right:30px; padding-left:20px;"
-              right
-              dark
-            >
-              mdi-newspaper-variant-multiple-outline
-            </v-icon>
-            <v-col><v-row style="color:black">White Paper</v-row></v-col>
-          </v-btn>
-        </v-row>-->
-        <v-spacer></v-spacer>
-        <v-row
-          align="center"
-          justify="center"
-          style="padding-top:10px; padding-bottom:100px;"
-          ><v-btn text target="https://twitter.com/brianspha_"
-            ><v-icon
-              color="black"
-              style="padding-right:25px; padding-left:0px;"
-            >
-              mdi-twitter
-            </v-icon></v-btn
-          >
-        </v-row>
-        <v-row
-          align="center"
-          justify="center"
-          style="padding-top:40px; padding-bottom:100px;padding-right:25px; padding-left:0px;"
-          >Created By &nbsp;<a href="https://twitter.com/brianspha_"
-            >Brianspha</a
-          ></v-row
-        >
-      </v-col>
-    </v-navigation-drawer>
-
     <!-- Sizes your content based upon application components -->
     <v-main>
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <!-- If using vue-router -->
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <router-view></router-view>
       </v-container>
     </v-main>
-    <MintNFTModal />
     <v-overlay
       :z-index="$store.state.loadinZIndex"
       :value="$store.state.isLoading"
@@ -228,12 +32,59 @@ import MintNFTModal from "./modals/MintNFTModal.vue";
 
 export default {
   name: "App",
-
+  watch: {
+    "$store.state.connected": async function(val) {
+      console.log("$store.state.connected changed value: ", val);
+      if (val) {
+        await this.getUserDevices();
+      }
+    },
+  },
   components: { MintNFTModal },
   created() {
     this.authenticate();
   },
+  mounted() {
+     this.$store.dispatch("warning",  {
+      warning: "Please note the website is still under development",
+    });
+  },
   methods: {
+    getUserDevices: async function() {
+      this.$store.state.isLoading = true;
+      const axios = require("axios").default;
+      var data = JSON.stringify({
+        operationName: "getUserDevices",
+        variables: {
+          _eq: this.$store.state.userAddress,
+        },
+        query:
+          "query getUserDevices($_eq: String!) {\n  devices(where: {owner_addr: {_eq: $_eq}, is_shipped: {_eq: true}}) {\n    device_type\n    id\n    label\n    sn\n    __typename\n  }\n}",
+      });
+      console.log("fetching user device: ", data);
+      axios({
+        method: "post",
+        url: process.env.VUE_APP_APP_DEVICE_DATA_URL,
+        data: data,
+        headers: {
+          // Overwrite Axios's automatically set Content-Type
+          "Content-Type": "application/json; charset=utf-8",
+          "x-hasura-admin-secret": process.env.VUE_APP_APP_SECRET_HASURA,
+        },
+      })
+        .then(async (devices) => {
+          console.log("found user device: ", devices.data.data.devices);
+          this.$store.state.userData.imeis = devices.data.data.devices.map(
+            (device) => {
+              return device.id;
+            }
+          );
+        })
+        .catch((error) => {
+          console.log("error getting user registred devices: ", error);
+          this.$store.state.isLoading = false;
+        });
+    },
     loadData: async function() {
       let _this = this;
       this.$store.state.ionftContract.methods
@@ -271,6 +122,7 @@ export default {
       // .toFixed() returns string, so ' * 1' is a trick to convert to number
     },
     connectWallet: async function() {
+      this.$store.state.isLoading = true;
       if (typeof ethereum !== "undefined") {
         try {
           await ethereum.enable();
@@ -278,11 +130,13 @@ export default {
           this.$store.state.connected = true;
           console.log("found default account: ", this.$store.state.userAddress);
         } catch (error) {
+          this.$store.state.isLoading = false;
           this.$store.dispatch("error", {
             error: "There was an error getting enabling metamask",
           });
         }
       } else {
+        this.$store.state.isLoading = false;
         this.$store.dispatch(
           "errorWithFooterMetamask",
           "Seems like you dont have metamask installed please use the below link to download"
@@ -307,7 +161,7 @@ export default {
           console.log("accounts; ", accounts);
           this.$store.state.userAddress = accounts[0];
           this.$store.state.connected = true;
-          resolve(true);
+
           if (typeof ethereum !== "undefined") {
             // Supports EIP-1102 injected Ethereum providers.
             window.web3 = new Web3(ethereum);
@@ -326,28 +180,31 @@ export default {
           window.web3.eth.net.getId((err, netId) => {
             console.log("netId: ", netId);
             switch (netId.toString()) {
-             case "4690":
+              case "4690":
                 this.$store.state.connected = true;
-               
+                resolve(true);
                 break;
               default:
-                window.ethereum.request({
-                  method: "wallet_addEthereumChain",
-                  params: [
-                    {
-                      chainId: "0x1252",
-                      chainName: "IOTEXT Testnet",
-                      nativeCurrency: {
-                        name: "IOTEXT",
-                        symbol: "IOTX",
-                        decimals: 18,
+                if (!this.$store.state.connected) {
+                  window.ethereum.request({
+                    method: "wallet_addEthereumChain",
+                    params: [
+                      {
+                        chainId: "0x1252",
+                        chainName: "IOTEXT Testnet",
+                        nativeCurrency: {
+                          name: "IOTEXT",
+                          symbol: "IOTX",
+                          decimals: 18,
+                        },
+                        rpcUrls: ["https://babel-api.testnet.iotex.io"],
+                        blockExplorerUrls: ["https://testnet.iotexscan.io/"],
                       },
-                      rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                      blockExplorerUrls: ["https://testnet.iotexscan.io/"],
-                    },
-                  ],
-                });
-                break /*;*/
+                    ],
+                  });
+                }
+                resolve(true);
+                break; /*;*/
             }
           });
           window.ethereum.on("accountsChanged", function(accounts) {

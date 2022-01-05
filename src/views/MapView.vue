@@ -1,6 +1,7 @@
 <template>
-  <div style="height: 100vh; width: 100%; " fluid>
+  <div style="height: 50vh; width: 50%; " fluid>
     <l-map
+      ref="map"
       :key="mapKey"
       :zoom="zoom"
       :center="center"
@@ -63,21 +64,26 @@ export default {
     },
     "$store.state.userAddress": function() {
       this.mapKey++;
-     // this.loadData()
+      // this.loadData()
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.map = this.$refs.map.mapObject;
+    });
   },
   data() {
     return {
       mapKey: 0,
       show: false,
-      zoom: 2,
+      zoom: 10,
       center: latLng(-85.062508, 25.461502),
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       withPopup: latLng(-85.062508, 25.461502),
       withTooltip: latLng(-85.062508, 25.461502),
-      currentZoom: 0,
+      currentZoom: 10,
       currentCenter: latLng(-85.062508, 25.461502),
       showParagraph: false,
       mapOptions: {
@@ -112,7 +118,10 @@ export default {
       await this.$store.dispatch("saveCeramicData", content); */
       for (var index in content.data) {
         var data = content.data[index];
-        if (data.userAddress.toUpperCase() === _this.$store.state.userAddress.toUpperCase()) {
+        if (
+          data.userAddress.toUpperCase() ===
+          _this.$store.state.userAddress.toUpperCase()
+        ) {
           _this.$store.state.userData = data;
         }
         data.data.map((nft) => {
@@ -160,7 +169,8 @@ export default {
       this.$store.state.showNFTDetailsDialog = true;
     },
     zoomUpdate(zoom) {
-      this.currentZoom = zoom;
+      console.log("zoooooom: ", zoom);
+      //this.currentZoom = zoom;
     },
     centerUpdate(center) {
       this.currentCenter = center;

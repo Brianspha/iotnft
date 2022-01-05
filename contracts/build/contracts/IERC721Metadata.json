@@ -359,9 +359,9 @@
     "tokenURI(uint256)": "c87b56dd",
     "transferFrom(address,address,uint256)": "23b872dd"
   },
-  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
-  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
-  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
+  "filename": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
+  "originalFilename": "contracts//Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
+  "path": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Metadata.sol",
   "type": "file",
-  "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483"
+  "deploymentAccount": "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11"
 }

@@ -6,12 +6,12 @@
   "silent": false,
   "track": true,
   "deploy": false,
-  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424",
+  "realRuntimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d4ab6a75f7a11a8d44",
   "realArgs": [],
-  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c63430006020033",
-  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220156394565cdd1dd424c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c63430006020033",
+  "code": "60566023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d4ab6a75f7a11a8d44fe7baf9d82341472de8589b79d0b152ef4135de6fef35d64736f6c63430006020033",
+  "runtimeBytecode": "73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220d4ab6a75f7a11a8d44fe7baf9d82341472de8589b79d0b152ef4135de6fef35d64736f6c63430006020033",
   "linkReferences": {},
-  "swarmHash": "c4d5c625c6acf201f55903a9aa57aa4d980682486482f164736f6c6343000602",
+  "swarmHash": "fe7baf9d82341472de8589b79d0b152ef4135de6fef35d64736f6c6343000602",
   "gasEstimates": {
     "creation": {
       "codeDepositCost": "17200",
@@ -35,9 +35,9 @@
     }
   },
   "functionHashes": {},
-  "filename": "/Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
-  "originalFilename": "contracts//Users/powerbite/Documents/Github/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
-  "path": "/Users/powerbite/Documents/Github/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "filename": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "originalFilename": "contracts//Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
+  "path": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/contracts/.embark/node_modules/@openzeppelin/contracts/math/SafeMath.sol",
   "type": "file",
-  "deploymentAccount": "0xE2aFDED2593a0D86eD4BDed6e4e2180D87958483"
+  "deploymentAccount": "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11"
 }

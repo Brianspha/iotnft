@@ -44,7 +44,7 @@ contract IOTNFT is
         require(tokenAddress != address(0), "Invalid token address");
         require(msg.sender != address(0), "Invalid sender address");
         ionft = TokenContract(tokenAddress);
-        contractOwner=msg.sender;
+        contractOwner = msg.sender;
     }
 
     function withdrawFees() public payable override onlyOwner nonReentrant {
@@ -52,7 +52,7 @@ contract IOTNFT is
         uint256 fees = transactionFees;
         transactionFees = 0;
         require(contractOwner.send(fees), "Insufficient funds");
-        emit adminFeeCollection(block.timestamp,fees);
+        emit adminFeeCollection(block.timestamp, fees);
     }
 
     function mintToken(
@@ -74,6 +74,7 @@ contract IOTNFT is
         } else {
             tokenId = ionft.mintToken(msg.sender, tokenURI);
         }
+        require(ionft.tokenExists(tokenId),"Token not minted");
         currentIONFTs[tokenId].delegated = delegate;
         currentIONFTs[tokenId].tokenId = tokenId;
         currentIONFTs[tokenId].originalPrice = tokenPrice;
@@ -90,9 +91,12 @@ contract IOTNFT is
         nonReentrant
         whenNotPaused
     {
+        require(currentIONFTs[tokenId].delegated, "Token not delegated");
         require(msg.sender != address(0), "Invalid sender");
-        require(ionft.tokenExists(tokenId), "Token not minted yet");
-        require(currentIONFTs[tokenId].exists, "Token not active");
+        require(
+            ionft.tokenExists(tokenId) && currentIONFTs[tokenId].exists,
+            "Token not minted yet or not active"
+        );
         require(
             msg.sender != currentIONFTs[tokenId].owner &&
                 ionft.ownerOf(tokenId) != msg.sender,
@@ -102,6 +106,7 @@ contract IOTNFT is
             msg.value > currentIONFTs[tokenId].price,
             "Invalid buying price"
         );
+        require(currentIONFTs[tokenId].delegated, "token not delegated");
 
         uint256 tempPrice = getContractCut(
             msg.value.sub(currentIONFTs[tokenId].price)
@@ -120,12 +125,7 @@ contract IOTNFT is
         ].totalStaked.add(remaining);
         address previousOwner = currentIONFTs[tokenId].owner;
         currentIONFTs[tokenId].owner = msg.sender;
-        if (currentIONFTs[tokenId].delegated) {
-            ionft.transferFrom(address(this), msg.sender, tokenId);
-        } else {
-            ionft.transferFrom(address(this), msg.sender, tokenId); //@dev user has to approve contract before calling this function
-        }
-
+        ionft.transferFrom(address(this), msg.sender, tokenId);
         emit transferTokenOwnerShip(
             msg.sender,
             previousOwner,
@@ -133,6 +133,28 @@ contract IOTNFT is
             tokenId,
             tempPrice
         );
+    }
+
+    function delegateNFT(uint256 tokenId, bool delegate) public override {
+        require(msg.sender != address(0), "Invalid sender address");
+        require(
+            currentIONFTs[tokenId].exists && ionft.tokenExists(tokenId),
+            "Token not listed or exists"
+        );
+        require(ionft.ownerOf(tokenId) == address(this), "Not Owner");
+
+        if (delegate) {
+            require(
+                !currentIONFTs[tokenId].delegated,
+                "Token already delegated"
+            );
+            currentIONFTs[tokenId].delegated = true;
+        } else {
+            require(currentIONFTs[tokenId].delegated, "Token not delegated");
+            currentIONFTs[tokenId].delegated = false;
+        }
+
+        emit delegatedToken(tokenId, msg.sender,delegate);
     }
 
     function getMinterDetails(address id)
@@ -159,6 +181,7 @@ contract IOTNFT is
             address,
             uint256,
             uint256,
+            bool,
             bool
         )
     {
@@ -166,7 +189,8 @@ contract IOTNFT is
             currentIONFTs[tokenId].owner,
             currentIONFTs[tokenId].price,
             currentIONFTs[tokenId].originalPrice,
-            currentIONFTs[tokenId].exists
+            currentIONFTs[tokenId].exists,
+            currentIONFTs[tokenId].delegated
         );
     }
 

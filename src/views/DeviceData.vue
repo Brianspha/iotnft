@@ -1,38 +1,42 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="deviceData"
-    sort-by="timestamp"
-    class="elevation-1"
-    :search="search"
-  >
-    <template v-slot:top>
-      <v-toolbar flat>
-        <v-col>
-          <v-text-field
-            :color="$store.state.primaryColor"
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col class="d-flex" cols="12" sm="3">
-          <v-select
-            dense
-            :value="imei"
-            solo
-            :items="$store.state.userData ? $store.state.userData.imeis : []"
-            filled
-            label="Registered Devices"
-            @change="loadDeviceData"
-          ></v-select>
-          <div style="padding-right:5px;"></div>
-          <v-btn
-            v-if="imei.length !== ''"
-            style="
+  <v-container fluid>
+    <v-data-table
+      :headers="headers"
+      :items="deviceData"
+      sort-by="timestamp"
+      class="elevation-1"
+      :search="search"
+    >
+      <template v-slot:top>
+        <v-row align="center" justify="start">
+          <v-toolbar flat>
+            <v-col>
+              <v-text-field
+                :color="$store.state.primaryColor"
+                v-model="search"
+                append-icon="mdi-magnify"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col class="d-flex" cols="12" sm="3">
+              <v-select
+                dense
+                :value="imei"
+                solo
+                :items="
+                  $store.state.userData ? $store.state.userData.imeis : []
+                "
+                filled
+                label="Registered Devices"
+                @change="loadDeviceData"
+              ></v-select>
+              <div style="padding-right:5px;"></div>
+              <v-btn
+                v-if="imei.length !== ''"
+                style="
             background-color:#6bdcc6;color:
             white;border-radius: 5px;
             font-style: italic;
@@ -42,17 +46,17 @@
             font-weight:bold;
             color:white;
         "
-            outlined
-            text
-            @click="loadDeviceData(imei)"
-          >
-            Get Data
-          </v-btn>
-          <v-btn
-            v-else
-            style="
-            background-color:#6bdcc6;color:
-            white;border-radius: 5px;
+                outlined
+                text
+                @click="loadDeviceData(imei)"
+              >
+                Get Data
+              </v-btn>
+              <v-btn
+                v-else
+                style="
+            background-color:#6bdcc6;
+            color:white;border-radius: 5px;
             font-style: italic;
             border-color: #699c79;
             border-width: 1px;
@@ -60,30 +64,31 @@
             font-weight:bold;
             color:white;
         "
-            outlined
-            text
-            disabled
-          >
-            Get data
-          </v-btn>
-        </v-col>
-      </v-toolbar>
-    </template>
-    <template #item.gyroscope="{ value }">
-      <v-select :v-model="value" :items="value" solo></v-select>
-    </template>
-    <template #item.accelerometer="{ value }">
-      <v-select :v-model="value" :items="value" solo></v-select>
-    </template>
-    <template v-slot:item.actions="{ item }">
-      <v-btn
-        small
-        class="mr-2"
-        @click="
-          mintNFT(item);
-          $store.state.mintNFTDialog = true;
-        "
-        style=" background-color:#6bdcc6;color:
+                outlined
+                text
+                disabled
+              >
+                Get data
+              </v-btn>
+            </v-col>
+          </v-toolbar></v-row
+        >
+      </template>
+      <template #item.gyroscope="{ value }">
+        <v-select :value="value[0]" :items="value" solo></v-select>
+      </template>
+      <template #item.accelerometer="{ value }">
+        <v-select :value="value[0]" :items="value" solo></v-select>
+      </template>
+      <template v-slot:item.actions="{ item }">
+        <v-btn
+          small
+          class="mr-2"
+          @click="
+            mintNFT(item);
+            $store.state.mintNFTDialog = true;
+          "
+          style=" background-color:#6bdcc6;color:
             white;border-radius: 5px;
             font-style: italic;
             border-color: #699c79;
@@ -91,18 +96,21 @@
             font-family:cursive;
             font-weight:bold;
             color:white;"
-      >
-        Mint
-      </v-btn>
-    </template>
-  </v-data-table>
+        >
+          Mint
+        </v-btn>
+      </template>
+    </v-data-table>
+  </v-container>
 </template>
 
 <script>
 import { latLng } from "leaflet";
+import MintNFTModal from "../modals/MintNFTModal.vue";
 const moment = require("moment");
 const bigNumber = require("bignumber.js");
 export default {
+  components: { MintNFTModal },
   data: () => ({
     nftName: "",
     nameRules: [
@@ -162,6 +170,18 @@ export default {
   computed: {},
 
   watch: {
+    "$store.state.showMyLocationsOnly": function(showMyLocations) {
+      console.log("showMyLocations only? ", showMyLocations);
+      if (showMyLocations) {
+        this.$store.state.dappNFTs = this.$store.state.allDAppNFTs.filter(
+          (nft) => {
+            return nft.owner === this.$store.state.userAddress;
+          }
+        );
+      } else {
+        this.$store.state.dappNFTs == this.$store.state.allDAppNFTs;
+      }
+    },
     "$store.state.userData.imeis": async function(imeis) {
       console.log("$store.state.userData.imeis  changed value: ", imeis);
       if (imeis.length > 0) {
@@ -171,25 +191,23 @@ export default {
     dialog(val) {
       val || this.close();
     },
-    "$store.state.mintNFTDialog": function(val) {
-      console.log("changed value: ", val);
-      val || this.close();
+    "$store.state.mintNFTDialog": function(showmintNFTDialog) {
+      console.log("changed showDialogue: ", showmintNFTDialog);
+      showmintNFTDialog || this.close();
     },
     "$store.state.userAddress": function() {
       this.mapKey++;
-      // this.loadData();
     },
   },
 
   created() {
     this.initialize();
-    this.loadData();
   },
 
   methods: {
     loadDeviceData: async function(imei) {
       console.log("device imei: ", imei);
-//      imei = "151358810263573"; //@dev for dev purposes
+      //     imei = "151358810263573"; //@dev for dev purposes
       this.$store.state.isLoading = true;
       const axios = require("axios").default;
       axios({
@@ -223,112 +241,56 @@ export default {
         },
       })
         .then((result) => {
-          console.log("device Data: ", result.data);
-          this.$store.dispatch("warning", {
-            warning: "The device does not have any data",
+          console.log("device Data: ", result.data.data);
+          /* if (result.data.data.pebble_device_record.length === 0) {
+            this.$store.dispatch("warning", {
+              warning: "The device does not have any data",
+            });
+          }
+          else{
+
+          }*/
+          console.log(
+            "this.$store.state.sampleData: ",
+            this.$store.state.sampleLocationData
+          );
+          var data = this.$store.state.sampleLocationData.data
+            .pebble_device_record;
+          console.log("device data: ", data);
+          data.map((point) => {
+            console.log("current point: ", point);
+            this.deviceData.push({
+              owner: this.$store.state.userAddress,
+              latitude: point.latitude,
+              longitude: point.longitude,
+              latLong: latLng(point.longitude, point.latitude),
+              gasResistance: point.gasResistance,
+              pressure: point.pressure,
+              humidity: point.humidity,
+              light: point.light,
+              temperature: point.temperature,
+              gyroscope: point.gyroscope
+                .replace("[", "")
+                .replace("]", "")
+                .split(","),
+              accelerometer: point.accelerometer
+                .replace("[", "")
+                .replace("]", "")
+                .split(","),
+              random: point.random,
+              snr: point.snr,
+              temperature2: point.temperature2,
+              timestamp: moment.unix(point.timestamp).format("LLLL"),
+              isNFT: false,
+              isDelegated: false,
+            });
           });
+
           this.$store.state.isLoading = false;
         })
         .catch((error) => {
           console.log("error fetching device data: ", error);
           this.$store.state.isLoading = false;
-        });
-    },
-    getGraphData: async function() {
-      // below ordinary XHR request with console.log
-      const gql = require("graphql-tag").default;
-      let _this = this;
-      _this.$store.state.isLoading = true;
-      const axios = require("axios").default;
-      axios({
-        method: "post",
-        url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
-        data: JSON.stringify({
-          imei: this.imei,
-        }),
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          "Content-Type": "application/json; charset=utf-8",
-        },
-      })
-        .then(async (queryResult) => {
-          const moment = require("moment");
-          console.log(queryResult.data.data.deviceRecords);
-          var deviceData = [];
-          for (var index in queryResult.data.data.deviceRecords) {
-            const dataPoint = queryResult.data.data.deviceRecords[index];
-            const protobuf = require("protobufjs");
-            // Load the protobuf definition, it's on GitHub at
-            // https://github.com/iotexproject/iott-dapp-example/blob/main/service/proto/pebble.proto
-            const pebbleProtoDef = await protobuf.parse(
-              this.$store.state.pebble
-            ).root;
-            // We need the SensorData proto definition, let's import it
-            const SensorData = pebbleProtoDef.lookupType("SensorData");
-            // Decode the telemetry
-            const encodedTelemetry = dataPoint.raw.replace(/0x/g, "");
-            var point = SensorData.decode(Buffer.from(encodedTelemetry, "hex"));
-            console.log(
-              "point in telemtry: ",
-              JSON.stringify(point),
-              encodedTelemetry
-            );
-
-            var lat = new bigNumber(point.latitude)
-              .dividedBy(new bigNumber(10).pow(7))
-              .toFixed(3);
-            var long = new bigNumber(point.longitude)
-              .dividedBy(new bigNumber(10).pow(7))
-              .toFixed(3);
-            deviceData.push({
-              owner: _this.$store.state.userAddress,
-              latitude: lat,
-              longitude: long,
-              latLong: latLng(long, lat),
-              gasResistance: point.gasResistance / 100,
-              pressure: point.pressure / 100,
-              humidity: point.humidity / 100,
-              light: point.light,
-              temperature: point.temperature / 100,
-              gyroscope: point.gyroscope,
-              accelerometer: point.accelerometer,
-              random: point.random,
-              snr: point.snr,
-              temperature2: point.temperature2 / 100,
-              timestamp: moment.unix(dataPoint.timestamp).format("LLLL"),
-            });
-          }
-          if (_this.$store.state.userData === null) {
-            _this.$store.state.userData = {
-              userAddress: _this.$store.state.userAddress,
-              imeis: [],
-              data: [],
-            };
-          }
-          _this.$store.state.userData.imeis.push(_this.imei);
-          _this.$store.state.userData.data.push({
-            imei: _this.imei,
-            nfts: [],
-          });
-          this.deviceData = deviceData;
-
-          // Log the telemetry
-          console.log(deviceData, "userData: ", _this.$store.state.userData);
-          _this.$store.state.isLoading = false;
-          this.dialog = false;
-          if (this.deviceData.length == 0) {
-            _this.$store.dispatch("warning", {
-              warning: "No Data found for this IMEI number",
-            });
-          }
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-          _this.$store.state.isLoading = false;
-          _this.$store.dispatch("error", {
-            error: "Something went wrong whilst fetching device data",
-            onTap: function() {},
-          });
         });
     },
     initialize() {
@@ -340,25 +302,8 @@ export default {
         console.log("this.$store.state.userData: ", this.$store.state.userData);
       }
     },
-    loadData: async function() {
-      let _this = this;
-      this.$store.state.isLoading = true;
-      var content = await this.$store.dispatch("getCeramicData");
-      /* content.data = [];
-      content.leaderboard = [];
-      await this.$store.dispatch("saveCeramicData", content); */
-      for (var index in content.data) {
-        var data = content.data[index];
-        if (
-          data.userAddress.toUpperCase() ===
-          _this.$store.state.userAddress.toUpperCase()
-        ) {
-          _this.$store.state.userData = data;
-        }
-      }
-      this.$store.state.isLoading = false;
-    },
     mintNFT(item) {
+      this.$store.state.isLoading = true;
       item.imei = this.imei;
       this.$store.state.selectedNFT = item;
       this.$store.state.mintNFTDialog = true;

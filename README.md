@@ -56,6 +56,7 @@ Please ensure you have an instance of ganache running on port 8546 (Although emb
 ```
 yarn lint
 ```
-
+### Note
+Still need to do a better job at unit testing the smartcontract
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

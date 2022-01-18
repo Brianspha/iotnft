@@ -33,10 +33,15 @@ import MintNFTModal from "./modals/MintNFTModal.vue";
 export default {
   name: "App",
   watch: {
+    "$store.state.selectedNFT.userAddress": async function(val) {
+      if (val) {
+      }
+    },
     "$store.state.connected": async function(val) {
       console.log("$store.state.connected changed value: ", val);
       if (val) {
         await this.getUserDevices();
+        await this.$store.dispatch("loadData");
       }
     },
   },
@@ -45,7 +50,7 @@ export default {
     this.authenticate();
   },
   mounted() {
-     this.$store.dispatch("warning",  {
+    this.$store.dispatch("warning", {
       warning: "Please note the website is still under development",
     });
   },
@@ -85,22 +90,6 @@ export default {
           this.$store.state.isLoading = false;
         });
     },
-    loadData: async function() {
-      let _this = this;
-      this.$store.state.ionftContract.methods
-        .getMinterDetails(this.$store.state.userAddress)
-        .call({ from: this.$store.state.userAddress, gas: 6000000 })
-        .then(async (details, error) => {
-          console.log("userDetails: ", details);
-          _this.$store.state.totalStaked = new bigNumber(
-            _this.$store.state.etherConverter(details[0], "wei", "eth")
-          ).toFixed(7);
-          console.log("totalStaked: ", _this.$store.state.totalStaked);
-        })
-        .catch((error) => {
-          console.log("error getting user details: ", error);
-        });
-    },
     authenticate() {
       this.$store.state.isLoading = true;
       let _this = this;
@@ -109,7 +98,6 @@ export default {
         .then(async (res, error) => {
           this.init()
             .then(async (res, err) => {
-              await _this.loadData();
               _this.$store.state.isLoading = false;
             })
             .catch((error) => {

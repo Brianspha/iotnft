@@ -2,7 +2,10 @@
   <v-row justify="center">
     <v-dialog v-model="$store.state.mintNFTDialog" width="100vw">
       <v-card>
-        <v-card-title class="text-h5">
+        <v-card-title
+          style=" font-size:25px;  font-style: italic;
+            font-family:cursive;"
+        >
           NFT Details
         </v-card-title>
         <v-card-text
@@ -22,6 +25,7 @@
               :color="$store.state.primaryColor"
             ></v-text-field>
             <v-text-field
+              type="number"
               :rules="priceRules"
               v-model="$store.state.selectedNFT.price"
               label="NFT Price (IOTEX)"
@@ -52,10 +56,53 @@
               hint="e.g. brianspha_"
               required
               :color="$store.state.primaryColor"
-            ></v-text-field> </v-form
-        ></v-card-text>
+            ></v-text-field>
+
+            <v-row align="center" justify="start"
+              ><v-checkbox
+                color="#699c79"
+                :value="delegate"
+                v-model="delegate"
+                label="Delegate Ownership?"
+              ></v-checkbox>
+              <v-tooltip v-model="showToolTip" top>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    style="padding-left:30px;"
+                    width="4px"
+                    height="4px"
+                    color="#699c79"
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon small color="#699c79">
+                      mdi-alert-circle
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <span
+                  >Delagating to contract means you intend on allowing others to
+                  purchase the NFT from IONFT</span
+                >
+              </v-tooltip></v-row
+            >
+            </v-form
+          ></v-card-text
+        >
         <v-row align="center" justify="center"
-          ><v-btn :color="$store.state.primaryColor" @click="save"
+          ><v-btn
+            style="
+            background-color:#6bdcc6;
+            color:white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:white;
+        "
+            @click="save"
             >Save AS PNG</v-btn
           ></v-row
         >
@@ -72,7 +119,16 @@
           </v-btn>
           <v-btn
             v-if="valid"
-            :color="$store.state.primaryColor"
+            style="
+            background-color:#6bdcc6;
+            color:white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:black;
+        "
             @click="mintNFT"
           >
             MINT NFT
@@ -89,6 +145,8 @@ import bigNumber from "bignumber.js";
 export default {
   data() {
     return {
+      showToolTip: false,
+      delegate: false,
       nftName: "",
       nameRules: [
         (v) => !!v || "NFT name required",
@@ -115,7 +173,11 @@ export default {
     };
   },
   mounted() {
+    this.$store.state.isLoading = false;
     if (!this.$store.state.mintNFTDialog) return;
+  },
+  created() {
+    this.$store.state.isLoading = false;
   },
   watch: {
     "$store.state.mintNFTDialog": function(val) {
@@ -129,6 +191,7 @@ export default {
       console.log("in mint nft dialog: ", this.$store.state.selectedNFT);
       let _this = this;
       var colorPallet = [
+        _this.generateColor(Date.now()),
         _this.generateColor(_this.$store.state.selectedNFT.timestamp),
         _this.generateColor(_this.$store.state.selectedNFT.snr),
         _this.generateColor(_this.$store.state.selectedNFT.vbat),
@@ -175,7 +238,11 @@ export default {
         this.$store.state.selectedNFT.price = price;
         this.$store.state.selectedNFT.originalPrice = price;
         this.$store.state.ionftContract.methods
-          .mintToken(JSON.stringify(this.$store.state.selectedNFT), price)
+          .mintToken(
+            JSON.stringify(this.$store.state.selectedNFT),
+            price,
+            this.delegate
+          )
           .send({
             from: _this.$store.state.userAddress,
             gas: 5000000,
@@ -184,6 +251,8 @@ export default {
             _this.$store.state.selectedNFT.tokenId =
               receipt.events.newTokenMinted.returnValues.tokenId;
             var content = await this.$store.dispatch("getCeramicData");
+            _this.$store.state.selectedNFT.isNFT = true;
+            _this.$store.state.selectedNFT.isDelegated = _this.delegate;
             if (content.data.length === 0) {
               _this.$store.state.userData = {
                 userAddress: _this.$store.state.userAddress,
@@ -237,20 +306,52 @@ export default {
               }
             }
             console.log("updatedContent: ", content);
-            await this.$store.dispatch("saveCeramicData", content);
+            await _this.$store.dispatch("saveCeramicData", content);
             _this.$store.state.mintNFTDialog = false;
-            _this.$store.dispatch("success", "Succesfully minted token");
+            if (_this.delegate) {
+              _this.$store.dispatch(
+                "success",
+                "Succesfully minted token and delegated to contract"
+              );
+            } else {
+              _this.$store.dispatch("success", "Succesfully minted token");
+            }
+            await _this.$store.dispatch("loadData");
             _this.$store.state.isLoading = false;
             _this.$store.state.reload = true;
+            _this.$store.state.selectedNFT = {};
           })
           .catch((error) => {
             console.log("error minting token: ", error);
             _this.$store.state.isLoading = false;
             _this.$store.dispatch("error", {
-              error: "Something went wrong whilst minting token",
+              error: "Something went wrong while minting token",
             });
           });
       }
+    },
+    transferToken: async function(tokenId) {
+      return new Promise((resolve) => {
+        let _this = this;
+        this.$store.state.tokenContract.methods
+          .transferFrom(
+            this.$store.state.userAddress,
+            this.$store.state.ionftContract.options.address,
+            tokenId
+          )
+          .send({
+            from: this.$store.state.userAddress,
+            gas: 5000000,
+          })
+          .then((receipt, error) => {
+            console.log("results of transferring token to contract: ", receipt);
+            resolve(receipt && !error);
+          })
+          .catch((error) => {
+            console.log("error while transferring token to contract: ", error);
+            resolve(false);
+          });
+      });
     },
     save: async function() {
       const doodle = document.querySelector("css-doodle");

@@ -10,6 +10,7 @@ import KeyDidResolver from "key-did-resolver";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
+const bigNumber = require('bignumber.js')
 const resolver = {
   ...KeyDidResolver.getResolver(),
   ...ThreeIdResolver.getResolver(ceramic),
@@ -31,77 +32,26 @@ const crossFetch = require("cross-fetch").default;
 const gql = require("graphql-tag").default;
 Vue.use(Vuex);
 const client = new SkynetClient("https://siasky.net/");
-const pebble = `
-syntax = "proto2";
-message SensorData
-{
- optional uint32 snr = 1;
- optional uint32 vbat = 2;
- optional uint32 latitude = 3;
- optional uint32 longitude = 4;
- optional uint32 gasResistance = 5;
- optional uint32 temperature = 6;
- optional uint32 pressure = 7;
- optional uint32 humidity = 8;
- optional uint32 light = 9;
- optional uint32 temperature2 = 10;
- repeated sint32 gyroscope = 11;
- repeated sint32 accelerometer = 12;
- optional string random = 13;
-}
-message SensorConfig
-{
-    optional uint32 bulkUpload = 1;
-    optional uint32 dataChannel = 2;
-    optional uint32 uploadPeriod = 3;
-    optional uint32 bulkUploadSamplingCnt = 4;
-    optional uint32 bulkUploadSamplingFreq = 5;
-    optional uint32 beep = 6;
-    optional string firmware = 7; 
-}
-message SensorState
-{
-    optional uint32 state = 1;
-}
-message SensorConfirm {
-    optional string owner = 1;
-}
-message BinPackage
-{
-    enum PackageType {
-        DATA = 0;
-        CONFIG = 1;
-        STATE = 2;
-    }
-    required PackageType type = 1;
-    required bytes data = 2;
-    required uint32 timestamp = 3;
-    required bytes signature = 4;
-}
-message ConfirmPackage {
-    required bytes owner = 1;
-    required uint32 timestamp = 2;
-    required bytes signature = 3;
-    required uint32 channel = 4;
-}
-`;
+
 /* eslint-disable no-new */
 const store = new Vuex.Store({
   state: {
-    showMyLocationsOnly:false,
+    sampleLocationData: require("../data/location.json"),
+    showMyLocationsOnly: false,
     totalStaked: 0,
+    tokenContract: require("../../contracts/embarkArtifacts/contracts/TokenContract")
+      .default,
     ionftContract: require("../../contracts/embarkArtifacts/contracts/IOTNFT")
       .default,
     loadinZIndex: 500,
     mintNFTDialog: false,
     testIMEI: process.env.VUE_APP_DEVICE_IMEI,
     userData: {
-      imeis:[],
-      data:[]
+      imeis: [],
+      data: [],
     },
     ceramicClient: ceramic,
     ceremicProvider: ceremicProvider,
-    pebble: pebble,
     graphClient: new ApolloClient({
       link: createHttpLink({
         uri: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
@@ -132,18 +82,76 @@ const store = new Vuex.Store({
     isLoading: false,
     userAddress: "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11",
     primaryColor: "green darken-1",
+    secondaryColor:"#699c79",
     selectedNFT: {},
     streamId: process.env.VUE_APP_CEREMIC_SECRET,
     tile: {},
     dappNFTs: [],
-    deviceDetailsDialog:false,
-    selectedDevice:{},
-    revision:1,
-    connected:false
+    deviceDetailsDialog: false,
+    selectedDevice: {},
+    revision: 1,
+    connected: false,
+    allDAppNFTs:[]
   },
   plugins: [createPersistedState()],
   modules: {},
   actions: {
+    loadData: async function() {
+      console.log("fetching data");
+      store.state.dappNFTs = [];
+      store.state.isLoading = true;
+      var content = await store.dispatch("getCeramicData");
+      /*  content.data = [];
+      content.leaderboard = [];
+      await store.dispatch("saveCeramicData", content);*/
+      for (var index in content.data) {
+        var data = content.data[index];
+        if (
+          data.userAddress.toUpperCase() ===
+          store.state.userAddress.toUpperCase()
+        ) {
+          store.state.userData = data;
+        }
+        data.data.map((nft) => {
+          nft.nfts.map((minted) => {
+            console.log("dappNFTs: ", minted);
+            store.state.dappNFTs.push(minted);
+          });
+        });
+      }
+      for (
+        var indexInner = 0;
+        indexInner < store.state.dappNFTs.length;
+        indexInner++
+      ) {
+        await store.state.ionftContract.methods
+          .getTokenDetails(store.state.dappNFTs[indexInner].tokenId)
+          .call({ from: store.state.userAddress, gas: 6000000 })
+          .then((details, error) => {
+            store.state.dappNFTs[indexInner].price = new bigNumber(
+              store.state.etherConverter(details[1], "wei", "eth")
+            ).toFixed(7);
+            store.state.dappNFTs[indexInner].originalPrice = new bigNumber(
+              store.state.etherConverter(details[2], "wei", "eth")
+            ).toFixed(7);
+            store.state.dappNFTs[indexInner].owner = details[0];
+            store.state.dappNFTs[indexInner].isDelegated = details[4];
+          })
+          .catch((error) => {
+            console.log("error getting token details: ", error);
+            delete store.state.dappNFTs[index];
+          });
+      }
+
+      if (store.state.dappNFTs.length === 0) {
+        store.dispatch("warning", {
+          warning: "Seems like arent any listed IONFTs",
+          onTap: function() {},
+        });
+      }
+      store.state.allDAppNFTs=store.state.dappNFTs
+      store.state.isLoading = false;
+    },
     getCeramicData: async function() {
       const tileDocument = await TileDocument.load(
         ceramic,
@@ -153,6 +161,7 @@ const store = new Vuex.Store({
       return tileDocument.content;
     },
     saveCeramicData: async function(context, data) {
+      console.log("saving ceremic data: ", data);
       const doc = await TileDocument.load(
         this.state.ceramicClient,
         this.state.streamId
@@ -170,11 +179,11 @@ const store = new Vuex.Store({
         this.state.publicKey,
         this.state.appSecret
       );
-      if(test.data === null){
+      if (test.data === null) {
         test = {
-          data:[],
-          leaderboard:[]
-        }
+          data: [],
+          leaderboard: [],
+        };
       }
       return test;
     },
@@ -196,13 +205,12 @@ const store = new Vuex.Store({
       });
     },
     warning(context, message) {
-      swal
-        .fire({
-          icon: "info",
-          title: "Info",
-          text: message.warning,
-          denyButtonText: `Close`,
-        })
+      swal.fire({
+        icon: "info",
+        title: "Info",
+        text: message.warning,
+        denyButtonText: `Close`,
+      });
     },
     error(context, message) {
       swal.fire("Error!", message.error, "error").then((result) => {

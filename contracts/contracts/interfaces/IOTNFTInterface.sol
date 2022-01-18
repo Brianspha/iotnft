@@ -44,7 +44,13 @@ interface IOTNFTInterface {
         uint256 tokenIndex,
         uint256 contractCut
     );
-  event adminFeeCollection(uint indexed date, uint256 indexed amount);
+    event adminFeeCollection(uint256 indexed date, uint256 indexed amount);
+    event delegatedToken(
+        uint256 indexed tokenId,
+        address indexed previousOwner,
+        bool indexed delegated
+    );
+
     /*==========================================================Function definition start==========================================================*/
     /**
  *@dev called when a user mints a token from pebble data
@@ -79,6 +85,7 @@ interface IOTNFTInterface {
             address,
             uint256,
             uint256,
+            bool,
             bool
         );
 
@@ -99,4 +106,10 @@ interface IOTNFTInterface {
 
   */
     function withdrawFees() external payable;
+
+    /**
+ *@dev allows the user to delegate the token to the contract
+
+  */
+    function delegateNFT(uint256 tokenId, bool delegate) external;
 }

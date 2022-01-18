@@ -17,6 +17,7 @@
             color:white;
         "
         outlined
+        href="/index.html"
         >Home</v-btn
       >
       <div style="padding-right:1.5%;"></div>
@@ -87,6 +88,18 @@
           :key="index"
           :lat-lng="[icon.latitude, icon.longitude]"
         >
+          <l-icon
+            v-if="icon.isNFT"
+            :icon-size="dynamicSize"
+            :icon-anchor="dynamicAnchor"
+            icon-url="https://siasky.net/CAAfxZScKN7nEA0y7y_EpI4-7Tmk-z16K-Fpg1KdRPoJyQ"
+          />
+          <l-icon
+            v-else
+            :icon-size="dynamicSize"
+            :icon-anchor="dynamicAnchor"
+            icon-url="https://siasky.net/EABuuwOz9W7LmD8TaFQUOj8LQGXddhQbwtnypIVDxvheJw"
+          />
           <l-tooltip :options="{ permanent: true, interactive: true }">
             <div>
               {{ icon.name }}
@@ -159,6 +172,7 @@
       <v-switch
         color="#699c79"
         inset
+        :value="$store.state.showMyLocationsOnly"
         v-model="$store.state.showMyLocationsOnly"
         label="Show my locations only"
       ></v-switch>
@@ -178,6 +192,9 @@
     >
     <v-divider style="padding-bottom:2%;"></v-divider>
     <device-data></device-data>
+    <MintNFTModal />
+    <NFTDetilsModal />
+    <DeviceDetailsModal />
   </v-container>
 </template>
 
@@ -192,6 +209,9 @@ import {
   LIcon,
 } from "vue2-leaflet";
 import DeviceData from "./DeviceData.vue";
+import MintNFTModal from "../modals/MintNFTModal.vue";
+import NFTDetilsModal from "../modals/NFTDetilsModal.vue";
+import DeviceDetailsModal from "../modals/DeviceDetailsModal.vue";
 export default {
   components: {
     LMap,
@@ -201,6 +221,9 @@ export default {
     LTooltip,
     LIcon,
     DeviceData,
+    MintNFTModal,
+    NFTDetilsModal,
+    DeviceDetailsModal,
   },
   watch: {
     "$store.state.showMyLocationsOnly": function(val) {
@@ -244,7 +267,11 @@ export default {
         [90, 180],
       ]),
       showMap: true,
+      iconSize: 34,
     };
+  },
+  created() {
+    this.$store.dispatch("loadData");
   },
   methods: {
     connectWallet: async function() {
@@ -274,6 +301,25 @@ export default {
     },
     centerUpdate(center) {
       this.currentCenter = center;
+    },
+    showNFTDetailsDialog(icon) {
+      console.log("clicked on: ", icon);
+      this.$store.state.isLoading = true;
+      if (icon.isNFT) {
+        var etherConverter = require("ether-converter");
+        icon.price = etherConverter(
+          icon.price,
+          "wei",
+          "eth"
+        );
+        this.$store.state.selectedNFT = icon;
+        this.$store.state.showNFTDetailsDialog = true;
+        this.$store.state.isLoading = false;
+      } else {
+        this.$store.state.selectedDevice = icon;
+        this.$store.state.deviceDetailsDialog = true;
+        this.$store.state.isLoading = false;
+      }
     },
   },
 };

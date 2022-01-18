@@ -2,12 +2,15 @@
   <v-row justify="center">
     <v-dialog v-model="$store.state.deviceDetailsDialog" width="100vw">
       <v-card>
-        <v-card-title class="text-h5">
+        <v-card-title
+          style=" font-size:25px;  font-style: italic;
+            font-family:cursive;"
+        >
           Location Details
         </v-card-title>
         <v-card-text
           ><v-form ref="form" lazy-validation>
-               <v-text-field
+            <v-text-field
               v-model="$store.state.selectedDevice.timestamp"
               label="Date"
               readonly
@@ -61,7 +64,7 @@
             ></v-text-field>
 
             <v-select
-              v-model="$store.state.selectedDevice.gyroscope"
+              :value="$store.state.selectedDevice.gyroscope[0]"
               :items="
                 $store.state.selectedDevice
                   ? $store.state.selectedDevice.gyroscope
@@ -76,7 +79,7 @@
             ></v-select>
 
             <v-select
-              v-model="$store.state.selectedDevice.accelerometer"
+              :value="$store.state.selectedDevice.accelerometer[0]"
               :items="
                 $store.state.selectedDevice
                   ? $store.state.selectedDevice.accelerometer
@@ -108,7 +111,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    this.$store.state.isLoading = false;
+  },
+  created() {
+    this.$store.state.isLoading = false;
+  },
+};
 </script>
 
 <style></style>

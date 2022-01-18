@@ -190,7 +190,7 @@ export default {
           console.log("error: ", error);
           _this.$store.state.isLoading = false;
           _this.$store.dispatch("error", {
-            error: "Something went wrong whilst fetching device data",
+            error: "Something went wrong while fetching device data",
             onTap: function() {},
           });
         });

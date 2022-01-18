@@ -158,7 +158,7 @@ contract("IOTNFT", function() {
   });
 
   /*************************** Token not delegated /***************************/
-  it("should mint a new token", async () => {
+  it("Token not delegated should mint a new token", async () => {
     var tokenPrice = etherConverter(20, "eth", "wei");
     var receipt = await IOTNFT.methods
       .mintToken(
@@ -189,7 +189,8 @@ contract("IOTNFT", function() {
     );
     assert.eventEmitted(receipt, "newTokenMinted");
   });
-  it("should check the owner of the token minted ", async () => {
+  it("Token not delegated should check the owner of the token minted ", async () => {
+    
     var owner = await TokenContract.methods.ownerOf(2).call({ gas: 6000000 });
     console.log("owner: ", owner, " minter: ", accounts[0]);
     assert.strictEqual(
@@ -199,13 +200,19 @@ contract("IOTNFT", function() {
     );
   });
 
-  it("should transfer token to contract before buying ", async () => {
+  it("Token not delegated should transfer token to contract before buying ", async () => {
     var transfered = await TokenContract.methods
       .transferFrom(accounts[0], IOTNFT.options.address, 2)
       .send({ gas: 6000000, from: accounts[0] });
     console.log("transfered: ", transfered);
   });
-  it("should check the token belongs to the contract before user can purchase ", async () => {
+  it("Token not delegated should delegate to contract before buying ", async () => {
+    var transfered = await IOTNFT.methods
+      .delegateNFT(2,true)
+      .send({ gas: 6000000, from: accounts[0] });
+    console.log("Token not delegated transfered: ", transfered);
+  });
+  it("Token not delegated should check the token belongs to the contract before user can purchase ", async () => {
     var owner = await TokenContract.methods.ownerOf(2).call({ gas: 6000000 });
     console.log(
       "owner: ",
@@ -219,7 +226,7 @@ contract("IOTNFT", function() {
       "Contract is not owner of token"
     );
   });
-  it("should buy a token with index 2", async () => {
+  it("Token not delegated should buy a token with index 2", async () => {
     var tokenPrice = etherConverter(30, "eth", "wei");
     var token = await IOTNFT.methods.buyToken(2).send({
       from: accounts[1],
@@ -227,12 +234,12 @@ contract("IOTNFT", function() {
       value: tokenPrice,
     });
   });
-  it("should check the owner of the token minted bought by account[1]", async () => {
+  it("Token not delegated should check the owner of the token minted bought by account[1]", async () => {
     var owner = await TokenContract.methods.ownerOf(2).call({ gas: 6000000 });
     console.log("owner: ", owner, " minter account[1]: ", accounts[1]);
     assert.strictEqual(accounts[1] == owner, true, "account[1] not owner");
   });
-  it("should get minter details", async () => {
+  it("Token not delegated should get minter details", async () => {
     var details = await IOTNFT.methods.getMinterDetails(accounts[0]).call({
       from: accounts[1],
       gas: 5000000,
@@ -240,7 +247,7 @@ contract("IOTNFT", function() {
     console.log("minter details: ", details);
   });
 
-  it("should get token details details", async () => {
+  it("Token not delegated should get token details details", async () => {
     var details = await IOTNFT.methods.getTokenDetails(1).call({
       from: accounts[1],
       gas: 5000000,
@@ -376,6 +383,12 @@ contract("IOTNFT", function() {
       .transferFrom(accounts[0], IOTNFT.options.address, 3)
       .send({ gas: 6000000, from: accounts[0] });
     console.log("transfered: ", transfered);
+  });
+  it("Token not delegated should delegate to contract before buying ", async () => {
+    var transfered = await IOTNFT.methods
+      .delegateNFT(3,true)
+      .send({ gas: 6000000, from: accounts[0] });
+    console.log("Token not delegated transfered: ", transfered);
   });
   it("should check the token belongs to the contract before user can purchase ", async () => {
     var owner = await TokenContract.methods.ownerOf(3).call({ gas: 6000000 });

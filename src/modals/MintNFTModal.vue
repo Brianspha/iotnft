@@ -87,8 +87,7 @@
                 >
               </v-tooltip></v-row
             >
-            </v-form
-          ></v-card-text
+          </v-form></v-card-text
         >
         <v-row align="center" justify="center"
           ><v-btn
@@ -151,8 +150,8 @@ export default {
       nameRules: [
         (v) => !!v || "NFT name required",
         (v) =>
-          (v && v.length >= 4 && v.length <= 15) ||
-          "NFT name must be atleast 4 characters",
+          (v && v.length >= 4 && v.length <= 100) ||
+          "NFT name must be atleast 4 characters and atmost 100 characters",
       ],
       nftPrice: 0,
       twitterUserName: "",
@@ -235,7 +234,6 @@ export default {
         );
         console.log("convertedPrice: ", price);
         this.$store.state.ionftContract.methods;
-        this.$store.state.selectedNFT.price = price;
         this.$store.state.selectedNFT.originalPrice = price;
         this.$store.state.ionftContract.methods
           .mintToken(
@@ -248,84 +246,97 @@ export default {
             gas: 5000000,
           })
           .then(async (receipt, error) => {
-            _this.$store.state.selectedNFT.tokenId =
-              receipt.events.newTokenMinted.returnValues.tokenId;
-            var content = await this.$store.dispatch("getCeramicData");
-            _this.$store.state.selectedNFT.isNFT = true;
-            _this.$store.state.selectedNFT.isDelegated = _this.delegate;
-            if (content.data.length === 0) {
-              _this.$store.state.userData = {
-                userAddress: _this.$store.state.userAddress,
-                imeis: [_this.$store.state.selectedNFT.imei],
-                data: [
-                  {
-                    imei: _this.$store.state.selectedNFT.imei,
-                    nfts: [_this.$store.state.selectedNFT],
-                  },
-                ],
-              };
-              content.data = [_this.$store.state.userData];
-              content.leaderboard = [
-                {
-                  wallet: _this.$store.state.userAddress,
-                  twitter_username:
-                    _this.$store.state.selectedNFT.twitter_username,
-                  ionfts_minted: 1,
-                  ionfts_bought: 0,
-                },
-              ];
-              // content.data.push(_this.$store.state.userData);
+            console.log(
+              "Object.keys(receipt.events).length: ",
+              Object.keys(receipt.events).length
+            );
+            if (Object.keys(receipt.events).length === 0) {
+              console.log("error minting IOTNFT token: ", receipt);
+              _this.$store.state.isLoading = false;
+              _this.$store.dispatch("error", {
+                error:
+                  "Something went wrong while minting IOTNFT token, this could be caused by the transaction reverting or the transaction ran out of gas while executing please inspect the website to see console",
+              });
             } else {
-              for (var index in content.data) {
-                //@dev for some reason for works better than map
-                var record = content.data[index];
-                if (record.userAddress === _this.$store.state.userAddress) {
-                  record.data.map((minted) => {
-                    if (minted.imei === _this.$store.state.selectedNFT.imei) {
-                      minted.nfts.push(_this.$store.state.selectedNFT);
-                    }
-                    return minted;
+              _this.$store.state.selectedNFT.tokenId =
+                receipt.events.newTokenMinted.returnValues.tokenId;
+              var content = await this.$store.dispatch("getCeramicData");
+              _this.$store.state.selectedNFT.isNFT = true;
+              _this.$store.state.selectedNFT.isDelegated = _this.delegate;
+              if (content.data.length === 0) {
+                _this.$store.state.userData = {
+                  userAddress: _this.$store.state.userAddress,
+                  imeis: [_this.$store.state.selectedNFT.imei],
+                  data: [
+                    {
+                      imei: _this.$store.state.selectedNFT.imei,
+                      nfts: [_this.$store.state.selectedNFT],
+                    },
+                  ],
+                };
+                content.data = [_this.$store.state.userData];
+                content.leaderboard = [
+                  {
+                    wallet: _this.$store.state.userAddress,
+                    twitter_username:
+                      _this.$store.state.selectedNFT.twitter_username,
+                    ionfts_minted: 1,
+                    ionfts_bought: 0,
+                  },
+                ];
+                // content.data.push(_this.$store.state.userData);
+              } else {
+                for (var index in content.data) {
+                  //@dev for some reason for works better than map
+                  var record = content.data[index];
+                  if (record.userAddress === _this.$store.state.userAddress) {
+                    record.data.map((minted) => {
+                      if (minted.imei === _this.$store.state.selectedNFT.imei) {
+                        minted.nfts.push(_this.$store.state.selectedNFT);
+                      }
+                      return minted;
+                    });
+                  }
+                }
+                var found = false;
+                content.leaderboard.map((user) => {
+                  if (user.wallet === _this.$store.state.userAddress) {
+                    user.ionfts_minted++;
+                  }
+                  return user;
+                });
+                if (!found) {
+                  content.leaderboard.push({
+                    wallet: _this.$store.state.userAddress,
+                    twitter_username:
+                      _this.$store.state.selectedNFT.twitter_username,
+                    ionfts_minted: 1,
+                    ionfts_bought: 0,
                   });
                 }
               }
-              var found = false;
-              content.leaderboard.map((user) => {
-                if (user.wallet === _this.$store.state.userAddress) {
-                  user.ionfts_minted++;
-                }
-                return user;
-              });
-              if (!found) {
-                content.leaderboard.push({
-                  wallet: _this.$store.state.userAddress,
-                  twitter_username:
-                    _this.$store.state.selectedNFT.twitter_username,
-                  ionfts_minted: 1,
-                  ionfts_bought: 0,
-                });
+              console.log("updatedContent: ", content);
+              await _this.$store.dispatch("saveCeramicData", content);
+              _this.$store.state.mintNFTDialog = false;
+              if (_this.delegate) {
+                _this.$store.dispatch(
+                  "success",
+                  "Succesfully minted token and delegated to contract"
+                );
+              } else {
+                _this.$store.dispatch("success", "Succesfully minted token");
               }
+              await _this.$store.dispatch("loadData");
+              _this.$store.state.isLoading = false;
+              _this.$store.state.reload = true;
+              _this.$store.state.selectedNFT = {};
             }
-            console.log("updatedContent: ", content);
-            await _this.$store.dispatch("saveCeramicData", content);
-            _this.$store.state.mintNFTDialog = false;
-            if (_this.delegate) {
-              _this.$store.dispatch(
-                "success",
-                "Succesfully minted token and delegated to contract"
-              );
-            } else {
-              _this.$store.dispatch("success", "Succesfully minted token");
-            }
-            await _this.$store.dispatch("loadData");
-            _this.$store.state.isLoading = false;
-            _this.$store.state.reload = true;
-            _this.$store.state.selectedNFT = {};
           })
           .catch((error) => {
-            console.log("error minting token: ", error);
+            console.log("error IOTNFT token: ", error);
             _this.$store.state.isLoading = false;
             _this.$store.dispatch("error", {
-              error: "Something went wrong while minting token",
+              error: "Something went wrong while minting IOTNFT token",
             });
           });
       }

@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row class="headingRow"
       ><div class="font-weight-black font-italic text-h3">
-        <a href="/index.html">IOTNFT</a>
+        <a href="./index.html">IOTNFT</a>
       </div>
       <v-spacer></v-spacer>
       <v-btn
@@ -17,7 +17,7 @@
             color:white;
         "
         outlined
-        href="/index.html"
+        href="./index.html"
         >Home</v-btn
       >
       <div style="padding-right:1.5%;"></div>

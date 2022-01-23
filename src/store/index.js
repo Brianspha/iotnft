@@ -36,7 +36,7 @@ const client = new SkynetClient("https://siasky.net/");
 /* eslint-disable no-new */
 const store = new Vuex.Store({
   state: {
-    sampleLocationData: require("../data/location.json"),
+    //sampleLocationData: require("../data/location.json"),
     showMyLocationsOnly: false,
     totalStaked: 0,
     tokenContract: require("../../contracts/embarkArtifacts/contracts/TokenContract")

@@ -214,79 +214,51 @@ export default {
         url: process.env.VUE_APP_TRUSTREAM_SUBGRAPH,
         method: "post",
         data: {
-          query: `
-      query pebble_device_record(
-    order_by: { timestamp: desc }
-    where: { imei: { _eq: "${imei}" } }
-  ) {
-    longitude
-    latitude
-    timestamp
-    temperature
-    temperature2
-    created_at
-    gyroscope
-    accelerometer
-    gyroscope
-    light
-    vbat
-    gas_resistance
-    snr
-    pressure
-    id
-    humidity
-    hash
-  }
-      `,
+          operationName: null,
+          variables: {},
+          query: `{\n  pebble_device_record(order_by: {timestamp: desc}, where: {imei: {_eq: "${imei}"}}) {\n    longitude\n    latitude\n    timestamp\n    temperature\n    temperature2\n    created_at\n    gyroscope\n    accelerometer\n    gyroscope\n    light\n    vbat\n    gas_resistance\n    snr\n    pressure\n    id\n    humidity\n    hash\n  }\n}\n`,
         },
       })
         .then((result) => {
           console.log("device Data: ", result.data.data);
-          /* if (result.data.data.pebble_device_record.length === 0) {
+          /**/ if (result.data.data.pebble_device_record.length === 0) {
             this.$store.dispatch("warning", {
               warning: "The device does not have any data",
             });
-          }
-          else{
-
-          }*/
-          console.log(
-            "this.$store.state.sampleData: ",
-            this.$store.state.sampleLocationData
-          );
-          var data = this.$store.state.sampleLocationData.data
-            .pebble_device_record;
-          console.log("device data: ", data);
-          data.map((point) => {
-            console.log("current point: ", point);
-            this.deviceData.push({
-              owner: this.$store.state.userAddress,
-              latitude: point.latitude,
-              longitude: point.longitude,
-              latLong: latLng(point.longitude, point.latitude),
-              gasResistance: point.gasResistance,
-              pressure: point.pressure,
-              humidity: point.humidity,
-              light: point.light,
-              temperature: point.temperature,
-              gyroscope: point.gyroscope
-                .replace("[", "")
-                .replace("]", "")
-                .split(","),
-              accelerometer: point.accelerometer
-                .replace("[", "")
-                .replace("]", "")
-                .split(","),
-              random: point.random,
-              snr: point.snr,
-              temperature2: point.temperature2,
-              timestamp: moment.unix(point.timestamp).format("LLLL"),
-              isNFT: false,
-              isDelegated: false,
+          } else {
+            var data = result.data.data.pebble_device_record;
+            console.log("device data: ", data);
+            data.map((point) => {
+              console.log("current point: ", point);
+              this.deviceData.push({
+                owner: this.$store.state.userAddress,
+                latitude: point.latitude,
+                longitude: point.longitude,
+                latLong: latLng(point.longitude, point.latitude),
+                gasResistance: point.gasResistance,
+                pressure: point.pressure,
+                humidity: point.humidity,
+                light: point.light,
+                temperature: point.temperature,
+                gyroscope: point.gyroscope
+                  .replace("[", "")
+                  .replace("]", "")
+                  .split(","),
+                accelerometer: point.accelerometer
+                  .replace("[", "")
+                  .replace("]", "")
+                  .split(","),
+                random: point.random,
+                snr: point.snr,
+                temperature2: point.temperature2,
+                timestamp: moment.unix(point.timestamp).format("LLLL"),
+                isNFT: false,
+                isDelegated: false,
+              });
             });
-          });
 
-          this.$store.state.isLoading = false;
+            this.$store.state.isLoading = false;
+          }
         })
         .catch((error) => {
           console.log("error fetching device data: ", error);

@@ -122,8 +122,8 @@ export default {
     nameRules: [
       (v) => !!v || "NFT name required",
       (v) =>
-        (v && v.length >= 4 && v.length <= 15) ||
-        "NFT name must be atleast 4 characters",
+        (v && v.length >= 4 && v.length <= 100) ||
+        "NFT name must be atleast 4 characters and atmost 100 characters",
     ],
     nftPrice: 0,
     twitterUserName: "",

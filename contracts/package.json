@@ -19,18 +19,22 @@
     "@openzeppelin/contracts-ethereum-package": "^2.5.0",
     "@openzeppelin/upgrades": "^2.8.0",
     "dotenv": "^10.0.0",
-    "embark": "^6.0.0",
+    "embark": "^6.0.1-nightly.0",
     "embark-geth": "^6.0.0",
     "embarkjs": "^6.0.0",
     "embarkjs-ens": "^6.0.0",
-    "embarkjs-web3": "^6.0.0"
+    "embarkjs-web3": "^6.0.0",
+    "yarn-upgrade-all": "^0.5.4"
   },
   "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.1",
     "bignumber.js": "^9.0.1",
     "dotenv": "^10.0.0",
+    "embark-solc": "^6.0.0",
     "ether-converter": "^0.0.16",
     "web3-eth": "^1.5.2",
-    "web3-eth-accounts": "^1.5.3",
-    "web3-utils": "^1.5.3"
+    "web3-eth-contract": "^1.7.0",
+    "web3-providers-http": "^1.7.0",
+    "web3-utils": "^1.4.0"
   }
 }

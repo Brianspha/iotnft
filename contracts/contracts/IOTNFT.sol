@@ -74,7 +74,7 @@ contract IOTNFT is
         } else {
             tokenId = ionft.mintToken(msg.sender, tokenURI);
         }
-        require(ionft.tokenExists(tokenId),"Token not minted");
+      //  require(ionft.tokenExists(tokenId),"Token not minted");
         currentIONFTs[tokenId].delegated = delegate;
         currentIONFTs[tokenId].tokenId = tokenId;
         currentIONFTs[tokenId].originalPrice = tokenPrice;

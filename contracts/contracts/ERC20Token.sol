@@ -2,7 +2,7 @@ pragma solidity >= 0.5 .10;
 
 import "./IERC20.sol";
 import "./SafeMathV2.sol";
-import "./Context.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 import "@openzeppelin/upgrades/contracts/Initializable.sol";
 
 /**

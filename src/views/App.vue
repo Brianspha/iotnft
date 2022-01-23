@@ -298,7 +298,7 @@ export default {
         console.info(performance.navigation.type);
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
           console.info("This page is reloaded");
-          window.location.href = "/index.html";
+          window.location.href = "./index.html";
         } else {
           console.info("This page is not reloaded");
         }

@@ -163,18 +163,18 @@ module.exports = {
   },
   matic: {
     deploy: {
-      SkyPainter: {
+      IOTNFT: {
         args: ["$TokenContract"],
         gas: "6000000",
         gasPrice: "250",
       },
       TokenContract: {
-        args: ["SkyPainterNFT", "SKPNFT"],
+        args: ["IOTNFT", "IOTNFT"],
         gas: "6000000",
         gasPrice: "250",
       },
       ERC721: {
-        args: ["SkyPainterNFT", "SKPNFT"],
+        args: ["IOTNFT", "IOTNFT"],
         gas: "6000000",
         gasPrice: "250",
       },
@@ -190,31 +190,31 @@ module.exports = {
     },
     afterDeploy: async ({ contracts, web3, logger }) => {
       console.log(
-        "contracts.SkyPainter.options.address: ",
-        contracts.SkyPainter.options.address
+        "contracts.IOTNFT.options.address: ",
+        contracts.IOTNFT.options.address
       );
       await contracts.TokenContract.methods
-        .setContractSkyPainterAddress(contracts.SkyPainter.options.address)
+        .setContractIOTNFTAddress(contracts.IOTNFT.options.address)
         .send({ from: web3.eth.defaultAccount });
       await contracts.ERC20Token.methods
-        .init("SkyPainterToken", "SKPT", 18, initialAmount)
+        .init("IOTNFT", "IOTNFT", 18, initialAmount)
         .send({ from: web3.eth.defaultAccount });
     },
   },
   ropsten: {
     deploy: {
-      SkyPainter: {
+      IOTNFT: {
         args: ["$TokenContract"],
         gas: "6000000",
         gasPrice: "250",
       },
       TokenContract: {
-        args: ["SkyPainterNFT", "SKPNFT"],
+        args: ["IOTNFT", "IOTNFT"],
         gas: "6000000",
         gasPrice: "250",
       },
       ERC721: {
-        args: ["SkyPainterNFT", "SKPNFT"],
+        args: ["IOTNFT", "IOTNFT"],
         gas: "6000000",
         gasPrice: "250",
       },
@@ -230,14 +230,14 @@ module.exports = {
     },
     afterDeploy: async ({ contracts, web3, logger }) => {
       console.log(
-        "contracts.SkyPainter.options.address: ",
-        contracts.SkyPainter.options.address
+        "contracts.IOTNFT.options.address: ",
+        contracts.IOTNFT.options.address
       );
       await contracts.TokenContract.methods
-        .setContractSkyPainterAddress(contracts.SkyPainter.options.address)
+        .setContractIOTNFTAddress(contracts.IOTNFT.options.address)
         .send({ from: web3.eth.defaultAccount });
       await contracts.ERC20Token.methods
-        .init("SkyPainterToken", "SKPT", 18, initialAmount)
+        .init("IOTNFT", "IOTNFT", 18, initialAmount)
         .send({ from: web3.eth.defaultAccount });
     },
   },

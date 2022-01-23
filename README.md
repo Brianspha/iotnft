@@ -3,15 +3,7 @@ Generative NFT where the features are represented by actual device readings usin
 
 ## Demo (Screenshots)
 
-1. ![1](./screenshots/1.png "1")
-2. ![2](./screenshots/2.png "2")
-3. ![3](./screenshots/3.png "3")
-4. ![4](./screenshots/4.png "4")
-5. ![5](./screenshots/5.png "5")
-6. ![6](./screenshots/6.png "6")
-7. ![7](./screenshots/7.png "7")
-8. ![8](./screenshots/8.png "8")
-9. ![9](./screenshots/9.png "9")
+Coming soon
 
 
 ### Demo (video click on image to open)

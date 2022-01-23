@@ -33,6 +33,34 @@ import MintNFTModal from "./modals/MintNFTModal.vue";
 export default {
   name: "App",
   watch: {
+    "window.ethereum.networkVersion": function(networkId) {
+      console.log("networkId: ", networkId);
+      switch (networkId.toString()) {
+        case "4690":
+          this.$store.state.connected = true;
+          break;
+        default:
+          if (!this.$store.state.connected) {
+            window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0x1252",
+                  chainName: "IOTEXT Testnet",
+                  nativeCurrency: {
+                    name: "IOTEXT",
+                    symbol: "IOTX",
+                    decimals: 18,
+                  },
+                  rpcUrls: ["https://babel-api.testnet.iotex.io"],
+                  blockExplorerUrls: ["https://testnet.iotexscan.io/"],
+                },
+              ],
+            });
+          }
+          break; /*;*/
+      }
+    },
     "$store.state.selectedNFT.userAddress": async function(val) {
       if (val) {
       }
@@ -140,7 +168,7 @@ export default {
         console.info(performance.navigation.type);
         if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
           console.info("This page is reloaded");
-          window.location.href = "/index.html";
+          window.location.href = "./index.html";
         } else {
           console.info("This page is not reloaded");
         }
@@ -165,36 +193,6 @@ export default {
               new Web3.providers.HttpProvider("http://localhost:8546")
             );
           }
-          window.web3.eth.net.getId((err, netId) => {
-            console.log("netId: ", netId);
-            switch (netId.toString()) {
-              case "4690":
-                this.$store.state.connected = true;
-                resolve(true);
-                break;
-              default:
-                if (!this.$store.state.connected) {
-                  window.ethereum.request({
-                    method: "wallet_addEthereumChain",
-                    params: [
-                      {
-                        chainId: "0x1252",
-                        chainName: "IOTEXT Testnet",
-                        nativeCurrency: {
-                          name: "IOTEXT",
-                          symbol: "IOTX",
-                          decimals: 18,
-                        },
-                        rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                        blockExplorerUrls: ["https://testnet.iotexscan.io/"],
-                      },
-                    ],
-                  });
-                }
-                resolve(true);
-                break; /*;*/
-            }
-          });
           window.ethereum.on("accountsChanged", function(accounts) {
             _this.$store.state.userAddress = accounts[0];
             window.location.reload();

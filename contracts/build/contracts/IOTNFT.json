@@ -19830,14 +19830,166 @@
   },
   "networks": {
     "4690": {
-      "events": {},
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        "0x46f81aedb227deef794d5c737014a5414db3c678220a521b747734688cc6a9fe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "string",
+              "name": "paused",
+              "type": "string"
+            }
+          ],
+          "name": "Pause",
+          "type": "event"
+        },
+        "0xab8f771d320c36af1f739e78861e82b4a21f97b123153ce1657e6904c8645da1": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "string",
+              "name": "unpaused",
+              "type": "string"
+            }
+          ],
+          "name": "Unpause",
+          "type": "event"
+        },
+        "0x600ded888969719a7badde4c4148aa1e044448fa493a26ac50149d0f17b5a418": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "date",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "amount",
+              "type": "uint256"
+            }
+          ],
+          "name": "adminFeeCollection",
+          "type": "event"
+        },
+        "0x177fc593512c9e06579ae83747e3c2b8fc5f3c76cef5968d27af2a040fb68258": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "bool",
+              "name": "delegated",
+              "type": "bool"
+            }
+          ],
+          "name": "delegatedToken",
+          "type": "event"
+        },
+        "0x07d40241f4975376edfb3697b835d9e59d7d197e7f64af48f283f0a6a8e6634b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "tokenId",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "internalType": "uint256",
+              "name": "tokenPrice",
+              "type": "uint256"
+            }
+          ],
+          "name": "newTokenMinted",
+          "type": "event"
+        },
+        "0x5af7a5b9fdf33798dd0cd51e78c9800e9aa1ff697bafa752e4575a793f748613": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "cost",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "tokenIndex",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "contractCut",
+              "type": "uint256"
+            }
+          ],
+          "name": "transferTokenOwnerShip",
+          "type": "event"
+        }
+      },
       "links": {},
-      "address": "0x618C763C2630910bE279eFa0f7711eCEf4485f9C",
-      "transactionHash": "0xf40bf741d6bcaaf393cd08c6a9062cff8d58834d98bf01afe9b9ca8e46645d3c"
+      "address": "0x6D6554a1B10d1D6457F317c39CEA4A392b6241b8",
+      "transactionHash": "0xe6ba462c489cb5e424b4e5ec71969e6daafbd11b839654c8046dd6c6aeb1721f"
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-23T01:44:14.421Z",
+  "updatedAt": "2022-01-23T20:18:16.818Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

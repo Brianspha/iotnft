@@ -80,7 +80,7 @@ const store = new Vuex.Store({
     selectedDataPoint: {},
     data: [],
     isLoading: false,
-    userAddress: "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11",
+    userAddress: "",
     primaryColor: "green darken-1",
     secondaryColor:"#699c79",
     selectedNFT: {},

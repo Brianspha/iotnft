@@ -304,7 +304,7 @@ export default {
               );
               _this.$store.state.reload = true;
               _this.$store.state.selectedNFT = {};
-              _this.$store.state.showNFTDetailsDialog = false;
+              //_this.$store.state.showNFTDetailsDialog = false;
             })
             .catch((error) => {
               console.log("error: ", error);
@@ -319,7 +319,7 @@ export default {
               _this.$store.dispatch("error", message);
               _this.$store.state.reload = true;
               _this.$store.state.selectedNFT = {};
-              _this.$store.state.showNFTDetailsDialog = false;
+              //_this.$store.state.showNFTDetailsDialog = false;
             });
         }
       }
@@ -441,7 +441,7 @@ export default {
           await _this.$store.dispatch("saveCeramicData", content);
           _this.$store.state.isLoading = false;
           _this.$store.dispatch("success", "Succesfully burnt IOTNFT token");
-          _this.$store.state.showNFTDetailsDialog = false;
+          //_this.$store.state.showNFTDetailsDialog = false;
           _this.$store.state.selectedNFT={}
           _this.$store.state.reload = true;
         })

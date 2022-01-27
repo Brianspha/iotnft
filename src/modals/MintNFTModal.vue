@@ -317,7 +317,7 @@ export default {
               }
               console.log("updatedContent: ", content);
               await _this.$store.dispatch("saveCeramicData", content);
-              _this.$store.state.mintNFTDialog = false;
+             // _this.$store.state.mintNFTDialog = false;
               if (_this.delegate) {
                 _this.$store.dispatch(
                   "success",
@@ -330,12 +330,12 @@ export default {
               _this.$store.state.isLoading = false;
               _this.$store.state.reload = true;
               _this.$store.state.selectedNFT = {};
-              _this.$store.state.mintNFTDialog = false;
+             // _this.$store.state.mintNFTDialog = false;
             }
           })
           .catch((error) => {
             console.log("error IOTNFT token: ", error);
-            _this.$store.state.mintNFTDialog = false;
+           // _this.$store.state.mintNFTDialog = false;
            // _this.$store.state.isLoading = false;
             _this.$store.dispatch("error", {
               error: "Something went wrong while minting IOTNFT token",

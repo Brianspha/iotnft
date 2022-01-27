@@ -10,7 +10,7 @@ import KeyDidResolver from "key-did-resolver";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
-const bigNumber = require('bignumber.js')
+const bigNumber = require("bignumber.js");
 const resolver = {
   ...KeyDidResolver.getResolver(),
   ...ThreeIdResolver.getResolver(ceramic),
@@ -82,7 +82,7 @@ const store = new Vuex.Store({
     isLoading: false,
     userAddress: "",
     primaryColor: "green darken-1",
-    secondaryColor:"#699c79",
+    secondaryColor: "#699c79",
     selectedNFT: {},
     streamId: process.env.VUE_APP_CEREMIC_SECRET,
     tile: {},
@@ -91,7 +91,7 @@ const store = new Vuex.Store({
     selectedDevice: {},
     revision: 1,
     connected: false,
-    allDAppNFTs:[]
+    allDAppNFTs: [],
   },
   plugins: [createPersistedState()],
   modules: {},
@@ -149,7 +149,7 @@ const store = new Vuex.Store({
           onTap: function() {},
         });
       }
-      store.state.allDAppNFTs=store.state.dappNFTs
+      store.state.allDAppNFTs = store.state.dappNFTs;
       store.state.isLoading = false;
     },
     getCeramicData: async function() {

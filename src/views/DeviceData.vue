@@ -35,7 +35,10 @@
               ></v-select>
               <div style="padding-right:5px;"></div>
               <v-btn
-                v-if="imei.length !== ''"
+                v-if="
+                  $store.state.userData &&
+                    $store.state.userData.imeis.length > 0
+                "
                 style="
             background-color:#6bdcc6;color:
             white;border-radius: 5px;

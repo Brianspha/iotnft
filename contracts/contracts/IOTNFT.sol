@@ -74,7 +74,7 @@ contract IOTNFT is
         } else {
             tokenId = ionft.mintToken(msg.sender, tokenURI);
         }
-      //  require(ionft.tokenExists(tokenId),"Token not minted");
+        //  require(ionft.tokenExists(tokenId),"Token not minted");
         currentIONFTs[tokenId].delegated = delegate;
         currentIONFTs[tokenId].tokenId = tokenId;
         currentIONFTs[tokenId].originalPrice = tokenPrice;
@@ -107,7 +107,7 @@ contract IOTNFT is
             "Invalid buying price"
         );
         require(currentIONFTs[tokenId].delegated, "token not delegated");
-
+        uint256 soldPrice = msg.value;
         uint256 tempPrice = getContractCut(
             msg.value.sub(currentIONFTs[tokenId].price)
         );
@@ -117,14 +117,13 @@ contract IOTNFT is
             currentIONFTs[tokenId].owner.send(remaining),
             "Insufficient funds"
         );
-        currentIONFTs[tokenId].price = currentIONFTs[tokenId].price.add(
-            remaining
-        );
+        currentIONFTs[tokenId].price = soldPrice;
         minters[currentIONFTs[tokenId].owner].totalStaked = minters[
             currentIONFTs[tokenId].owner
         ].totalStaked.add(remaining);
         address previousOwner = currentIONFTs[tokenId].owner;
         currentIONFTs[tokenId].owner = msg.sender;
+        currentIONFTs[tokenId].delegated = false;
         ionft.transferFrom(address(this), msg.sender, tokenId);
         emit transferTokenOwnerShip(
             msg.sender,
@@ -154,7 +153,7 @@ contract IOTNFT is
             currentIONFTs[tokenId].delegated = false;
         }
 
-        emit delegatedToken(tokenId, msg.sender,delegate);
+        emit delegatedToken(tokenId, msg.sender, delegate);
     }
 
     function getMinterDetails(address id)

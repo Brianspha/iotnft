@@ -306,12 +306,6 @@ export default {
       console.log("clicked on: ", icon);
       this.$store.state.isLoading = true;
       if (icon.isNFT) {
-        var etherConverter = require("ether-converter");
-        icon.price = etherConverter(
-          icon.price,
-          "wei",
-          "eth"
-        );
         this.$store.state.selectedNFT = icon;
         this.$store.state.showNFTDetailsDialog = true;
         this.$store.state.isLoading = false;

@@ -64,7 +64,11 @@
             ></v-text-field>
 
             <v-select
-              :value="$store.state.selectedDevice.gyroscope[0]"
+              :value="
+                $store.state.selectedDevice
+                  ? $store.state.selectedDevice.gyroscope[0]
+                  : 0
+              "
               :items="
                 $store.state.selectedDevice
                   ? $store.state.selectedDevice.gyroscope
@@ -79,7 +83,11 @@
             ></v-select>
 
             <v-select
-              :value="$store.state.selectedDevice.accelerometer[0]"
+              :value="
+                $store.state.selectedDevice
+                  ? $store.state.selectedDevice.accelerometer
+                  : 0
+              "
               :items="
                 $store.state.selectedDevice
                   ? $store.state.selectedDevice.accelerometer

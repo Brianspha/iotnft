@@ -92,6 +92,7 @@ const store = new Vuex.Store({
     revision: 1,
     connected: false,
     allDAppNFTs: [],
+    deviceData: [],
   },
   plugins: [createPersistedState()],
   modules: {},
@@ -104,6 +105,7 @@ const store = new Vuex.Store({
       /*  content.data = [];
       content.leaderboard = [];
       await store.dispatch("saveCeramicData", content);*/
+      console.log("foundData: ", content.data);
       for (var index in content.data) {
         var data = content.data[index];
         if (
@@ -143,12 +145,14 @@ const store = new Vuex.Store({
           });
       }
 
-      if (store.state.dappNFTs.length === 0) {
+      /*  if (store.state.dappNFTs.length === 0) {
         store.dispatch("warning", {
           warning: "Seems like arent any listed IONFTs",
           onTap: function() {},
         });
-      }
+      }*/
+      console.log("dappNFTs: ", store.state.dappNFTs);
+      store.state.deviceData = store.state.dappNFTs;
       store.state.allDAppNFTs = store.state.dappNFTs;
       store.state.isLoading = false;
     },
@@ -224,7 +228,7 @@ const store = new Vuex.Store({
         icon: "success",
         title: "Success",
         text: message.message,
-        footer: `<a href= https://testnet.bscscan.com/tx/${message.txHash}> View on Binance Explorer</a>`,
+        footer: `<a href= https://testnet.iotexscan.io/tx/${message.txHash}> View on iotex Explorer</a>`,
       });
     },
     errorWithFooterMetamask(context, message) {

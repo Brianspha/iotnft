@@ -53,67 +53,7 @@
       <v-divider></v-divider>
       <div style="padding-right: .9%;"></div>
     </v-row>
-    <div
-      style="
-        height: 600px;
-        width: 100%;
-        padding-top:2%; border-radius: 25px;
-        border-color: #699c79; border-width: 5px;
-        padding-bottom:5%;
-        "
-      fluid
-    >
-      <l-map
-        :bounds="bounds"
-        :max-bounds="maxBounds"
-        :key="mapKey"
-        :center="center"
-        :options="mapOptions"
-        style="
-            height: 600px;
-            width: 100%;
-            z-index: 1;
-            border-radius: 25px;
-            border-color: #699c79;
-            border-width: 2px;
-            border: 1px solid #699c79;
-            outline: 2px solid #699c79;
-        "
-        @update:center="centerUpdate"
-        @update:zoom="zoomUpdate"
-      >
-        <l-tile-layer :url="url" :attribution="attribution" />
-        <l-marker
-          v-for="(icon, index) in $store.state.dappNFTs"
-          :key="index"
-          :lat-lng="[icon.latitude, icon.longitude]"
-        >
-          <l-icon
-            v-if="icon.isNFT"
-            :icon-size="dynamicSize"
-            :icon-anchor="dynamicAnchor"
-            icon-url="https://siasky.net/CAAfxZScKN7nEA0y7y_EpI4-7Tmk-z16K-Fpg1KdRPoJyQ"
-          />
-          <l-icon
-            v-else
-            :icon-size="dynamicSize"
-            :icon-anchor="dynamicAnchor"
-            icon-url="https://siasky.net/EABuuwOz9W7LmD8TaFQUOj8LQGXddhQbwtnypIVDxvheJw"
-          />
-          <l-tooltip :options="{ permanent: true, interactive: true }">
-            <div>
-              {{ icon.name }}
-            </div>
-            <div
-              class="text-decoration-underline"
-              @click="showNFTDetailsDialog(icon)"
-            >
-              View Details
-            </div>
-          </l-tooltip>
-        </l-marker>
-      </l-map>
-    </div>
+    <map-component :mapData="$store.state.dappNFTs" nonNFTIcon="https://siasky.net/EABBmSDVOAhhqOUk4yF5K5OqXNeGZXTEkrnDYmI72rvB0A"/>
     <v-row style="padding-top: 5%;" align="center">
       <div style="padding-left:1%;"></div>
       <div
@@ -191,7 +131,7 @@
       </div></v-row
     >
     <v-divider style="padding-bottom:2%;"></v-divider>
-    <device-data></device-data>
+    <device-data-view/>
     <MintNFTModal />
     <NFTDetilsModal />
     <DeviceDetailsModal />
@@ -208,10 +148,11 @@ import {
   LTooltip,
   LIcon,
 } from "vue2-leaflet";
-import DeviceData from "./DeviceData.vue";
 import MintNFTModal from "../modals/MintNFTModal.vue";
 import NFTDetilsModal from "../modals/NFTDetilsModal.vue";
 import DeviceDetailsModal from "../modals/DeviceDetailsModal.vue";
+import MapComponent from '../components/MapComponent.vue';
+import DeviceDataView from './DeviceDataView.vue';
 export default {
   components: {
     LMap,
@@ -220,10 +161,11 @@ export default {
     LPopup,
     LTooltip,
     LIcon,
-    DeviceData,
     MintNFTModal,
     NFTDetilsModal,
     DeviceDetailsModal,
+    MapComponent,
+    DeviceDataView,
   },
   watch: {
     "$store.state.showMyLocationsOnly": function(val) {
@@ -240,6 +182,7 @@ export default {
   },
   data() {
     return {
+      deviceData:[],
       mapKey: 0,
       show: false,
       zoom: 3,

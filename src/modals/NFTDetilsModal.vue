@@ -1,6 +1,10 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="$store.state.showNFTDetailsDialog" width="100vw">
+    <v-dialog
+      v-model="$store.state.showNFTDetailsDialog"
+      width="100vw"
+      :retain-focus="false"
+    >
       <v-card>
         <v-card-title
           style=" font-size:25px;  font-style: italic;
@@ -67,7 +71,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-if="$store.state.userAddress === $store.state.selectedNFT.owner"
+              v-else
               v-model="$store.state.selectedNFT.twitter_username"
               :rules="usernameRules"
               label="Twitter Username"
@@ -77,9 +81,17 @@
             ></v-text-field>
             <v-row align="center" justify="start"
               ><v-checkbox
+                v-if="$store.state.selectedNFT.isDelegated"
                 color="#699c79"
-                :value="$store.state.selectedNFT.isDelegated"
-                :v-model="$store.state.selectedNFT.isDelegated"
+                input-value="true"
+                value
+                readonly
+                label="Token Delegated Ownership?"
+              ></v-checkbox>
+              <v-checkbox
+                v-else
+                color="#699c79"
+                :value="false"
                 label="Token Delegated Ownership?"
                 readonly
               ></v-checkbox>
@@ -172,7 +184,8 @@
         "
             v-if="
               valid &&
-                $store.state.userAddress === $store.state.selectedNFT.owner
+                $store.state.userAddress === $store.state.selectedNFT.owner &&
+                !$store.state.selectedNFT.isDelegated
             "
             @click="burnNFT"
           >
@@ -241,6 +254,10 @@ export default {
     this.$store.state.isLoading = false;
     //this.$store.state.selectedNFT.price=etherConverter(this.$store.state.selectedNFT.price,"wei","eth")
     //  this.$router.go();
+    console.log(
+      "this.$store.state.selectedNFT.price: ",
+      this.$store.state.selectedNFT
+    );
   },
   methods: {
     purchase() {
@@ -254,6 +271,7 @@ export default {
             parseFloat(this.offerPrice)
         ) {
           _this.$store.state.isLoading = false;
+
           var message = {
             error:
               "Please ensure that the offer Price is greater than 0 or the current Price!!",
@@ -277,8 +295,15 @@ export default {
               value: price,
             })
             .then(async (receipt, error) => {
+              _this.$store.state.selectedNFT.price = _this.$store.state.etherConverter(
+                price,
+                "wei",
+                "eth"
+              );
               var content = await this.$store.dispatch("getCeramicData");
               var found = false;
+              _this.$store.state.selectedNFT.owner =
+                _this.$store.state.userAddress;
               content.leaderboard.map((user) => {
                 if (user.wallet === _this.$store.state.userAddress) {
                   user.ionfts_bought = new bigNumber(user.ionfts_bought).plus(
@@ -327,53 +352,76 @@ export default {
     delegate: async function() {
       let _this = this;
       _this.$store.state.isLoading = true;
-      _this.$store.state.tokenContract.methods
-        .transferFrom(
-          _this.$store.state.userAddress,
-          _this.$store.state.ionftContract.options.address,
-          this.$store.state.selectedNFT.tokenId
-        )
-        .send({ from: _this.$store.state.userAddress, gas: 5000000 })
-        .then((receipt, error) => {
-          console.log("results of transferring token to IONFT: ", receipt);
-          _this.$store.state.ionftContract.methods
-            .delegateNFT(
-              this.$store.state.selectedNFT.tokenId,
-              !this.$store.state.selectedNFT.isDelegated
-            )
-            .send({ from: _this.$store.state.userAddress, gas: 5000000 })
-            .then((receipt, error) => {
-              _this.$store.state.isLoading = false;
-              console.log("results of delegating token: ", receipt);
-              if (_this.$store.state.selectedNFT.isDelegated) {
-                _this.$store.dispatch(
-                  "success",
-                  "Succesfully revoked delegation of token to the IONFT Contract, please check if the token appears in your assets tab on metamask!"
-                );
-              } else {
+      if (this.$store.state.selectedNFT.isDelegated) {
+        _this.$store.state.ionftContract.methods
+          .revokeDelegatedNFT(this.$store.state.selectedNFT.tokenId)
+          .send({ from: _this.$store.state.userAddress, gas: 5000000 })
+          .then((receipt, error) => {
+            _this.$store.state.isLoading = false;
+            console.log("results of revoking delagation of token: ", receipt);
+            _this.$store.state.selectedNFT.isDelegated = false;
+            _this.$store.dispatch(
+              "success",
+              "Succesfully revoked delegation of token to the IONFT Contract, please check if the token appears in your assets tab on metamask!"
+            );
+          })
+          .catch((error) => {
+            console.log("error delegating NFT: ", error);
+            _this.$store.state.isLoading = false;
+            var message = {
+              error: "Something went wrong while delegating token to IONFT",
+              onTap: () => {
+                this.state.showNFTDetailsDialog = true;
+              },
+            };
+            _this.$store.dispatch("error", message);
+          });
+      } else {
+        _this.$store.state.tokenContract.methods
+          .transferFrom(
+            _this.$store.state.userAddress,
+            _this.$store.state.ionftContract.options.address,
+            this.$store.state.selectedNFT.tokenId
+          )
+          .send({ from: _this.$store.state.userAddress, gas: 5000000 })
+          .then((receipt, error) => {
+            console.log("results of transferring token to IONFT: ", receipt);
+            _this.$store.state.ionftContract.methods
+              .delegateNFT(this.$store.state.selectedNFT.tokenId)
+              .send({ from: _this.$store.state.userAddress, gas: 5000000 })
+              .then((receipt, error) => {
+                _this.$store.state.isLoading = false;
+                console.log("results of delegating token: ", receipt);
+                _this.$store.state.selectedNFT.isDelegated = true;
                 _this.$store.dispatch(
                   "success",
                   "Succesfully delegated token to the IONFT Contract"
                 );
-              }
-            })
-            .catch((error) => {
-              console.log("error delegating NFT: ", error);
-              _this.$store.state.isLoading = false;
-              var message = {
-                error: _this.$store.state.selectedNFT.isDelegated
-                  ? "Something went wrong while revoking delegation of token from IONFT Contract"
-                  : "Something went wrong while delegating token to IONFT",
-                onTap: () => {
-                  this.state.showNFTDetailsDialog = true;
-                },
-              };
-              _this.$store.dispatch("error", message);
-            });
-        })
-        .catch((error) => {
-          console.log("error transferring token to IONFT contract: ", error);
-        });
+              })
+              .catch((error) => {
+                console.log("error delegating NFT: ", error);
+                _this.$store.state.isLoading = false;
+                var message = {
+                  error: "Something went wrong while delegating token to IONFT",
+                  onTap: () => {
+                    this.state.showNFTDetailsDialog = true;
+                  },
+                };
+                _this.$store.dispatch("error", message);
+              });
+          })
+          .catch((error) => {
+            _this.$store.state.isLoading = false;
+            var message = {
+              error: "Something went wrong while delegating token to IONFT",
+              onTap: () => {
+                this.state.showNFTDetailsDialog = true;
+              },
+            };
+            _this.$store.dispatch("error", message);
+            console.log("error transferring token to IONFT contract: ", error);
+          });
+      }
     },
     save: async function() {
       const doodle = document.querySelector("css-doodle");
@@ -408,7 +456,6 @@ export default {
             }
             return user;
           });
-
           for (var index in content.data) {
             var data = content.data[index];
             data.map((nft) => {
@@ -442,7 +489,7 @@ export default {
           _this.$store.state.isLoading = false;
           _this.$store.dispatch("success", "Succesfully burnt IOTNFT token");
           //_this.$store.state.showNFTDetailsDialog = false;
-          _this.$store.state.selectedNFT={}
+          _this.$store.state.selectedNFT = {};
           _this.$store.state.reload = true;
         })
         .catch((error) => {

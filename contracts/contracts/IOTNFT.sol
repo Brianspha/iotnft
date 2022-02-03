@@ -74,7 +74,7 @@ contract IOTNFT is
         } else {
             tokenId = ionft.mintToken(msg.sender, tokenURI);
         }
-        //  require(ionft.tokenExists(tokenId),"Token not minted");
+        require(ionft.tokenExists(tokenId), "Token not minted");
         currentIONFTs[tokenId].delegated = delegate;
         currentIONFTs[tokenId].tokenId = tokenId;
         currentIONFTs[tokenId].originalPrice = tokenPrice;
@@ -134,26 +134,29 @@ contract IOTNFT is
         );
     }
 
-    function delegateNFT(uint256 tokenId, bool delegate) public override {
+    function revokeDelegatedNFT(uint256 tokenId) public override {
         require(msg.sender != address(0), "Invalid sender address");
         require(
             currentIONFTs[tokenId].exists && ionft.tokenExists(tokenId),
             "Token not listed or exists"
         );
-        require(ionft.ownerOf(tokenId) == address(this), "Not Owner");
+        require(ionft.ownerOf(tokenId) == address(this), "Contract Not Owner");
+        require(currentIONFTs[tokenId].delegated, "Token not delegated");
+        ionft.transferFrom(address(this), msg.sender, tokenId);
+        currentIONFTs[tokenId].delegated = false;
+        emit revokedDelegatedToken(tokenId);
+    }
 
-        if (delegate) {
-            require(
-                !currentIONFTs[tokenId].delegated,
-                "Token already delegated"
-            );
-            currentIONFTs[tokenId].delegated = true;
-        } else {
-            require(currentIONFTs[tokenId].delegated, "Token not delegated");
-            currentIONFTs[tokenId].delegated = false;
-        }
-
-        emit delegatedToken(tokenId, msg.sender, delegate);
+    function delegateNFT(uint256 tokenId) public override {
+        require(msg.sender != address(0), "Invalid sender address");
+        require(
+            currentIONFTs[tokenId].exists && ionft.tokenExists(tokenId),
+            "Token not listed or exists"
+        );
+        require(ionft.ownerOf(tokenId) == address(this), "Contract Not Owner");
+        require(!currentIONFTs[tokenId].delegated, "Token already delegated");
+        currentIONFTs[tokenId].delegated = true;
+        emit delegatedToken(tokenId);
     }
 
     function getMinterDetails(address id)

@@ -45,11 +45,9 @@ interface IOTNFTInterface {
         uint256 contractCut
     );
     event adminFeeCollection(uint256 indexed date, uint256 indexed amount);
-    event delegatedToken(
-        uint256 indexed tokenId,
-        address indexed previousOwner,
-        bool indexed delegated
-    );
+    event delegatedToken(uint256 indexed tokenId);
+        event revokedDelegatedToken(uint256 indexed tokenId);
+
 
     /*==========================================================Function definition start==========================================================*/
     /**
@@ -111,5 +109,11 @@ interface IOTNFTInterface {
  *@dev allows the user to delegate the token to the contract
 
   */
-    function delegateNFT(uint256 tokenId, bool delegate) external;
+    function delegateNFT(uint256 tokenId) external;
+
+    /**
+ *@dev allows the user to revoke delagation of token from the contract
+
+  */
+    function revokeDelegatedNFT(uint256 tokenId) external;
 }

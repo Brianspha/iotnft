@@ -20,7 +20,36 @@
                 hide-details
               ></v-text-field>
             </v-col>
-            <v-spacer></v-spacer>
+            <v-col class="d-flex" cols="12" sm="3">
+              <v-btn
+                v-if="
+                  $store.state.userData &&
+                    $store.state.userData.imeis.length > 0 &&
+                    deviceData != null &&
+                    deviceData.length > 0
+                "
+                style="
+            background-color:#6bdcc6;color:
+            white;border-radius: 5px;
+            font-style: italic;
+            border-color: #699c79;
+            border-width: 1px;
+            font-family:cursive;
+            font-weight:bold;
+            color:white;
+        "
+                outlined
+                text
+                @click="
+                  $store.state.deviceData = deviceData;
+                  $router.push('/deviceDataMapView');
+                "
+              >
+                View on Map
+              </v-btn></v-col
+            >
+            <v-spacer> </v-spacer>
+
             <v-col class="d-flex" cols="12" sm="3">
               <v-select
                 dense
@@ -209,7 +238,7 @@ export default {
 
   methods: {
     loadDeviceData: async function(imei) {
-      console.log("device imei: ", imei);
+      let _this=this
       //     imei = "151358810263573"; //@dev for dev purposes
       this.$store.state.isLoading = true;
       const axios = require("axios").default;
@@ -228,13 +257,14 @@ export default {
             this.$store.dispatch("warning", {
               warning: "The device does not have any data",
             });
+            _this.$store.state.isLoading = false;
           } else {
             var data = result.data.data.pebble_device_record;
             console.log("device data: ", data);
             data.map((point) => {
               console.log("current point: ", point);
               this.deviceData.push({
-                owner: this.$store.state.userAddress,
+                owner: _this.$store.state.userAddress,
                 latitude: point.latitude,
                 longitude: point.longitude,
                 latLong: latLng(point.longitude, point.latitude),
@@ -259,13 +289,13 @@ export default {
                 isDelegated: false,
               });
             });
-
-            this.$store.state.isLoading = false;
+            _this.$store.state.isLoading = false;
+            _this.$store.state.deviceData = _this.deviceData;
           }
         })
         .catch((error) => {
           console.log("error fetching device data: ", error);
-          this.$store.state.isLoading = false;
+          _this.$store.state.isLoading = false;
         });
     },
     initialize() {

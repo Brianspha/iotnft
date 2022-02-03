@@ -169,6 +169,7 @@ export default {
           (v && !isNaN(v) && parseFloat(v) > 0) ||
           "Offer Price must be a valid amount",
       ],
+      tokenMinted: false,
     };
   },
   mounted() {
@@ -258,88 +259,94 @@ export default {
                   "Something went wrong while minting IOTNFT token, this could be caused by the transaction reverting or the transaction ran out of gas while executing please inspect the website to see console",
               });
             } else {
-              _this.$store.state.selectedNFT.tokenId =
-                receipt.events.newTokenMinted.returnValues.tokenId;
-              var content = await this.$store.dispatch("getCeramicData");
-              _this.$store.state.selectedNFT.isNFT = true;
-              _this.$store.state.selectedNFT.isDelegated = _this.delegate;
-              if (content.data.length === 0) {
-                _this.$store.state.userData = {
-                  userAddress: _this.$store.state.userAddress,
-                  imeis: [_this.$store.state.selectedNFT.imei],
-                  data: [
+              {
+                _this.$store.state.selectedNFT.isNFT = true;
+                _this.$store.state.selectedNFT.tokenId =
+                  receipt.events.newTokenMinted.returnValues.tokenId;
+                var content = await _this.$store.dispatch("getCeramicData");
+                _this.$store.state.selectedNFT.isNFT = true;
+                _this.$store.state.selectedNFT.isDelegated = _this.delegate;
+                if (content.data.length === 0) {
+                  _this.$store.state.userData = {
+                    userAddress: _this.$store.state.userAddress,
+                    imeis: [_this.$store.state.selectedNFT.imei],
+                    data: [
+                      {
+                        imei: _this.$store.state.selectedNFT.imei,
+                        nfts: [_this.$store.state.selectedNFT],
+                      },
+                    ],
+                  };
+                  content.data = [_this.$store.state.userData];
+                  content.leaderboard = [
                     {
-                      imei: _this.$store.state.selectedNFT.imei,
-                      nfts: [_this.$store.state.selectedNFT],
+                      wallet: _this.$store.state.userAddress,
+                      twitter_username:
+                        _this.$store.state.selectedNFT.twitter_username,
+                      ionfts_minted: 1,
+                      ionfts_bought: 0,
                     },
-                  ],
-                };
-                content.data = [_this.$store.state.userData];
-                content.leaderboard = [
-                  {
-                    wallet: _this.$store.state.userAddress,
-                    twitter_username:
-                      _this.$store.state.selectedNFT.twitter_username,
-                    ionfts_minted: 1,
-                    ionfts_bought: 0,
-                  },
-                ];
-                // content.data.push(_this.$store.state.userData);
-              } else {
-                for (var index in content.data) {
-                  //@dev for some reason for works better than map
-                  var record = content.data[index];
-                  if (record.userAddress === _this.$store.state.userAddress) {
-                    record.data.map((minted) => {
-                      if (minted.imei === _this.$store.state.selectedNFT.imei) {
-                        minted.nfts.push(_this.$store.state.selectedNFT);
-                      }
-                      return minted;
+                  ];
+                  // content.data.push(_this.$store.state.userData);
+                } else {
+                  for (var index in content.data) {
+                    //@dev for some reason for works better than map
+                    var record = content.data[index];
+                    if (record.userAddress === _this.$store.state.userAddress) {
+                      record.data.map((minted) => {
+                        if (
+                          minted.imei === _this.$store.state.selectedNFT.imei
+                        ) {
+                          minted.nfts.push(_this.$store.state.selectedNFT);
+                        }
+                        return minted;
+                      });
+                    }
+                  }
+                  var found = false;
+                  content.leaderboard.map((user) => {
+                    if (user.wallet === _this.$store.state.userAddress) {
+                      user.ionfts_minted++;
+                    }
+                    return user;
+                  });
+                  if (!found) {
+                    content.leaderboard.push({
+                      wallet: _this.$store.state.userAddress,
+                      twitter_username:
+                        _this.$store.state.selectedNFT.twitter_username,
+                      ionfts_minted: 1,
+                      ionfts_bought: 0,
                     });
                   }
                 }
-                var found = false;
-                content.leaderboard.map((user) => {
-                  if (user.wallet === _this.$store.state.userAddress) {
-                    user.ionfts_minted++;
-                  }
-                  return user;
-                });
-                if (!found) {
-                  content.leaderboard.push({
-                    wallet: _this.$store.state.userAddress,
-                    twitter_username:
-                      _this.$store.state.selectedNFT.twitter_username,
-                    ionfts_minted: 1,
-                    ionfts_bought: 0,
-                  });
+                console.log("updatedContent: ", content);
+                await _this.$store.dispatch("saveCeramicData", content);
+                // _this.$store.state.mintNFTDialog = false;
+                if (_this.delegate) {
+                  _this.$store.dispatch(
+                    "success",
+                    "Succesfully minted token and delegated to contract"
+                  );
+                } else {
+                  _this.$store.dispatch("success", "Succesfully minted token");
                 }
+                await _this.$store.dispatch("loadData");
+                _this.$store.state.isLoading = false;
+                _this.$store.state.reload = true;
+                _this.$store.state.selectedNFT = {};
+                _this.tokenMinted = true;
               }
-              console.log("updatedContent: ", content);
-              await _this.$store.dispatch("saveCeramicData", content);
-             // _this.$store.state.mintNFTDialog = false;
-              if (_this.delegate) {
-                _this.$store.dispatch(
-                  "success",
-                  "Succesfully minted token and delegated to contract"
-                );
-              } else {
-                _this.$store.dispatch("success", "Succesfully minted token");
-              }
-              await _this.$store.dispatch("loadData");
-              _this.$store.state.isLoading = false;
-              _this.$store.state.reload = true;
-              _this.$store.state.selectedNFT = {};
-             // _this.$store.state.mintNFTDialog = false;
             }
           })
           .catch((error) => {
             console.log("error IOTNFT token: ", error);
-           // _this.$store.state.mintNFTDialog = false;
-           // _this.$store.state.isLoading = false;
+            // _this.$store.state.mintNFTDialog = false;
+            // _this.$store.state.isLoading = false;
             _this.$store.dispatch("error", {
               error: "Something went wrong while minting IOTNFT token",
             });
+            _this.$store.state.isLoading = false;
           });
       }
     },
@@ -367,19 +374,26 @@ export default {
       });
     },
     save: async function() {
-      const doodle = document.querySelector("css-doodle");
-      console.log("doodle: ", doodle);
-      let _this = this;
-      this.$store.state.isLoading = true;
-      doodle
-        .export({
-          scale: 6,
-          download: true,
-        })
-        .then((data, error) => {
-          _this.$store.state.isLoading = false;
-          console.log("data,error: ", data, error);
-        });
+      if (!this.tokenMinted) {
+        const doodle = document.querySelector("css-doodle");
+        console.log("doodle: ", doodle);
+        let _this = this;
+        this.$store.state.isLoading = true;
+        doodle
+          .export({
+            scale: 6,
+            download: true,
+          })
+          .then((data, error) => {
+            _this.$store.state.isLoading = false;
+            console.log("data,error: ", data, error);
+          })
+          .catch((error) => {
+            console.log("error: ", error);
+            _this.$store.state.isLoading = false;
+          });
+      }
+
       /* open Dev tools to see the result */
     },
   },

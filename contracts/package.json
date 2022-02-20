@@ -9,7 +9,7 @@
     "gendocs": "npx solidity-docgen --solc-module solc-0.8.4",
     "iotex": "embark reset && embark build iotex",
     "ropsten": "embark reset && embark build ropsten",
-    "harmony": "embark reset && embark build harmony",
+    "harmony": "truffle deploy --reset --network harmony",
     "iotex-deploy":"truffle deploy --reset --network iotex"
   },
   "keywords": [],

@@ -1,7 +1,7 @@
 // This file contains only the basic configuration you need to run Embark's node
 // For additional configurations, see: https://framework.embarklabs.io/docs/blockchain_configuration.html
 require("dotenv").config();
-
+console.log("NODE_URL_HARMONY_TESTNET: ",process.env.NODE_URL_HARMONY_TESTNET)
 module.exports = {
   // default applies to all environments
   default: {
@@ -66,8 +66,13 @@ module.exports = {
     ],
   },
   harmony: {
-    endpoint: process.env.NODE_URL_HARMONY, // Endpoint of an node to connect to. Can be on localhost or on the internet
-    accounts: [{ privateKey: `${process.env.H_PRIVATE_KEY}` }],
+    endpoint: process.env.NODE_URL_HARMONY_TESTNET, // Endpoint of an node to connect to. Can be on localhost or on the internet
+    accounts: [
+      {
+        mnemonic: process.env.HARMONEY_ONE_MNEMONIC,
+        hdpath: `m/44'/1023'/0'/0/`,
+      },
+    ],
   },
   testnet: {
     networkType: "testnet", // Can be: testnet(ropsten), rinkeby, livenet or custom, in which case, it will use the specified networkId

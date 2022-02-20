@@ -23,47 +23,27 @@
   </v-app>
 </template>
 <script>
-
 import Web3 from "web3";
 import EmbarkJS from "../contracts/embarkArtifacts/embarkjs";
 import MintNFTModal from "./modals/MintNFTModal.vue";
+import getExtension from "./extension";
 
 export default {
   name: "App",
   watch: {
-    "window.ethereum.networkVersion": function(networkId) {
+    "window.ethereum.networkVersion": function (networkId) {
       console.log("networkId: ", networkId);
       switch (networkId.toString()) {
         case "4690":
           this.$store.state.connected = true;
           break;
-        default:
-          if (!this.$store.state.connected) {
-            window.ethereum.request({
-              method: "wallet_addEthereumChain",
-              params: [
-                {
-                  chainId: "0x1252",
-                  chainName: "IOTEXT Testnet",
-                  nativeCurrency: {
-                    name: "IOTEXT",
-                    symbol: "IOTX",
-                    decimals: 18,
-                  },
-                  rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                  blockExplorerUrls: ["https://testnet.iotexscan.io/"],
-                },
-              ],
-            });
-          }
-          break; /*;*/
       }
     },
-    "$store.state.selectedNFT.userAddress": async function(val) {
+    "$store.state.selectedNFT.userAddress": async function (val) {
       if (val) {
       }
     },
-    "$store.state.connected": async function(val) {
+    "$store.state.connected": async function (val) {
       console.log("$store.state.connected changed value: ", val);
       if (val) {
         await this.getUserDevices();
@@ -76,12 +56,12 @@ export default {
     this.authenticate();
   },
   mounted() {
-   /* this.$store.dispatch("warning", {
+    /* this.$store.dispatch("warning", {
       warning: "Please note the website is still under development",
     });*/
   },
   methods: {
-    getUserDevices: async function() {
+    getUserDevices: async function () {
       this.$store.state.isLoading = true;
       const axios = require("axios").default;
       var data = JSON.stringify({
@@ -121,14 +101,13 @@ export default {
             devices.data.data.pebble_device.length === 0
           ) {
             console.log("no devices found for this user");
-          //  this.$store.state.userData.imeis=["100000000000225", "100000000000211"]
+            //  this.$store.state.userData.imeis=["100000000000225", "100000000000211"]
           } else {
             console.log("found user device: ", devices.data.data.pebble_device);
-            this.$store.state.userData.imeis = devices.data.data.pebble_device.map(
-              (device) => {
+            this.$store.state.userData.imeis =
+              devices.data.data.pebble_device.map((device) => {
                 return device.id;
-              }
-            );
+              });
           }
         })
         .catch((error) => {
@@ -138,24 +117,21 @@ export default {
     },
     authenticate() {
       this.$store.state.isLoading = true;
-      let _this = this;
-      _this.$store.state.ceramicClient.did
-        .authenticate()
-        .then(async (res, error) => {
-          this.init()
-            .then(async (res, err) => {
-              _this.$store.state.isLoading = false;
-            })
-            .catch((error) => {
-              _this.$store.state.isLoading = false;
-            });
-        });
+      window.addEventListener("load", () => {
+        this.hmyExtension = getExtension(
+          this.chain.endpoint,
+          this.chain.shard,
+          this.chain.id
+        );
+        this.crowdfundingInstance = getCrowdfundingInstance(this.hmyExtension);
+        this.getProjects();
+      });
     },
     getRandomInRange(from, to, fixed) {
       return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
       // .toFixed() returns string, so ' * 1' is a trick to convert to number
     },
-    connectWallet: async function() {
+    connectWallet: async function () {
       this.$store.state.isLoading = true;
       if (typeof ethereum !== "undefined") {
         try {
@@ -177,7 +153,7 @@ export default {
         );
       }
     },
-    init: async function() {
+    init: async function () {
       return new Promise(async (resolve) => {
         let _this = this;
         if (window.performance) {
@@ -191,7 +167,8 @@ export default {
           console.info("This page is not reloaded");
         }
         EmbarkJS.onReady(async (error) => {
-          var accounts = await require("../contracts/embarkArtifacts/embarkjs").default.enableEthereum();
+          var accounts =
+            await require("../contracts/embarkArtifacts/embarkjs").default.enableEthereum();
           console.log("accounts; ", accounts);
           this.$store.state.userAddress = accounts[0];
           this.$store.state.connected = true;
@@ -211,11 +188,11 @@ export default {
               new Web3.providers.HttpProvider("http://localhost:8546")
             );
           }
-          window.ethereum.on("accountsChanged", function(accounts) {
+          window.ethereum.on("accountsChanged", function (accounts) {
             _this.$store.state.userAddress = accounts[0];
             window.location.reload();
           });
-          window.ethereum.on("networkChanged", function(netId) {
+          window.ethereum.on("networkChanged", function (netId) {
             _this.$store.state.userAddress = accounts[0];
             window.location.reload();
           });
@@ -225,6 +202,15 @@ export default {
   },
   data: () => ({
     drawer: false,
+    chain: {
+      id: 2,
+      endpoint: "https://api.s0.b.hmny.io",
+      shard: 0,
+    },
+    transaction: {
+      gasLimit: 6721900,
+      gasPrice: 1000000000,
+    },
   }),
 };
 </script>

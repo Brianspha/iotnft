@@ -11,6 +11,7 @@
     "@ceramicnetwork/3id-did-resolver": "^1.4.3",
     "@ceramicnetwork/http-client": "^1.3.0",
     "@ceramicnetwork/stream-tile": "^1.3.1",
+    "@harmony-js/core": "^0.1.57",
     "@luxdamore/vue-css-doodle": "^1.0.1",
     "@reef-defi/evm-provider": "^1.0.4",
     "apexcharts": "^3.28.3",

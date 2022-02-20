@@ -28,6 +28,8 @@ const HDWalletProvider = require("@truffle/hdwallet-provider");
 require("dotenv").config();
 const GAS_LIMIT = 8e6;
 console.log(process.env.NODE_URL_IOTEX);
+const mnemonic =  process.env.HARMONEY_ONE_MNEMONIC;
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -102,6 +104,16 @@ module.exports = {
       timeoutBlocks: 50, // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: false, // Skip dry run before migrations? (default: false for public nets )
     },
+    harmony:{
+      provider: () => {
+        return new HDWalletProvider({
+          mnemonic,
+          providerOrUrl: 'https://api.s0.b.hmny.io', // https://api.s0.t.hmny.io for mainnet
+          derivationPath: `m/44'/1023'/0'/0/`
+        });
+      },
+      network_id: 1666700000, // 1666600000 for mainnet
+    }
   },
 
   // Set default mocha options here, use special reporters etc.

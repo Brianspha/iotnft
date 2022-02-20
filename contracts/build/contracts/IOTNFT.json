@@ -508,10 +508,10 @@
       "signature": "0x476343ee"
     }
   ],
-  "deployedAddress": "0x9fff63536f17d68E20Ab5306514E5524c1bc51b9",
+  "deployedAddress": "0x49c26F63730D21eE1f033d46d152292f7b0566D2",
   "className": "IOTNFT",
   "args": [
-    "0xd3A5E8bf997a62854d61C50F653635cc7823A3cA"
+    "0x5655fF7dFf3829b438C9eC37b9330dea65C0c2b0"
   ],
   "gas": "6000000",
   "gasPrice": "250",
@@ -583,5 +583,5 @@
   "path": "/Users/siphamandlamjoli/Documents/GitHub/iotnft/contracts/contracts/IOTNFT.sol",
   "type": "file",
   "deploymentAccount": "0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11",
-  "transactionHash": "0x23fe80638289da332999cbd4dbf7d81a243fb60b16cb3c2f90443b646bf68ed8"
+  "transactionHash": "0xd7d1808393b6389d68928e5bd794c3c2eaf62970551c3680fbad558b6589713c"
 }

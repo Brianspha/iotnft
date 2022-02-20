@@ -1,0 +1,1658 @@
+{
+  "contractName": "SuperfluidOwnableGovernance",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isKeySet",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "liquidationPeriod",
+          "type": "uint256"
+        }
+      ],
+      "name": "CFAv1LiquidationPeriodChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isKeySet",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "ConfigChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isKeySet",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "rewardAddress",
+          "type": "address"
+        }
+      ],
+      "name": "RewardAddressChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isKeySet",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "minimumDeposit",
+          "type": "uint256"
+        }
+      ],
+      "name": "SuperTokenMinimumDepositChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isKeySet",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "enabled",
+          "type": "bool"
+        }
+      ],
+      "name": "TrustedForwarderChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "factory",
+          "type": "address"
+        }
+      ],
+      "name": "authorizeAppFactory",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperToken[]",
+          "name": "tokens",
+          "type": "address[]"
+        }
+      ],
+      "name": "batchUpdateSuperTokenLogic",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperToken[]",
+          "name": "tokens",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "minimumDeposits",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "batchUpdateSuperTokenMinimumDeposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "clearCFAv1LiquidationPeriod",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "clearRewardAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "clearSuperTokenMinimumDeposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        }
+      ],
+      "name": "clearTrustedForwarder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        }
+      ],
+      "name": "disableTrustedForwarder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        }
+      ],
+      "name": "enableTrustedForwarder",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "getCFAv1LiquidationPeriod",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getConfigAsAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "value",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getConfigAsUint256",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "period",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "getRewardAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        }
+      ],
+      "name": "getSuperTokenMinimumDeposit",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "factory",
+          "type": "address"
+        }
+      ],
+      "name": "isAuthorizedAppFactory",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        }
+      ],
+      "name": "isTrustedForwarder",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        }
+      ],
+      "name": "registerAgreementClass",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "newGov",
+          "type": "address"
+        }
+      ],
+      "name": "replaceGovernance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCFAv1LiquidationPeriod",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "rewardAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setRewardAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "contract ISuperfluidToken",
+          "name": "superToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "setSuperTokenMinimumDeposit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "factory",
+          "type": "address"
+        }
+      ],
+      "name": "unauthorizeAppFactory",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "hostNewLogic",
+          "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "agreementClassNewLogics",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address",
+          "name": "superTokenFactoryNewLogic",
+          "type": "address"
+        }
+      ],
+      "name": "updateContracts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract ISuperfluid",
+          "name": "host",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "key",
+          "type": "bytes32"
+        }
+      ],
+      "name": "whiteListNewApp",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isKeySet\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"liquidationPeriod\",\"type\":\"uint256\"}],\"name\":\"CFAv1LiquidationPeriodChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isKeySet\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"ConfigChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isKeySet\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"rewardAddress\",\"type\":\"address\"}],\"name\":\"RewardAddressChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isKeySet\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"minimumDeposit\",\"type\":\"uint256\"}],\"name\":\"SuperTokenMinimumDepositChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isKeySet\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"enabled\",\"type\":\"bool\"}],\"name\":\"TrustedForwarderChanged\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"authorizeAppFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperToken[]\",\"name\":\"tokens\",\"type\":\"address[]\"}],\"name\":\"batchUpdateSuperTokenLogic\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperToken[]\",\"name\":\"tokens\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"minimumDeposits\",\"type\":\"uint256[]\"}],\"name\":\"batchUpdateSuperTokenMinimumDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"clearCFAv1LiquidationPeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"clearRewardAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"clearSuperTokenMinimumDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"}],\"name\":\"clearTrustedForwarder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"}],\"name\":\"disableTrustedForwarder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"}],\"name\":\"enableTrustedForwarder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"getCFAv1LiquidationPeriod\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"getConfigAsAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"value\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"getConfigAsUint256\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"period\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"getRewardAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"}],\"name\":\"getSuperTokenMinimumDeposit\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"isAuthorizedAppFactory\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"}],\"name\":\"isTrustedForwarder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"}],\"name\":\"registerAgreementClass\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"newGov\",\"type\":\"address\"}],\"name\":\"replaceGovernance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setCFAv1LiquidationPeriod\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"rewardAddress\",\"type\":\"address\"}],\"name\":\"setRewardAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"contract ISuperfluidToken\",\"name\":\"superToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"setSuperTokenMinimumDeposit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"factory\",\"type\":\"address\"}],\"name\":\"unauthorizeAppFactory\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"hostNewLogic\",\"type\":\"address\"},{\"internalType\":\"address[]\",\"name\":\"agreementClassNewLogics\",\"type\":\"address[]\"},{\"internalType\":\"address\",\"name\":\"superTokenFactoryNewLogic\",\"type\":\"address\"}],\"name\":\"updateContracts\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract ISuperfluid\",\"name\":\"host\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"key\",\"type\":\"bytes32\"}],\"name\":\"whiteListNewApp\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"authorizeAppFactory(address,address)\":{\"details\":\"allows the given factory to register new apps without requiring onetime keys\",\"params\":{\"factory\":\"must be an initialized contract\"}},\"batchUpdateSuperTokenLogic(address,address[])\":{\"details\":\"Update supertoken logic contract to the latest that is managed by the super token factory\"},\"getConfigAsAddress(address,address,bytes32)\":{\"details\":\"Get configuration as address value\"},\"getConfigAsUint256(address,address,bytes32)\":{\"details\":\"Get configuration as uint256 value\"},\"isAuthorizedAppFactory(address,address)\":{\"details\":\"tells if the given factory is authorized to register apps\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"registerAgreementClass(address,address)\":{\"details\":\"Register a new agreement class\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"replaceGovernance(address,address)\":{\"details\":\"Replace the current governance with a new governance\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"unauthorizeAppFactory(address,address)\":{\"details\":\"withdraws authorization from a factory to register new apps. Doesn't affect apps previously registered by the factory.\"},\"updateContracts(address,address,address[],address)\":{\"details\":\"Update logics of the contracts NOTE: - Because they might have inter-dependencies, it is good to have one single function to update them all\"},\"whiteListNewApp(address,bytes32)\":{\"details\":\"Whitelist a new app using a onetime key\",\"params\":{\"key\":\"is a deployer specific hash key which can be used once to register an app NOTE: To generate the key, use the SuperfluidGovernanceConfigs.getAppRegistrationConfigKey offchain.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/gov/SuperfluidOwnableGovernance.sol\":\"SuperfluidOwnableGovernance\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x15e2d5bd4c28a88548074c54d220e8086f638a71ed07e6b3ba5a70066fcf458d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://90faf5851c02f9bd42c5bfb54d4f0421a2612f50ab80b2c4fa24fa3792071cc2\",\"dweb:/ipfs/QmRGM4F2PcGVF85aTfaA9YBhCHHDqrMhRjyp6fGeBTtirb\"]},\"@openzeppelin/contracts/proxy/Initializable.sol\":{\"keccak256\":\"0x9abeffe138f098b16557187383ba0f9e8503602fa95cd668132986ee115237ed\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fb863d688f8bf04b846369451afba15e8129b2ee16bd1631c12138c262d1bf68\",\"dweb:/ipfs/QmRE3EmJ1T4Hg5HjGHVupP2a3Vrnd8jRY8GtB6J52QNX9z\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x5f02220344881ce43204ae4a6281145a67bc52c2bb1290a791857df3d19d78f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://24427744bd3e6cb73c17010119af12a318289c0253a4d9acb8576c9fb3797b08\",\"dweb:/ipfs/QmTLDqpKRBuxGxRAmjgXt9AkXyACW3MtKzi7PYjm5iMfGC\"]},\"@openzeppelin/contracts/token/ERC777/IERC777.sol\":{\"keccak256\":\"0xe81b5fca616ec6f57bb9d1ab0750202b9e514760462274ac04495e8c249697ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e23a53ea7f3787f90ff8f6e25ea47896ed4b56e336e72ae543e3ef74eaa9e23\",\"dweb:/ipfs/QmSDNkjN5k2VRbrfWdTMJ39dzcSvFz4YMQqHZ5z61qLNVA\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x28911e614500ae7c607a432a709d35da25f3bc5ddc8bd12b278b66358070c0ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://256c8c8af5eb072bc473226ab2b2187149b8fc04f5f4a4820db22527f5ce8e3c\",\"dweb:/ipfs/QmRvi5BhnL7Rxf85KrJhwM6RRhukm4tzoctRdgQEheNyiN\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x8d3cb350f04ff49cfb10aef08d87f19dcbaecc8027b0bed12f3275cd12f38cf0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ded47ec7c96750f9bd04bbbc84f659992d4ba901cb7b532a52cd468272cf378f\",\"dweb:/ipfs/QmfBrGtQP7rZEqEg6Wz6jh2N2Kukpj1z5v3CGWmAqrzm96\"]},\"project:/contracts/gov/SuperfluidGovernanceBase.sol\":{\"keccak256\":\"0xf1c00784a08790103ab376900cdf38cba2e04d3d58d31f52eeb55f106bef3b0f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3f4ab5ed7d354dd96e5c98df404f14480be7aaa1de3a9ae13af316d8cc49ab5e\",\"dweb:/ipfs/QmduSgHoPCtacu3xD5C4tUx7W6GUNAtUWo99wzZrVtTpyR\"]},\"project:/contracts/gov/SuperfluidOwnableGovernance.sol\":{\"keccak256\":\"0x90eb86e106e42cfa3ac2d572d593ade394dc62c0eab646305025741e914004b3\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://4eb55e3a03d3a5afcc07175d5d7df083d32c7f0fc2c768f79a9346580d5bb00c\",\"dweb:/ipfs/QmUrJKcMaLA9ANt1PVQbRPcdTeuFhmcwT9fdMDAKNoSFKE\"]},\"project:/contracts/interfaces/superfluid/Definitions.sol\":{\"keccak256\":\"0x629a096aa6ce1da21b6d6861ebcd640257fc3c77e5d7f7de5de73b251a0be4b3\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://41046b449583e40efa0bd9e99147474cfbbc12fbba2e7184deb8c95939f04e9f\",\"dweb:/ipfs/QmT9HGuLjGbZF1yM7RtnyRo8GuVXzPk8rCjibKTKmc2LDN\"]},\"project:/contracts/interfaces/superfluid/ISuperAgreement.sol\":{\"keccak256\":\"0xcf8a33fadd5db47562156a11098623246efd1b46a2c3d28269767bcbb324fd66\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://5c0273b4a136874ca4ad1b3f66b312adfa8e8ed48b301e4e979081d4923bb55f\",\"dweb:/ipfs/QmQvK9ZQggymJAftai2aA89EfQY2hX3MSpejNkr6kNf45m\"]},\"project:/contracts/interfaces/superfluid/ISuperApp.sol\":{\"keccak256\":\"0xca93702505ec3c8244227e372687d9bdbc9d368fa07723d310ab9550501abb2a\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3514c2c72fc866064227ea28fceea9dec4ca27cdbda2cff546b59f6b899cee4d\",\"dweb:/ipfs/QmdpFCRDm8An2U6TCTUK3Zopp8wVS44mzh2YjVvtruE3dZ\"]},\"project:/contracts/interfaces/superfluid/ISuperToken.sol\":{\"keccak256\":\"0xba355f7d7d5d32ca345bcdb355759ba598a911ff07227ff80012a5e0bf660fb1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://72c2669590a012587b892f0bbb166079ffb9e4c2044511b45eb6b34489f83b30\",\"dweb:/ipfs/QmQckdZ7tbboxPpXSt8irWo98KBcZRT5xNPuGf7yuZxZw2\"]},\"project:/contracts/interfaces/superfluid/ISuperTokenFactory.sol\":{\"keccak256\":\"0x7dc514c6c9eda681ed8ad66ccfb68dc22764b6c429ab55fddbba28b6b148621b\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://bc4b3b35bb0ddd9323afa1f25468eb706e5f7eccce6ff9beec9657aeea8bec33\",\"dweb:/ipfs/QmSLKq8JYWavnjDokYoe1cUERbvWFfiBWBJ2zDCMVyycsM\"]},\"project:/contracts/interfaces/superfluid/ISuperfluid.sol\":{\"keccak256\":\"0x987a883e8acd87e07eb00ebb1c882d294c7a0af2e5a8cb234270f83f4168438f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://87631a2a511fcfd20787d0bb633d37f3a810bd50c58502c996106b97f2795272\",\"dweb:/ipfs/QmeR8yfLL41en8GjszYRc8Cw9QoEmRQ6j3hCi8JRsym3vZ\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidGovernance.sol\":{\"keccak256\":\"0x2ac401c7fb012ef43d8becad0196bcd41ac9ad33778a7a5e4809a1740a646e63\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://a04710e0e2a4d0183d2760b1ef73e970e4070eaeee3dfefe5ba4bed61dd45ada\",\"dweb:/ipfs/QmYCxDFAWmrCTzioikvbeJtHByWvyxT9nARBuaVoYmopPo\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidToken.sol\":{\"keccak256\":\"0x6c573b0c0d9ccfc73f787da2e06c725b714d9a36357cfe4fb3c5fb7b47d75665\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://af67f4b3d6ea0c88ba9d1c1cfa0be051de016e689b02ba931c871ecad8fad336\",\"dweb:/ipfs/QmPRQsAEPUcJjxXxjAmttXTbmuSdaDPi41KAqTMYhM6L5m\"]},\"project:/contracts/interfaces/tokens/ERC20WithTokenInfo.sol\":{\"keccak256\":\"0x808d3a486826e7f119671174a77896c6e23578e691625350dbb3e9f74a0d5137\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://06a7a1bc2ed6888c7080a8e1fb676b7f3972b3f22620c771a41ca3a0ee78b968\",\"dweb:/ipfs/QmW7qpRwv2vEtCtENoP4BUkK4yRBbiKUZbPbyXNbPthiLQ\"]},\"project:/contracts/interfaces/tokens/TokenInfo.sol\":{\"keccak256\":\"0x4dee21b8f64edbfe811a300d31f529b5367d1186d69b8b2b8dc3373be7a108b0\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://67edf7ddbd90cd7871dc3c92202d4a749d3be0065174fd0f5b89b18edac9d8d1\",\"dweb:/ipfs/QmNc58Ep6sYkSybGVAgmkeCjHFdBL2m1sGJGUgR99xKqeh\"]},\"project:/contracts/upgradability/UUPSProxiable.sol\":{\"keccak256\":\"0x57cc7ce92a1583e18469fd5498ce14ebda0090b170e2eb9c6d96297c4c5660c2\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://159c53d7328542895fe4616305ca91e7edca97d5b30f66709a72c80b8cc8e398\",\"dweb:/ipfs/QmdxcYxA4RKxdx5BD9LsM7de63BQDW9DH4PQT1YttQz9Fa\"]},\"project:/contracts/upgradability/UUPSUtils.sol\":{\"keccak256\":\"0x2b47a0c71503981f4cf29656831aee3b038513dcc8554d8a432830af58d29bd1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://b3bfc98fe566bee28d4431680bced199d498af6045b1380f88499828161429f2\",\"dweb:/ipfs/QmcyxSdt8S6mXZLwGkcmRGusykhoYe2RMAo8QiSFpd97cb\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600061001b61006a565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35061006e565b3390565b61177d8061007d6000396000f3fe608060405234801561001057600080fd5b50600436106101a95760003560e01c80638369a0f1116100f95780638ecbd87b11610097578063cadf8f8511610071578063cadf8f8514610740578063e447cc1d1461076e578063f047a2d91461079c578063f2fde38b146107d4576101a9565b80638ecbd87b146106ac578063ab846f1a146106da578063af8f7a6114610712576101a9565b80638b93b3f5116100d35780638b93b3f5146106105780638ce933791461063e5780638da5cb5b146106765780638e6fce951461067e576101a9565b80638369a0f11461058a5780638a7ff2f7146105a05780638abe04e9146105ce576101a9565b8063427942a411610166578063715018a611610140578063715018a6146104cc5780637dce4f81146104d45780637f0558e41461050c57806380f70cba14610542576101a9565b8063427942a4146103d857806344864b251461046857806346bdec5414610496576101a9565b806317dcabbf146101ae57806319df62ab146101dc578063219644731461022657806325c955c3146102f4578063325529081461032257806342148deb1461035a575b600080fd5b6101da600480360360408110156101c457600080fd5b506001600160a01b0381351690602001356107fa565b005b61020a600480360360408110156101f257600080fd5b506001600160a01b038135811691602001351661080c565b604080516001600160a01b039092168252519081900360200190f35b6101da6004803603606081101561023c57600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561026657600080fd5b82018360208201111561027857600080fd5b803590602001918460208302840111600160201b8311171561029957600080fd5b919390929091602081019035600160201b8111156102b657600080fd5b8201836020820111156102c857600080fd5b803590602001918460208302840111600160201b831117156102e957600080fd5b509092509050610840565b6101da6004803603604081101561030a57600080fd5b506001600160a01b03813581169160200135166108d1565b6101da6004803603606081101561033857600080fd5b506001600160a01b0381358116916020810135821691604090910135166108e5565b6101da6004803603604081101561037057600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561039a57600080fd5b8201836020820111156103ac57600080fd5b803590602001918460208302840111600160201b831117156103cd57600080fd5b509092509050610961565b6101da600480360360808110156103ee57600080fd5b6001600160a01b038235811692602081013590911691810190606081016040820135600160201b81111561042157600080fd5b82018360208201111561043357600080fd5b803590602001918460208302840111600160201b8311171561045457600080fd5b9193509150356001600160a01b0316610a0a565b6101da6004803603604081101561047e57600080fd5b506001600160a01b0381358116916020013516610ba2565b6101da600480360360608110156104ac57600080fd5b506001600160a01b03813581169160208101359091169060400135610c18565b6101da610c90565b6101da600480360360608110156104ea57600080fd5b506001600160a01b038135811691602081013582169160409091013516610d4e565b6101da6004803603606081101561052257600080fd5b506001600160a01b03813581169160208101359091169060400135610dba565b6105786004803603606081101561055857600080fd5b506001600160a01b03813581169160208101359091169060400135610e32565b60408051918252519081900360200190f35b61020a6004803603606081101561055857600080fd5b610578600480360360408110156105b657600080fd5b506001600160a01b0381358116916020013516610ea3565b6105fc600480360360408110156105e457600080fd5b506001600160a01b0381358116916020013516610ed0565b604080519115158252519081900360200190f35b6101da6004803603604081101561062657600080fd5b506001600160a01b0381358116916020013516610ef0565b6101da6004803603606081101561065457600080fd5b506001600160a01b038135811691602081013582169160409091013516610f45565b61020a610fa7565b6105786004803603604081101561069457600080fd5b506001600160a01b0381358116916020013516610fb6565b6101da600480360360408110156106c257600080fd5b506001600160a01b0381358116916020013516610fe3565b6101da600480360360608110156106f057600080fd5b506001600160a01b038135811691602081013582169160409091013516611059565b6101da6004803603604081101561072857600080fd5b506001600160a01b03813581169160200135166110c0565b6101da6004803603604081101561075657600080fd5b506001600160a01b0381358116916020013516611136565b6101da6004803603604081101561078457600080fd5b506001600160a01b038135811691602001351661118f565b6105fc600480360360608110156107b257600080fd5b506001600160a01b038135811691602081013582169160409091013516611205565b6101da600480360360208110156107ea57600080fd5b50356001600160a01b0316611220565b610808826000836001611334565b5050565b600061083983837f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d09610e32565b9392505050565b82811461087e5760405162461bcd60e51b81526004018080602001828103825260258152602001806117236025913960400191505060405180910390fd5b60005b818110156108c9576108c18686868481811061089957fe5b905060200201356001600160a01b03168585858181106108b557fe5b90506020020135610dba565b600101610881565b505050505050565b6108088260006108e0846113e6565b61143b565b60408051600181526001600160a01b038381166020830152825181861693918716927f14e12f219a4f9023456dc7832e10119ab768b8ccefc8cb79bc6de0419781eeeb92908290030190a361095c83837f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d09846114eb565b505050565b8261096b816115a0565b60005b82811015610a0357846001600160a01b031663787afde785858481811061099157fe5b905060200201356001600160a01b03166040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b1580156109e057600080fd5b505af11580156109f4573d6000803e3d6000fd5b5050505080600101905061096e565b5050505050565b84610a14816115a0565b6001600160a01b03851615610a8b57856001600160a01b03166346951954866040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610a7257600080fd5b505af1158015610a86573d6000803e3d6000fd5b505050505b60005b83811015610b2357866001600160a01b03166306cecba8868684818110610ab157fe5b905060200201356001600160a01b03166040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610b0057600080fd5b505af1158015610b14573d6000803e3d6000fd5b50505050806001019050610a8e565b506001600160a01b038216156108c957856001600160a01b03166354fbc493836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610b8257600080fd5b505af1158015610b96573d6000803e3d6000fd5b50505050505050505050565b81610bac816115a0565b826001600160a01b0316637283100c836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610bfb57600080fd5b505af1158015610c0f573d6000803e3d6000fd5b50505050505050565b60408051600181526020810183905281516001600160a01b0380861693908716927f3cbad89c3bb0ff70e832f6d6fa458ff3f5487e8156ec52e8814c46c59e919289929081900390910190a361095c83837f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa84611334565b610c98611617565b6001600160a01b0316610ca9610fa7565b6001600160a01b031614610d04576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b610d638383610d5c8461161b565b6000611334565b60408051600181526001600160a01b0383811660208301526000828401529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a3505050565b60408051600181526020810183905281516001600160a01b0380861693908716927fc055c4a3853372c08a98805545379133f00f7261d956b9197729d67f37a82a53929081900390910190a361095c83837feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc484611334565b6001600160a01b03808416600090815260016020908152604080832093861683529281528282208483529052908120805460ff16610e9757506001600160a01b0384166000908152600160209081526040808320838052825280832085845290915290205b60010154949350505050565b600061083983837feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc4610e32565b6000610ee6836000610ee1856113e6565b610e32565b6001149392505050565b803b80610f2e5760405162461bcd60e51b81526004018080602001828103825260218152602001806116716021913960400191505060405180910390fd5b50610808826000610f3e846113e6565b6001611334565b6040805160008082526001600160a01b038481166020840152828401919091529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a361095c83836108e08461161b565b6000546001600160a01b031690565b600061083983837f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa610e32565b604080516000808252602082015281516001600160a01b0380851693908616927fc055c4a3853372c08a98805545379133f00f7261d956b9197729d67f37a82a53929081900390910190a361080882827feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc461143b565b6110678383610f3e8461161b565b6040805160018082526001600160a01b038481166020840152828401919091529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a3505050565b604080516000808252602082015281516001600160a01b0380851693908616927f3cbad89c3bb0ff70e832f6d6fa458ff3f5487e8156ec52e8814c46c59e919289929081900390910190a361080882827f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa61143b565b81611140816115a0565b826001600160a01b03166315a024e1836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610bfb57600080fd5b604080516000808252602082015281516001600160a01b0380851693908616927f14e12f219a4f9023456dc7832e10119ab768b8ccefc8cb79bc6de0419781eeeb929081900390910190a361080882827f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d0961143b565b60006112158484610ee18561161b565b600114949350505050565b611228611617565b6001600160a01b0316611239610fa7565b6001600160a01b031614611294576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b0381166112d95760405162461bcd60e51b81526004018080602001828103825260268152602001806116926026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b8361133e816115a0565b604080518481526001602082015280820184905290516001600160a01b0380871692908816917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e3909181900360600190a350604080518082018252600180825260208083019485526001600160a01b039788166000908152828252848120979098168852958652828720948752939094529093209151825460ff19169015151782559151910155565b6000816040516020018080602001836001600160a01b03168152602001828103825260398152602001806116b86039913960400192505050604051602081830303815290604052805190602001209050919050565b82611445816115a0565b604080518381526000602082018190528183015290516001600160a01b0380861692908716917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e3909181900360600190a350604080518082018252600080825260208083018281526001600160a01b03978816835260018083528584209790981683529581528382209482529390935291209051815460ff19169015151781559051910155565b836114f5816115a0565b60408051848152600160208201526001600160a01b03848116828401529151828716928816917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e390919081900360600190a35060408051808201825260018082526001600160a01b03938416602080840191825297851660009081528289528481209790951685529587528284209484529390955290209251835460ff19169015151783559051910155565b6115a8611617565b6001600160a01b03166115b9610fa7565b6001600160a01b031614611614576040805162461bcd60e51b815260206004820152601f60248201527f5346476f763a206f6e6c79206f776e657220697320617574686f72697a656400604482015290519081900360640190fd5b50565b3390565b6000816040516020018080602001836001600160a01b03168152602001828103825260328152602001806116f1603291396040019250505060405160208183030381529060405280519060200120905091905056fe5346476f763a20666163746f7279206d757374206265206120636f6e74726163744f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573736f72672e7375706572666c7569642d66696e616e63652e7375706572666c7569642e61707057686974654c697374696e672e666163746f72796f72672e7375706572666c7569642d66696e616e63652e7375706572666c7569642e74727573746564466f727761726465725346476f763a2061727261797320617265206e6f74207468652073616d65206c656e677468a2646970667358221220b67ca1ecff014435dc5d105567d771483876c49246856bab09b172096693b3e064736f6c63430007060033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101a95760003560e01c80638369a0f1116100f95780638ecbd87b11610097578063cadf8f8511610071578063cadf8f8514610740578063e447cc1d1461076e578063f047a2d91461079c578063f2fde38b146107d4576101a9565b80638ecbd87b146106ac578063ab846f1a146106da578063af8f7a6114610712576101a9565b80638b93b3f5116100d35780638b93b3f5146106105780638ce933791461063e5780638da5cb5b146106765780638e6fce951461067e576101a9565b80638369a0f11461058a5780638a7ff2f7146105a05780638abe04e9146105ce576101a9565b8063427942a411610166578063715018a611610140578063715018a6146104cc5780637dce4f81146104d45780637f0558e41461050c57806380f70cba14610542576101a9565b8063427942a4146103d857806344864b251461046857806346bdec5414610496576101a9565b806317dcabbf146101ae57806319df62ab146101dc578063219644731461022657806325c955c3146102f4578063325529081461032257806342148deb1461035a575b600080fd5b6101da600480360360408110156101c457600080fd5b506001600160a01b0381351690602001356107fa565b005b61020a600480360360408110156101f257600080fd5b506001600160a01b038135811691602001351661080c565b604080516001600160a01b039092168252519081900360200190f35b6101da6004803603606081101561023c57600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561026657600080fd5b82018360208201111561027857600080fd5b803590602001918460208302840111600160201b8311171561029957600080fd5b919390929091602081019035600160201b8111156102b657600080fd5b8201836020820111156102c857600080fd5b803590602001918460208302840111600160201b831117156102e957600080fd5b509092509050610840565b6101da6004803603604081101561030a57600080fd5b506001600160a01b03813581169160200135166108d1565b6101da6004803603606081101561033857600080fd5b506001600160a01b0381358116916020810135821691604090910135166108e5565b6101da6004803603604081101561037057600080fd5b6001600160a01b038235169190810190604081016020820135600160201b81111561039a57600080fd5b8201836020820111156103ac57600080fd5b803590602001918460208302840111600160201b831117156103cd57600080fd5b509092509050610961565b6101da600480360360808110156103ee57600080fd5b6001600160a01b038235811692602081013590911691810190606081016040820135600160201b81111561042157600080fd5b82018360208201111561043357600080fd5b803590602001918460208302840111600160201b8311171561045457600080fd5b9193509150356001600160a01b0316610a0a565b6101da6004803603604081101561047e57600080fd5b506001600160a01b0381358116916020013516610ba2565b6101da600480360360608110156104ac57600080fd5b506001600160a01b03813581169160208101359091169060400135610c18565b6101da610c90565b6101da600480360360608110156104ea57600080fd5b506001600160a01b038135811691602081013582169160409091013516610d4e565b6101da6004803603606081101561052257600080fd5b506001600160a01b03813581169160208101359091169060400135610dba565b6105786004803603606081101561055857600080fd5b506001600160a01b03813581169160208101359091169060400135610e32565b60408051918252519081900360200190f35b61020a6004803603606081101561055857600080fd5b610578600480360360408110156105b657600080fd5b506001600160a01b0381358116916020013516610ea3565b6105fc600480360360408110156105e457600080fd5b506001600160a01b0381358116916020013516610ed0565b604080519115158252519081900360200190f35b6101da6004803603604081101561062657600080fd5b506001600160a01b0381358116916020013516610ef0565b6101da6004803603606081101561065457600080fd5b506001600160a01b038135811691602081013582169160409091013516610f45565b61020a610fa7565b6105786004803603604081101561069457600080fd5b506001600160a01b0381358116916020013516610fb6565b6101da600480360360408110156106c257600080fd5b506001600160a01b0381358116916020013516610fe3565b6101da600480360360608110156106f057600080fd5b506001600160a01b038135811691602081013582169160409091013516611059565b6101da6004803603604081101561072857600080fd5b506001600160a01b03813581169160200135166110c0565b6101da6004803603604081101561075657600080fd5b506001600160a01b0381358116916020013516611136565b6101da6004803603604081101561078457600080fd5b506001600160a01b038135811691602001351661118f565b6105fc600480360360608110156107b257600080fd5b506001600160a01b038135811691602081013582169160409091013516611205565b6101da600480360360208110156107ea57600080fd5b50356001600160a01b0316611220565b610808826000836001611334565b5050565b600061083983837f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d09610e32565b9392505050565b82811461087e5760405162461bcd60e51b81526004018080602001828103825260258152602001806117236025913960400191505060405180910390fd5b60005b818110156108c9576108c18686868481811061089957fe5b905060200201356001600160a01b03168585858181106108b557fe5b90506020020135610dba565b600101610881565b505050505050565b6108088260006108e0846113e6565b61143b565b60408051600181526001600160a01b038381166020830152825181861693918716927f14e12f219a4f9023456dc7832e10119ab768b8ccefc8cb79bc6de0419781eeeb92908290030190a361095c83837f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d09846114eb565b505050565b8261096b816115a0565b60005b82811015610a0357846001600160a01b031663787afde785858481811061099157fe5b905060200201356001600160a01b03166040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b1580156109e057600080fd5b505af11580156109f4573d6000803e3d6000fd5b5050505080600101905061096e565b5050505050565b84610a14816115a0565b6001600160a01b03851615610a8b57856001600160a01b03166346951954866040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610a7257600080fd5b505af1158015610a86573d6000803e3d6000fd5b505050505b60005b83811015610b2357866001600160a01b03166306cecba8868684818110610ab157fe5b905060200201356001600160a01b03166040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610b0057600080fd5b505af1158015610b14573d6000803e3d6000fd5b50505050806001019050610a8e565b506001600160a01b038216156108c957856001600160a01b03166354fbc493836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610b8257600080fd5b505af1158015610b96573d6000803e3d6000fd5b50505050505050505050565b81610bac816115a0565b826001600160a01b0316637283100c836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610bfb57600080fd5b505af1158015610c0f573d6000803e3d6000fd5b50505050505050565b60408051600181526020810183905281516001600160a01b0380861693908716927f3cbad89c3bb0ff70e832f6d6fa458ff3f5487e8156ec52e8814c46c59e919289929081900390910190a361095c83837f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa84611334565b610c98611617565b6001600160a01b0316610ca9610fa7565b6001600160a01b031614610d04576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b610d638383610d5c8461161b565b6000611334565b60408051600181526001600160a01b0383811660208301526000828401529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a3505050565b60408051600181526020810183905281516001600160a01b0380861693908716927fc055c4a3853372c08a98805545379133f00f7261d956b9197729d67f37a82a53929081900390910190a361095c83837feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc484611334565b6001600160a01b03808416600090815260016020908152604080832093861683529281528282208483529052908120805460ff16610e9757506001600160a01b0384166000908152600160209081526040808320838052825280832085845290915290205b60010154949350505050565b600061083983837feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc4610e32565b6000610ee6836000610ee1856113e6565b610e32565b6001149392505050565b803b80610f2e5760405162461bcd60e51b81526004018080602001828103825260218152602001806116716021913960400191505060405180910390fd5b50610808826000610f3e846113e6565b6001611334565b6040805160008082526001600160a01b038481166020840152828401919091529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a361095c83836108e08461161b565b6000546001600160a01b031690565b600061083983837f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa610e32565b604080516000808252602082015281516001600160a01b0380851693908616927fc055c4a3853372c08a98805545379133f00f7261d956b9197729d67f37a82a53929081900390910190a361080882827feae305fa863b373417e615b1044222e2806cefc7788d169ce6748a443c3f6cc461143b565b6110678383610f3e8461161b565b6040805160018082526001600160a01b038481166020840152828401919091529151828516928616917f168da2dec91b2e06e30d49955479383e76f71ba185807a8a5b75e2ed563e1d27919081900360600190a3505050565b604080516000808252602082015281516001600160a01b0380851693908616927f3cbad89c3bb0ff70e832f6d6fa458ff3f5487e8156ec52e8814c46c59e919289929081900390910190a361080882827f1ca463a216b802472396d1b8a5b5b695d935b1d24311e89b020144e6613f15aa61143b565b81611140816115a0565b826001600160a01b03166315a024e1836040518263ffffffff1660e01b815260040180826001600160a01b03168152602001915050600060405180830381600087803b158015610bfb57600080fd5b604080516000808252602082015281516001600160a01b0380851693908616927f14e12f219a4f9023456dc7832e10119ab768b8ccefc8cb79bc6de0419781eeeb929081900390910190a361080882827f9f60ae461adf056670e03ae602566409933242392cb06744f5747c9f38b05d0961143b565b60006112158484610ee18561161b565b600114949350505050565b611228611617565b6001600160a01b0316611239610fa7565b6001600160a01b031614611294576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b0381166112d95760405162461bcd60e51b81526004018080602001828103825260268152602001806116926026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b8361133e816115a0565b604080518481526001602082015280820184905290516001600160a01b0380871692908816917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e3909181900360600190a350604080518082018252600180825260208083019485526001600160a01b039788166000908152828252848120979098168852958652828720948752939094529093209151825460ff19169015151782559151910155565b6000816040516020018080602001836001600160a01b03168152602001828103825260398152602001806116b86039913960400192505050604051602081830303815290604052805190602001209050919050565b82611445816115a0565b604080518381526000602082018190528183015290516001600160a01b0380861692908716917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e3909181900360600190a350604080518082018252600080825260208083018281526001600160a01b03978816835260018083528584209790981683529581528382209482529390935291209051815460ff19169015151781559051910155565b836114f5816115a0565b60408051848152600160208201526001600160a01b03848116828401529151828716928816917f33afe19ae6902b933890ff48190fabdc4cf7f5ab499be9c4d9d98e3b4562e390919081900360600190a35060408051808201825260018082526001600160a01b03938416602080840191825297851660009081528289528481209790951685529587528284209484529390955290209251835460ff19169015151783559051910155565b6115a8611617565b6001600160a01b03166115b9610fa7565b6001600160a01b031614611614576040805162461bcd60e51b815260206004820152601f60248201527f5346476f763a206f6e6c79206f776e657220697320617574686f72697a656400604482015290519081900360640190fd5b50565b3390565b6000816040516020018080602001836001600160a01b03168152602001828103825260328152602001806116f1603291396040019250505060405160208183030381529060405280519060200120905091905056fe5346476f763a20666163746f7279206d757374206265206120636f6e74726163744f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573736f72672e7375706572666c7569642d66696e616e63652e7375706572666c7569642e61707057686974654c697374696e672e666163746f72796f72672e7375706572666c7569642d66696e616e63652e7375706572666c7569642e74727573746564466f727761726465725346476f763a2061727261797320617265206e6f74207468652073616d65206c656e677468a2646970667358221220b67ca1ecff014435dc5d105567d771483876c49246856bab09b172096693b3e064736f6c63430007060033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "305:259:40:-:0;;;;;;;;;;;;-1:-1:-1;884:17:2;904:12;:10;:12::i;:::-;926:6;:18;;-1:-1:-1;;;;;;926:18:2;-1:-1:-1;;;;;926:18:2;;;;;;;959:43;;926:18;;-1:-1:-1;926:18:2;959:43;;926:6;;959:43;850:159;305:259:40;;598:104:25;685:10;598:104;:::o;305:259:40:-;;;;;;;",
+  "deployedSourceMap": "305:259:40:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;10654:170:38;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;10654:170:38;;;;;;;;:::i;:::-;;5265:288;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;5265:288:38;;;;;;;;;;:::i;:::-;;;;-1:-1:-1;;;;;5265:288:38;;;;;;;;;;;;;;2314:485;;;;;;;;;;;;;;;;-1:-1:-1;;;;;2314:485:38;;;;;;;;;;;;;;;-1:-1:-1;;;2314:485:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;2314:485:38;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;2314:485:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;2314:485:38;;;;;;;;;;-1:-1:-1;2314:485:38;;-1:-1:-1;2314:485:38;-1:-1:-1;2314:485:38;:::i;12067:258::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;12067:258:38;;;;;;;;;;:::i;5559:389::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;5559:389:38;;;;;;;;;;;;;;;;;;;:::i;2023:285::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;2023:285:38;;;;;;;;;;;;;;;-1:-1:-1;;;2023:285:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;2023:285:38;;;;;;;;;;-1:-1:-1;2023:285:38;;-1:-1:-1;2023:285:38;-1:-1:-1;2023:285:38;:::i;1334:683::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;1334:683:38;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;1334:683:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;1334:683:38;;;;;;;;;;;;-1:-1:-1;1334:683:38;-1:-1:-1;1334:683:38;-1:-1:-1;;;;;1334:683:38;;:::i;878:212::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;878:212:38;;;;;;;;;;:::i;6813:382::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;6813:382:38;;;;;;;;;;;;;;;;;:::i;1717:145:2:-;;;:::i;9596:382:38:-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;9596:382:38;;;;;;;;;;;;;;;;;;;:::i;8015:332::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;8015:332:38;;;;;;;;;;;;;;;;;:::i;4447:424::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;4447:424:38;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;4001:440;;;;;;;;;;;;;;;7725:284;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;7725:284:38;;;;;;;;;;:::i;10916:305::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;10916:305:38;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;11386:521;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;11386:521:38;;;;;;;;;;:::i;9984:375::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;9984:375:38;;;;;;;;;;;;;;;;;;;:::i;1085:85:2:-;;;:::i;6497:310:38:-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;6497:310:38;;;;;;;;;;:::i;8353:303::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;8353:303:38;;;;;;;;;;:::i;9210:380::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;9210:380:38;;;;;;;;;;;;;;;;;;;:::i;7201:334::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;7201:334:38;;;;;;;;;;:::i;1096:232::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;1096:232:38;;;;;;;;;;:::i;5954:326::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;5954:326:38;;;;;;;;;;:::i;8874:330::-;;;;;;;;;;;;;;;;-1:-1:-1;;;;;;8874:330:38;;;;;;;;;;;;;;;;;;;:::i;2011:240:2:-;;;;;;;;;;;;;;;;-1:-1:-1;2011:240:2;-1:-1:-1;;;;;2011:240:2;;:::i;10654:170:38:-;10763:54;10774:4;10805:1;10810:3;10815:1;10763:10;:54::i;:::-;10654:170;;:::o;5265:288::-;5389:7;5419:127;5451:4;5457:10;6023:60:45;5419:18:38;:127::i;:::-;5412:134;5265:288;-1:-1:-1;;;5265:288:38:o;2314:485::-;2501:39;;;2493:89;;;;-1:-1:-1;;;2493:89:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2597:6;2592:201;2609:26;;;2592:201;;;2656:126;2701:4;2723:6;;2730:1;2723:9;;;;;;;;;;;;;-1:-1:-1;;;;;2723:9:38;2750:15;;2766:1;2750:18;;;;;;;;;;;;;2656:27;:126::i;:::-;2637:3;;2592:201;;;;2314:485;;;;;:::o;12067:258::-;12184:134;12210:4;12241:1;12258:59;12309:7;12258:50;:59::i;:::-;12184:12;:134::i;5559:389::-;5719:59;;;5758:4;5719:59;;-1:-1:-1;;;;;5719:59:38;;;;;;;;;;;;;;;;;;;;;;;;;;5795:146;5819:4;5825:10;6023:60:45;5927:13:38;5795:10;:146::i;:::-;5559:389;;;:::o;2023:285::-;2179:4;12464:24;12483:4;12464:18;:24::i;:::-;2204:6:::1;2199:103;2216:17:::0;;::::1;2199:103;;;2254:4;-1:-1:-1::0;;;;;2254:26:38::1;;2281:6;;2288:1;2281:9;;;;;;;;;;;;;-1:-1:-1::0;;;;;2281:9:38::1;2254:37;;;;;;;;;;;;;-1:-1:-1::0;;;;;2254:37:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;2235:3;;;;;2199:103;;;;2023:285:::0;;;;:::o;1334:683::-;1565:4;12464:24;12483:4;12464:18;:24::i;:::-;-1:-1:-1;;;;;1589:26:38;::::1;::::0;1585:110:::1;;1653:4;-1:-1:-1::0;;;;;1631:39:38::1;;1671:12;1631:53;;;;;;;;;;;;;-1:-1:-1::0;;;;;1631:53:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;1585:110;1709:6;1704:153;1721:34:::0;;::::1;1704:153;;;1776:4;-1:-1:-1::0;;;;;1776:25:38::1;;1818:23;;1842:1;1818:26;;;;;;;;;;;;;-1:-1:-1::0;;;;;1818:26:38::1;1776:70;;;;;;;;;;;;;-1:-1:-1::0;;;;;1776:70:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;1757:3;;;;;1704:153;;;-1:-1:-1::0;;;;;;1870:39:38;::::1;::::0;1866:145:::1;;1925:4;-1:-1:-1::0;;;;;1925:28:38::1;;1973:25;1925:75;;;;;;;;;;;;;-1:-1:-1::0;;;;;1925:75:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;1334:683:::0;;;;;;:::o;878:212::-;1010:4;12464:24;12483:4;12464:18;:24::i;:::-;1030:4:::1;-1:-1:-1::0;;;;;1030:22:38::1;;1075:6;1030:53;;;;;;;;;;;;;-1:-1:-1::0;;;;;1030:53:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;;;;;;;;;;;;::::0;::::1;;;;;;;;;878:212:::0;;;:::o;6813:382::-;6974:60;;;7022:4;6974:60;;;;;;;;;;-1:-1:-1;;;;;6974:60:38;;;;;;;;;;;;;;;;;;;7051:137;7075:4;7081:10;6162:89:45;7182:5:38;7051:10;:137::i;1717:145:2:-;1308:12;:10;:12::i;:::-;-1:-1:-1;;;;;1297:23:2;:7;:5;:7::i;:::-;-1:-1:-1;;;;;1297:23:2;;1289:68;;;;;-1:-1:-1;;;1289:68:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1823:1:::1;1807:6:::0;;1786:40:::1;::::0;-1:-1:-1;;;;;1807:6:2;;::::1;::::0;1786:40:::1;::::0;1823:1;;1786:40:::1;1853:1;1836:19:::0;;-1:-1:-1;;;;;;1836:19:2::1;::::0;;1717:145::o;9596:382:38:-;9754:137;9778:4;9784:10;9808:67;9865:9;9808:56;:67::i;:::-;9889:1;9754:10;:137::i;:::-;9906:65;;;9948:4;9906:65;;-1:-1:-1;;;;;9906:65:38;;;;;;;9965:5;9906:65;;;;;;;;;;;;;;;;;;;;;;;9596:382;;;:::o;8015:332::-;8166:62;;;8216:4;8166:62;;;;;;;;;;-1:-1:-1;;;;;8166:62:38;;;;;;;;;;;;;;;;;;;8245:95;8256:4;8262:10;6326:71:45;8334:5:38;8245:10;:95::i;4447:424::-;-1:-1:-1;;;;;4658:23:38;;;4610:14;4658:23;;;:8;:23;;;;;;;;:44;;;;;;;;;;;:49;;;;;;;;4722:5;;;;4717:124;;-1:-1:-1;;;;;;4790:23:38;;;;;;:8;:23;;;;;;;;:35;;;;;;;;:40;;;;;;;;4717:124;4857:7;;;;4447:424;-1:-1:-1;;;;4447:424:38:o;7725:284::-;7857:13;7894:108;7913:4;7919:10;6326:71:45;7894:18:38;:108::i;10916:305::-;11042:4;11069:140;11101:4;11132:1;11149:59;11200:7;11149:50;:59::i;:::-;11069:18;:140::i;:::-;11213:1;11069:145;;10916:305;-1:-1:-1;;;10916:305:38:o;11386:521::-;11645:20;;11688:6;11680:52;;;;-1:-1:-1;;;11680:52:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;11386:521;11753:147;11777:4;11808:1;11825:59;11876:7;11825:50;:59::i;:::-;11898:1;11753:10;:147::i;9984:375::-;10145:66;;;10187:5;10145:66;;;-1:-1:-1;;;;;10145:66:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;10228:124;10254:4;10260:10;10284:67;10341:9;10284:56;:67::i;1085:85:2:-;1131:7;1157:6;-1:-1:-1;;;;;1157:6:2;1085:85;:::o;6497:310:38:-;6638:13;6674:126;6706:4;6712:10;6162:89:45;6674:18:38;:126::i;8353:303::-;8483:59;;;8533:5;8483:59;;;;;;;;;-1:-1:-1;;;;;8483:59:38;;;;;;;;;;;;;;;;;;;8559:90;8572:4;8578:10;6326:71:45;8559:12:38;:90::i;9210:380::-;9367:137;9391:4;9397:10;9421:67;9478:9;9421:56;:67::i;9367:137::-;9519:64;;;9561:4;9519:64;;;-1:-1:-1;;;;;9519:64:38;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;9210:380;;;:::o;7201:334::-;7341:57;;;7389:5;7341:57;;;;;;;;;-1:-1:-1;;;;;7341:57:38;;;;;;;;;;;;;;;;;;;7408:120;7434:4;7440:10;6162:89:45;7408:12:38;:120::i;1096:232::-;1241:4;12464:24;12483:4;12464:18;:24::i;:::-;1261:4:::1;-1:-1:-1::0;;;;;1261:27:38::1;;1305:14;1261:60;;;;;;;;;;;;;-1:-1:-1::0;;;;;1261:60:38::1;;;;;;;;;;;;;;;;;;;;;;;;;::::0;::::1;5954:326:::0;6085:57;;;6124:5;6085:57;;;;;;;;;-1:-1:-1;;;;;6085:57:38;;;;;;;;;;;;;;;;;;;6152:121;6178:4;6184:10;6023:60:45;6152:12:38;:121::i;8874:330::-;9035:4;9062:130;9094:4;9100:10;9124:67;9181:9;9124:56;:67::i;9062:130::-;9196:1;9062:135;;8874:330;-1:-1:-1;;;;8874:330:38:o;2011:240:2:-;1308:12;:10;:12::i;:::-;-1:-1:-1;;;;;1297:23:2;:7;:5;:7::i;:::-;-1:-1:-1;;;;;1297:23:2;;1289:68;;;;;-1:-1:-1;;;1289:68:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;2099:22:2;::::1;2091:73;;;;-1:-1:-1::0;;;2091:73:2::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2200:6;::::0;;2179:38:::1;::::0;-1:-1:-1;;;;;2179:38:2;;::::1;::::0;2200:6;::::1;::::0;2179:38:::1;::::0;::::1;2227:6;:17:::0;;-1:-1:-1;;;;;;2227:17:2::1;-1:-1:-1::0;;;;;2227:17:2;;;::::1;::::0;;;::::1;::::0;;2011:240::o;3348:334:38:-;3521:4;12464:24;12483:4;12464:18;:24::i;:::-;3546:49:::1;::::0;;;;;3583:4:::1;3546:49;::::0;::::1;::::0;;;;;;;;;-1:-1:-1;;;;;3546:49:38;;::::1;::::0;;;::::1;::::0;::::1;::::0;;;;;;;::::1;-1:-1:-1::0;3657:18:38::1;::::0;;;;::::1;::::0;;3663:4:::1;3657:18:::0;;;::::1;::::0;;::::1;::::0;;;-1:-1:-1;;;;;3605:23:38;;::::1;-1:-1:-1::0;3605:23:38;;;;;;;;;:44;;;::::1;::::0;;;;;;;;:49;;;;;;;;;;:70;;;;-1:-1:-1;;3605:70:38::1;::::0;::::1;;;::::0;;;;;::::1;::::0;3348:334::o;6936:221:45:-;7008:7;7141;7044:105;;;;;;;;;-1:-1:-1;;;;;7044:105:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;7034:116;;;;;;7027:123;;6936:221;;;:::o;3688:307:38:-;3840:4;12464:24;12483:4;12464:18;:24::i;:::-;3865:46:::1;::::0;;;;;3902:5:::1;3865:46;::::0;::::1;::::0;;;;;;;;;-1:-1:-1;;;;;3865:46:38;;::::1;::::0;;;::::1;::::0;::::1;::::0;;;;;;;::::1;-1:-1:-1::0;3973:15:38::1;::::0;;;;::::1;::::0;;-1:-1:-1;3973:15:38;;;::::1;::::0;;::::1;::::0;;;-1:-1:-1;;;;;3921:23:38;;::::1;::::0;;3973:15;3921:23;;;;;;:44;;;::::1;::::0;;;;;;;;:49;;;;;;;;;:67;;;;-1:-1:-1;;3921:67:38::1;::::0;::::1;;;::::0;;;;;::::1;::::0;3688:307::o;2972:370::-;3145:4;12464:24;12483:4;12464:18;:24::i;:::-;3170:67:::1;::::0;;;;;3207:4:::1;3170:67;::::0;::::1;::::0;-1:-1:-1;;;;;3213:23:38;;::::1;3170:67:::0;;;;;;;;::::1;::::0;;::::1;::::0;::::1;::::0;;;;;;;;::::1;-1:-1:-1::0;3299:36:38::1;::::0;;;;::::1;::::0;;3305:4:::1;3299:36:::0;;;-1:-1:-1;;;;;3311:23:38;;::::1;3299:36;::::0;;::::1;::::0;;;3247:23;;::::1;-1:-1:-1::0;3247:23:38;;;;;;;;;:44;;;::::1;::::0;;;;;;;;:49;;;;;;;;;:88;;;;-1:-1:-1;;3247:88:38::1;::::0;::::1;;;::::0;;;;;::::1;::::0;2972:370::o;393:169:40:-;507:12;:10;:12::i;:::-;-1:-1:-1;;;;;496:23:40;:7;:5;:7::i;:::-;-1:-1:-1;;;;;496:23:40;;488:67;;;;;-1:-1:-1;;;488:67:40;;;;;;;;;;;;;;;;;;;;;;;;;;;;393:169;:::o;598:104:25:-;685:10;598:104;:::o;6404:224:45:-;6484:7;6610:9;6520:100;;;;;;;;;-1:-1:-1;;;;;6520:100:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;6510:111;;;;;;6503:118;;6404:224;;;:::o",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity 0.7.6;\n\nimport {\n    ISuperfluid,\n    ISuperfluidToken\n} from \"../interfaces/superfluid/ISuperfluid.sol\";\nimport { SuperfluidGovernanceBase } from \"./SuperfluidGovernanceBase.sol\";\n\nimport { Ownable } from \"@openzeppelin/contracts/access/Ownable.sol\";\n\n\ncontract SuperfluidOwnableGovernance is\n    Ownable,\n    SuperfluidGovernanceBase\n{\n    function _requireAuthorised(ISuperfluid /*host*/)\n        internal view override\n    {\n        require(owner() == _msgSender(), \"SFGov: only owner is authorized\");\n    }\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/gov/SuperfluidOwnableGovernance.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/gov/SuperfluidOwnableGovernance.sol",
+    "exportedSymbols": {
+      "ISuperfluid": [
+        15420
+      ],
+      "ISuperfluidToken": [
+        15781
+      ],
+      "Ownable": [
+        395
+      ],
+      "SuperfluidGovernanceBase": [
+        13472
+      ],
+      "SuperfluidOwnableGovernance": [
+        13575
+      ]
+    },
+    "id": 13576,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13547,
+        "literals": [
+          "solidity",
+          "0.7",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:22:40"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/superfluid/ISuperfluid.sol",
+        "file": "../interfaces/superfluid/ISuperfluid.sol",
+        "id": 13550,
+        "nodeType": "ImportDirective",
+        "scope": 13576,
+        "sourceUnit": 15421,
+        "src": "59:97:40",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13548,
+              "name": "ISuperfluid",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "72:11:40",
+              "typeDescriptions": {}
+            }
+          },
+          {
+            "foreign": {
+              "id": 13549,
+              "name": "ISuperfluidToken",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "89:16:40",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/gov/SuperfluidGovernanceBase.sol",
+        "file": "./SuperfluidGovernanceBase.sol",
+        "id": 13552,
+        "nodeType": "ImportDirective",
+        "scope": 13576,
+        "sourceUnit": 13473,
+        "src": "157:74:40",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13551,
+              "name": "SuperfluidGovernanceBase",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "166:24:40",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+        "file": "@openzeppelin/contracts/access/Ownable.sol",
+        "id": 13554,
+        "nodeType": "ImportDirective",
+        "scope": 13576,
+        "sourceUnit": 396,
+        "src": "233:69:40",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13553,
+              "name": "Ownable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "242:7:40",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 13555,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 395,
+              "src": "349:7:40",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$395",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 13556,
+            "nodeType": "InheritanceSpecifier",
+            "src": "349:7:40"
+          },
+          {
+            "baseName": {
+              "id": 13557,
+              "name": "SuperfluidGovernanceBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13472,
+              "src": "362:24:40",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SuperfluidGovernanceBase_$13472",
+                "typeString": "contract SuperfluidGovernanceBase"
+              }
+            },
+            "id": 13558,
+            "nodeType": "InheritanceSpecifier",
+            "src": "362:24:40"
+          }
+        ],
+        "contractDependencies": [
+          395,
+          3803,
+          13472,
+          15494
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 13575,
+        "linearizedBaseContracts": [
+          13575,
+          13472,
+          15494,
+          395,
+          3803
+        ],
+        "name": "SuperfluidOwnableGovernance",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "baseFunctions": [
+              13471
+            ],
+            "body": {
+              "id": 13573,
+              "nodeType": "Block",
+              "src": "478:84:40",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 13569,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 13565,
+                            "name": "owner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 330,
+                            "src": "496:5:40",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                              "typeString": "function () view returns (address)"
+                            }
+                          },
+                          "id": 13566,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "496:7:40",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 13567,
+                            "name": "_msgSender",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3791,
+                            "src": "507:10:40",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
+                              "typeString": "function () view returns (address payable)"
+                            }
+                          },
+                          "id": 13568,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "507:12:40",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "496:23:40",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5346476f763a206f6e6c79206f776e657220697320617574686f72697a6564",
+                        "id": 13570,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "521:33:40",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_0cda93e6f21c5b719117b343dca133f3e028a3bb41ff64a53893c801995c0363",
+                          "typeString": "literal_string \"SFGov: only owner is authorized\""
+                        },
+                        "value": "SFGov: only owner is authorized"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_0cda93e6f21c5b719117b343dca133f3e028a3bb41ff64a53893c801995c0363",
+                          "typeString": "literal_string \"SFGov: only owner is authorized\""
+                        }
+                      ],
+                      "id": 13564,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "488:7:40",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 13571,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "488:67:40",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 13572,
+                  "nodeType": "ExpressionStatement",
+                  "src": "488:67:40"
+                }
+              ]
+            },
+            "id": 13574,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_requireAuthorised",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 13562,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "465:8:40"
+            },
+            "parameters": {
+              "id": 13561,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13560,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13574,
+                  "src": "421:11:40",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ISuperfluid_$15420",
+                    "typeString": "contract ISuperfluid"
+                  },
+                  "typeName": {
+                    "id": 13559,
+                    "name": "ISuperfluid",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 15420,
+                    "src": "421:11:40",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ISuperfluid_$15420",
+                      "typeString": "contract ISuperfluid"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "420:22:40"
+            },
+            "returnParameters": {
+              "id": 13563,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "478:0:40"
+            },
+            "scope": 13575,
+            "src": "393:169:40",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 13576,
+        "src": "305:259:40"
+      }
+    ],
+    "src": "35:530:40"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/gov/SuperfluidOwnableGovernance.sol",
+      "exportedSymbols": {
+        "ISuperfluid": [
+          15420
+        ],
+        "ISuperfluidToken": [
+          15781
+        ],
+        "Ownable": [
+          395
+        ],
+        "SuperfluidGovernanceBase": [
+          13472
+        ],
+        "SuperfluidOwnableGovernance": [
+          13575
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.7",
+            ".6"
+          ]
+        },
+        "id": 13547,
+        "name": "PragmaDirective",
+        "src": "35:22:40"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 15421,
+          "absolutePath": "project:/contracts/interfaces/superfluid/ISuperfluid.sol",
+          "file": "../interfaces/superfluid/ISuperfluid.sol",
+          "scope": 13576,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "ISuperfluid"
+                },
+                "id": 13548,
+                "name": "Identifier",
+                "src": "72:11:40"
+              }
+            },
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "ISuperfluidToken"
+                },
+                "id": 13549,
+                "name": "Identifier",
+                "src": "89:16:40"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13550,
+        "name": "ImportDirective",
+        "src": "59:97:40"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 13473,
+          "absolutePath": "project:/contracts/gov/SuperfluidGovernanceBase.sol",
+          "file": "./SuperfluidGovernanceBase.sol",
+          "scope": 13576,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "SuperfluidGovernanceBase"
+                },
+                "id": 13551,
+                "name": "Identifier",
+                "src": "166:24:40"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13552,
+        "name": "ImportDirective",
+        "src": "157:74:40"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 396,
+          "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+          "file": "@openzeppelin/contracts/access/Ownable.sol",
+          "scope": 13576,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "Ownable"
+                },
+                "id": 13553,
+                "name": "Identifier",
+                "src": "242:7:40"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13554,
+        "name": "ImportDirective",
+        "src": "233:69:40"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            395,
+            3803,
+            13472,
+            15494
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            13575,
+            13472,
+            15494,
+            395,
+            3803
+          ],
+          "name": "SuperfluidOwnableGovernance",
+          "scope": 13576
+        },
+        "children": [
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "Ownable",
+                  "referencedDeclaration": 395,
+                  "type": "contract Ownable"
+                },
+                "id": 13555,
+                "name": "UserDefinedTypeName",
+                "src": "349:7:40"
+              }
+            ],
+            "id": 13556,
+            "name": "InheritanceSpecifier",
+            "src": "349:7:40"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "SuperfluidGovernanceBase",
+                  "referencedDeclaration": 13472,
+                  "type": "contract SuperfluidGovernanceBase"
+                },
+                "id": 13557,
+                "name": "UserDefinedTypeName",
+                "src": "362:24:40"
+              }
+            ],
+            "id": 13558,
+            "name": "InheritanceSpecifier",
+            "src": "362:24:40"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                13471
+              ],
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_requireAuthorised",
+              "scope": 13575,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 13562,
+                "name": "OverrideSpecifier",
+                "src": "465:8:40"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13574,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract ISuperfluid",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "ISuperfluid",
+                          "referencedDeclaration": 15420,
+                          "type": "contract ISuperfluid"
+                        },
+                        "id": 13559,
+                        "name": "UserDefinedTypeName",
+                        "src": "421:11:40"
+                      }
+                    ],
+                    "id": 13560,
+                    "name": "VariableDeclaration",
+                    "src": "421:11:40"
+                  }
+                ],
+                "id": 13561,
+                "name": "ParameterList",
+                "src": "420:22:40"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13563,
+                "name": "ParameterList",
+                "src": "478:0:40"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_0cda93e6f21c5b719117b343dca133f3e028a3bb41ff64a53893c801995c0363",
+                                  "typeString": "literal_string \"SFGov: only owner is authorized\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                4294967278,
+                                4294967278
+                              ],
+                              "referencedDeclaration": 4294967278,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 13564,
+                            "name": "Identifier",
+                            "src": "488:7:40"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 330,
+                                      "type": "function () view returns (address)",
+                                      "value": "owner"
+                                    },
+                                    "id": 13565,
+                                    "name": "Identifier",
+                                    "src": "496:5:40"
+                                  }
+                                ],
+                                "id": 13566,
+                                "name": "FunctionCall",
+                                "src": "496:7:40"
+                              },
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address payable",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 3791,
+                                      "type": "function () view returns (address payable)",
+                                      "value": "_msgSender"
+                                    },
+                                    "id": 13567,
+                                    "name": "Identifier",
+                                    "src": "507:10:40"
+                                  }
+                                ],
+                                "id": 13568,
+                                "name": "FunctionCall",
+                                "src": "507:12:40"
+                              }
+                            ],
+                            "id": 13569,
+                            "name": "BinaryOperation",
+                            "src": "496:23:40"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "5346476f763a206f6e6c79206f776e657220697320617574686f72697a6564",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"SFGov: only owner is authorized\"",
+                              "value": "SFGov: only owner is authorized"
+                            },
+                            "id": 13570,
+                            "name": "Literal",
+                            "src": "521:33:40"
+                          }
+                        ],
+                        "id": 13571,
+                        "name": "FunctionCall",
+                        "src": "488:67:40"
+                      }
+                    ],
+                    "id": 13572,
+                    "name": "ExpressionStatement",
+                    "src": "488:67:40"
+                  }
+                ],
+                "id": 13573,
+                "name": "Block",
+                "src": "478:84:40"
+              }
+            ],
+            "id": 13574,
+            "name": "FunctionDefinition",
+            "src": "393:169:40"
+          }
+        ],
+        "id": 13575,
+        "name": "ContractDefinition",
+        "src": "305:259:40"
+      }
+    ],
+    "id": 13576,
+    "name": "SourceUnit",
+    "src": "35:530:40"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.336Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "authorizeAppFactory(address,address)": {
+        "details": "allows the given factory to register new apps without requiring onetime keys",
+        "params": {
+          "factory": "must be an initialized contract"
+        }
+      },
+      "batchUpdateSuperTokenLogic(address,address[])": {
+        "details": "Update supertoken logic contract to the latest that is managed by the super token factory"
+      },
+      "getConfigAsAddress(address,address,bytes32)": {
+        "details": "Get configuration as address value"
+      },
+      "getConfigAsUint256(address,address,bytes32)": {
+        "details": "Get configuration as uint256 value"
+      },
+      "isAuthorizedAppFactory(address,address)": {
+        "details": "tells if the given factory is authorized to register apps"
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "registerAgreementClass(address,address)": {
+        "details": "Register a new agreement class"
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "replaceGovernance(address,address)": {
+        "details": "Replace the current governance with a new governance"
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "unauthorizeAppFactory(address,address)": {
+        "details": "withdraws authorization from a factory to register new apps. Doesn't affect apps previously registered by the factory."
+      },
+      "updateContracts(address,address,address[],address)": {
+        "details": "Update logics of the contracts NOTE: - Because they might have inter-dependencies, it is good to have one single function to update them all"
+      },
+      "whiteListNewApp(address,bytes32)": {
+        "details": "Whitelist a new app using a onetime key",
+        "params": {
+          "key": "is a deployer specific hash key which can be used once to register an app NOTE: To generate the key, use the SuperfluidGovernanceConfigs.getAppRegistrationConfigKey offchain."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

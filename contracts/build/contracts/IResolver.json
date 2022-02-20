@@ -1,0 +1,716 @@
+{
+  "contractName": "IResolver",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "Set",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "set",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"}],\"name\":\"Set\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"get\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"address\",\"name\":\"target\",\"type\":\"address\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Superfluid\",\"details\":\"Abstraction for a address resolver contract\",\"kind\":\"dev\",\"methods\":{\"get(string)\":{\"details\":\"Get address by name.\"},\"set(string,address)\":{\"details\":\"Set resolver address name.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/ux/IResolver.sol\":\"IResolver\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/ux/IResolver.sol\":{\"keccak256\":\"0x4a65c9579c05695e5cc386441b986898f789f274e3b4441ba8ba9195cf9a1902\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://424c52257febd253b6c2efebc8620640fb859423c1f356bbfd9b9fb850c1aefc\",\"dweb:/ipfs/QmYdY8ccfgiak9Dsjukg6ZKhZjU37Q8FTNizNPZFf8qska\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity >= 0.5.0;\n\n/**\n * @dev Abstraction for a address resolver contract\n *\n * @author Superfluid\n */\ninterface IResolver {\n\n    event Set(string indexed name, address target);\n\n    /**\n     * @dev Set resolver address name.\n     */\n    function set(string calldata name, address target) external;\n\n    /**\n     * @dev Get address by name.\n     */\n    function get(string calldata name) external view returns (address);\n\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/interfaces/ux/IResolver.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/ux/IResolver.sol",
+    "exportedSymbols": {
+      "IResolver": [
+        16012
+      ]
+    },
+    "id": 16013,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 15988,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:25:59"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 15989,
+          "nodeType": "StructuredDocumentation",
+          "src": "62:84:59",
+          "text": " @dev Abstraction for a address resolver contract\n @author Superfluid"
+        },
+        "fullyImplemented": false,
+        "id": 16012,
+        "linearizedBaseContracts": [
+          16012
+        ],
+        "name": "IResolver",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "id": 15995,
+            "name": "Set",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 15994,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 15991,
+                  "indexed": true,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15995,
+                  "src": "184:19:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15990,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "184:6:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 15993,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15995,
+                  "src": "205:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 15992,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "205:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "183:37:59"
+            },
+            "src": "174:47:59"
+          },
+          {
+            "documentation": {
+              "id": 15996,
+              "nodeType": "StructuredDocumentation",
+              "src": "227:50:59",
+              "text": " @dev Set resolver address name."
+            },
+            "functionSelector": "a815ff15",
+            "id": 16003,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "set",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 16001,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 15998,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16003,
+                  "src": "295:20:59",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15997,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "295:6:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 16000,
+                  "mutability": "mutable",
+                  "name": "target",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16003,
+                  "src": "317:14:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 15999,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "317:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "294:38:59"
+            },
+            "returnParameters": {
+              "id": 16002,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "341:0:59"
+            },
+            "scope": 16012,
+            "src": "282:60:59",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 16004,
+              "nodeType": "StructuredDocumentation",
+              "src": "348:44:59",
+              "text": " @dev Get address by name."
+            },
+            "functionSelector": "693ec85e",
+            "id": 16011,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "get",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 16007,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16006,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16011,
+                  "src": "410:20:59",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 16005,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "410:6:59",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "409:22:59"
+            },
+            "returnParameters": {
+              "id": 16010,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 16009,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 16011,
+                  "src": "455:7:59",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 16008,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "455:7:59",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "454:9:59"
+            },
+            "scope": 16012,
+            "src": "397:67:59",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 16013,
+        "src": "147:320:59"
+      }
+    ],
+    "src": "35:433:59"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/interfaces/ux/IResolver.sol",
+      "exportedSymbols": {
+        "IResolver": [
+          16012
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.5",
+            ".0"
+          ]
+        },
+        "id": 15988,
+        "name": "PragmaDirective",
+        "src": "35:25:59"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            16012
+          ],
+          "name": "IResolver",
+          "scope": 16013
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Abstraction for a address resolver contract\n @author Superfluid"
+            },
+            "id": 15989,
+            "name": "StructuredDocumentation",
+            "src": "62:84:59"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "Set"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": true,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "scope": 15995,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15990,
+                        "name": "ElementaryTypeName",
+                        "src": "184:6:59"
+                      }
+                    ],
+                    "id": 15991,
+                    "name": "VariableDeclaration",
+                    "src": "184:19:59"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "mutability": "mutable",
+                      "name": "target",
+                      "scope": 15995,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 15992,
+                        "name": "ElementaryTypeName",
+                        "src": "205:7:59"
+                      }
+                    ],
+                    "id": 15993,
+                    "name": "VariableDeclaration",
+                    "src": "205:14:59"
+                  }
+                ],
+                "id": 15994,
+                "name": "ParameterList",
+                "src": "183:37:59"
+              }
+            ],
+            "id": 15995,
+            "name": "EventDefinition",
+            "src": "174:47:59"
+          },
+          {
+            "attributes": {
+              "functionSelector": "a815ff15",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "set",
+              "scope": 16012,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Set resolver address name."
+                },
+                "id": 15996,
+                "name": "StructuredDocumentation",
+                "src": "227:50:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "scope": 16003,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15997,
+                        "name": "ElementaryTypeName",
+                        "src": "295:6:59"
+                      }
+                    ],
+                    "id": 15998,
+                    "name": "VariableDeclaration",
+                    "src": "295:20:59"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "target",
+                      "scope": 16003,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 15999,
+                        "name": "ElementaryTypeName",
+                        "src": "317:7:59"
+                      }
+                    ],
+                    "id": 16000,
+                    "name": "VariableDeclaration",
+                    "src": "317:14:59"
+                  }
+                ],
+                "id": 16001,
+                "name": "ParameterList",
+                "src": "294:38:59"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 16002,
+                "name": "ParameterList",
+                "src": "341:0:59"
+              }
+            ],
+            "id": 16003,
+            "name": "FunctionDefinition",
+            "src": "282:60:59"
+          },
+          {
+            "attributes": {
+              "functionSelector": "693ec85e",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "get",
+              "scope": 16012,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Get address by name."
+                },
+                "id": 16004,
+                "name": "StructuredDocumentation",
+                "src": "348:44:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "scope": 16011,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 16005,
+                        "name": "ElementaryTypeName",
+                        "src": "410:6:59"
+                      }
+                    ],
+                    "id": 16006,
+                    "name": "VariableDeclaration",
+                    "src": "410:20:59"
+                  }
+                ],
+                "id": 16007,
+                "name": "ParameterList",
+                "src": "409:22:59"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 16011,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 16008,
+                        "name": "ElementaryTypeName",
+                        "src": "455:7:59"
+                      }
+                    ],
+                    "id": 16009,
+                    "name": "VariableDeclaration",
+                    "src": "455:7:59"
+                  }
+                ],
+                "id": 16010,
+                "name": "ParameterList",
+                "src": "454:9:59"
+              }
+            ],
+            "id": 16011,
+            "name": "FunctionDefinition",
+            "src": "397:67:59"
+          }
+        ],
+        "id": 16012,
+        "name": "ContractDefinition",
+        "src": "147:320:59"
+      }
+    ],
+    "id": 16013,
+    "name": "SourceUnit",
+    "src": "35:433:59"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.384Z",
+  "devdoc": {
+    "author": "Superfluid",
+    "details": "Abstraction for a address resolver contract",
+    "kind": "dev",
+    "methods": {
+      "get(string)": {
+        "details": "Get address by name."
+      },
+      "set(string,address)": {
+        "details": "Set resolver address name."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

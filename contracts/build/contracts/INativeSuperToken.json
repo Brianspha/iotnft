@@ -1,0 +1,2656 @@
+{
+  "contractName": "INativeSuperToken",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32[]",
+          "name": "data",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "AgreementCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "penaltyAccount",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "rewardAccount",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rewardAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AgreementLiquidated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "liquidatorAccount",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "penaltyAccount",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "bondAccount",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rewardAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "bailoutAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AgreementLiquidatedBy",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "liquidatorAccount",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "targetAccount",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "rewardAccount",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rewardAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "int256",
+          "name": "targetAccountBalanceDelta",
+          "type": "int256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "liquidationTypeData",
+          "type": "bytes"
+        }
+      ],
+      "name": "AgreementLiquidatedV2",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "slotId",
+          "type": "uint256"
+        }
+      ],
+      "name": "AgreementStateUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AgreementTerminated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32[]",
+          "name": "data",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "AgreementUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenHolder",
+          "type": "address"
+        }
+      ],
+      "name": "AuthorizedOperator",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "bailoutAccount",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "bailoutAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Bailout",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "operatorData",
+          "type": "bytes"
+        }
+      ],
+      "name": "Burned",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "operatorData",
+          "type": "bytes"
+        }
+      ],
+      "name": "Minted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "tokenHolder",
+          "type": "address"
+        }
+      ],
+      "name": "RevokedOperator",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "operatorData",
+          "type": "bytes"
+        }
+      ],
+      "name": "Sent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenDowngraded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenUpgraded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "authorizeOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "burn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "data",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "createAgreement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "subtractedValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "decreaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "defaultOperators",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "downgrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "getAccountActiveAgreements",
+      "outputs": [
+        {
+          "internalType": "contract ISuperAgreement[]",
+          "name": "activeAgreements",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dataLength",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAgreementData",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "data",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "agreementClass",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "slotId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dataLength",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAgreementStateSlot",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "slotData",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getHost",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "host",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getUnderlyingToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "tokenAddr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "granularity",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "addedValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "increaseAllowance",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "isAccountCritical",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isCritical",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isAccountCriticalNow",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isCritical",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "isAccountSolvent",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isSolvent",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isAccountSolventNow",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "isSolvent",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "tokenHolder",
+          "type": "address"
+        }
+      ],
+      "name": "isOperatorFor",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "liquidator",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "penaltyAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rewardAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "bailoutAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "makeLiquidationPayouts",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "liquidationTypeData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "liquidatorAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "useDefaultRewardAccount",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "targetAccount",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rewardAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "int256",
+          "name": "targetAccountBalanceDelta",
+          "type": "int256"
+        }
+      ],
+      "name": "makeLiquidationPayoutsV2",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "operationApprove",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "operationDowngrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "operationTransferFrom",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "operationUpgrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "operatorData",
+          "type": "bytes"
+        }
+      ],
+      "name": "operatorBurn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "operatorData",
+          "type": "bytes"
+        }
+      ],
+      "name": "operatorSend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "realtimeBalanceOf",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "availableBalance",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "owedDeposit",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "realtimeBalanceOfNow",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "availableBalance",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "owedDeposit",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "operator",
+          "type": "address"
+        }
+      ],
+      "name": "revokeOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "userData",
+          "type": "bytes"
+        }
+      ],
+      "name": "selfBurn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "userData",
+          "type": "bytes"
+        }
+      ],
+      "name": "selfMint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "send",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "int256",
+          "name": "delta",
+          "type": "int256"
+        }
+      ],
+      "name": "settleBalance",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "dataLength",
+          "type": "uint256"
+        }
+      ],
+      "name": "terminateAgreement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        }
+      ],
+      "name": "transferAll",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "id",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "data",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "updateAgreementData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "slotId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32[]",
+          "name": "slotData",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "updateAgreementStateSlot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "upgrade",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "upgradeTo",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "contract IERC20",
+          "name": "underlyingToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint8",
+          "name": "underlyingDecimals",
+          "type": "uint8"
+        },
+        {
+          "internalType": "string",
+          "name": "n",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "s",
+          "type": "string"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "initialSupply",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32[]\",\"name\":\"data\",\"type\":\"bytes32[]\"}],\"name\":\"AgreementCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"penaltyAccount\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"rewardAccount\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rewardAmount\",\"type\":\"uint256\"}],\"name\":\"AgreementLiquidated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"liquidatorAccount\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"penaltyAccount\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"bondAccount\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rewardAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"bailoutAmount\",\"type\":\"uint256\"}],\"name\":\"AgreementLiquidatedBy\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"liquidatorAccount\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"targetAccount\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"rewardAccount\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rewardAmount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"int256\",\"name\":\"targetAccountBalanceDelta\",\"type\":\"int256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"liquidationTypeData\",\"type\":\"bytes\"}],\"name\":\"AgreementLiquidatedV2\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"slotId\",\"type\":\"uint256\"}],\"name\":\"AgreementStateUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"}],\"name\":\"AgreementTerminated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes32[]\",\"name\":\"data\",\"type\":\"bytes32[]\"}],\"name\":\"AgreementUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"tokenHolder\",\"type\":\"address\"}],\"name\":\"AuthorizedOperator\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"bailoutAccount\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"bailoutAmount\",\"type\":\"uint256\"}],\"name\":\"Bailout\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"operatorData\",\"type\":\"bytes\"}],\"name\":\"Burned\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"operatorData\",\"type\":\"bytes\"}],\"name\":\"Minted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"tokenHolder\",\"type\":\"address\"}],\"name\":\"RevokedOperator\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"operatorData\",\"type\":\"bytes\"}],\"name\":\"Sent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokenDowngraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"TokenUpgraded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"authorizeOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"burn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32[]\",\"name\":\"data\",\"type\":\"bytes32[]\"}],\"name\":\"createAgreement\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"subtractedValue\",\"type\":\"uint256\"}],\"name\":\"decreaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"defaultOperators\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"downgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"getAccountActiveAgreements\",\"outputs\":[{\"internalType\":\"contract ISuperAgreement[]\",\"name\":\"activeAgreements\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"dataLength\",\"type\":\"uint256\"}],\"name\":\"getAgreementData\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"data\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"agreementClass\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"slotId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"dataLength\",\"type\":\"uint256\"}],\"name\":\"getAgreementStateSlot\",\"outputs\":[{\"internalType\":\"bytes32[]\",\"name\":\"slotData\",\"type\":\"bytes32[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getHost\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"host\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getUnderlyingToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"tokenAddr\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"granularity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"addedValue\",\"type\":\"uint256\"}],\"name\":\"increaseAllowance\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"underlyingToken\",\"type\":\"address\"},{\"internalType\":\"uint8\",\"name\":\"underlyingDecimals\",\"type\":\"uint8\"},{\"internalType\":\"string\",\"name\":\"n\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"s\",\"type\":\"string\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"symbol\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"initialSupply\",\"type\":\"uint256\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"isAccountCritical\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isCritical\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isAccountCriticalNow\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isCritical\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"isAccountSolvent\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isSolvent\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"isAccountSolventNow\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"isSolvent\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"tokenHolder\",\"type\":\"address\"}],\"name\":\"isOperatorFor\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"liquidator\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"penaltyAccount\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"rewardAmount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bailoutAmount\",\"type\":\"uint256\"}],\"name\":\"makeLiquidationPayouts\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"liquidationTypeData\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"liquidatorAccount\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"useDefaultRewardAccount\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"targetAccount\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"rewardAmount\",\"type\":\"uint256\"},{\"internalType\":\"int256\",\"name\":\"targetAccountBalanceDelta\",\"type\":\"int256\"}],\"name\":\"makeLiquidationPayoutsV2\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"operationApprove\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"operationDowngrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"operationTransferFrom\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"operationUpgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"operatorData\",\"type\":\"bytes\"}],\"name\":\"operatorBurn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"},{\"internalType\":\"bytes\",\"name\":\"operatorData\",\"type\":\"bytes\"}],\"name\":\"operatorSend\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"realtimeBalanceOf\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"availableBalance\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"deposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"owedDeposit\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"realtimeBalanceOfNow\",\"outputs\":[{\"internalType\":\"int256\",\"name\":\"availableBalance\",\"type\":\"int256\"},{\"internalType\":\"uint256\",\"name\":\"deposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"owedDeposit\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"operator\",\"type\":\"address\"}],\"name\":\"revokeOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"name\":\"selfBurn\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"userData\",\"type\":\"bytes\"}],\"name\":\"selfMint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"send\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"int256\",\"name\":\"delta\",\"type\":\"int256\"}],\"name\":\"settleBalance\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"uint256\",\"name\":\"dataLength\",\"type\":\"uint256\"}],\"name\":\"terminateAgreement\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"}],\"name\":\"transferAll\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"id\",\"type\":\"bytes32\"},{\"internalType\":\"bytes32[]\",\"name\":\"data\",\"type\":\"bytes32[]\"}],\"name\":\"updateAgreementData\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"slotId\",\"type\":\"uint256\"},{\"internalType\":\"bytes32[]\",\"name\":\"slotData\",\"type\":\"bytes32[]\"}],\"name\":\"updateAgreementStateSlot\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"upgrade\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"upgradeTo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"author\":\"Superfluid\",\"details\":\"Native SuperToken full interface\",\"kind\":\"dev\",\"methods\":{\"allowance(address,address)\":{\"details\":\"Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called.\"},\"approve(address,uint256)\":{\"details\":\"Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event.\"},\"authorizeOperator(address)\":{\"details\":\"Make an account an operator of the caller. See {isOperatorFor}. Emits an {AuthorizedOperator} event. Requirements - `operator` cannot be calling address.\"},\"balanceOf(address)\":{\"details\":\"Returns the amount of tokens owned by an account (`owner`).\"},\"burn(uint256,bytes)\":{\"details\":\"Destroys `amount` tokens from the caller's account, reducing the total supply. If a send hook is registered for the caller, the corresponding function will be called with `data` and empty `operatorData`. See {IERC777Sender}. Emits a {Burned} event. Requirements - the caller must have at least `amount` tokens.\"},\"createAgreement(bytes32,bytes32[])\":{\"details\":\"Create a new agreement\",\"params\":{\"data\":\"Agreement data\",\"id\":\"Agreement ID\"}},\"decimals()\":{\"details\":\"Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: SuperToken always uses 18 decimals. Note: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}.\"},\"decreaseAllowance(address,uint256)\":{\"details\":\"Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`.\"},\"defaultOperators()\":{\"details\":\"Returns the list of default operators. These accounts are operators for all token holders, even if {authorizeOperator} was never called on them. This list is immutable, but individual holders may revoke these via {revokeOperator}, in which case {isOperatorFor} will return false.\"},\"downgrade(uint256)\":{\"details\":\"Downgrade SuperToken to ERC20.It will call transfer to send tokens\",\"params\":{\"amount\":\"Number of tokens to be downgraded\"}},\"getAccountActiveAgreements(address)\":{\"details\":\"Get a list of agreements that is active for the accountAn active agreement is one that has state for the account\",\"params\":{\"account\":\"Account to query\"},\"returns\":{\"activeAgreements\":\"List of accounts that have non-zero states for the account\"}},\"getAgreementData(address,bytes32,uint256)\":{\"details\":\"Get data of the agreement\",\"params\":{\"agreementClass\":\"Contract address of the agreement\",\"id\":\"Agreement ID\"},\"returns\":{\"data\":\"Data of the agreement\"}},\"getAgreementStateSlot(address,address,uint256,uint256)\":{\"details\":\"Get data of the slot of the state of a agreement\",\"params\":{\"account\":\"Account to query\",\"agreementClass\":\"Contract address of the agreement\",\"dataLength\":\"length of the state data\",\"slotId\":\"slot id of the state\"}},\"getHost()\":{\"details\":\"Get superfluid host contract address\"},\"getUnderlyingToken()\":{\"details\":\"Return the underlying token contract\",\"returns\":{\"tokenAddr\":\"Underlying token address\"}},\"granularity()\":{\"details\":\"Returns the smallest part of the token that is not divisible. This means all token operations (creation, movement and destruction) must have amounts that are a multiple of this number. For super token contracts, this value is 1 always\"},\"increaseAllowance(address,uint256)\":{\"details\":\"Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address.\"},\"initialize(address,uint8,string,string)\":{\"details\":\"Initialize the contract\"},\"isAccountCritical(address,uint256)\":{\"details\":\"Check if one account is critical\",\"params\":{\"account\":\"Account check if is critical by a future time\",\"timestamp\":\"Time of balance\"},\"returns\":{\"isCritical\":\"isCritical\"}},\"isAccountCriticalNow(address)\":{\"details\":\"Check if one account is critical now\",\"params\":{\"account\":\"Account check if is critical by a future time\"},\"returns\":{\"isCritical\":\"isCritical\"}},\"isAccountSolvent(address,uint256)\":{\"details\":\"Check if one account is solvent\",\"params\":{\"account\":\"Account check if is solvent by a future time\",\"timestamp\":\"Time of balance\"},\"returns\":{\"isSolvent\":\"isSolvent\"}},\"isAccountSolventNow(address)\":{\"details\":\"Check if one account is solvent now\",\"params\":{\"account\":\"Account check if is solvent now\"},\"returns\":{\"isSolvent\":\"isSolvent\"}},\"isOperatorFor(address,address)\":{\"details\":\"Returns true if an account is an operator of `tokenHolder`. Operators can send and burn tokens on behalf of their owners. All accounts are their own operator. See {operatorSend} and {operatorBurn}.\"},\"makeLiquidationPayouts(bytes32,address,address,uint256,uint256)\":{\"details\":\"Make liquidation payouts\",\"params\":{\"bailoutAmount\":\"Amount of account bailout needed NOTE: Liquidation rules:  - If a bailout is required (bailoutAmount > 0)     - the actual reward goes to the liquidator,     - while the reward account becomes the bailout account     - total bailout include: bailout amount + reward amount Modifiers:  - onlyAgreement\",\"id\":\"Agreement ID\",\"liquidator\":\"Address of the executer of liquidation\",\"penaltyAccount\":\"Account of the agreement to be penalized\",\"rewardAmount\":\"Amount of liquidation reward\"}},\"makeLiquidationPayoutsV2(bytes32,bytes,address,bool,address,uint256,int256)\":{\"details\":\"Make liquidation payouts (v2)\",\"params\":{\"id\":\"Agreement ID\",\"liquidationTypeData\":\"Data regarding the version of the liquidation schema and the type\",\"liquidatorAccount\":\"Address of the executor of the liquidation\",\"rewardAmount\":\"The amount the reward recepient account will receive\",\"targetAccount\":\"Account of the stream sender\",\"targetAccountBalanceDelta\":\"The amount the sender account balance should change by - If a bailout is required (bailoutAmount > 0)   - the actual reward (single deposit) goes to the executor,   - while the reward account becomes the bailout account   - total bailout include: bailout amount + reward amount   - the targetAccount will be bailed out - If a bailout is not required   - the targetAccount will pay the rewardAmount   - the liquidator (reward account in PIC period) will receive the rewardAmount Modifiers:  - onlyAgreement\",\"useDefaultRewardAccount\":\"Whether or not the default reward account receives the rewardAmount\"}},\"name()\":{\"details\":\"Returns the name of the token.\"},\"operationApprove(address,address,uint256)\":{\"details\":\"Perform ERC20 approve by host contract.\",\"params\":{\"account\":\"The account owner to be approved.\",\"amount\":\"Number of tokens to be approved. Modifiers:  - onlyHost\",\"spender\":\"The spender of account owner's funds.\"}},\"operationDowngrade(address,uint256)\":{\"details\":\"Downgrade ERC20 to SuperToken by host contract.\",\"params\":{\"account\":\"The account to be changed.\",\"amount\":\"Number of tokens to be downgraded (in 18 decimals) Modifiers:  - onlyHost\"}},\"operationTransferFrom(address,address,address,uint256)\":{\"details\":\"Perform ERC20 transfer from by host contract.\",\"params\":{\"account\":\"The account to spend sender's funds.\",\"amount\":\"Number of tokens to be transferred. Modifiers:  - onlyHost\",\"recipient\":\"The recipient of thefunds.\",\"spender\":\"The account where the funds is sent from.\"}},\"operationUpgrade(address,uint256)\":{\"details\":\"Upgrade ERC20 to SuperToken by host contract.\",\"params\":{\"account\":\"The account to be changed.\",\"amount\":\"Number of tokens to be upgraded (in 18 decimals) Modifiers:  - onlyHost\"}},\"operatorBurn(address,uint256,bytes,bytes)\":{\"details\":\"Destroys `amount` tokens from `account`, reducing the total supply. The caller must be an operator of `account`. If a send hook is registered for `account`, the corresponding function will be called with `data` and `operatorData`. See {IERC777Sender}. Emits a {Burned} event. Requirements - `account` cannot be the zero address. - `account` must have at least `amount` tokens. - the caller must be an operator for `account`.\"},\"operatorSend(address,address,uint256,bytes,bytes)\":{\"details\":\"Moves `amount` tokens from `sender` to `recipient`. The caller must be an operator of `sender`. If send or receive hooks are registered for `sender` and `recipient`, the corresponding functions will be called with `data` and `operatorData`. See {IERC777Sender} and {IERC777Recipient}. Emits a {Sent} event. Requirements - `sender` cannot be the zero address. - `sender` must have at least `amount` tokens. - the caller must be an operator for `sender`. - `recipient` cannot be the zero address. - if `recipient` is a contract, it must implement the {IERC777Recipient} interface.\"},\"realtimeBalanceOf(address,uint256)\":{\"details\":\"Calculate the real balance of a user, taking in consideration all agreements of the account\",\"params\":{\"account\":\"for the query\",\"timestamp\":\"Time of balance\"},\"returns\":{\"availableBalance\":\"Real-time balance\",\"deposit\":\"Account deposit\",\"owedDeposit\":\"Account owed Deposit\"}},\"realtimeBalanceOfNow(address)\":{\"details\":\"realtimeBalanceOf with timestamp equals to block timestamp\"},\"revokeOperator(address)\":{\"details\":\"Revoke an account's operator status for the caller. See {isOperatorFor} and {defaultOperators}. Emits a {RevokedOperator} event. Requirements - `operator` cannot be calling address.\"},\"selfBurn(address,uint256,bytes)\":{\"details\":\"Burn existing tokens for the account Modifiers:  - onlySelf\"},\"selfMint(address,uint256,bytes)\":{\"details\":\"Mint new tokens for the account Modifiers:  - onlySelf\"},\"send(address,uint256,bytes)\":{\"details\":\"Moves `amount` tokens from the caller's account to `recipient`. If send or receive hooks are registered for the caller and `recipient`, the corresponding functions will be called with `data` and empty `operatorData`. See {IERC777Sender} and {IERC777Recipient}. Emits a {Sent} event. Requirements - the caller must have at least `amount` tokens. - `recipient` cannot be the zero address. - if `recipient` is a contract, it must implement the {IERC777Recipient} interface.\"},\"settleBalance(address,int256)\":{\"details\":\"Settle balance from an account by the agreement.      The agreement needs to make sure that the balance delta is balanced afterwards\",\"params\":{\"account\":\"Account to query.\",\"delta\":\"Amount of balance delta to be settled Modifiers:  - onlyAgreement\"}},\"symbol()\":{\"details\":\"Returns the symbol of the token, usually a shorter version of the name.\"},\"terminateAgreement(bytes32,uint256)\":{\"details\":\"Close the agreement\",\"params\":{\"id\":\"Agreement ID\"}},\"totalSupply()\":{\"details\":\"See {IERC20-totalSupply}.\"},\"transfer(address,uint256)\":{\"details\":\"Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event.\"},\"transferAll(address)\":{\"details\":\"Transfer all available balance from `msg.sender` to `recipient`\"},\"transferFrom(address,address,uint256)\":{\"details\":\"Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event.\"},\"updateAgreementData(bytes32,bytes32[])\":{\"details\":\"Create a new agreement\",\"params\":{\"data\":\"Agreement data\",\"id\":\"Agreement ID\"}},\"updateAgreementStateSlot(address,uint256,bytes32[])\":{\"details\":\"Update agreement state slot\",\"params\":{\"account\":\"Account to be updated NOTE - To clear the storage out, provide zero-ed array of intended length\"}},\"upgrade(uint256)\":{\"details\":\"Upgrade ERC20 to SuperToken.\",\"params\":{\"amount\":\"Number of tokens to be upgraded (in 18 decimals) NOTE: It will use \\u00b4transferFrom\\u00b4 to get tokens. Before calling this function you should \\u00b4approve\\u00b4 this contract\"}},\"upgradeTo(address,uint256,bytes)\":{\"details\":\"Upgrade ERC20 to SuperToken and transfer immediately\",\"params\":{\"amount\":\"Number of tokens to be upgraded (in 18 decimals)\",\"data\":\"User data for the TokensRecipient callback NOTE: It will use \\u00b4transferFrom\\u00b4 to get tokens. Before calling this function you should \\u00b4approve\\u00b4 this contract\",\"to\":\"The account to received upgraded tokens\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/tokens/INativeSuperToken.sol\":\"INativeSuperToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x5f02220344881ce43204ae4a6281145a67bc52c2bb1290a791857df3d19d78f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://24427744bd3e6cb73c17010119af12a318289c0253a4d9acb8576c9fb3797b08\",\"dweb:/ipfs/QmTLDqpKRBuxGxRAmjgXt9AkXyACW3MtKzi7PYjm5iMfGC\"]},\"@openzeppelin/contracts/token/ERC777/IERC777.sol\":{\"keccak256\":\"0xe81b5fca616ec6f57bb9d1ab0750202b9e514760462274ac04495e8c249697ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e23a53ea7f3787f90ff8f6e25ea47896ed4b56e336e72ae543e3ef74eaa9e23\",\"dweb:/ipfs/QmSDNkjN5k2VRbrfWdTMJ39dzcSvFz4YMQqHZ5z61qLNVA\"]},\"project:/contracts/interfaces/superfluid/Definitions.sol\":{\"keccak256\":\"0x629a096aa6ce1da21b6d6861ebcd640257fc3c77e5d7f7de5de73b251a0be4b3\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://41046b449583e40efa0bd9e99147474cfbbc12fbba2e7184deb8c95939f04e9f\",\"dweb:/ipfs/QmT9HGuLjGbZF1yM7RtnyRo8GuVXzPk8rCjibKTKmc2LDN\"]},\"project:/contracts/interfaces/superfluid/ISuperAgreement.sol\":{\"keccak256\":\"0xcf8a33fadd5db47562156a11098623246efd1b46a2c3d28269767bcbb324fd66\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://5c0273b4a136874ca4ad1b3f66b312adfa8e8ed48b301e4e979081d4923bb55f\",\"dweb:/ipfs/QmQvK9ZQggymJAftai2aA89EfQY2hX3MSpejNkr6kNf45m\"]},\"project:/contracts/interfaces/superfluid/ISuperApp.sol\":{\"keccak256\":\"0xca93702505ec3c8244227e372687d9bdbc9d368fa07723d310ab9550501abb2a\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3514c2c72fc866064227ea28fceea9dec4ca27cdbda2cff546b59f6b899cee4d\",\"dweb:/ipfs/QmdpFCRDm8An2U6TCTUK3Zopp8wVS44mzh2YjVvtruE3dZ\"]},\"project:/contracts/interfaces/superfluid/ISuperToken.sol\":{\"keccak256\":\"0xba355f7d7d5d32ca345bcdb355759ba598a911ff07227ff80012a5e0bf660fb1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://72c2669590a012587b892f0bbb166079ffb9e4c2044511b45eb6b34489f83b30\",\"dweb:/ipfs/QmQckdZ7tbboxPpXSt8irWo98KBcZRT5xNPuGf7yuZxZw2\"]},\"project:/contracts/interfaces/superfluid/ISuperTokenFactory.sol\":{\"keccak256\":\"0x7dc514c6c9eda681ed8ad66ccfb68dc22764b6c429ab55fddbba28b6b148621b\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://bc4b3b35bb0ddd9323afa1f25468eb706e5f7eccce6ff9beec9657aeea8bec33\",\"dweb:/ipfs/QmSLKq8JYWavnjDokYoe1cUERbvWFfiBWBJ2zDCMVyycsM\"]},\"project:/contracts/interfaces/superfluid/ISuperfluid.sol\":{\"keccak256\":\"0x987a883e8acd87e07eb00ebb1c882d294c7a0af2e5a8cb234270f83f4168438f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://87631a2a511fcfd20787d0bb633d37f3a810bd50c58502c996106b97f2795272\",\"dweb:/ipfs/QmeR8yfLL41en8GjszYRc8Cw9QoEmRQ6j3hCi8JRsym3vZ\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidGovernance.sol\":{\"keccak256\":\"0x2ac401c7fb012ef43d8becad0196bcd41ac9ad33778a7a5e4809a1740a646e63\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://a04710e0e2a4d0183d2760b1ef73e970e4070eaeee3dfefe5ba4bed61dd45ada\",\"dweb:/ipfs/QmYCxDFAWmrCTzioikvbeJtHByWvyxT9nARBuaVoYmopPo\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidToken.sol\":{\"keccak256\":\"0x6c573b0c0d9ccfc73f787da2e06c725b714d9a36357cfe4fb3c5fb7b47d75665\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://af67f4b3d6ea0c88ba9d1c1cfa0be051de016e689b02ba931c871ecad8fad336\",\"dweb:/ipfs/QmPRQsAEPUcJjxXxjAmttXTbmuSdaDPi41KAqTMYhM6L5m\"]},\"project:/contracts/interfaces/tokens/ERC20WithTokenInfo.sol\":{\"keccak256\":\"0x808d3a486826e7f119671174a77896c6e23578e691625350dbb3e9f74a0d5137\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://06a7a1bc2ed6888c7080a8e1fb676b7f3972b3f22620c771a41ca3a0ee78b968\",\"dweb:/ipfs/QmW7qpRwv2vEtCtENoP4BUkK4yRBbiKUZbPbyXNbPthiLQ\"]},\"project:/contracts/interfaces/tokens/INativeSuperToken.sol\":{\"keccak256\":\"0x9ee0e65ccea0fa0a84a232425ba23a29177c2500c7f4acc972d3d025e363b468\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://52dcb313fac588668e72ea8ca3abc7750b5810b27690c91d2631b681e0f74591\",\"dweb:/ipfs/QmVRwN7s3avXxcH3Cutfm3fugG8HTB1juye2X6wMvnbxqs\"]},\"project:/contracts/interfaces/tokens/TokenInfo.sol\":{\"keccak256\":\"0x4dee21b8f64edbfe811a300d31f529b5367d1186d69b8b2b8dc3373be7a108b0\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://67edf7ddbd90cd7871dc3c92202d4a749d3be0065174fd0f5b89b18edac9d8d1\",\"dweb:/ipfs/QmNc58Ep6sYkSybGVAgmkeCjHFdBL2m1sGJGUgR99xKqeh\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity >= 0.7.0;\n\nimport { ISuperToken } from \"../superfluid/ISuperToken.sol\";\n\n/**\n * @dev Native SuperToken custom token functions\n *\n * @author Superfluid\n */\ninterface INativeSuperTokenCustom {\n    function initialize(string calldata name, string calldata symbol, uint256 initialSupply) external;\n}\n\n/**\n * @dev Native SuperToken full interface\n *\n * @author Superfluid\n */\ninterface INativeSuperToken is INativeSuperTokenCustom, ISuperToken {\n    function initialize(string calldata name, string calldata symbol, uint256 initialSupply) external override;\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/interfaces/tokens/INativeSuperToken.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/tokens/INativeSuperToken.sol",
+    "exportedSymbols": {
+      "INativeSuperToken": [
+        15861
+      ],
+      "INativeSuperTokenCustom": [
+        15845
+      ],
+      "ISuperToken": [
+        14924
+      ]
+    },
+    "id": 15862,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 15832,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:25:55"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/superfluid/ISuperToken.sol",
+        "file": "../superfluid/ISuperToken.sol",
+        "id": 15834,
+        "nodeType": "ImportDirective",
+        "scope": 15862,
+        "sourceUnit": 14925,
+        "src": "62:60:55",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 15833,
+              "name": "ISuperToken",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "71:11:55",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 15835,
+          "nodeType": "StructuredDocumentation",
+          "src": "124:81:55",
+          "text": " @dev Native SuperToken custom token functions\n @author Superfluid"
+        },
+        "fullyImplemented": false,
+        "id": 15845,
+        "linearizedBaseContracts": [
+          15845
+        ],
+        "name": "INativeSuperTokenCustom",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "b119490e",
+            "id": 15844,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 15842,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 15837,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15844,
+                  "src": "266:20:55",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15836,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "266:6:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 15839,
+                  "mutability": "mutable",
+                  "name": "symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15844,
+                  "src": "288:22:55",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15838,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "288:6:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 15841,
+                  "mutability": "mutable",
+                  "name": "initialSupply",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15844,
+                  "src": "312:21:55",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 15840,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "312:7:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "265:69:55"
+            },
+            "returnParameters": {
+              "id": 15843,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "343:0:55"
+            },
+            "scope": 15845,
+            "src": "246:98:55",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 15862,
+        "src": "206:140:55"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 15847,
+              "name": "INativeSuperTokenCustom",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 15845,
+              "src": "453:23:55",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_INativeSuperTokenCustom_$15845",
+                "typeString": "contract INativeSuperTokenCustom"
+              }
+            },
+            "id": 15848,
+            "nodeType": "InheritanceSpecifier",
+            "src": "453:23:55"
+          },
+          {
+            "baseName": {
+              "id": 15849,
+              "name": "ISuperToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 14924,
+              "src": "478:11:55",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ISuperToken_$14924",
+                "typeString": "contract ISuperToken"
+              }
+            },
+            "id": 15850,
+            "nodeType": "InheritanceSpecifier",
+            "src": "478:11:55"
+          }
+        ],
+        "contractDependencies": [
+          1936,
+          3444,
+          14924,
+          15781,
+          15845,
+          15968
+        ],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 15846,
+          "nodeType": "StructuredDocumentation",
+          "src": "348:73:55",
+          "text": " @dev Native SuperToken full interface\n @author Superfluid"
+        },
+        "fullyImplemented": false,
+        "id": 15861,
+        "linearizedBaseContracts": [
+          15861,
+          14924,
+          3444,
+          1936,
+          15968,
+          15781,
+          15845
+        ],
+        "name": "INativeSuperToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "baseFunctions": [
+              15844
+            ],
+            "functionSelector": "b119490e",
+            "id": 15860,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initialize",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 15858,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "594:8:55"
+            },
+            "parameters": {
+              "id": 15857,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 15852,
+                  "mutability": "mutable",
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15860,
+                  "src": "516:20:55",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15851,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "516:6:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 15854,
+                  "mutability": "mutable",
+                  "name": "symbol",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15860,
+                  "src": "538:22:55",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 15853,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "538:6:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 15856,
+                  "mutability": "mutable",
+                  "name": "initialSupply",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 15860,
+                  "src": "562:21:55",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 15855,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "562:7:55",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "515:69:55"
+            },
+            "returnParameters": {
+              "id": 15859,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "602:0:55"
+            },
+            "scope": 15861,
+            "src": "496:107:55",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 15862,
+        "src": "422:183:55"
+      }
+    ],
+    "src": "35:571:55"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/interfaces/tokens/INativeSuperToken.sol",
+      "exportedSymbols": {
+        "INativeSuperToken": [
+          15861
+        ],
+        "INativeSuperTokenCustom": [
+          15845
+        ],
+        "ISuperToken": [
+          14924
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 15832,
+        "name": "PragmaDirective",
+        "src": "35:25:55"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 14925,
+          "absolutePath": "project:/contracts/interfaces/superfluid/ISuperToken.sol",
+          "file": "../superfluid/ISuperToken.sol",
+          "scope": 15862,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "ISuperToken"
+                },
+                "id": 15833,
+                "name": "Identifier",
+                "src": "71:11:55"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 15834,
+        "name": "ImportDirective",
+        "src": "62:60:55"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            15845
+          ],
+          "name": "INativeSuperTokenCustom",
+          "scope": 15862
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Native SuperToken custom token functions\n @author Superfluid"
+            },
+            "id": 15835,
+            "name": "StructuredDocumentation",
+            "src": "124:81:55"
+          },
+          {
+            "attributes": {
+              "functionSelector": "b119490e",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "initialize",
+              "scope": 15845,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "scope": 15844,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15836,
+                        "name": "ElementaryTypeName",
+                        "src": "266:6:55"
+                      }
+                    ],
+                    "id": 15837,
+                    "name": "VariableDeclaration",
+                    "src": "266:20:55"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "symbol",
+                      "scope": 15844,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15838,
+                        "name": "ElementaryTypeName",
+                        "src": "288:6:55"
+                      }
+                    ],
+                    "id": 15839,
+                    "name": "VariableDeclaration",
+                    "src": "288:22:55"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "initialSupply",
+                      "scope": 15844,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 15840,
+                        "name": "ElementaryTypeName",
+                        "src": "312:7:55"
+                      }
+                    ],
+                    "id": 15841,
+                    "name": "VariableDeclaration",
+                    "src": "312:21:55"
+                  }
+                ],
+                "id": 15842,
+                "name": "ParameterList",
+                "src": "265:69:55"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 15843,
+                "name": "ParameterList",
+                "src": "343:0:55"
+              }
+            ],
+            "id": 15844,
+            "name": "FunctionDefinition",
+            "src": "246:98:55"
+          }
+        ],
+        "id": 15845,
+        "name": "ContractDefinition",
+        "src": "206:140:55"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            1936,
+            3444,
+            14924,
+            15781,
+            15845,
+            15968
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            15861,
+            14924,
+            3444,
+            1936,
+            15968,
+            15781,
+            15845
+          ],
+          "name": "INativeSuperToken",
+          "scope": 15862
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Native SuperToken full interface\n @author Superfluid"
+            },
+            "id": 15846,
+            "name": "StructuredDocumentation",
+            "src": "348:73:55"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "INativeSuperTokenCustom",
+                  "referencedDeclaration": 15845,
+                  "type": "contract INativeSuperTokenCustom"
+                },
+                "id": 15847,
+                "name": "UserDefinedTypeName",
+                "src": "453:23:55"
+              }
+            ],
+            "id": 15848,
+            "name": "InheritanceSpecifier",
+            "src": "453:23:55"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "ISuperToken",
+                  "referencedDeclaration": 14924,
+                  "type": "contract ISuperToken"
+                },
+                "id": 15849,
+                "name": "UserDefinedTypeName",
+                "src": "478:11:55"
+              }
+            ],
+            "id": 15850,
+            "name": "InheritanceSpecifier",
+            "src": "478:11:55"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                15844
+              ],
+              "functionSelector": "b119490e",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "initialize",
+              "scope": 15861,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 15858,
+                "name": "OverrideSpecifier",
+                "src": "594:8:55"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "name",
+                      "scope": 15860,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15851,
+                        "name": "ElementaryTypeName",
+                        "src": "516:6:55"
+                      }
+                    ],
+                    "id": 15852,
+                    "name": "VariableDeclaration",
+                    "src": "516:20:55"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "symbol",
+                      "scope": 15860,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "string",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string"
+                        },
+                        "id": 15853,
+                        "name": "ElementaryTypeName",
+                        "src": "538:6:55"
+                      }
+                    ],
+                    "id": 15854,
+                    "name": "VariableDeclaration",
+                    "src": "538:22:55"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "initialSupply",
+                      "scope": 15860,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint256",
+                          "type": "uint256"
+                        },
+                        "id": 15855,
+                        "name": "ElementaryTypeName",
+                        "src": "562:7:55"
+                      }
+                    ],
+                    "id": 15856,
+                    "name": "VariableDeclaration",
+                    "src": "562:21:55"
+                  }
+                ],
+                "id": 15857,
+                "name": "ParameterList",
+                "src": "515:69:55"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 15859,
+                "name": "ParameterList",
+                "src": "602:0:55"
+              }
+            ],
+            "id": 15860,
+            "name": "FunctionDefinition",
+            "src": "496:107:55"
+          }
+        ],
+        "id": 15861,
+        "name": "ContractDefinition",
+        "src": "422:183:55"
+      }
+    ],
+    "id": 15862,
+    "name": "SourceUnit",
+    "src": "35:571:55"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.378Z",
+  "devdoc": {
+    "author": "Superfluid",
+    "details": "Native SuperToken full interface",
+    "kind": "dev",
+    "methods": {
+      "allowance(address,address)": {
+        "details": "Returns the remaining number of tokens that `spender` will be allowed to spend on behalf of `owner` through {transferFrom}. This is zero by default. This value changes when {approve} or {transferFrom} are called."
+      },
+      "approve(address,uint256)": {
+        "details": "Sets `amount` as the allowance of `spender` over the caller's tokens. Returns a boolean value indicating whether the operation succeeded. IMPORTANT: Beware that changing an allowance with this method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering. One possible solution to mitigate this race condition is to first reduce the spender's allowance to 0 and set the desired value afterwards: https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729 Emits an {Approval} event."
+      },
+      "authorizeOperator(address)": {
+        "details": "Make an account an operator of the caller. See {isOperatorFor}. Emits an {AuthorizedOperator} event. Requirements - `operator` cannot be calling address."
+      },
+      "balanceOf(address)": {
+        "details": "Returns the amount of tokens owned by an account (`owner`)."
+      },
+      "burn(uint256,bytes)": {
+        "details": "Destroys `amount` tokens from the caller's account, reducing the total supply. If a send hook is registered for the caller, the corresponding function will be called with `data` and empty `operatorData`. See {IERC777Sender}. Emits a {Burned} event. Requirements - the caller must have at least `amount` tokens."
+      },
+      "createAgreement(bytes32,bytes32[])": {
+        "details": "Create a new agreement",
+        "params": {
+          "data": "Agreement data",
+          "id": "Agreement ID"
+        }
+      },
+      "decimals()": {
+        "details": "Returns the number of decimals used to get its user representation. For example, if `decimals` equals `2`, a balance of `505` tokens should be displayed to a user as `5,05` (`505 / 10 ** 2`). Tokens usually opt for a value of 18, imitating the relationship between Ether and Wei. This is the value {ERC20} uses, unless {_setupDecimals} is called. NOTE: SuperToken always uses 18 decimals. Note: This information is only used for _display_ purposes: it in no way affects any of the arithmetic of the contract, including {IERC20-balanceOf} and {IERC20-transfer}."
+      },
+      "decreaseAllowance(address,uint256)": {
+        "details": "Atomically decreases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address. - `spender` must have allowance for the caller of at least `subtractedValue`."
+      },
+      "defaultOperators()": {
+        "details": "Returns the list of default operators. These accounts are operators for all token holders, even if {authorizeOperator} was never called on them. This list is immutable, but individual holders may revoke these via {revokeOperator}, in which case {isOperatorFor} will return false."
+      },
+      "downgrade(uint256)": {
+        "details": "Downgrade SuperToken to ERC20.It will call transfer to send tokens",
+        "params": {
+          "amount": "Number of tokens to be downgraded"
+        }
+      },
+      "getAccountActiveAgreements(address)": {
+        "details": "Get a list of agreements that is active for the accountAn active agreement is one that has state for the account",
+        "params": {
+          "account": "Account to query"
+        },
+        "returns": {
+          "activeAgreements": "List of accounts that have non-zero states for the account"
+        }
+      },
+      "getAgreementData(address,bytes32,uint256)": {
+        "details": "Get data of the agreement",
+        "params": {
+          "agreementClass": "Contract address of the agreement",
+          "id": "Agreement ID"
+        },
+        "returns": {
+          "data": "Data of the agreement"
+        }
+      },
+      "getAgreementStateSlot(address,address,uint256,uint256)": {
+        "details": "Get data of the slot of the state of a agreement",
+        "params": {
+          "account": "Account to query",
+          "agreementClass": "Contract address of the agreement",
+          "dataLength": "length of the state data",
+          "slotId": "slot id of the state"
+        }
+      },
+      "getHost()": {
+        "details": "Get superfluid host contract address"
+      },
+      "getUnderlyingToken()": {
+        "details": "Return the underlying token contract",
+        "returns": {
+          "tokenAddr": "Underlying token address"
+        }
+      },
+      "granularity()": {
+        "details": "Returns the smallest part of the token that is not divisible. This means all token operations (creation, movement and destruction) must have amounts that are a multiple of this number. For super token contracts, this value is 1 always"
+      },
+      "increaseAllowance(address,uint256)": {
+        "details": "Atomically increases the allowance granted to `spender` by the caller. This is an alternative to {approve} that can be used as a mitigation for problems described in {IERC20-approve}. Emits an {Approval} event indicating the updated allowance. Requirements: - `spender` cannot be the zero address."
+      },
+      "initialize(address,uint8,string,string)": {
+        "details": "Initialize the contract"
+      },
+      "isAccountCritical(address,uint256)": {
+        "details": "Check if one account is critical",
+        "params": {
+          "account": "Account check if is critical by a future time",
+          "timestamp": "Time of balance"
+        },
+        "returns": {
+          "isCritical": "isCritical"
+        }
+      },
+      "isAccountCriticalNow(address)": {
+        "details": "Check if one account is critical now",
+        "params": {
+          "account": "Account check if is critical by a future time"
+        },
+        "returns": {
+          "isCritical": "isCritical"
+        }
+      },
+      "isAccountSolvent(address,uint256)": {
+        "details": "Check if one account is solvent",
+        "params": {
+          "account": "Account check if is solvent by a future time",
+          "timestamp": "Time of balance"
+        },
+        "returns": {
+          "isSolvent": "isSolvent"
+        }
+      },
+      "isAccountSolventNow(address)": {
+        "details": "Check if one account is solvent now",
+        "params": {
+          "account": "Account check if is solvent now"
+        },
+        "returns": {
+          "isSolvent": "isSolvent"
+        }
+      },
+      "isOperatorFor(address,address)": {
+        "details": "Returns true if an account is an operator of `tokenHolder`. Operators can send and burn tokens on behalf of their owners. All accounts are their own operator. See {operatorSend} and {operatorBurn}."
+      },
+      "makeLiquidationPayouts(bytes32,address,address,uint256,uint256)": {
+        "details": "Make liquidation payouts",
+        "params": {
+          "bailoutAmount": "Amount of account bailout needed NOTE: Liquidation rules:  - If a bailout is required (bailoutAmount > 0)     - the actual reward goes to the liquidator,     - while the reward account becomes the bailout account     - total bailout include: bailout amount + reward amount Modifiers:  - onlyAgreement",
+          "id": "Agreement ID",
+          "liquidator": "Address of the executer of liquidation",
+          "penaltyAccount": "Account of the agreement to be penalized",
+          "rewardAmount": "Amount of liquidation reward"
+        }
+      },
+      "makeLiquidationPayoutsV2(bytes32,bytes,address,bool,address,uint256,int256)": {
+        "details": "Make liquidation payouts (v2)",
+        "params": {
+          "id": "Agreement ID",
+          "liquidationTypeData": "Data regarding the version of the liquidation schema and the type",
+          "liquidatorAccount": "Address of the executor of the liquidation",
+          "rewardAmount": "The amount the reward recepient account will receive",
+          "targetAccount": "Account of the stream sender",
+          "targetAccountBalanceDelta": "The amount the sender account balance should change by - If a bailout is required (bailoutAmount > 0)   - the actual reward (single deposit) goes to the executor,   - while the reward account becomes the bailout account   - total bailout include: bailout amount + reward amount   - the targetAccount will be bailed out - If a bailout is not required   - the targetAccount will pay the rewardAmount   - the liquidator (reward account in PIC period) will receive the rewardAmount Modifiers:  - onlyAgreement",
+          "useDefaultRewardAccount": "Whether or not the default reward account receives the rewardAmount"
+        }
+      },
+      "name()": {
+        "details": "Returns the name of the token."
+      },
+      "operationApprove(address,address,uint256)": {
+        "details": "Perform ERC20 approve by host contract.",
+        "params": {
+          "account": "The account owner to be approved.",
+          "amount": "Number of tokens to be approved. Modifiers:  - onlyHost",
+          "spender": "The spender of account owner's funds."
+        }
+      },
+      "operationDowngrade(address,uint256)": {
+        "details": "Downgrade ERC20 to SuperToken by host contract.",
+        "params": {
+          "account": "The account to be changed.",
+          "amount": "Number of tokens to be downgraded (in 18 decimals) Modifiers:  - onlyHost"
+        }
+      },
+      "operationTransferFrom(address,address,address,uint256)": {
+        "details": "Perform ERC20 transfer from by host contract.",
+        "params": {
+          "account": "The account to spend sender's funds.",
+          "amount": "Number of tokens to be transferred. Modifiers:  - onlyHost",
+          "recipient": "The recipient of thefunds.",
+          "spender": "The account where the funds is sent from."
+        }
+      },
+      "operationUpgrade(address,uint256)": {
+        "details": "Upgrade ERC20 to SuperToken by host contract.",
+        "params": {
+          "account": "The account to be changed.",
+          "amount": "Number of tokens to be upgraded (in 18 decimals) Modifiers:  - onlyHost"
+        }
+      },
+      "operatorBurn(address,uint256,bytes,bytes)": {
+        "details": "Destroys `amount` tokens from `account`, reducing the total supply. The caller must be an operator of `account`. If a send hook is registered for `account`, the corresponding function will be called with `data` and `operatorData`. See {IERC777Sender}. Emits a {Burned} event. Requirements - `account` cannot be the zero address. - `account` must have at least `amount` tokens. - the caller must be an operator for `account`."
+      },
+      "operatorSend(address,address,uint256,bytes,bytes)": {
+        "details": "Moves `amount` tokens from `sender` to `recipient`. The caller must be an operator of `sender`. If send or receive hooks are registered for `sender` and `recipient`, the corresponding functions will be called with `data` and `operatorData`. See {IERC777Sender} and {IERC777Recipient}. Emits a {Sent} event. Requirements - `sender` cannot be the zero address. - `sender` must have at least `amount` tokens. - the caller must be an operator for `sender`. - `recipient` cannot be the zero address. - if `recipient` is a contract, it must implement the {IERC777Recipient} interface."
+      },
+      "realtimeBalanceOf(address,uint256)": {
+        "details": "Calculate the real balance of a user, taking in consideration all agreements of the account",
+        "params": {
+          "account": "for the query",
+          "timestamp": "Time of balance"
+        },
+        "returns": {
+          "availableBalance": "Real-time balance",
+          "deposit": "Account deposit",
+          "owedDeposit": "Account owed Deposit"
+        }
+      },
+      "realtimeBalanceOfNow(address)": {
+        "details": "realtimeBalanceOf with timestamp equals to block timestamp"
+      },
+      "revokeOperator(address)": {
+        "details": "Revoke an account's operator status for the caller. See {isOperatorFor} and {defaultOperators}. Emits a {RevokedOperator} event. Requirements - `operator` cannot be calling address."
+      },
+      "selfBurn(address,uint256,bytes)": {
+        "details": "Burn existing tokens for the account Modifiers:  - onlySelf"
+      },
+      "selfMint(address,uint256,bytes)": {
+        "details": "Mint new tokens for the account Modifiers:  - onlySelf"
+      },
+      "send(address,uint256,bytes)": {
+        "details": "Moves `amount` tokens from the caller's account to `recipient`. If send or receive hooks are registered for the caller and `recipient`, the corresponding functions will be called with `data` and empty `operatorData`. See {IERC777Sender} and {IERC777Recipient}. Emits a {Sent} event. Requirements - the caller must have at least `amount` tokens. - `recipient` cannot be the zero address. - if `recipient` is a contract, it must implement the {IERC777Recipient} interface."
+      },
+      "settleBalance(address,int256)": {
+        "details": "Settle balance from an account by the agreement.      The agreement needs to make sure that the balance delta is balanced afterwards",
+        "params": {
+          "account": "Account to query.",
+          "delta": "Amount of balance delta to be settled Modifiers:  - onlyAgreement"
+        }
+      },
+      "symbol()": {
+        "details": "Returns the symbol of the token, usually a shorter version of the name."
+      },
+      "terminateAgreement(bytes32,uint256)": {
+        "details": "Close the agreement",
+        "params": {
+          "id": "Agreement ID"
+        }
+      },
+      "totalSupply()": {
+        "details": "See {IERC20-totalSupply}."
+      },
+      "transfer(address,uint256)": {
+        "details": "Moves `amount` tokens from the caller's account to `recipient`. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+      },
+      "transferAll(address)": {
+        "details": "Transfer all available balance from `msg.sender` to `recipient`"
+      },
+      "transferFrom(address,address,uint256)": {
+        "details": "Moves `amount` tokens from `sender` to `recipient` using the allowance mechanism. `amount` is then deducted from the caller's allowance. Returns a boolean value indicating whether the operation succeeded. Emits a {Transfer} event."
+      },
+      "updateAgreementData(bytes32,bytes32[])": {
+        "details": "Create a new agreement",
+        "params": {
+          "data": "Agreement data",
+          "id": "Agreement ID"
+        }
+      },
+      "updateAgreementStateSlot(address,uint256,bytes32[])": {
+        "details": "Update agreement state slot",
+        "params": {
+          "account": "Account to be updated NOTE - To clear the storage out, provide zero-ed array of intended length"
+        }
+      },
+      "upgrade(uint256)": {
+        "details": "Upgrade ERC20 to SuperToken.",
+        "params": {
+          "amount": "Number of tokens to be upgraded (in 18 decimals) NOTE: It will use ´transferFrom´ to get tokens. Before calling this function you should ´approve´ this contract"
+        }
+      },
+      "upgradeTo(address,uint256,bytes)": {
+        "details": "Upgrade ERC20 to SuperToken and transfer immediately",
+        "params": {
+          "amount": "Number of tokens to be upgraded (in 18 decimals)",
+          "data": "User data for the TokensRecipient callback NOTE: It will use ´transferFrom´ to get tokens. Before calling this function you should ´approve´ this contract",
+          "to": "The account to received upgraded tokens"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

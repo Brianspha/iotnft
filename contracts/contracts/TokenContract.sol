@@ -4,7 +4,7 @@ pragma solidity >=0.6.2;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/upgrades/contracts/Initializable.sol";
+import "./Initializable.sol";
 
 
 
@@ -23,7 +23,7 @@ modifier onlyIONFT (){
 address public IOTNFTAddress;
 //@dev function definitions
  constructor(string memory name, string memory symbol)
-    public initializer
+     initializer
     ERC721(name, symbol)
   {
 
@@ -33,9 +33,7 @@ address public IOTNFTAddress;
     *@dev init contract variables
    
      */
-  function init()  public initializer
-{
-}
+
   function setContractIOTNFTAddress(address iotnftAddress) onlyOwner  public{
     require(iotnftAddress != address(0), "invalid iotnft address");
     IOTNFTAddress=iotnftAddress;

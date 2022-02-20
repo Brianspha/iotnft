@@ -1,6 +1,7 @@
-pragma solidity ^0.6.2;
+pragma solidity >=0.6.2;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+//"SPDX-License-Identifier: UNLICENSED"
 
 /**
  * @title Pausable

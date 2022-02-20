@@ -1,5 +1,8 @@
 pragma solidity >=0.6.2;
-import "@openzeppelin/upgrades/contracts/Initializable.sol";
+pragma experimental ABIEncoderV2;
+
+import "./IOTNFTERC20Token.sol";
+import "./Initializable.sol";
 import "./interfaces/IOTNFTInterface.sol";
 import "./TokenContract.sol";
 import "./SafeMathV2.sol";
@@ -7,6 +10,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./ReentrancyGuard.sol";
 
 import "./Pausable.sol";
+import {ISuperfluid, ISuperToken, SuperAppDefinitions} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/superfluid/ISuperfluid.sol";
+
+import {IConstantFlowAgreementV1} from "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IConstantFlowAgreementV1.sol";
+
+import "@superfluid-finance/ethereum-contracts/contracts/interfaces/agreements/IInstantDistributionAgreementV1.sol";
 
 //"SPDX-License-Identifier: UNLICENSED"
 
@@ -14,6 +22,8 @@ import "./Pausable.sol";
 *@dev contract represents the functionality required by OneCanvas 
 *@notice mostly likey not optimised for gas will fix as i develop
 *@notice implements the IOneCanvas interface 
+ @dev has bugs 
+ @notice poorly formatted code
 
  */
 contract IOTNFT is
@@ -29,22 +39,53 @@ contract IOTNFT is
 
     /*==========================================================Event definition start==========================================================*/
     /*==========================================================Variable definition start==========================================================*/
+    uint256 private fundIndexIds;
+    ISuperfluid private _host; // host
+    IConstantFlowAgreementV1 private _cfa; // the stored constant flow agreement class address
+    ISuperToken private _acceptedToken; // accepted token
+    IInstantDistributionAgreementV1 instantDistributionAgreement;
     uint256 public transactionFees = 0;
     uint256 public minMintCost = 0.01 ether;
     uint256 public contractCut = 3500;
+    uint256 minDividendsPerExperience = 100;
     address payable contractOwner;
+    uint32 private constant INDEX_ID = 0;
     TokenContract ionft;
     address[] mintersIds;
-    uint256[] tokenIndexes;
+
+    mapping(uint256 => int96) public flowRates;
     mapping(uint256 => IOTNFT) currentIONFTs;
     mapping(address => Minter) minters;
 
     /*==========================================================Function definition start==========================================================*/
-    constructor(address tokenAddress) public initializer {
-        require(tokenAddress != address(0), "Invalid token address");
+    constructor(
+        TokenContract tokenAddress,
+        ISuperfluid host,
+        IConstantFlowAgreementV1 cfa,
+        ISuperToken acceptedToken,
+        IInstantDistributionAgreementV1 ida
+    ) initializer {
+        require(address(tokenAddress) != address(0), "Invalid token address");
         require(msg.sender != address(0), "Invalid sender address");
-        ionft = TokenContract(tokenAddress);
+        require(address(host) != address(0), "Invalid host address");
+        require(address(cfa) != address(0), "Invalid CFA address");
+        require(address(ida) != address(0), "Invalid IDA address");
+
+        require(
+            address(acceptedToken) != address(0),
+            "Invalid supertoken address"
+        );
+        _host = host;
+        _cfa = cfa;
+        _acceptedToken = acceptedToken;
+        ionft = tokenAddress;
+        instantDistributionAgreement = ida;
         contractOwner = msg.sender;
+        uint256 configWord = SuperAppDefinitions.APP_LEVEL_FINAL |
+            SuperAppDefinitions.BEFORE_AGREEMENT_CREATED_NOOP |
+            SuperAppDefinitions.BEFORE_AGREEMENT_UPDATED_NOOP |
+            SuperAppDefinitions.BEFORE_AGREEMENT_TERMINATED_NOOP;
+        _host.registerApp(configWord);
     }
 
     function withdrawFees() public payable override onlyOwner nonReentrant {
@@ -58,10 +99,12 @@ contract IOTNFT is
     function mintToken(
         string memory tokenURI,
         uint256 tokenPrice,
-        bool delegate
+        bool delegate,
+        uint256 maxLeaseDays
     ) public override whenNotPaused {
         require(msg.sender != address(0), "Invalid sender");
         require(tokenPrice > 0, "Invalid token price");
+        require(maxLeaseDays > 0, "Max lease must be positive");
         if (!minters[msg.sender].active) {
             minters[msg.sender].id = msg.sender;
             minters[msg.sender].totalStaked = 0;
@@ -75,6 +118,7 @@ contract IOTNFT is
             tokenId = ionft.mintToken(msg.sender, tokenURI);
         }
         require(ionft.tokenExists(tokenId), "Token not minted");
+        currentIONFTs[tokenId].maxRentableDays = maxLeaseDays;
         currentIONFTs[tokenId].delegated = delegate;
         currentIONFTs[tokenId].tokenId = tokenId;
         currentIONFTs[tokenId].originalPrice = tokenPrice;
@@ -91,6 +135,7 @@ contract IOTNFT is
         nonReentrant
         whenNotPaused
     {
+        require(!currentIONFTs[tokenId].rentedOut, "Not possible to buy");
         require(currentIONFTs[tokenId].delegated, "Token not delegated");
         require(msg.sender != address(0), "Invalid sender");
         require(
@@ -144,6 +189,7 @@ contract IOTNFT is
         require(currentIONFTs[tokenId].delegated, "Token not delegated");
         ionft.transferFrom(address(this), msg.sender, tokenId);
         currentIONFTs[tokenId].delegated = false;
+
         emit revokedDelegatedToken(tokenId);
     }
 
@@ -159,6 +205,54 @@ contract IOTNFT is
         emit delegatedToken(tokenId);
     }
 
+    function rentNFT(
+        uint256 tokenId,
+        uint256 duration,
+        int96 flowRate
+    ) public override nonReentrant whenNotPaused {
+        require(msg.sender != address(0), "Invalid sender address");
+        require(
+            currentIONFTs[tokenId].exists &&
+                ionft.tokenExists(tokenId) &&
+                currentIONFTs[tokenId].delegated,
+            "Token not listed or exists or delegated"
+        );
+        require(!currentIONFTs[tokenId].rentedOut, "Token not available");
+        require(
+            currentIONFTs[tokenId].owner != msg.sender,
+            "Owner Cannot rent"
+        );
+        require(
+            duration > 0 && currentIONFTs[tokenId].maxRentableDays >= duration,
+            "Invalid duration"
+        );
+        currentIONFTs[tokenId].borrowedAt = block.timestamp;
+        currentIONFTs[tokenId].currentBorrower.duration = duration; //@dev in days
+        currentIONFTs[tokenId].currentBorrower.owner = msg.sender;
+        currentIONFTs[tokenId].currentBorrower.exists = true;
+        currentIONFTs[tokenId].rentedOut = true;
+        _createFlow(currentIONFTs[tokenId].owner, flowRate); //@dev create flow to user
+        emit nftRentedOut(msg.sender, duration, tokenId);
+    }
+
+    function returnNFT(uint256 tokenId) public override nonReentrant {
+        require(
+            currentIONFTs[tokenId].exists &&
+                ionft.tokenExists(tokenId) &&
+                currentIONFTs[tokenId].delegated,
+            "Token not listed or exists or delegated"
+        );
+        require(
+            currentIONFTs[tokenId].currentBorrower.owner == msg.sender,
+            "not borrower"
+        );
+        ionft.transferFrom(msg.sender, address(this), tokenId);
+        _deleteFlow(msg.sender, address(this));
+        delete currentIONFTs[tokenId].currentBorrower;
+        currentIONFTs[tokenId].rentedOut = false;
+        emit nftReturned(msg.sender, tokenId, block.timestamp);
+    }
+
     function getMinterDetails(address id)
         public
         view
@@ -172,12 +266,9 @@ contract IOTNFT is
         return mintersIds;
     }
 
-    function getTokenIndexes() public view override returns (uint256[] memory) {
-        return tokenIndexes;
-    }
-
     function getTokenDetails(uint256 tokenId)
         public
+        view
         override
         returns (
             address,
@@ -204,5 +295,60 @@ contract IOTNFT is
         uint256 roundValue = value.ceil(100);
         uint256 cut = roundValue.mul(contractCut).div(10000);
         return cut;
+    }
+
+    /*==============================Superfluid ============================*/
+
+    function _createFlow(address to, int96 flowRate) internal {
+        if (to == address(this) || to == address(0)) return;
+        _host.callAgreement(
+            _cfa,
+            abi.encodeWithSelector(
+                _cfa.createFlow.selector,
+                _acceptedToken,
+                to,
+                flowRate,
+                new bytes(0)
+            ),
+            new bytes(0)
+        );
+    }
+
+    function _deleteFlow(address from, address to) internal {
+        _host.callAgreement(
+            _cfa,
+            abi.encodeWithSelector(
+                _cfa.deleteFlow.selector,
+                _acceptedToken,
+                from,
+                to,
+                new bytes(0) // placeholder
+            ),
+            new bytes(0)
+        );
+    }
+
+    function getNFTRealTimeBalance(uint256 tokenId)
+        public
+        view
+        returns (
+            int256,
+            uint256,
+            uint256
+        )
+    {
+        require(
+            currentIONFTs[tokenId].exists &&
+                ionft.tokenExists(tokenId) &&
+                currentIONFTs[tokenId].delegated,
+            "Token not listed or exists or delegated"
+        );
+        int256 availableBalance;
+        uint256 deposit;
+        uint256 owedDeposit;
+        uint256 timestamp;
+        (availableBalance, deposit, owedDeposit, timestamp) = _acceptedToken
+            .realtimeBalanceOfNow(currentIONFTs[tokenId].owner);
+        return (availableBalance, deposit, owedDeposit);
     }
 }

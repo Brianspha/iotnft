@@ -1,4 +1,5 @@
 pragma solidity >=0.6.2;
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 //"SPDX-License-Identifier: UNLICENSED"
 
@@ -15,8 +16,18 @@ interface IOTNFTInterface {
         bool delegated;
         uint256 price;
         uint256 originalPrice;
+        uint maxRentableDays;
+        uint256 borrowedAt;
+        Borrower currentBorrower;
+        bool exists;
+        bool rentedOut;
+    }
+    struct Borrower {
+        address payable owner;
+        uint duration;
         bool exists;
     }
+
     struct Minter {
         address payable id;
         uint256 totalStaked;
@@ -44,33 +55,38 @@ interface IOTNFTInterface {
         uint256 tokenIndex,
         uint256 contractCut
     );
+    event nftRentedOut(
+        address indexed user,
+        uint256 indexed duration,
+        uint256 indexed tokenId
+    );
+    event nftReturned(
+        address indexed user,
+        uint256 indexed tokenId,
+        uint256 indexed date
+    );
     event adminFeeCollection(uint256 indexed date, uint256 indexed amount);
     event delegatedToken(uint256 indexed tokenId);
-        event revokedDelegatedToken(uint256 indexed tokenId);
-
+    event revokedDelegatedToken(uint256 indexed tokenId);
 
     /*==========================================================Function definition start==========================================================*/
     /**
  *@dev called when a user mints a token from pebble data
  @param tokenPrice- The price the token is to be sold for
- @param tokenURI - the json data associated with the current pixel
+ @param tokenURI - the json data associated with the pebble data point
  @notice function doesnt return a value just emits a value using the **pixelColored** event
   */
     function mintToken(
-        string calldata tokenURI,
+        string memory tokenURI,
         uint256 tokenPrice,
-        bool delegate
+        bool delegate,
+        uint256 maxLeaseDays
     ) external;
 
     /**
      *@dev returns all MINTER eth addresses
      */
     function getMinterKeys() external view returns (address[] memory);
-
-    /**
-     *@dev returns all token indexes
-     */
-    function getTokenIndexes() external view returns (uint256[] memory);
 
     /**
      *dev gets token info based on the given tokenId
@@ -116,4 +132,16 @@ interface IOTNFTInterface {
 
   */
     function revokeDelegatedNFT(uint256 tokenId) external;
+
+    /**
+    * @dev allows users to share an experience of a pebble owner by owning a part of the NFT minted by the user
+    
+     */
+    function rentNFT(
+        uint256 tokenId,
+        uint duration,
+        int96 flowRate
+    ) external;
+
+    function returnNFT(uint256 tokenId) external;
 }

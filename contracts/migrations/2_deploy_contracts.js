@@ -1,21 +1,8 @@
-var IONFT = artifacts.require("IOTNFT");
-var IONFTToken = artifacts.require("TokenContract");
+const Web3 = require("web3");
+const deploy = require("@superfluid-finance/ethereum-contracts/scripts/deploy-erc1820");
 
-module.exports = function(deployer, network, accounts) {
-  deployer.deploy(IONFTToken, "IOTNFT", "IOTNFT").then((IONFTTokenDeployed) => {
-    console.log("deployed token contract: ", IONFTTokenDeployed.address);
-    return deployer
-      .deploy(IONFT, IONFTTokenDeployed.address)
-      .then(async function(IONFTDeployed) {
-        IONFT = await IONFT.deployed();
-        IONFTToken = await IONFTToken.deployed();
-        var receipt = await IONFTToken.setContractIOTNFTAddress(
-          IONFTDeployed.address
-        );
-        console.log(
-          "Succesfully set ionft address inside nft contract: ",
-          receipt
-        );
-      });
-  });
+module.exports = async function(deployer) {
+    const errorHandler = err => { if (err) throw err; };
+    global.web3 = new Web3(deployer.provider);
+    await deploy(errorHandler);
 };

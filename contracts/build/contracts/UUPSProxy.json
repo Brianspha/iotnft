@@ -1,0 +1,1593 @@
+{
+  "contractName": "UUPSProxy",
+  "abi": [
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "initialAddress",
+          "type": "address"
+        }
+      ],
+      "name": "initializeProxy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialAddress\",\"type\":\"address\"}],\"name\":\"initializeProxy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"UUPS (Universal Upgradeable Proxy Standard) Proxy NOTE: - Compliant with [Universal Upgradeable Proxy Standard](https://eips.ethereum.org/EIPS/eip-1822) - Compiiant with [Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) - Implements delegation of calls to other contracts, with proper forwarding of   return values and bubbling of failures. - It defines a fallback function that delegates all calls to the implementation.\",\"kind\":\"dev\",\"methods\":{\"initializeProxy(address)\":{\"details\":\"Proxy initialization function.      This should only be called once and it is permission-less.\",\"params\":{\"initialAddress\":\"Initial logic contract code address to be used.\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/upgradability/UUPSProxy.sol\":\"UUPSProxy\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/proxy/Proxy.sol\":{\"keccak256\":\"0x0414d54056b3d8f9102ae1142264e9361408397878148203ab7a25cbf6248f08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ebdc01639f69030c754dc3462d5f437c4644164465066187e320f524579fbede\",\"dweb:/ipfs/QmZZhoPYagwu4MoJMAg26Y6Nfj4d9HJzUnvrMNsbo9ZorM\"]},\"project:/contracts/upgradability/UUPSProxy.sol\":{\"keccak256\":\"0x56ae5dba7b1f2aa57717b647859a8586244138aee2b1d6b67f266e097c6f6acc\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://f1887056ea1b08b13d6a2170fde9aa480cb3f1a59944641746a3a4f19306895a\",\"dweb:/ipfs/QmWbN56ky7MGnkCn2yYdqmUDCLrKfs7Uf25zXKNMSvRvsL\"]},\"project:/contracts/upgradability/UUPSUtils.sol\":{\"keccak256\":\"0x2b47a0c71503981f4cf29656831aee3b038513dcc8554d8a432830af58d29bd1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://b3bfc98fe566bee28d4431680bced199d498af6045b1380f88499828161429f2\",\"dweb:/ipfs/QmcyxSdt8S6mXZLwGkcmRGusykhoYe2RMAo8QiSFpd97cb\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610204806100206000396000f3fe6080604052600436106100225760003560e01c80634a0687ef1461003957610031565b366100315761002f61006c565b005b61002f61006c565b34801561004557600080fd5b5061002f6004803603602081101561005c57600080fd5b50356001600160a01b0316610086565b610074610084565b61008461007f610152565b610161565b565b6001600160a01b0381166100e1576040805162461bcd60e51b815260206004820152601760248201527f5555505350726f78793a207a65726f2061646472657373000000000000000000604482015290519081900360640190fd5b60006100eb610185565b6001600160a01b031614610146576040805162461bcd60e51b815260206004820152601e60248201527f5555505350726f78793a20616c726561647920696e697469616c697a65640000604482015290519081900360640190fd5b61014f816101aa565b50565b600061015c610185565b905090565b3660008037600080366000845af43d6000803e808015610180573d6000f35b3d6000fd5b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5490565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5556fea2646970667358221220284abb19f20211854e5d4a827da559887f1d063cdbfc1f0d68d77e2a0707eba864736f6c63430007060033",
+  "deployedBytecode": "0x6080604052600436106100225760003560e01c80634a0687ef1461003957610031565b366100315761002f61006c565b005b61002f61006c565b34801561004557600080fd5b5061002f6004803603602081101561005c57600080fd5b50356001600160a01b0316610086565b610074610084565b61008461007f610152565b610161565b565b6001600160a01b0381166100e1576040805162461bcd60e51b815260206004820152601760248201527f5555505350726f78793a207a65726f2061646472657373000000000000000000604482015290519081900360640190fd5b60006100eb610185565b6001600160a01b031614610146576040805162461bcd60e51b815260206004820152601e60248201527f5555505350726f78793a20616c726561647920696e697469616c697a65640000604482015290519081900360640190fd5b61014f816101aa565b50565b600061015c610185565b905090565b3660008037600080366000845af43d6000803e808015610180573d6000f35b3d6000fd5b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5490565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5556fea2646970667358221220284abb19f20211854e5d4a827da559887f1d063cdbfc1f0d68d77e2a0707eba864736f6c63430007060033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "652:716:95:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "652:716:95:-:0;;;;;;;;;;;;;;;;;;;;;;;2843:11:12;:9;:11::i;:::-;652:716:95;;2619:11:12;:9;:11::i;894:285:95:-;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;894:285:95;-1:-1:-1;;;;;894:285:95;;:::i;2265:110:12:-;2313:17;:15;:17::i;:::-;2340:28;2350:17;:15;:17::i;:::-;2340:9;:28::i;:::-;2265:110::o;894:285:95:-;-1:-1:-1;;;;;970:28:95;;962:64;;;;;-1:-1:-1;;;962:64:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;1082:1;1044:26;:24;:26::i;:::-;-1:-1:-1;;;;;1044:40:95;;1036:83;;;;;-1:-1:-1;;;1036:83:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;1129:43;1157:14;1129:27;:43::i;:::-;894:285;:::o;1235:130::-;1302:7;1332:26;:24;:26::i;:::-;1325:33;;1235:130;:::o;891:895:12:-;1285:14;1282:1;1279;1266:34;1499:1;1496;1480:14;1477:1;1461:14;1454:5;1441:60;1575:16;1572:1;1569;1554:38;1613:6;1680:38;;;;1751:16;1748:1;1741:27;1680:38;1699:16;1696:1;1689:27;617:170:96;750:20;744:27;;699:82::o;838:228::-;987:20;963:87;914:146::o",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity 0.7.6;\n\nimport { UUPSUtils } from \"./UUPSUtils.sol\";\nimport { Proxy } from \"@openzeppelin/contracts/proxy/Proxy.sol\";\n\n\n/**\n * @dev UUPS (Universal Upgradeable Proxy Standard) Proxy\n *\n * NOTE:\n * - Compliant with [Universal Upgradeable Proxy Standard](https://eips.ethereum.org/EIPS/eip-1822)\n * - Compiiant with [Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967)\n * - Implements delegation of calls to other contracts, with proper forwarding of\n *   return values and bubbling of failures.\n * - It defines a fallback function that delegates all calls to the implementation.\n */\ncontract UUPSProxy is Proxy {\n\n    /**\n     * @dev Proxy initialization function.\n     *      This should only be called once and it is permission-less.\n     * @param initialAddress Initial logic contract code address to be used.\n     */\n    function initializeProxy(address initialAddress) external {\n        require(initialAddress != address(0), \"UUPSProxy: zero address\");\n        require(UUPSUtils.implementation() == address(0), \"UUPSProxy: already initialized\");\n        UUPSUtils.setImplementation(initialAddress);\n    }\n\n    /// @dev Proxy._implementation implementation\n    function _implementation() internal virtual override view returns (address)\n    {\n        return UUPSUtils.implementation();\n    }\n\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/upgradability/UUPSProxy.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/upgradability/UUPSProxy.sol",
+    "exportedSymbols": {
+      "Proxy": [
+        1355
+      ],
+      "UUPSProxy": [
+        32904
+      ],
+      "UUPSUtils": [
+        32928
+      ]
+    },
+    "id": 32905,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 32849,
+        "literals": [
+          "solidity",
+          "0.7",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:22:95"
+      },
+      {
+        "absolutePath": "project:/contracts/upgradability/UUPSUtils.sol",
+        "file": "./UUPSUtils.sol",
+        "id": 32851,
+        "nodeType": "ImportDirective",
+        "scope": 32905,
+        "sourceUnit": 32929,
+        "src": "59:44:95",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 32850,
+              "name": "UUPSUtils",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "68:9:95",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/proxy/Proxy.sol",
+        "file": "@openzeppelin/contracts/proxy/Proxy.sol",
+        "id": 32853,
+        "nodeType": "ImportDirective",
+        "scope": 32905,
+        "sourceUnit": 1356,
+        "src": "104:64:95",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 32852,
+              "name": "Proxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "113:5:95",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 32855,
+              "name": "Proxy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1355,
+              "src": "674:5:95",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Proxy_$1355",
+                "typeString": "contract Proxy"
+              }
+            },
+            "id": 32856,
+            "nodeType": "InheritanceSpecifier",
+            "src": "674:5:95"
+          }
+        ],
+        "contractDependencies": [
+          1355
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 32854,
+          "nodeType": "StructuredDocumentation",
+          "src": "171:480:95",
+          "text": " @dev UUPS (Universal Upgradeable Proxy Standard) Proxy\n NOTE:\n - Compliant with [Universal Upgradeable Proxy Standard](https://eips.ethereum.org/EIPS/eip-1822)\n - Compiiant with [Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967)\n - Implements delegation of calls to other contracts, with proper forwarding of\n   return values and bubbling of failures.\n - It defines a fallback function that delegates all calls to the implementation."
+        },
+        "fullyImplemented": true,
+        "id": 32904,
+        "linearizedBaseContracts": [
+          32904,
+          1355
+        ],
+        "name": "UUPSProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 32890,
+              "nodeType": "Block",
+              "src": "952:227:95",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 32868,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "id": 32863,
+                          "name": "initialAddress",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 32859,
+                          "src": "970:14:95",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "!=",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 32866,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "996:1:95",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 32865,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "988:7:95",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 32864,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "988:7:95",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 32867,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "988:10:95",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "970:28:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5555505350726f78793a207a65726f2061646472657373",
+                        "id": 32869,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1000:25:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_ddef727975921b7952b7e20fd4290233907fcf50863b08b5223d979ede27321e",
+                          "typeString": "literal_string \"UUPSProxy: zero address\""
+                        },
+                        "value": "UUPSProxy: zero address"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_ddef727975921b7952b7e20fd4290233907fcf50863b08b5223d979ede27321e",
+                          "typeString": "literal_string \"UUPSProxy: zero address\""
+                        }
+                      ],
+                      "id": 32862,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "962:7:95",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 32870,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "962:64:95",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 32871,
+                  "nodeType": "ExpressionStatement",
+                  "src": "962:64:95"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 32880,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "expression": {
+                              "id": 32873,
+                              "name": "UUPSUtils",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 32928,
+                              "src": "1044:9:95",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_UUPSUtils_$32928_$",
+                                "typeString": "type(library UUPSUtils)"
+                              }
+                            },
+                            "id": 32874,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "implementation",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 32919,
+                            "src": "1044:24:95",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                              "typeString": "function () view returns (address)"
+                            }
+                          },
+                          "id": 32875,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1044:26:95",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "hexValue": "30",
+                              "id": 32878,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "1082:1:95",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 32877,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "1074:7:95",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": {
+                              "id": 32876,
+                              "name": "address",
+                              "nodeType": "ElementaryTypeName",
+                              "src": "1074:7:95",
+                              "typeDescriptions": {}
+                            }
+                          },
+                          "id": 32879,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1074:10:95",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "1044:40:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5555505350726f78793a20616c726561647920696e697469616c697a6564",
+                        "id": 32881,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1086:32:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_b83493ae559d613bdaa11f876d4e817b661ed75187e4a486b85abafea5a50e6c",
+                          "typeString": "literal_string \"UUPSProxy: already initialized\""
+                        },
+                        "value": "UUPSProxy: already initialized"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_b83493ae559d613bdaa11f876d4e817b661ed75187e4a486b85abafea5a50e6c",
+                          "typeString": "literal_string \"UUPSProxy: already initialized\""
+                        }
+                      ],
+                      "id": 32872,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "1036:7:95",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 32882,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1036:83:95",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 32883,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1036:83:95"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 32887,
+                        "name": "initialAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32859,
+                        "src": "1157:14:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "expression": {
+                        "id": 32884,
+                        "name": "UUPSUtils",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32928,
+                        "src": "1129:9:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_UUPSUtils_$32928_$",
+                          "typeString": "type(library UUPSUtils)"
+                        }
+                      },
+                      "id": 32886,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setImplementation",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 32927,
+                      "src": "1129:27:95",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 32888,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1129:43:95",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 32889,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1129:43:95"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 32857,
+              "nodeType": "StructuredDocumentation",
+              "src": "687:202:95",
+              "text": " @dev Proxy initialization function.\n      This should only be called once and it is permission-less.\n @param initialAddress Initial logic contract code address to be used."
+            },
+            "functionSelector": "4a0687ef",
+            "id": 32891,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "initializeProxy",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 32860,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32859,
+                  "mutability": "mutable",
+                  "name": "initialAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32891,
+                  "src": "919:22:95",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 32858,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "919:7:95",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "918:24:95"
+            },
+            "returnParameters": {
+              "id": 32861,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "952:0:95"
+            },
+            "scope": 32904,
+            "src": "894:285:95",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              1320
+            ],
+            "body": {
+              "id": 32902,
+              "nodeType": "Block",
+              "src": "1315:50:95",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "id": 32898,
+                        "name": "UUPSUtils",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32928,
+                        "src": "1332:9:95",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_UUPSUtils_$32928_$",
+                          "typeString": "type(library UUPSUtils)"
+                        }
+                      },
+                      "id": 32899,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "implementation",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 32919,
+                      "src": "1332:24:95",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                        "typeString": "function () view returns (address)"
+                      }
+                    },
+                    "id": 32900,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1332:26:95",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "functionReturnParameters": 32897,
+                  "id": 32901,
+                  "nodeType": "Return",
+                  "src": "1325:33:95"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 32892,
+              "nodeType": "StructuredDocumentation",
+              "src": "1185:45:95",
+              "text": "@dev Proxy._implementation implementation"
+            },
+            "id": 32903,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_implementation",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 32894,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1279:8:95"
+            },
+            "parameters": {
+              "id": 32893,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1259:2:95"
+            },
+            "returnParameters": {
+              "id": 32897,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32896,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32903,
+                  "src": "1302:7:95",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 32895,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1302:7:95",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1301:9:95"
+            },
+            "scope": 32904,
+            "src": "1235:130:95",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 32905,
+        "src": "652:716:95"
+      }
+    ],
+    "src": "35:1334:95"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/upgradability/UUPSProxy.sol",
+      "exportedSymbols": {
+        "Proxy": [
+          1355
+        ],
+        "UUPSProxy": [
+          32904
+        ],
+        "UUPSUtils": [
+          32928
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.7",
+            ".6"
+          ]
+        },
+        "id": 32849,
+        "name": "PragmaDirective",
+        "src": "35:22:95"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 32929,
+          "absolutePath": "project:/contracts/upgradability/UUPSUtils.sol",
+          "file": "./UUPSUtils.sol",
+          "scope": 32905,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "UUPSUtils"
+                },
+                "id": 32850,
+                "name": "Identifier",
+                "src": "68:9:95"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 32851,
+        "name": "ImportDirective",
+        "src": "59:44:95"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1356,
+          "absolutePath": "@openzeppelin/contracts/proxy/Proxy.sol",
+          "file": "@openzeppelin/contracts/proxy/Proxy.sol",
+          "scope": 32905,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "Proxy"
+                },
+                "id": 32852,
+                "name": "Identifier",
+                "src": "113:5:95"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 32853,
+        "name": "ImportDirective",
+        "src": "104:64:95"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            1355
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            32904,
+            1355
+          ],
+          "name": "UUPSProxy",
+          "scope": 32905
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev UUPS (Universal Upgradeable Proxy Standard) Proxy\n NOTE:\n - Compliant with [Universal Upgradeable Proxy Standard](https://eips.ethereum.org/EIPS/eip-1822)\n - Compiiant with [Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967)\n - Implements delegation of calls to other contracts, with proper forwarding of\n   return values and bubbling of failures.\n - It defines a fallback function that delegates all calls to the implementation."
+            },
+            "id": 32854,
+            "name": "StructuredDocumentation",
+            "src": "171:480:95"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "Proxy",
+                  "referencedDeclaration": 1355,
+                  "type": "contract Proxy"
+                },
+                "id": 32855,
+                "name": "UserDefinedTypeName",
+                "src": "674:5:95"
+              }
+            ],
+            "id": 32856,
+            "name": "InheritanceSpecifier",
+            "src": "674:5:95"
+          },
+          {
+            "attributes": {
+              "functionSelector": "4a0687ef",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "initializeProxy",
+              "scope": 32904,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Proxy initialization function.\n      This should only be called once and it is permission-less.\n @param initialAddress Initial logic contract code address to be used."
+                },
+                "id": 32857,
+                "name": "StructuredDocumentation",
+                "src": "687:202:95"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "initialAddress",
+                      "scope": 32891,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 32858,
+                        "name": "ElementaryTypeName",
+                        "src": "919:7:95"
+                      }
+                    ],
+                    "id": 32859,
+                    "name": "VariableDeclaration",
+                    "src": "919:22:95"
+                  }
+                ],
+                "id": 32860,
+                "name": "ParameterList",
+                "src": "918:24:95"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 32861,
+                "name": "ParameterList",
+                "src": "952:0:95"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_ddef727975921b7952b7e20fd4290233907fcf50863b08b5223d979ede27321e",
+                                  "typeString": "literal_string \"UUPSProxy: zero address\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                4294967278,
+                                4294967278
+                              ],
+                              "referencedDeclaration": 4294967278,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 32862,
+                            "name": "Identifier",
+                            "src": "962:7:95"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "!=",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 32859,
+                                  "type": "address",
+                                  "value": "initialAddress"
+                                },
+                                "id": 32863,
+                                "name": "Identifier",
+                                "src": "970:14:95"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address payable",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_rational_0_by_1",
+                                          "typeString": "int_const 0"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(address)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "name": "address"
+                                        },
+                                        "id": 32864,
+                                        "name": "ElementaryTypeName",
+                                        "src": "988:7:95"
+                                      }
+                                    ],
+                                    "id": 32865,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "988:7:95"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "hexvalue": "30",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "token": "number",
+                                      "type": "int_const 0",
+                                      "value": "0"
+                                    },
+                                    "id": 32866,
+                                    "name": "Literal",
+                                    "src": "996:1:95"
+                                  }
+                                ],
+                                "id": 32867,
+                                "name": "FunctionCall",
+                                "src": "988:10:95"
+                              }
+                            ],
+                            "id": 32868,
+                            "name": "BinaryOperation",
+                            "src": "970:28:95"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "5555505350726f78793a207a65726f2061646472657373",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"UUPSProxy: zero address\"",
+                              "value": "UUPSProxy: zero address"
+                            },
+                            "id": 32869,
+                            "name": "Literal",
+                            "src": "1000:25:95"
+                          }
+                        ],
+                        "id": 32870,
+                        "name": "FunctionCall",
+                        "src": "962:64:95"
+                      }
+                    ],
+                    "id": 32871,
+                    "name": "ExpressionStatement",
+                    "src": "962:64:95"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_b83493ae559d613bdaa11f876d4e817b661ed75187e4a486b85abafea5a50e6c",
+                                  "typeString": "literal_string \"UUPSProxy: already initialized\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                4294967278,
+                                4294967278
+                              ],
+                              "referencedDeclaration": 4294967278,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 32872,
+                            "name": "Identifier",
+                            "src": "1036:7:95"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "implementation",
+                                      "referencedDeclaration": 32919,
+                                      "type": "function () view returns (address)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 32928,
+                                          "type": "type(library UUPSUtils)",
+                                          "value": "UUPSUtils"
+                                        },
+                                        "id": 32873,
+                                        "name": "Identifier",
+                                        "src": "1044:9:95"
+                                      }
+                                    ],
+                                    "id": 32874,
+                                    "name": "MemberAccess",
+                                    "src": "1044:24:95"
+                                  }
+                                ],
+                                "id": 32875,
+                                "name": "FunctionCall",
+                                "src": "1044:26:95"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address payable",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_rational_0_by_1",
+                                          "typeString": "int_const 0"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(address)"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "name": "address"
+                                        },
+                                        "id": 32876,
+                                        "name": "ElementaryTypeName",
+                                        "src": "1074:7:95"
+                                      }
+                                    ],
+                                    "id": 32877,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1074:7:95"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "hexvalue": "30",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "token": "number",
+                                      "type": "int_const 0",
+                                      "value": "0"
+                                    },
+                                    "id": 32878,
+                                    "name": "Literal",
+                                    "src": "1082:1:95"
+                                  }
+                                ],
+                                "id": 32879,
+                                "name": "FunctionCall",
+                                "src": "1074:10:95"
+                              }
+                            ],
+                            "id": 32880,
+                            "name": "BinaryOperation",
+                            "src": "1044:40:95"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "5555505350726f78793a20616c726561647920696e697469616c697a6564",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"UUPSProxy: already initialized\"",
+                              "value": "UUPSProxy: already initialized"
+                            },
+                            "id": 32881,
+                            "name": "Literal",
+                            "src": "1086:32:95"
+                          }
+                        ],
+                        "id": 32882,
+                        "name": "FunctionCall",
+                        "src": "1036:83:95"
+                      }
+                    ],
+                    "id": 32883,
+                    "name": "ExpressionStatement",
+                    "src": "1036:83:95"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "setImplementation",
+                              "referencedDeclaration": 32927,
+                              "type": "function (address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 32928,
+                                  "type": "type(library UUPSUtils)",
+                                  "value": "UUPSUtils"
+                                },
+                                "id": 32884,
+                                "name": "Identifier",
+                                "src": "1129:9:95"
+                              }
+                            ],
+                            "id": 32886,
+                            "name": "MemberAccess",
+                            "src": "1129:27:95"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 32859,
+                              "type": "address",
+                              "value": "initialAddress"
+                            },
+                            "id": 32887,
+                            "name": "Identifier",
+                            "src": "1157:14:95"
+                          }
+                        ],
+                        "id": 32888,
+                        "name": "FunctionCall",
+                        "src": "1129:43:95"
+                      }
+                    ],
+                    "id": 32889,
+                    "name": "ExpressionStatement",
+                    "src": "1129:43:95"
+                  }
+                ],
+                "id": 32890,
+                "name": "Block",
+                "src": "952:227:95"
+              }
+            ],
+            "id": 32891,
+            "name": "FunctionDefinition",
+            "src": "894:285:95"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                1320
+              ],
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_implementation",
+              "scope": 32904,
+              "stateMutability": "view",
+              "virtual": true,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "@dev Proxy._implementation implementation"
+                },
+                "id": 32892,
+                "name": "StructuredDocumentation",
+                "src": "1185:45:95"
+              },
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 32894,
+                "name": "OverrideSpecifier",
+                "src": "1279:8:95"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 32893,
+                "name": "ParameterList",
+                "src": "1259:2:95"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 32903,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 32895,
+                        "name": "ElementaryTypeName",
+                        "src": "1302:7:95"
+                      }
+                    ],
+                    "id": 32896,
+                    "name": "VariableDeclaration",
+                    "src": "1302:7:95"
+                  }
+                ],
+                "id": 32897,
+                "name": "ParameterList",
+                "src": "1301:9:95"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 32897
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "arguments": [
+                            null
+                          ],
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "address",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                null
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "implementation",
+                              "referencedDeclaration": 32919,
+                              "type": "function () view returns (address)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 32928,
+                                  "type": "type(library UUPSUtils)",
+                                  "value": "UUPSUtils"
+                                },
+                                "id": 32898,
+                                "name": "Identifier",
+                                "src": "1332:9:95"
+                              }
+                            ],
+                            "id": 32899,
+                            "name": "MemberAccess",
+                            "src": "1332:24:95"
+                          }
+                        ],
+                        "id": 32900,
+                        "name": "FunctionCall",
+                        "src": "1332:26:95"
+                      }
+                    ],
+                    "id": 32901,
+                    "name": "Return",
+                    "src": "1325:33:95"
+                  }
+                ],
+                "id": 32902,
+                "name": "Block",
+                "src": "1315:50:95"
+              }
+            ],
+            "id": 32903,
+            "name": "FunctionDefinition",
+            "src": "1235:130:95"
+          }
+        ],
+        "id": 32904,
+        "name": "ContractDefinition",
+        "src": "652:716:95"
+      }
+    ],
+    "id": 32905,
+    "name": "SourceUnit",
+    "src": "35:1334:95"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.907Z",
+  "devdoc": {
+    "details": "UUPS (Universal Upgradeable Proxy Standard) Proxy NOTE: - Compliant with [Universal Upgradeable Proxy Standard](https://eips.ethereum.org/EIPS/eip-1822) - Compiiant with [Standard Proxy Storage Slots](https://eips.ethereum.org/EIPS/eip-1967) - Implements delegation of calls to other contracts, with proper forwarding of   return values and bubbling of failures. - It defines a fallback function that delegates all calls to the implementation.",
+    "kind": "dev",
+    "methods": {
+      "initializeProxy(address)": {
+        "details": "Proxy initialization function.      This should only be called once and it is permission-less.",
+        "params": {
+          "initialAddress": "Initial logic contract code address to be used."
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

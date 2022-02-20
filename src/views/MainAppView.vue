@@ -214,7 +214,7 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("loadData");
+    this.$store.dispatch("loadSkyData");
   },
   methods: {
     connectWallet: async function() {

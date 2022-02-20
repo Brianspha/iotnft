@@ -35,7 +35,7 @@ module.exports = {
         gas: "6000000",
         gasPrice: "250",
       },
-      TokenContract: {
+      IONFTERC20Token: {
         args: ["IOTNFT", "IOTNFT"],
         gas: "6000000",
         gasPrice: "250",

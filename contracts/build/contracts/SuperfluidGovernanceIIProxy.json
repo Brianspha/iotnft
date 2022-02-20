@@ -1,0 +1,2011 @@
+{
+  "contractName": "SuperfluidGovernanceIIProxy",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "initialAddress",
+          "type": "address"
+        }
+      ],
+      "name": "initializeProxy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"stateMutability\":\"payable\",\"type\":\"fallback\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"initialAddress\",\"type\":\"address\"}],\"name\":\"initializeProxy\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"details\":\"A proxy for governance which is both ownable and upgradable IMPORTANT! Make sure the inheritance order remains in sync with the logic contract (Ownable first)!\",\"kind\":\"dev\",\"methods\":{\"initializeProxy(address)\":{\"details\":\"Proxy initialization function.      This should only be called once and it is permission-less.\",\"params\":{\"initialAddress\":\"Initial logic contract code address to be used.\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/gov/SuperfluidGovernanceII.sol\":\"SuperfluidGovernanceIIProxy\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"keccak256\":\"0x15e2d5bd4c28a88548074c54d220e8086f638a71ed07e6b3ba5a70066fcf458d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://90faf5851c02f9bd42c5bfb54d4f0421a2612f50ab80b2c4fa24fa3792071cc2\",\"dweb:/ipfs/QmRGM4F2PcGVF85aTfaA9YBhCHHDqrMhRjyp6fGeBTtirb\"]},\"@openzeppelin/contracts/proxy/Initializable.sol\":{\"keccak256\":\"0x9abeffe138f098b16557187383ba0f9e8503602fa95cd668132986ee115237ed\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fb863d688f8bf04b846369451afba15e8129b2ee16bd1631c12138c262d1bf68\",\"dweb:/ipfs/QmRE3EmJ1T4Hg5HjGHVupP2a3Vrnd8jRY8GtB6J52QNX9z\"]},\"@openzeppelin/contracts/proxy/Proxy.sol\":{\"keccak256\":\"0x0414d54056b3d8f9102ae1142264e9361408397878148203ab7a25cbf6248f08\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ebdc01639f69030c754dc3462d5f437c4644164465066187e320f524579fbede\",\"dweb:/ipfs/QmZZhoPYagwu4MoJMAg26Y6Nfj4d9HJzUnvrMNsbo9ZorM\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x5f02220344881ce43204ae4a6281145a67bc52c2bb1290a791857df3d19d78f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://24427744bd3e6cb73c17010119af12a318289c0253a4d9acb8576c9fb3797b08\",\"dweb:/ipfs/QmTLDqpKRBuxGxRAmjgXt9AkXyACW3MtKzi7PYjm5iMfGC\"]},\"@openzeppelin/contracts/token/ERC777/IERC777.sol\":{\"keccak256\":\"0xe81b5fca616ec6f57bb9d1ab0750202b9e514760462274ac04495e8c249697ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e23a53ea7f3787f90ff8f6e25ea47896ed4b56e336e72ae543e3ef74eaa9e23\",\"dweb:/ipfs/QmSDNkjN5k2VRbrfWdTMJ39dzcSvFz4YMQqHZ5z61qLNVA\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x28911e614500ae7c607a432a709d35da25f3bc5ddc8bd12b278b66358070c0ea\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://256c8c8af5eb072bc473226ab2b2187149b8fc04f5f4a4820db22527f5ce8e3c\",\"dweb:/ipfs/QmRvi5BhnL7Rxf85KrJhwM6RRhukm4tzoctRdgQEheNyiN\"]},\"@openzeppelin/contracts/utils/Context.sol\":{\"keccak256\":\"0x8d3cb350f04ff49cfb10aef08d87f19dcbaecc8027b0bed12f3275cd12f38cf0\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ded47ec7c96750f9bd04bbbc84f659992d4ba901cb7b532a52cd468272cf378f\",\"dweb:/ipfs/QmfBrGtQP7rZEqEg6Wz6jh2N2Kukpj1z5v3CGWmAqrzm96\"]},\"project:/contracts/gov/SuperfluidGovernanceBase.sol\":{\"keccak256\":\"0xf1c00784a08790103ab376900cdf38cba2e04d3d58d31f52eeb55f106bef3b0f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3f4ab5ed7d354dd96e5c98df404f14480be7aaa1de3a9ae13af316d8cc49ab5e\",\"dweb:/ipfs/QmduSgHoPCtacu3xD5C4tUx7W6GUNAtUWo99wzZrVtTpyR\"]},\"project:/contracts/gov/SuperfluidGovernanceII.sol\":{\"keccak256\":\"0xd43c67e448cf8498d9aff43e2dd588822a2036a25d42e643dba52ac02fa7a7ad\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://72e9b9ce9d5e5d6d937639c61c2516f49557b02b872ac64bf4f18f2c20def21d\",\"dweb:/ipfs/QmNyhSe65TARims88jor2HWe3s69SY3yThXQzDaBiYUYUF\"]},\"project:/contracts/interfaces/superfluid/Definitions.sol\":{\"keccak256\":\"0x629a096aa6ce1da21b6d6861ebcd640257fc3c77e5d7f7de5de73b251a0be4b3\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://41046b449583e40efa0bd9e99147474cfbbc12fbba2e7184deb8c95939f04e9f\",\"dweb:/ipfs/QmT9HGuLjGbZF1yM7RtnyRo8GuVXzPk8rCjibKTKmc2LDN\"]},\"project:/contracts/interfaces/superfluid/ISuperAgreement.sol\":{\"keccak256\":\"0xcf8a33fadd5db47562156a11098623246efd1b46a2c3d28269767bcbb324fd66\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://5c0273b4a136874ca4ad1b3f66b312adfa8e8ed48b301e4e979081d4923bb55f\",\"dweb:/ipfs/QmQvK9ZQggymJAftai2aA89EfQY2hX3MSpejNkr6kNf45m\"]},\"project:/contracts/interfaces/superfluid/ISuperApp.sol\":{\"keccak256\":\"0xca93702505ec3c8244227e372687d9bdbc9d368fa07723d310ab9550501abb2a\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3514c2c72fc866064227ea28fceea9dec4ca27cdbda2cff546b59f6b899cee4d\",\"dweb:/ipfs/QmdpFCRDm8An2U6TCTUK3Zopp8wVS44mzh2YjVvtruE3dZ\"]},\"project:/contracts/interfaces/superfluid/ISuperToken.sol\":{\"keccak256\":\"0xba355f7d7d5d32ca345bcdb355759ba598a911ff07227ff80012a5e0bf660fb1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://72c2669590a012587b892f0bbb166079ffb9e4c2044511b45eb6b34489f83b30\",\"dweb:/ipfs/QmQckdZ7tbboxPpXSt8irWo98KBcZRT5xNPuGf7yuZxZw2\"]},\"project:/contracts/interfaces/superfluid/ISuperTokenFactory.sol\":{\"keccak256\":\"0x7dc514c6c9eda681ed8ad66ccfb68dc22764b6c429ab55fddbba28b6b148621b\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://bc4b3b35bb0ddd9323afa1f25468eb706e5f7eccce6ff9beec9657aeea8bec33\",\"dweb:/ipfs/QmSLKq8JYWavnjDokYoe1cUERbvWFfiBWBJ2zDCMVyycsM\"]},\"project:/contracts/interfaces/superfluid/ISuperfluid.sol\":{\"keccak256\":\"0x987a883e8acd87e07eb00ebb1c882d294c7a0af2e5a8cb234270f83f4168438f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://87631a2a511fcfd20787d0bb633d37f3a810bd50c58502c996106b97f2795272\",\"dweb:/ipfs/QmeR8yfLL41en8GjszYRc8Cw9QoEmRQ6j3hCi8JRsym3vZ\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidGovernance.sol\":{\"keccak256\":\"0x2ac401c7fb012ef43d8becad0196bcd41ac9ad33778a7a5e4809a1740a646e63\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://a04710e0e2a4d0183d2760b1ef73e970e4070eaeee3dfefe5ba4bed61dd45ada\",\"dweb:/ipfs/QmYCxDFAWmrCTzioikvbeJtHByWvyxT9nARBuaVoYmopPo\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidToken.sol\":{\"keccak256\":\"0x6c573b0c0d9ccfc73f787da2e06c725b714d9a36357cfe4fb3c5fb7b47d75665\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://af67f4b3d6ea0c88ba9d1c1cfa0be051de016e689b02ba931c871ecad8fad336\",\"dweb:/ipfs/QmPRQsAEPUcJjxXxjAmttXTbmuSdaDPi41KAqTMYhM6L5m\"]},\"project:/contracts/interfaces/tokens/ERC20WithTokenInfo.sol\":{\"keccak256\":\"0x808d3a486826e7f119671174a77896c6e23578e691625350dbb3e9f74a0d5137\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://06a7a1bc2ed6888c7080a8e1fb676b7f3972b3f22620c771a41ca3a0ee78b968\",\"dweb:/ipfs/QmW7qpRwv2vEtCtENoP4BUkK4yRBbiKUZbPbyXNbPthiLQ\"]},\"project:/contracts/interfaces/tokens/TokenInfo.sol\":{\"keccak256\":\"0x4dee21b8f64edbfe811a300d31f529b5367d1186d69b8b2b8dc3373be7a108b0\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://67edf7ddbd90cd7871dc3c92202d4a749d3be0065174fd0f5b89b18edac9d8d1\",\"dweb:/ipfs/QmNc58Ep6sYkSybGVAgmkeCjHFdBL2m1sGJGUgR99xKqeh\"]},\"project:/contracts/upgradability/UUPSProxiable.sol\":{\"keccak256\":\"0x57cc7ce92a1583e18469fd5498ce14ebda0090b170e2eb9c6d96297c4c5660c2\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://159c53d7328542895fe4616305ca91e7edca97d5b30f66709a72c80b8cc8e398\",\"dweb:/ipfs/QmdxcYxA4RKxdx5BD9LsM7de63BQDW9DH4PQT1YttQz9Fa\"]},\"project:/contracts/upgradability/UUPSProxy.sol\":{\"keccak256\":\"0x56ae5dba7b1f2aa57717b647859a8586244138aee2b1d6b67f266e097c6f6acc\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://f1887056ea1b08b13d6a2170fde9aa480cb3f1a59944641746a3a4f19306895a\",\"dweb:/ipfs/QmWbN56ky7MGnkCn2yYdqmUDCLrKfs7Uf25zXKNMSvRvsL\"]},\"project:/contracts/upgradability/UUPSUtils.sol\":{\"keccak256\":\"0x2b47a0c71503981f4cf29656831aee3b038513dcc8554d8a432830af58d29bd1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://b3bfc98fe566bee28d4431680bced199d498af6045b1380f88499828161429f2\",\"dweb:/ipfs/QmcyxSdt8S6mXZLwGkcmRGusykhoYe2RMAo8QiSFpd97cb\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50600061001b61006a565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35061006e565b3390565b6104a98061007d6000396000f3fe6080604052600436106100435760003560e01c80634a0687ef1461005a578063715018a61461008d5780638da5cb5b146100a2578063f2fde38b146100d357610052565b3661005257610050610106565b005b610050610106565b34801561006657600080fd5b506100506004803603602081101561007d57600080fd5b50356001600160a01b0316610120565b34801561009957600080fd5b506100506101ec565b3480156100ae57600080fd5b506100b76102aa565b604080516001600160a01b039092168252519081900360200190f35b3480156100df57600080fd5b50610050600480360360208110156100f657600080fd5b50356001600160a01b03166102b9565b61010e61011e565b61011e6101196103cd565b6103dc565b565b6001600160a01b03811661017b576040805162461bcd60e51b815260206004820152601760248201527f5555505350726f78793a207a65726f2061646472657373000000000000000000604482015290519081900360640190fd5b6000610185610400565b6001600160a01b0316146101e0576040805162461bcd60e51b815260206004820152601e60248201527f5555505350726f78793a20616c726561647920696e697469616c697a65640000604482015290519081900360640190fd5b6101e981610425565b50565b6101f4610449565b6001600160a01b03166102056102aa565b6001600160a01b031614610260576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b6102c1610449565b6001600160a01b03166102d26102aa565b6001600160a01b03161461032d576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b0381166103725760405162461bcd60e51b815260040180806020018281038252602681526020018061044e6026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b60006103d7610400565b905090565b3660008037600080366000845af43d6000803e8080156103fb573d6000f35b3d6000fd5b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5490565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc55565b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f2061646472657373a2646970667358221220630949cf86cf4e545ac972112a560a25bbbaeb5b304bd4f7f773e27fefd9ce7764736f6c63430007060033",
+  "deployedBytecode": "0x6080604052600436106100435760003560e01c80634a0687ef1461005a578063715018a61461008d5780638da5cb5b146100a2578063f2fde38b146100d357610052565b3661005257610050610106565b005b610050610106565b34801561006657600080fd5b506100506004803603602081101561007d57600080fd5b50356001600160a01b0316610120565b34801561009957600080fd5b506100506101ec565b3480156100ae57600080fd5b506100b76102aa565b604080516001600160a01b039092168252519081900360200190f35b3480156100df57600080fd5b50610050600480360360208110156100f657600080fd5b50356001600160a01b03166102b9565b61010e61011e565b61011e6101196103cd565b6103dc565b565b6001600160a01b03811661017b576040805162461bcd60e51b815260206004820152601760248201527f5555505350726f78793a207a65726f2061646472657373000000000000000000604482015290519081900360640190fd5b6000610185610400565b6001600160a01b0316146101e0576040805162461bcd60e51b815260206004820152601e60248201527f5555505350726f78793a20616c726561647920696e697469616c697a65640000604482015290519081900360640190fd5b6101e981610425565b50565b6101f4610449565b6001600160a01b03166102056102aa565b6001600160a01b031614610260576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b6102c1610449565b6001600160a01b03166102d26102aa565b6001600160a01b03161461032d576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b0381166103725760405162461bcd60e51b815260040180806020018281038252602681526020018061044e6026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b60006103d7610400565b905090565b3660008037600080366000845af43d6000803e8080156103fb573d6000f35b3d6000fd5b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc5490565b7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc55565b339056fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f2061646472657373a2646970667358221220630949cf86cf4e545ac972112a560a25bbbaeb5b304bd4f7f773e27fefd9ce7764736f6c63430007060033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "629:62:39:-:0;;;;;;;;;;;;-1:-1:-1;884:17:2;904:12;:10;:12::i;:::-;926:6;:18;;-1:-1:-1;;;;;;926:18:2;-1:-1:-1;;;;;926:18:2;;;;;;;959:43;;926:18;;-1:-1:-1;926:18:2;959:43;;926:6;;959:43;850:159;629:62:39;;598:104:25;685:10;598:104;:::o;629:62:39:-;;;;;;;",
+  "deployedSourceMap": "629:62:39:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2843:11:12;:9;:11::i;:::-;629:62:39;;2619:11:12;:9;:11::i;894:285:95:-;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;894:285:95;-1:-1:-1;;;;;894:285:95;;:::i;1717:145:2:-;;;;;;;;;;;;;:::i;1085:85::-;;;;;;;;;;;;;:::i;:::-;;;;-1:-1:-1;;;;;1085:85:2;;;;;;;;;;;;;;2011:240;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;2011:240:2;-1:-1:-1;;;;;2011:240:2;;:::i;2265:110:12:-;2313:17;:15;:17::i;:::-;2340:28;2350:17;:15;:17::i;:::-;2340:9;:28::i;:::-;2265:110::o;894:285:95:-;-1:-1:-1;;;;;970:28:95;;962:64;;;;;-1:-1:-1;;;962:64:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;1082:1;1044:26;:24;:26::i;:::-;-1:-1:-1;;;;;1044:40:95;;1036:83;;;;;-1:-1:-1;;;1036:83:95;;;;;;;;;;;;;;;;;;;;;;;;;;;;1129:43;1157:14;1129:27;:43::i;:::-;894:285;:::o;1717:145:2:-;1308:12;:10;:12::i;:::-;-1:-1:-1;;;;;1297:23:2;:7;:5;:7::i;:::-;-1:-1:-1;;;;;1297:23:2;;1289:68;;;;;-1:-1:-1;;;1289:68:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1823:1:::1;1807:6:::0;;1786:40:::1;::::0;-1:-1:-1;;;;;1807:6:2;;::::1;::::0;1786:40:::1;::::0;1823:1;;1786:40:::1;1853:1;1836:19:::0;;-1:-1:-1;;;;;;1836:19:2::1;::::0;;1717:145::o;1085:85::-;1131:7;1157:6;-1:-1:-1;;;;;1157:6:2;1085:85;:::o;2011:240::-;1308:12;:10;:12::i;:::-;-1:-1:-1;;;;;1297:23:2;:7;:5;:7::i;:::-;-1:-1:-1;;;;;1297:23:2;;1289:68;;;;;-1:-1:-1;;;1289:68:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;2099:22:2;::::1;2091:73;;;;-1:-1:-1::0;;;2091:73:2::1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2200:6;::::0;;2179:38:::1;::::0;-1:-1:-1;;;;;2179:38:2;;::::1;::::0;2200:6;::::1;::::0;2179:38:::1;::::0;::::1;2227:6;:17:::0;;-1:-1:-1;;;;;;2227:17:2::1;-1:-1:-1::0;;;;;2227:17:2;;;::::1;::::0;;;::::1;::::0;;2011:240::o;1235:130:95:-;1302:7;1332:26;:24;:26::i;:::-;1325:33;;1235:130;:::o;891:895:12:-;1285:14;1282:1;1279;1266:34;1499:1;1496;1480:14;1477:1;1461:14;1454:5;1441:60;1575:16;1572:1;1569;1554:38;1613:6;1680:38;;;;1751:16;1748:1;1741:27;1680:38;1699:16;1696:1;1689:27;617:170:96;750:20;744:27;;699:82::o;838:228::-;987:20;963:87;914:146::o;598:104:25:-;685:10;598:104;:::o",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity 0.7.6;\n\nimport { UUPSProxy } from \"../upgradability/UUPSProxy.sol\";\nimport { Ownable } from \"@openzeppelin/contracts/access/Ownable.sol\";\nimport { UUPSProxiable } from \"../upgradability/UUPSProxiable.sol\";\nimport { SuperfluidGovernanceBase } from \"./SuperfluidGovernanceBase.sol\";\nimport { ISuperfluid } from \"../interfaces/superfluid/ISuperfluid.sol\";\n\n/**\n * @dev A proxy for governance which is both ownable and upgradable\n * IMPORTANT! Make sure the inheritance order remains in sync with the logic contract (Ownable first)!\n */\n// solhint-disable-next-line no-empty-blocks\ncontract SuperfluidGovernanceIIProxy is Ownable, UUPSProxy { }\n\ncontract SuperfluidGovernanceII is\n    Ownable,\n    UUPSProxiable,\n    SuperfluidGovernanceBase\n{\n    function _requireAuthorised() private view {\n        require(owner() == _msgSender(), \"SFGovII: only owner is authorized\");\n    }\n\n    /**************************************************************************\n    * UUPSProxiable\n    **************************************************************************/\n\n    // TODO: do we need initialize() here?\n\n    function proxiableUUID() public pure override returns (bytes32) {\n        return keccak256(\"org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation\");\n    }\n\n    function updateCode(address newAddress)\n        external override\n    {\n        _requireAuthorised();\n        _updateCodeAddress(newAddress);\n    }\n\n    /**************************************************************************\n    * SuperfluidGovernanceBase\n    **************************************************************************/\n\n    function _requireAuthorised(ISuperfluid /*host*/)\n        internal view override\n    {\n        _requireAuthorised();\n    }\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/gov/SuperfluidGovernanceII.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/gov/SuperfluidGovernanceII.sol",
+    "exportedSymbols": {
+      "ISuperfluid": [
+        15420
+      ],
+      "Ownable": [
+        395
+      ],
+      "SuperfluidGovernanceBase": [
+        13472
+      ],
+      "SuperfluidGovernanceII": [
+        13545
+      ],
+      "SuperfluidGovernanceIIProxy": [
+        13490
+      ],
+      "UUPSProxiable": [
+        32847
+      ],
+      "UUPSProxy": [
+        32904
+      ]
+    },
+    "id": 13546,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 13474,
+        "literals": [
+          "solidity",
+          "0.7",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:22:39"
+      },
+      {
+        "absolutePath": "project:/contracts/upgradability/UUPSProxy.sol",
+        "file": "../upgradability/UUPSProxy.sol",
+        "id": 13476,
+        "nodeType": "ImportDirective",
+        "scope": 13546,
+        "sourceUnit": 32905,
+        "src": "59:59:39",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13475,
+              "name": "UUPSProxy",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "68:9:39",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+        "file": "@openzeppelin/contracts/access/Ownable.sol",
+        "id": 13478,
+        "nodeType": "ImportDirective",
+        "scope": 13546,
+        "sourceUnit": 396,
+        "src": "119:69:39",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13477,
+              "name": "Ownable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "128:7:39",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/upgradability/UUPSProxiable.sol",
+        "file": "../upgradability/UUPSProxiable.sol",
+        "id": 13480,
+        "nodeType": "ImportDirective",
+        "scope": 13546,
+        "sourceUnit": 32848,
+        "src": "189:67:39",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13479,
+              "name": "UUPSProxiable",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "198:13:39",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/gov/SuperfluidGovernanceBase.sol",
+        "file": "./SuperfluidGovernanceBase.sol",
+        "id": 13482,
+        "nodeType": "ImportDirective",
+        "scope": 13546,
+        "sourceUnit": 13473,
+        "src": "257:74:39",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13481,
+              "name": "SuperfluidGovernanceBase",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "266:24:39",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/superfluid/ISuperfluid.sol",
+        "file": "../interfaces/superfluid/ISuperfluid.sol",
+        "id": 13484,
+        "nodeType": "ImportDirective",
+        "scope": 13546,
+        "sourceUnit": 15421,
+        "src": "332:71:39",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 13483,
+              "name": "ISuperfluid",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "341:11:39",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 13486,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 395,
+              "src": "669:7:39",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$395",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 13487,
+            "nodeType": "InheritanceSpecifier",
+            "src": "669:7:39"
+          },
+          {
+            "baseName": {
+              "id": 13488,
+              "name": "UUPSProxy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 32904,
+              "src": "678:9:39",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UUPSProxy_$32904",
+                "typeString": "contract UUPSProxy"
+              }
+            },
+            "id": 13489,
+            "nodeType": "InheritanceSpecifier",
+            "src": "678:9:39"
+          }
+        ],
+        "contractDependencies": [
+          395,
+          1355,
+          3803,
+          32904
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 13485,
+          "nodeType": "StructuredDocumentation",
+          "src": "405:178:39",
+          "text": " @dev A proxy for governance which is both ownable and upgradable\n IMPORTANT! Make sure the inheritance order remains in sync with the logic contract (Ownable first)!"
+        },
+        "fullyImplemented": true,
+        "id": 13490,
+        "linearizedBaseContracts": [
+          13490,
+          32904,
+          1355,
+          395,
+          3803
+        ],
+        "name": "SuperfluidGovernanceIIProxy",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 13546,
+        "src": "629:62:39"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 13491,
+              "name": "Ownable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 395,
+              "src": "732:7:39",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Ownable_$395",
+                "typeString": "contract Ownable"
+              }
+            },
+            "id": 13492,
+            "nodeType": "InheritanceSpecifier",
+            "src": "732:7:39"
+          },
+          {
+            "baseName": {
+              "id": 13493,
+              "name": "UUPSProxiable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 32847,
+              "src": "745:13:39",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UUPSProxiable_$32847",
+                "typeString": "contract UUPSProxiable"
+              }
+            },
+            "id": 13494,
+            "nodeType": "InheritanceSpecifier",
+            "src": "745:13:39"
+          },
+          {
+            "baseName": {
+              "id": 13495,
+              "name": "SuperfluidGovernanceBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 13472,
+              "src": "764:24:39",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SuperfluidGovernanceBase_$13472",
+                "typeString": "contract SuperfluidGovernanceBase"
+              }
+            },
+            "id": 13496,
+            "nodeType": "InheritanceSpecifier",
+            "src": "764:24:39"
+          }
+        ],
+        "contractDependencies": [
+          395,
+          1303,
+          3803,
+          13472,
+          15494,
+          32847
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 13545,
+        "linearizedBaseContracts": [
+          13545,
+          13472,
+          15494,
+          32847,
+          1303,
+          395,
+          3803
+        ],
+        "name": "SuperfluidGovernanceII",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 13508,
+              "nodeType": "Block",
+              "src": "838:86:39",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 13504,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 13500,
+                            "name": "owner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 330,
+                            "src": "856:5:39",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_address_$",
+                              "typeString": "function () view returns (address)"
+                            }
+                          },
+                          "id": 13501,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "856:7:39",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "arguments": [],
+                          "expression": {
+                            "argumentTypes": [],
+                            "id": 13502,
+                            "name": "_msgSender",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 3791,
+                            "src": "867:10:39",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$__$returns$_t_address_payable_$",
+                              "typeString": "function () view returns (address payable)"
+                            }
+                          },
+                          "id": 13503,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "867:12:39",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "856:23:39",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "5346476f7649493a206f6e6c79206f776e657220697320617574686f72697a6564",
+                        "id": 13505,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "881:35:39",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_aeb7dc15ae4cc3c032bf5ff218fe6f9b3d4f84315de3c3814f51b0a4d36d98df",
+                          "typeString": "literal_string \"SFGovII: only owner is authorized\""
+                        },
+                        "value": "SFGovII: only owner is authorized"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_aeb7dc15ae4cc3c032bf5ff218fe6f9b3d4f84315de3c3814f51b0a4d36d98df",
+                          "typeString": "literal_string \"SFGovII: only owner is authorized\""
+                        }
+                      ],
+                      "id": 13499,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "848:7:39",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 13506,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "848:69:39",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 13507,
+                  "nodeType": "ExpressionStatement",
+                  "src": "848:69:39"
+                }
+              ]
+            },
+            "id": 13509,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_requireAuthorised",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 13497,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "822:2:39"
+            },
+            "returnParameters": {
+              "id": 13498,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "838:0:39"
+            },
+            "scope": 13545,
+            "src": "795:129:39",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "private"
+          },
+          {
+            "baseFunctions": [
+              32797
+            ],
+            "body": {
+              "id": 13519,
+              "nodeType": "Block",
+              "src": "1219:107:39",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "hexValue": "6f72672e7375706572666c7569642d66696e616e63652e636f6e7472616374732e5375706572666c756964476f7665726e616e636549492e696d706c656d656e746174696f6e",
+                        "id": 13516,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1246:72:39",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_42262e3b6ca1f8f82e158e1ac4ddf4e6273aa6499266ae17bcaceb2383054239",
+                          "typeString": "literal_string \"org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation\""
+                        },
+                        "value": "org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_stringliteral_42262e3b6ca1f8f82e158e1ac4ddf4e6273aa6499266ae17bcaceb2383054239",
+                          "typeString": "literal_string \"org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation\""
+                        }
+                      ],
+                      "id": 13515,
+                      "name": "keccak256",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4294967288,
+                      "src": "1236:9:39",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_keccak256_pure$_t_bytes_memory_ptr_$returns$_t_bytes32_$",
+                        "typeString": "function (bytes memory) pure returns (bytes32)"
+                      }
+                    },
+                    "id": 13517,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1236:83:39",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 13514,
+                  "id": 13518,
+                  "nodeType": "Return",
+                  "src": "1229:90:39"
+                }
+              ]
+            },
+            "functionSelector": "52d1902d",
+            "id": 13520,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "proxiableUUID",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 13511,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1192:8:39"
+            },
+            "parameters": {
+              "id": 13510,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1177:2:39"
+            },
+            "returnParameters": {
+              "id": 13514,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13513,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13520,
+                  "src": "1210:7:39",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 13512,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1210:7:39",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1209:9:39"
+            },
+            "scope": 13545,
+            "src": "1155:171:39",
+            "stateMutability": "pure",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "baseFunctions": [
+              32791
+            ],
+            "body": {
+              "id": 13533,
+              "nodeType": "Block",
+              "src": "1402:77:39",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 13526,
+                      "name": "_requireAuthorised",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13509,
+                        13544
+                      ],
+                      "referencedDeclaration": 13509,
+                      "src": "1412:18:39",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$__$returns$__$",
+                        "typeString": "function () view"
+                      }
+                    },
+                    "id": 13527,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1412:20:39",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 13528,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1412:20:39"
+                },
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "id": 13530,
+                        "name": "newAddress",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 13522,
+                        "src": "1461:10:39",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      ],
+                      "id": 13529,
+                      "name": "_updateCodeAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 32840,
+                      "src": "1442:18:39",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
+                        "typeString": "function (address)"
+                      }
+                    },
+                    "id": 13531,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1442:30:39",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 13532,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1442:30:39"
+                }
+              ]
+            },
+            "functionSelector": "46951954",
+            "id": 13534,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateCode",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 13524,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1389:8:39"
+            },
+            "parameters": {
+              "id": 13523,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13522,
+                  "mutability": "mutable",
+                  "name": "newAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13534,
+                  "src": "1352:18:39",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 13521,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1352:7:39",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1351:20:39"
+            },
+            "returnParameters": {
+              "id": 13525,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1402:0:39"
+            },
+            "scope": 13545,
+            "src": "1332:147:39",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "baseFunctions": [
+              13471
+            ],
+            "body": {
+              "id": 13543,
+              "nodeType": "Block",
+              "src": "1762:37:39",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "id": 13540,
+                      "name": "_requireAuthorised",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        13509,
+                        13544
+                      ],
+                      "referencedDeclaration": 13509,
+                      "src": "1772:18:39",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$__$returns$__$",
+                        "typeString": "function () view"
+                      }
+                    },
+                    "id": 13541,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1772:20:39",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 13542,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1772:20:39"
+                }
+              ]
+            },
+            "id": 13544,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_requireAuthorised",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 13538,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "1749:8:39"
+            },
+            "parameters": {
+              "id": 13537,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 13536,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 13544,
+                  "src": "1705:11:39",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_ISuperfluid_$15420",
+                    "typeString": "contract ISuperfluid"
+                  },
+                  "typeName": {
+                    "id": 13535,
+                    "name": "ISuperfluid",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 15420,
+                    "src": "1705:11:39",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_ISuperfluid_$15420",
+                      "typeString": "contract ISuperfluid"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1704:22:39"
+            },
+            "returnParameters": {
+              "id": 13539,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1762:0:39"
+            },
+            "scope": 13545,
+            "src": "1677:122:39",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 13546,
+        "src": "693:1108:39"
+      }
+    ],
+    "src": "35:1767:39"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/gov/SuperfluidGovernanceII.sol",
+      "exportedSymbols": {
+        "ISuperfluid": [
+          15420
+        ],
+        "Ownable": [
+          395
+        ],
+        "SuperfluidGovernanceBase": [
+          13472
+        ],
+        "SuperfluidGovernanceII": [
+          13545
+        ],
+        "SuperfluidGovernanceIIProxy": [
+          13490
+        ],
+        "UUPSProxiable": [
+          32847
+        ],
+        "UUPSProxy": [
+          32904
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.7",
+            ".6"
+          ]
+        },
+        "id": 13474,
+        "name": "PragmaDirective",
+        "src": "35:22:39"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 32905,
+          "absolutePath": "project:/contracts/upgradability/UUPSProxy.sol",
+          "file": "../upgradability/UUPSProxy.sol",
+          "scope": 13546,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "UUPSProxy"
+                },
+                "id": 13475,
+                "name": "Identifier",
+                "src": "68:9:39"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13476,
+        "name": "ImportDirective",
+        "src": "59:59:39"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 396,
+          "absolutePath": "@openzeppelin/contracts/access/Ownable.sol",
+          "file": "@openzeppelin/contracts/access/Ownable.sol",
+          "scope": 13546,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "Ownable"
+                },
+                "id": 13477,
+                "name": "Identifier",
+                "src": "128:7:39"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13478,
+        "name": "ImportDirective",
+        "src": "119:69:39"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 32848,
+          "absolutePath": "project:/contracts/upgradability/UUPSProxiable.sol",
+          "file": "../upgradability/UUPSProxiable.sol",
+          "scope": 13546,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "UUPSProxiable"
+                },
+                "id": 13479,
+                "name": "Identifier",
+                "src": "198:13:39"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13480,
+        "name": "ImportDirective",
+        "src": "189:67:39"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 13473,
+          "absolutePath": "project:/contracts/gov/SuperfluidGovernanceBase.sol",
+          "file": "./SuperfluidGovernanceBase.sol",
+          "scope": 13546,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "SuperfluidGovernanceBase"
+                },
+                "id": 13481,
+                "name": "Identifier",
+                "src": "266:24:39"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13482,
+        "name": "ImportDirective",
+        "src": "257:74:39"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 15421,
+          "absolutePath": "project:/contracts/interfaces/superfluid/ISuperfluid.sol",
+          "file": "../interfaces/superfluid/ISuperfluid.sol",
+          "scope": 13546,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "ISuperfluid"
+                },
+                "id": 13483,
+                "name": "Identifier",
+                "src": "341:11:39"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 13484,
+        "name": "ImportDirective",
+        "src": "332:71:39"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            395,
+            1355,
+            3803,
+            32904
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            13490,
+            32904,
+            1355,
+            395,
+            3803
+          ],
+          "name": "SuperfluidGovernanceIIProxy",
+          "nodes": [
+            null
+          ],
+          "scope": 13546
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev A proxy for governance which is both ownable and upgradable\n IMPORTANT! Make sure the inheritance order remains in sync with the logic contract (Ownable first)!"
+            },
+            "id": 13485,
+            "name": "StructuredDocumentation",
+            "src": "405:178:39"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "Ownable",
+                  "referencedDeclaration": 395,
+                  "type": "contract Ownable"
+                },
+                "id": 13486,
+                "name": "UserDefinedTypeName",
+                "src": "669:7:39"
+              }
+            ],
+            "id": 13487,
+            "name": "InheritanceSpecifier",
+            "src": "669:7:39"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "UUPSProxy",
+                  "referencedDeclaration": 32904,
+                  "type": "contract UUPSProxy"
+                },
+                "id": 13488,
+                "name": "UserDefinedTypeName",
+                "src": "678:9:39"
+              }
+            ],
+            "id": 13489,
+            "name": "InheritanceSpecifier",
+            "src": "678:9:39"
+          }
+        ],
+        "id": 13490,
+        "name": "ContractDefinition",
+        "src": "629:62:39"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "contractDependencies": [
+            395,
+            1303,
+            3803,
+            13472,
+            15494,
+            32847
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            13545,
+            13472,
+            15494,
+            32847,
+            1303,
+            395,
+            3803
+          ],
+          "name": "SuperfluidGovernanceII",
+          "scope": 13546
+        },
+        "children": [
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "Ownable",
+                  "referencedDeclaration": 395,
+                  "type": "contract Ownable"
+                },
+                "id": 13491,
+                "name": "UserDefinedTypeName",
+                "src": "732:7:39"
+              }
+            ],
+            "id": 13492,
+            "name": "InheritanceSpecifier",
+            "src": "732:7:39"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "UUPSProxiable",
+                  "referencedDeclaration": 32847,
+                  "type": "contract UUPSProxiable"
+                },
+                "id": 13493,
+                "name": "UserDefinedTypeName",
+                "src": "745:13:39"
+              }
+            ],
+            "id": 13494,
+            "name": "InheritanceSpecifier",
+            "src": "745:13:39"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "SuperfluidGovernanceBase",
+                  "referencedDeclaration": 13472,
+                  "type": "contract SuperfluidGovernanceBase"
+                },
+                "id": 13495,
+                "name": "UserDefinedTypeName",
+                "src": "764:24:39"
+              }
+            ],
+            "id": 13496,
+            "name": "InheritanceSpecifier",
+            "src": "764:24:39"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_requireAuthorised",
+              "scope": 13545,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "private"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13497,
+                "name": "ParameterList",
+                "src": "822:2:39"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13498,
+                "name": "ParameterList",
+                "src": "838:0:39"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_aeb7dc15ae4cc3c032bf5ff218fe6f9b3d4f84315de3c3814f51b0a4d36d98df",
+                                  "typeString": "literal_string \"SFGovII: only owner is authorized\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                4294967278,
+                                4294967278
+                              ],
+                              "referencedDeclaration": 4294967278,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 13499,
+                            "name": "Identifier",
+                            "src": "848:7:39"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_address",
+                                "typeString": "address"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 330,
+                                      "type": "function () view returns (address)",
+                                      "value": "owner"
+                                    },
+                                    "id": 13500,
+                                    "name": "Identifier",
+                                    "src": "856:5:39"
+                                  }
+                                ],
+                                "id": 13501,
+                                "name": "FunctionCall",
+                                "src": "856:7:39"
+                              },
+                              {
+                                "attributes": {
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "address payable",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 3791,
+                                      "type": "function () view returns (address payable)",
+                                      "value": "_msgSender"
+                                    },
+                                    "id": 13502,
+                                    "name": "Identifier",
+                                    "src": "867:10:39"
+                                  }
+                                ],
+                                "id": 13503,
+                                "name": "FunctionCall",
+                                "src": "867:12:39"
+                              }
+                            ],
+                            "id": 13504,
+                            "name": "BinaryOperation",
+                            "src": "856:23:39"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "5346476f7649493a206f6e6c79206f776e657220697320617574686f72697a6564",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"SFGovII: only owner is authorized\"",
+                              "value": "SFGovII: only owner is authorized"
+                            },
+                            "id": 13505,
+                            "name": "Literal",
+                            "src": "881:35:39"
+                          }
+                        ],
+                        "id": 13506,
+                        "name": "FunctionCall",
+                        "src": "848:69:39"
+                      }
+                    ],
+                    "id": 13507,
+                    "name": "ExpressionStatement",
+                    "src": "848:69:39"
+                  }
+                ],
+                "id": 13508,
+                "name": "Block",
+                "src": "838:86:39"
+              }
+            ],
+            "id": 13509,
+            "name": "FunctionDefinition",
+            "src": "795:129:39"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                32797
+              ],
+              "functionSelector": "52d1902d",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "proxiableUUID",
+              "scope": 13545,
+              "stateMutability": "pure",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 13511,
+                "name": "OverrideSpecifier",
+                "src": "1192:8:39"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13510,
+                "name": "ParameterList",
+                "src": "1177:2:39"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13520,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bytes32",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes32",
+                          "type": "bytes32"
+                        },
+                        "id": 13512,
+                        "name": "ElementaryTypeName",
+                        "src": "1210:7:39"
+                      }
+                    ],
+                    "id": 13513,
+                    "name": "VariableDeclaration",
+                    "src": "1210:7:39"
+                  }
+                ],
+                "id": 13514,
+                "name": "ParameterList",
+                "src": "1209:9:39"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 13514
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "bytes32",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_stringliteral_42262e3b6ca1f8f82e158e1ac4ddf4e6273aa6499266ae17bcaceb2383054239",
+                                  "typeString": "literal_string \"org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 4294967288,
+                              "type": "function (bytes memory) pure returns (bytes32)",
+                              "value": "keccak256"
+                            },
+                            "id": 13515,
+                            "name": "Identifier",
+                            "src": "1236:9:39"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "6f72672e7375706572666c7569642d66696e616e63652e636f6e7472616374732e5375706572666c756964476f7665726e616e636549492e696d706c656d656e746174696f6e",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation\"",
+                              "value": "org.superfluid-finance.contracts.SuperfluidGovernanceII.implementation"
+                            },
+                            "id": 13516,
+                            "name": "Literal",
+                            "src": "1246:72:39"
+                          }
+                        ],
+                        "id": 13517,
+                        "name": "FunctionCall",
+                        "src": "1236:83:39"
+                      }
+                    ],
+                    "id": 13518,
+                    "name": "Return",
+                    "src": "1229:90:39"
+                  }
+                ],
+                "id": 13519,
+                "name": "Block",
+                "src": "1219:107:39"
+              }
+            ],
+            "id": 13520,
+            "name": "FunctionDefinition",
+            "src": "1155:171:39"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                32791
+              ],
+              "functionSelector": "46951954",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "updateCode",
+              "scope": 13545,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 13524,
+                "name": "OverrideSpecifier",
+                "src": "1389:8:39"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "newAddress",
+                      "scope": 13534,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 13521,
+                        "name": "ElementaryTypeName",
+                        "src": "1352:7:39"
+                      }
+                    ],
+                    "id": 13522,
+                    "name": "VariableDeclaration",
+                    "src": "1352:18:39"
+                  }
+                ],
+                "id": 13523,
+                "name": "ParameterList",
+                "src": "1351:20:39"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13525,
+                "name": "ParameterList",
+                "src": "1402:0:39"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "arguments": [
+                            null
+                          ],
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                null
+                              ],
+                              "overloadedDeclarations": [
+                                13509,
+                                13544
+                              ],
+                              "referencedDeclaration": 13509,
+                              "type": "function () view",
+                              "value": "_requireAuthorised"
+                            },
+                            "id": 13526,
+                            "name": "Identifier",
+                            "src": "1412:18:39"
+                          }
+                        ],
+                        "id": 13527,
+                        "name": "FunctionCall",
+                        "src": "1412:20:39"
+                      }
+                    ],
+                    "id": 13528,
+                    "name": "ExpressionStatement",
+                    "src": "1412:20:39"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 32840,
+                              "type": "function (address)",
+                              "value": "_updateCodeAddress"
+                            },
+                            "id": 13529,
+                            "name": "Identifier",
+                            "src": "1442:18:39"
+                          },
+                          {
+                            "attributes": {
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 13522,
+                              "type": "address",
+                              "value": "newAddress"
+                            },
+                            "id": 13530,
+                            "name": "Identifier",
+                            "src": "1461:10:39"
+                          }
+                        ],
+                        "id": 13531,
+                        "name": "FunctionCall",
+                        "src": "1442:30:39"
+                      }
+                    ],
+                    "id": 13532,
+                    "name": "ExpressionStatement",
+                    "src": "1442:30:39"
+                  }
+                ],
+                "id": 13533,
+                "name": "Block",
+                "src": "1402:77:39"
+              }
+            ],
+            "id": 13534,
+            "name": "FunctionDefinition",
+            "src": "1332:147:39"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                13471
+              ],
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_requireAuthorised",
+              "scope": 13545,
+              "stateMutability": "view",
+              "virtual": false,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 13538,
+                "name": "OverrideSpecifier",
+                "src": "1749:8:39"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 13544,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract ISuperfluid",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "ISuperfluid",
+                          "referencedDeclaration": 15420,
+                          "type": "contract ISuperfluid"
+                        },
+                        "id": 13535,
+                        "name": "UserDefinedTypeName",
+                        "src": "1705:11:39"
+                      }
+                    ],
+                    "id": 13536,
+                    "name": "VariableDeclaration",
+                    "src": "1705:11:39"
+                  }
+                ],
+                "id": 13537,
+                "name": "ParameterList",
+                "src": "1704:22:39"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 13539,
+                "name": "ParameterList",
+                "src": "1762:0:39"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "arguments": [
+                            null
+                          ],
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                null
+                              ],
+                              "overloadedDeclarations": [
+                                13509,
+                                13544
+                              ],
+                              "referencedDeclaration": 13509,
+                              "type": "function () view",
+                              "value": "_requireAuthorised"
+                            },
+                            "id": 13540,
+                            "name": "Identifier",
+                            "src": "1772:18:39"
+                          }
+                        ],
+                        "id": 13541,
+                        "name": "FunctionCall",
+                        "src": "1772:20:39"
+                      }
+                    ],
+                    "id": 13542,
+                    "name": "ExpressionStatement",
+                    "src": "1772:20:39"
+                  }
+                ],
+                "id": 13543,
+                "name": "Block",
+                "src": "1762:37:39"
+              }
+            ],
+            "id": 13544,
+            "name": "FunctionDefinition",
+            "src": "1677:122:39"
+          }
+        ],
+        "id": 13545,
+        "name": "ContractDefinition",
+        "src": "693:1108:39"
+      }
+    ],
+    "id": 13546,
+    "name": "SourceUnit",
+    "src": "35:1767:39"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.335Z",
+  "devdoc": {
+    "details": "A proxy for governance which is both ownable and upgradable IMPORTANT! Make sure the inheritance order remains in sync with the logic contract (Ownable first)!",
+    "kind": "dev",
+    "methods": {
+      "initializeProxy(address)": {
+        "details": "Proxy initialization function.      This should only be called once and it is permission-less.",
+        "params": {
+          "initialAddress": "Initial logic contract code address to be used."
+        }
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

@@ -331,7 +331,7 @@ export default {
                 } else {
                   _this.$store.dispatch("success", "Succesfully minted token");
                 }
-                await _this.$store.dispatch("loadData");
+                await _this.$store.dispatch("loadSkyData");
                 _this.$store.state.isLoading = false;
                 _this.$store.state.reload = true;
                 _this.$store.state.selectedNFT = {};

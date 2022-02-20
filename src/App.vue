@@ -67,7 +67,7 @@ export default {
       console.log("$store.state.connected changed value: ", val);
       if (val) {
         await this.getUserDevices();
-        await this.$store.dispatch("loadData");
+        await this.$store.dispatch("loadSkyData");
       }
     },
   },

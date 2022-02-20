@@ -1,0 +1,428 @@
+{
+  "contractName": "IMultiSigWallet",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "destination",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "submitTransaction",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "transactionId",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"destination\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"submitTransaction\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"transactionId\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/misc/IMultiSigWallet.sol\":\"IMultiSigWallet\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/misc/IMultiSigWallet.sol\":{\"keccak256\":\"0xb4fb278594f95d5b3b3f0b65af046b708f1a59eb9e4a2560f0940032ee4a107f\",\"license\":\"UNLICENSED\",\"urls\":[\"bzz-raw://453852a648bd15b2a1534e0f50d692e6f5ece430059f749f14ef96343a47a694\",\"dweb:/ipfs/QmacwXjP29HqpMy6a3avehFVEo8jwDqiikyVACNSRabg1J\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: UNLICENSED\n\npragma solidity >= 0.4.22;\n\ninterface IMultiSigWallet {\n    function submitTransaction(address destination, uint value, bytes calldata data)\n        external\n        returns (uint transactionId);\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/interfaces/misc/IMultiSigWallet.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/misc/IMultiSigWallet.sol",
+    "exportedSymbols": {
+      "IMultiSigWallet": [
+        14105
+      ]
+    },
+    "id": 14106,
+    "license": "UNLICENSED",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 14093,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".22"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "40:26:43"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 14105,
+        "linearizedBaseContracts": [
+          14105
+        ],
+        "name": "IMultiSigWallet",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "functionSelector": "c6427474",
+            "id": 14104,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "submitTransaction",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 14100,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 14095,
+                  "mutability": "mutable",
+                  "name": "destination",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14104,
+                  "src": "127:19:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 14094,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "127:7:43",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 14097,
+                  "mutability": "mutable",
+                  "name": "value",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14104,
+                  "src": "148:10:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 14096,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "148:4:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 14099,
+                  "mutability": "mutable",
+                  "name": "data",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14104,
+                  "src": "160:19:43",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 14098,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "160:5:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "126:54:43"
+            },
+            "returnParameters": {
+              "id": 14103,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 14102,
+                  "mutability": "mutable",
+                  "name": "transactionId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 14104,
+                  "src": "215:18:43",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 14101,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "215:4:43",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "214:20:43"
+            },
+            "scope": 14105,
+            "src": "100:135:43",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 14106,
+        "src": "68:169:43"
+      }
+    ],
+    "src": "40:198:43"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/interfaces/misc/IMultiSigWallet.sol",
+      "exportedSymbols": {
+        "IMultiSigWallet": [
+          14105
+        ]
+      },
+      "license": "UNLICENSED"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.4",
+            ".22"
+          ]
+        },
+        "id": 14093,
+        "name": "PragmaDirective",
+        "src": "40:26:43"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "interface",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            14105
+          ],
+          "name": "IMultiSigWallet",
+          "scope": 14106
+        },
+        "children": [
+          {
+            "attributes": {
+              "functionSelector": "c6427474",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "submitTransaction",
+              "scope": 14105,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "destination",
+                      "scope": 14104,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 14094,
+                        "name": "ElementaryTypeName",
+                        "src": "127:7:43"
+                      }
+                    ],
+                    "id": 14095,
+                    "name": "VariableDeclaration",
+                    "src": "127:19:43"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "value",
+                      "scope": 14104,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 14096,
+                        "name": "ElementaryTypeName",
+                        "src": "148:4:43"
+                      }
+                    ],
+                    "id": 14097,
+                    "name": "VariableDeclaration",
+                    "src": "148:10:43"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "data",
+                      "scope": 14104,
+                      "stateVariable": false,
+                      "storageLocation": "calldata",
+                      "type": "bytes",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bytes",
+                          "type": "bytes"
+                        },
+                        "id": 14098,
+                        "name": "ElementaryTypeName",
+                        "src": "160:5:43"
+                      }
+                    ],
+                    "id": 14099,
+                    "name": "VariableDeclaration",
+                    "src": "160:19:43"
+                  }
+                ],
+                "id": 14100,
+                "name": "ParameterList",
+                "src": "126:54:43"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "transactionId",
+                      "scope": 14104,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 14101,
+                        "name": "ElementaryTypeName",
+                        "src": "215:4:43"
+                      }
+                    ],
+                    "id": 14102,
+                    "name": "VariableDeclaration",
+                    "src": "215:18:43"
+                  }
+                ],
+                "id": 14103,
+                "name": "ParameterList",
+                "src": "214:20:43"
+              }
+            ],
+            "id": 14104,
+            "name": "FunctionDefinition",
+            "src": "100:135:43"
+          }
+        ],
+        "id": 14105,
+        "name": "ContractDefinition",
+        "src": "68:169:43"
+      }
+    ],
+    "id": 14106,
+    "name": "SourceUnit",
+    "src": "40:198:43"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.344Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

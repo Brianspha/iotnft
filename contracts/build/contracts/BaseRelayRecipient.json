@@ -1,0 +1,1152 @@
+{
+  "contractName": "BaseRelayRecipient",
+  "abi": [
+    {
+      "inputs": [],
+      "name": "versionRecipient",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "forwarder",
+          "type": "address"
+        }
+      ],
+      "name": "isTrustedForwarder",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"forwarder\",\"type\":\"address\"}],\"name\":\"isTrustedForwarder\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"versionRecipient\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"isTrustedForwarder(address)\":{\"details\":\"Check if the forwarder is trusted\"},\"versionRecipient()\":{\"details\":\"EIP 2771 version NOTE: - It is not clear if it is actually from the EIP 2771.... - https://docs.biconomy.io/guides/enable-gasless-transactions/eip-2771\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"notice\":\"A base contract to be inherited by any contract that want to receive relayed transactions A subclass must use \\\"_msgSender()\\\" instead of \\\"msg.sender\\\"\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/ux/BaseRelayRecipient.sol\":\"BaseRelayRecipient\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/interfaces/ux/IRelayRecipient.sol\":{\"keccak256\":\"0x6958231965a70d83a59ce4f1b28f719e2d6bcb4b0956c9751312d6fe42d4887c\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://dbdcca19c2f27cd7e96c16a826af93161f5e5319740fbfbd798cf6d6d5d035fd\",\"dweb:/ipfs/QmdFH4Q9MXs2s73v6g93Yox6maanboftnGHa4nVg2pFNxS\"]},\"project:/contracts/ux/BaseRelayRecipient.sol\":{\"keccak256\":\"0x55002bbc51ab546f5fe9c23b7b02a846a70a509c7f89640b8ba28a0db6ba0a47\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://5195ffe8179f2d375a31fc4c07e73b3597c83333622d9ad835c3ac73b183d908\",\"dweb:/ipfs/QmXcYYNhbZSKWWNhHrQCynK1zsd9yVJ8DaRS5uCnRo8vMd\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity 0.7.6;\n\n// MODIFIED FROM: https://github.com/opengsn/forwarder/blob/master/contracts/BaseRelayRecipient.sol\n\nimport \"../interfaces/ux/IRelayRecipient.sol\";\n\n/**\n * A base contract to be inherited by any contract that want to receive relayed transactions\n * A subclass must use \"_msgSender()\" instead of \"msg.sender\"\n */\nabstract contract BaseRelayRecipient is IRelayRecipient {\n\n    /**\n     * @dev Check if the forwarder is trusted\n     */\n    function isTrustedForwarder(address forwarder) public view virtual override returns(bool);\n\n    /**\n     * @dev Return the transaction signer of this call\n     *\n     * if the call came through our trusted forwarder, return the original sender.\n     * otherwise, return `msg.sender`.\n     * should be used in the contract anywhere instead of msg.sender\n     */\n    function _getTransactionSigner() internal virtual view returns (address payable ret) {\n        require(msg.data.length >= 24 && isTrustedForwarder(msg.sender), \"Not trusted forwarder\");\n        // At this point we know that the sender is a trusted forwarder,\n        // so we trust that the last bytes of msg.data are the verified sender address.\n        // extract sender address from the end of msg.data\n        assembly {\n            ret := shr(96,calldataload(sub(calldatasize(),20)))\n        }\n    }\n\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/ux/BaseRelayRecipient.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/ux/BaseRelayRecipient.sol",
+    "exportedSymbols": {
+      "BaseRelayRecipient": [
+        34025
+      ],
+      "IRelayRecipient": [
+        15986
+      ]
+    },
+    "id": 34026,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 33989,
+        "literals": [
+          "solidity",
+          "0.7",
+          ".6"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:22:100"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/ux/IRelayRecipient.sol",
+        "file": "../interfaces/ux/IRelayRecipient.sol",
+        "id": 33990,
+        "nodeType": "ImportDirective",
+        "scope": 34026,
+        "sourceUnit": 15987,
+        "src": "160:46:100",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [
+          {
+            "baseName": {
+              "id": 33992,
+              "name": "IRelayRecipient",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 15986,
+              "src": "411:15:100",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IRelayRecipient_$15986",
+                "typeString": "contract IRelayRecipient"
+              }
+            },
+            "id": 33993,
+            "nodeType": "InheritanceSpecifier",
+            "src": "411:15:100"
+          }
+        ],
+        "contractDependencies": [
+          15986
+        ],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 33991,
+          "nodeType": "StructuredDocumentation",
+          "src": "208:162:100",
+          "text": " A base contract to be inherited by any contract that want to receive relayed transactions\n A subclass must use \"_msgSender()\" instead of \"msg.sender\""
+        },
+        "fullyImplemented": false,
+        "id": 34025,
+        "linearizedBaseContracts": [
+          34025,
+          15986
+        ],
+        "name": "BaseRelayRecipient",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "baseFunctions": [
+              15979
+            ],
+            "documentation": {
+              "id": 33994,
+              "nodeType": "StructuredDocumentation",
+              "src": "434:57:100",
+              "text": " @dev Check if the forwarder is trusted"
+            },
+            "functionSelector": "572b6c05",
+            "id": 34002,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "isTrustedForwarder",
+            "nodeType": "FunctionDefinition",
+            "overrides": {
+              "id": 33998,
+              "nodeType": "OverrideSpecifier",
+              "overrides": [],
+              "src": "563:8:100"
+            },
+            "parameters": {
+              "id": 33997,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 33996,
+                  "mutability": "mutable",
+                  "name": "forwarder",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34002,
+                  "src": "524:17:100",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 33995,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "524:7:100",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "523:19:100"
+            },
+            "returnParameters": {
+              "id": 34001,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 34000,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34002,
+                  "src": "580:4:100",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 33999,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "580:4:100",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "579:6:100"
+            },
+            "scope": 34025,
+            "src": "496:90:100",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 34023,
+              "nodeType": "Block",
+              "src": "946:419:100",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "commonType": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        "id": 34018,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "id": 34013,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "leftExpression": {
+                            "expression": {
+                              "expression": {
+                                "id": 34009,
+                                "name": "msg",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4294967281,
+                                "src": "964:3:100",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_message",
+                                  "typeString": "msg"
+                                }
+                              },
+                              "id": 34010,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "data",
+                              "nodeType": "MemberAccess",
+                              "src": "964:8:100",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_bytes_calldata_ptr",
+                                "typeString": "bytes calldata"
+                              }
+                            },
+                            "id": 34011,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "length",
+                            "nodeType": "MemberAccess",
+                            "src": "964:15:100",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "nodeType": "BinaryOperation",
+                          "operator": ">=",
+                          "rightExpression": {
+                            "hexValue": "3234",
+                            "id": 34012,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "983:2:100",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_24_by_1",
+                              "typeString": "int_const 24"
+                            },
+                            "value": "24"
+                          },
+                          "src": "964:21:100",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "&&",
+                        "rightExpression": {
+                          "arguments": [
+                            {
+                              "expression": {
+                                "id": 34015,
+                                "name": "msg",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4294967281,
+                                "src": "1008:3:100",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_magic_message",
+                                  "typeString": "msg"
+                                }
+                              },
+                              "id": 34016,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "sender",
+                              "nodeType": "MemberAccess",
+                              "src": "1008:10:100",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_address_payable",
+                                "typeString": "address payable"
+                              }
+                            ],
+                            "id": 34014,
+                            "name": "isTrustedForwarder",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 34002,
+                            "src": "989:18:100",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$_t_address_$returns$_t_bool_$",
+                              "typeString": "function (address) view returns (bool)"
+                            }
+                          },
+                          "id": 34017,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "989:30:100",
+                          "tryCall": false,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        },
+                        "src": "964:55:100",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "hexValue": "4e6f74207472757374656420666f72776172646572",
+                        "id": 34019,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1021:23:100",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c55544493bc7eeb535999264c70f56bda4911db54b18ae1e4ae3be74ec809c39",
+                          "typeString": "literal_string \"Not trusted forwarder\""
+                        },
+                        "value": "Not trusted forwarder"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c55544493bc7eeb535999264c70f56bda4911db54b18ae1e4ae3be74ec809c39",
+                          "typeString": "literal_string \"Not trusted forwarder\""
+                        }
+                      ],
+                      "id": 34008,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        4294967278,
+                        4294967278
+                      ],
+                      "referencedDeclaration": 4294967278,
+                      "src": "956:7:100",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 34020,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "956:89:100",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 34021,
+                  "nodeType": "ExpressionStatement",
+                  "src": "956:89:100"
+                },
+                {
+                  "AST": {
+                    "nodeType": "YulBlock",
+                    "src": "1284:75:100",
+                    "statements": [
+                      {
+                        "nodeType": "YulAssignment",
+                        "src": "1298:51:100",
+                        "value": {
+                          "arguments": [
+                            {
+                              "kind": "number",
+                              "nodeType": "YulLiteral",
+                              "src": "1309:2:100",
+                              "type": "",
+                              "value": "96"
+                            },
+                            {
+                              "arguments": [
+                                {
+                                  "arguments": [
+                                    {
+                                      "arguments": [],
+                                      "functionName": {
+                                        "name": "calldatasize",
+                                        "nodeType": "YulIdentifier",
+                                        "src": "1329:12:100"
+                                      },
+                                      "nodeType": "YulFunctionCall",
+                                      "src": "1329:14:100"
+                                    },
+                                    {
+                                      "kind": "number",
+                                      "nodeType": "YulLiteral",
+                                      "src": "1344:2:100",
+                                      "type": "",
+                                      "value": "20"
+                                    }
+                                  ],
+                                  "functionName": {
+                                    "name": "sub",
+                                    "nodeType": "YulIdentifier",
+                                    "src": "1325:3:100"
+                                  },
+                                  "nodeType": "YulFunctionCall",
+                                  "src": "1325:22:100"
+                                }
+                              ],
+                              "functionName": {
+                                "name": "calldataload",
+                                "nodeType": "YulIdentifier",
+                                "src": "1312:12:100"
+                              },
+                              "nodeType": "YulFunctionCall",
+                              "src": "1312:36:100"
+                            }
+                          ],
+                          "functionName": {
+                            "name": "shr",
+                            "nodeType": "YulIdentifier",
+                            "src": "1305:3:100"
+                          },
+                          "nodeType": "YulFunctionCall",
+                          "src": "1305:44:100"
+                        },
+                        "variableNames": [
+                          {
+                            "name": "ret",
+                            "nodeType": "YulIdentifier",
+                            "src": "1298:3:100"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "evmVersion": "istanbul",
+                  "externalReferences": [
+                    {
+                      "declaration": 34006,
+                      "isOffset": false,
+                      "isSlot": false,
+                      "src": "1298:3:100",
+                      "valueSize": 1
+                    }
+                  ],
+                  "id": 34022,
+                  "nodeType": "InlineAssembly",
+                  "src": "1275:84:100"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 34003,
+              "nodeType": "StructuredDocumentation",
+              "src": "592:264:100",
+              "text": " @dev Return the transaction signer of this call\n if the call came through our trusted forwarder, return the original sender.\n otherwise, return `msg.sender`.\n should be used in the contract anywhere instead of msg.sender"
+            },
+            "id": 34024,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "_getTransactionSigner",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 34004,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "891:2:100"
+            },
+            "returnParameters": {
+              "id": 34007,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 34006,
+                  "mutability": "mutable",
+                  "name": "ret",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 34024,
+                  "src": "925:19:100",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "typeName": {
+                    "id": 34005,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "925:15:100",
+                    "stateMutability": "payable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "924:21:100"
+            },
+            "scope": 34025,
+            "src": "861:504:100",
+            "stateMutability": "view",
+            "virtual": true,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 34026,
+        "src": "371:997:100"
+      }
+    ],
+    "src": "35:1334:100"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/ux/BaseRelayRecipient.sol",
+      "exportedSymbols": {
+        "BaseRelayRecipient": [
+          34025
+        ],
+        "IRelayRecipient": [
+          15986
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.7",
+            ".6"
+          ]
+        },
+        "id": 33989,
+        "name": "PragmaDirective",
+        "src": "35:22:100"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 15987,
+          "absolutePath": "project:/contracts/interfaces/ux/IRelayRecipient.sol",
+          "file": "../interfaces/ux/IRelayRecipient.sol",
+          "scope": 34026,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 33990,
+        "name": "ImportDirective",
+        "src": "160:46:100"
+      },
+      {
+        "attributes": {
+          "abstract": true,
+          "contractDependencies": [
+            15986
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            34025,
+            15986
+          ],
+          "name": "BaseRelayRecipient",
+          "scope": 34026
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " A base contract to be inherited by any contract that want to receive relayed transactions\n A subclass must use \"_msgSender()\" instead of \"msg.sender\""
+            },
+            "id": 33991,
+            "name": "StructuredDocumentation",
+            "src": "208:162:100"
+          },
+          {
+            "attributes": {},
+            "children": [
+              {
+                "attributes": {
+                  "name": "IRelayRecipient",
+                  "referencedDeclaration": 15986,
+                  "type": "contract IRelayRecipient"
+                },
+                "id": 33992,
+                "name": "UserDefinedTypeName",
+                "src": "411:15:100"
+              }
+            ],
+            "id": 33993,
+            "name": "InheritanceSpecifier",
+            "src": "411:15:100"
+          },
+          {
+            "attributes": {
+              "baseFunctions": [
+                15979
+              ],
+              "functionSelector": "572b6c05",
+              "implemented": false,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "isTrustedForwarder",
+              "scope": 34025,
+              "stateMutability": "view",
+              "virtual": true,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Check if the forwarder is trusted"
+                },
+                "id": 33994,
+                "name": "StructuredDocumentation",
+                "src": "434:57:100"
+              },
+              {
+                "attributes": {
+                  "overrides": [
+                    null
+                  ]
+                },
+                "id": 33998,
+                "name": "OverrideSpecifier",
+                "src": "563:8:100"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "forwarder",
+                      "scope": 34002,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "nonpayable",
+                          "type": "address"
+                        },
+                        "id": 33995,
+                        "name": "ElementaryTypeName",
+                        "src": "524:7:100"
+                      }
+                    ],
+                    "id": 33996,
+                    "name": "VariableDeclaration",
+                    "src": "524:17:100"
+                  }
+                ],
+                "id": 33997,
+                "name": "ParameterList",
+                "src": "523:19:100"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "",
+                      "scope": 34002,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 33999,
+                        "name": "ElementaryTypeName",
+                        "src": "580:4:100"
+                      }
+                    ],
+                    "id": 34000,
+                    "name": "VariableDeclaration",
+                    "src": "580:4:100"
+                  }
+                ],
+                "id": 34001,
+                "name": "ParameterList",
+                "src": "579:6:100"
+              }
+            ],
+            "id": 34002,
+            "name": "FunctionDefinition",
+            "src": "496:90:100"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "_getTransactionSigner",
+              "scope": 34025,
+              "stateMutability": "view",
+              "virtual": true,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": " @dev Return the transaction signer of this call\n if the call came through our trusted forwarder, return the original sender.\n otherwise, return `msg.sender`.\n should be used in the contract anywhere instead of msg.sender"
+                },
+                "id": 34003,
+                "name": "StructuredDocumentation",
+                "src": "592:264:100"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 34004,
+                "name": "ParameterList",
+                "src": "891:2:100"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "ret",
+                      "scope": 34024,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address payable",
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "stateMutability": "payable",
+                          "type": "address payable"
+                        },
+                        "id": 34005,
+                        "name": "ElementaryTypeName",
+                        "src": "925:15:100"
+                      }
+                    ],
+                    "id": 34006,
+                    "name": "VariableDeclaration",
+                    "src": "925:19:100"
+                  }
+                ],
+                "id": 34007,
+                "name": "ParameterList",
+                "src": "924:21:100"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_c55544493bc7eeb535999264c70f56bda4911db54b18ae1e4ae3be74ec809c39",
+                                  "typeString": "literal_string \"Not trusted forwarder\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                4294967278,
+                                4294967278
+                              ],
+                              "referencedDeclaration": 4294967278,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 34008,
+                            "name": "Identifier",
+                            "src": "956:7:100"
+                          },
+                          {
+                            "attributes": {
+                              "commonType": {
+                                "typeIdentifier": "t_bool",
+                                "typeString": "bool"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "&&",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": ">=",
+                                  "type": "bool"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "length",
+                                      "type": "uint256"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "member_name": "data",
+                                          "type": "bytes calldata"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "overloadedDeclarations": [
+                                                null
+                                              ],
+                                              "referencedDeclaration": 4294967281,
+                                              "type": "msg",
+                                              "value": "msg"
+                                            },
+                                            "id": 34009,
+                                            "name": "Identifier",
+                                            "src": "964:3:100"
+                                          }
+                                        ],
+                                        "id": 34010,
+                                        "name": "MemberAccess",
+                                        "src": "964:8:100"
+                                      }
+                                    ],
+                                    "id": 34011,
+                                    "name": "MemberAccess",
+                                    "src": "964:15:100"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "hexvalue": "3234",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "token": "number",
+                                      "type": "int_const 24",
+                                      "value": "24"
+                                    },
+                                    "id": 34012,
+                                    "name": "Literal",
+                                    "src": "983:2:100"
+                                  }
+                                ],
+                                "id": 34013,
+                                "name": "BinaryOperation",
+                                "src": "964:21:100"
+                              },
+                              {
+                                "attributes": {
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "tryCall": false,
+                                  "type": "bool",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_address_payable",
+                                          "typeString": "address payable"
+                                        }
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 34002,
+                                      "type": "function (address) view returns (bool)",
+                                      "value": "isTrustedForwarder"
+                                    },
+                                    "id": 34014,
+                                    "name": "Identifier",
+                                    "src": "989:18:100"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "sender",
+                                      "type": "address payable"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 4294967281,
+                                          "type": "msg",
+                                          "value": "msg"
+                                        },
+                                        "id": 34015,
+                                        "name": "Identifier",
+                                        "src": "1008:3:100"
+                                      }
+                                    ],
+                                    "id": 34016,
+                                    "name": "MemberAccess",
+                                    "src": "1008:10:100"
+                                  }
+                                ],
+                                "id": 34017,
+                                "name": "FunctionCall",
+                                "src": "989:30:100"
+                              }
+                            ],
+                            "id": 34018,
+                            "name": "BinaryOperation",
+                            "src": "964:55:100"
+                          },
+                          {
+                            "attributes": {
+                              "hexvalue": "4e6f74207472757374656420666f72776172646572",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "token": "string",
+                              "type": "literal_string \"Not trusted forwarder\"",
+                              "value": "Not trusted forwarder"
+                            },
+                            "id": 34019,
+                            "name": "Literal",
+                            "src": "1021:23:100"
+                          }
+                        ],
+                        "id": 34020,
+                        "name": "FunctionCall",
+                        "src": "956:89:100"
+                      }
+                    ],
+                    "id": 34021,
+                    "name": "ExpressionStatement",
+                    "src": "956:89:100"
+                  },
+                  {
+                    "attributes": {
+                      "evmVersion": "istanbul",
+                      "externalReferences": [
+                        {
+                          "declaration": 34006,
+                          "isOffset": false,
+                          "isSlot": false,
+                          "src": "1298:3:100",
+                          "valueSize": 1
+                        }
+                      ],
+                      "operations": "{\n    ret := shr(96, calldataload(sub(calldatasize(), 20)))\n}"
+                    },
+                    "children": [],
+                    "id": 34022,
+                    "name": "InlineAssembly",
+                    "src": "1275:84:100"
+                  }
+                ],
+                "id": 34023,
+                "name": "Block",
+                "src": "946:419:100"
+              }
+            ],
+            "id": 34024,
+            "name": "FunctionDefinition",
+            "src": "861:504:100"
+          }
+        ],
+        "id": 34025,
+        "name": "ContractDefinition",
+        "src": "371:997:100"
+      }
+    ],
+    "id": 34026,
+    "name": "SourceUnit",
+    "src": "35:1334:100"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.945Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "isTrustedForwarder(address)": {
+        "details": "Check if the forwarder is trusted"
+      },
+      "versionRecipient()": {
+        "details": "EIP 2771 version NOTE: - It is not clear if it is actually from the EIP 2771.... - https://docs.biconomy.io/guides/enable-gasless-transactions/eip-2771"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "notice": "A base contract to be inherited by any contract that want to receive relayed transactions A subclass must use \"_msgSender()\" instead of \"msg.sender\"",
+    "version": 1
+  }
+}

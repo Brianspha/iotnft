@@ -1,4 +1,5 @@
 pragma solidity >=0.4.25;
+//"SPDX-License-Identifier: UNLICENSED"
 
 contract Migrations {
   address public owner;

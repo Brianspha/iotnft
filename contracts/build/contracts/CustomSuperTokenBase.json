@@ -1,0 +1,297 @@
+{
+  "contractName": "CustomSuperTokenBase",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.7.6+commit.7338295f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Custom super token base contract NOTE: - Because of how solidity is layouting its storages variables and custom   super token inherits the Super Token standard implementation, so it is   required that the custom token proxy would need to pad its implementation   with reserved storages used by the Super Token implementation. - You will need to append your own proxy implementation after the base   - Refer to SETH.sol for an example how it is used.\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/interfaces/superfluid/CustomSuperTokenBase.sol\":\"CustomSuperTokenBase\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x5f02220344881ce43204ae4a6281145a67bc52c2bb1290a791857df3d19d78f5\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://24427744bd3e6cb73c17010119af12a318289c0253a4d9acb8576c9fb3797b08\",\"dweb:/ipfs/QmTLDqpKRBuxGxRAmjgXt9AkXyACW3MtKzi7PYjm5iMfGC\"]},\"@openzeppelin/contracts/token/ERC777/IERC777.sol\":{\"keccak256\":\"0xe81b5fca616ec6f57bb9d1ab0750202b9e514760462274ac04495e8c249697ab\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1e23a53ea7f3787f90ff8f6e25ea47896ed4b56e336e72ae543e3ef74eaa9e23\",\"dweb:/ipfs/QmSDNkjN5k2VRbrfWdTMJ39dzcSvFz4YMQqHZ5z61qLNVA\"]},\"project:/contracts/interfaces/superfluid/CustomSuperTokenBase.sol\":{\"keccak256\":\"0x02893317bff099720f93aa88386cdfe171f50b84816a8d66089c6f3cbc6e428d\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://26269241e3a310f586ce28f4e50573e4d3473526f5e198f94dd2f5560b0ea5b6\",\"dweb:/ipfs/QmUSW6g3ELPrNPCLFAaf1WMcRaoczdgUNz2jK1zSxZuMei\"]},\"project:/contracts/interfaces/superfluid/Definitions.sol\":{\"keccak256\":\"0x629a096aa6ce1da21b6d6861ebcd640257fc3c77e5d7f7de5de73b251a0be4b3\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://41046b449583e40efa0bd9e99147474cfbbc12fbba2e7184deb8c95939f04e9f\",\"dweb:/ipfs/QmT9HGuLjGbZF1yM7RtnyRo8GuVXzPk8rCjibKTKmc2LDN\"]},\"project:/contracts/interfaces/superfluid/ISuperAgreement.sol\":{\"keccak256\":\"0xcf8a33fadd5db47562156a11098623246efd1b46a2c3d28269767bcbb324fd66\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://5c0273b4a136874ca4ad1b3f66b312adfa8e8ed48b301e4e979081d4923bb55f\",\"dweb:/ipfs/QmQvK9ZQggymJAftai2aA89EfQY2hX3MSpejNkr6kNf45m\"]},\"project:/contracts/interfaces/superfluid/ISuperApp.sol\":{\"keccak256\":\"0xca93702505ec3c8244227e372687d9bdbc9d368fa07723d310ab9550501abb2a\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://3514c2c72fc866064227ea28fceea9dec4ca27cdbda2cff546b59f6b899cee4d\",\"dweb:/ipfs/QmdpFCRDm8An2U6TCTUK3Zopp8wVS44mzh2YjVvtruE3dZ\"]},\"project:/contracts/interfaces/superfluid/ISuperToken.sol\":{\"keccak256\":\"0xba355f7d7d5d32ca345bcdb355759ba598a911ff07227ff80012a5e0bf660fb1\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://72c2669590a012587b892f0bbb166079ffb9e4c2044511b45eb6b34489f83b30\",\"dweb:/ipfs/QmQckdZ7tbboxPpXSt8irWo98KBcZRT5xNPuGf7yuZxZw2\"]},\"project:/contracts/interfaces/superfluid/ISuperTokenFactory.sol\":{\"keccak256\":\"0x7dc514c6c9eda681ed8ad66ccfb68dc22764b6c429ab55fddbba28b6b148621b\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://bc4b3b35bb0ddd9323afa1f25468eb706e5f7eccce6ff9beec9657aeea8bec33\",\"dweb:/ipfs/QmSLKq8JYWavnjDokYoe1cUERbvWFfiBWBJ2zDCMVyycsM\"]},\"project:/contracts/interfaces/superfluid/ISuperfluid.sol\":{\"keccak256\":\"0x987a883e8acd87e07eb00ebb1c882d294c7a0af2e5a8cb234270f83f4168438f\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://87631a2a511fcfd20787d0bb633d37f3a810bd50c58502c996106b97f2795272\",\"dweb:/ipfs/QmeR8yfLL41en8GjszYRc8Cw9QoEmRQ6j3hCi8JRsym3vZ\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidGovernance.sol\":{\"keccak256\":\"0x2ac401c7fb012ef43d8becad0196bcd41ac9ad33778a7a5e4809a1740a646e63\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://a04710e0e2a4d0183d2760b1ef73e970e4070eaeee3dfefe5ba4bed61dd45ada\",\"dweb:/ipfs/QmYCxDFAWmrCTzioikvbeJtHByWvyxT9nARBuaVoYmopPo\"]},\"project:/contracts/interfaces/superfluid/ISuperfluidToken.sol\":{\"keccak256\":\"0x6c573b0c0d9ccfc73f787da2e06c725b714d9a36357cfe4fb3c5fb7b47d75665\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://af67f4b3d6ea0c88ba9d1c1cfa0be051de016e689b02ba931c871ecad8fad336\",\"dweb:/ipfs/QmPRQsAEPUcJjxXxjAmttXTbmuSdaDPi41KAqTMYhM6L5m\"]},\"project:/contracts/interfaces/tokens/ERC20WithTokenInfo.sol\":{\"keccak256\":\"0x808d3a486826e7f119671174a77896c6e23578e691625350dbb3e9f74a0d5137\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://06a7a1bc2ed6888c7080a8e1fb676b7f3972b3f22620c771a41ca3a0ee78b968\",\"dweb:/ipfs/QmW7qpRwv2vEtCtENoP4BUkK4yRBbiKUZbPbyXNbPthiLQ\"]},\"project:/contracts/interfaces/tokens/TokenInfo.sol\":{\"keccak256\":\"0x4dee21b8f64edbfe811a300d31f529b5367d1186d69b8b2b8dc3373be7a108b0\",\"license\":\"AGPLv3\",\"urls\":[\"bzz-raw://67edf7ddbd90cd7871dc3c92202d4a749d3be0065174fd0f5b89b18edac9d8d1\",\"dweb:/ipfs/QmNc58Ep6sYkSybGVAgmkeCjHFdBL2m1sGJGUgR99xKqeh\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "// SPDX-License-Identifier: AGPLv3\npragma solidity >= 0.7.0;\n\nimport {\n    ISuperToken\n} from \"../../interfaces/superfluid/ISuperToken.sol\";\n\n\n/**\n * @dev Custom super token base contract\n *\n * NOTE:\n * - Because of how solidity is layouting its storages variables and custom\n *   super token inherits the Super Token standard implementation, so it is\n *   required that the custom token proxy would need to pad its implementation\n *   with reserved storages used by the Super Token implementation.\n * - You will need to append your own proxy implementation after the base\n *   - Refer to SETH.sol for an example how it is used.\n */\nabstract contract CustomSuperTokenBase {\n    // This is the hard-coded number of storage slots used by the super token\n    uint256[32] internal _storagePaddings;\n}\n",
+  "sourcePath": "/home/runner/work/protocol-monorepo/protocol-monorepo/packages/ethereum-contracts/contracts/interfaces/superfluid/CustomSuperTokenBase.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/interfaces/superfluid/CustomSuperTokenBase.sol",
+    "exportedSymbols": {
+      "CustomSuperTokenBase": [
+        14115
+      ],
+      "ISuperToken": [
+        14924
+      ]
+    },
+    "id": 14116,
+    "license": "AGPLv3",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 14107,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "35:25:44"
+      },
+      {
+        "absolutePath": "project:/contracts/interfaces/superfluid/ISuperToken.sol",
+        "file": "../../interfaces/superfluid/ISuperToken.sol",
+        "id": 14109,
+        "nodeType": "ImportDirective",
+        "scope": 14116,
+        "sourceUnit": 14925,
+        "src": "62:78:44",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "id": 14108,
+              "name": "ISuperToken",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "src": "75:11:44",
+              "typeDescriptions": {}
+            }
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": true,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 14110,
+          "nodeType": "StructuredDocumentation",
+          "src": "143:489:44",
+          "text": " @dev Custom super token base contract\n NOTE:\n - Because of how solidity is layouting its storages variables and custom\n   super token inherits the Super Token standard implementation, so it is\n   required that the custom token proxy would need to pad its implementation\n   with reserved storages used by the Super Token implementation.\n - You will need to append your own proxy implementation after the base\n   - Refer to SETH.sol for an example how it is used."
+        },
+        "fullyImplemented": true,
+        "id": 14115,
+        "linearizedBaseContracts": [
+          14115
+        ],
+        "name": "CustomSuperTokenBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 14114,
+            "mutability": "mutable",
+            "name": "_storagePaddings",
+            "nodeType": "VariableDeclaration",
+            "scope": 14115,
+            "src": "756:37:44",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_uint256_$32_storage",
+              "typeString": "uint256[32]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 14111,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "756:7:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "id": 14113,
+              "length": {
+                "hexValue": "3332",
+                "id": 14112,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "kind": "number",
+                "lValueRequested": false,
+                "nodeType": "Literal",
+                "src": "764:2:44",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_rational_32_by_1",
+                  "typeString": "int_const 32"
+                },
+                "value": "32"
+              },
+              "nodeType": "ArrayTypeName",
+              "src": "756:11:44",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_uint256_$32_storage_ptr",
+                "typeString": "uint256[32]"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 14116,
+        "src": "633:163:44"
+      }
+    ],
+    "src": "35:762:44"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/interfaces/superfluid/CustomSuperTokenBase.sol",
+      "exportedSymbols": {
+        "CustomSuperTokenBase": [
+          14115
+        ],
+        "ISuperToken": [
+          14924
+        ]
+      },
+      "license": "AGPLv3"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            ">=",
+            "0.7",
+            ".0"
+          ]
+        },
+        "id": 14107,
+        "name": "PragmaDirective",
+        "src": "35:25:44"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 14925,
+          "absolutePath": "project:/contracts/interfaces/superfluid/ISuperToken.sol",
+          "file": "../../interfaces/superfluid/ISuperToken.sol",
+          "scope": 14116,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "value": "ISuperToken"
+                },
+                "id": 14108,
+                "name": "Identifier",
+                "src": "75:11:44"
+              }
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 14109,
+        "name": "ImportDirective",
+        "src": "62:78:44"
+      },
+      {
+        "attributes": {
+          "abstract": true,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            14115
+          ],
+          "name": "CustomSuperTokenBase",
+          "scope": 14116
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": " @dev Custom super token base contract\n NOTE:\n - Because of how solidity is layouting its storages variables and custom\n   super token inherits the Super Token standard implementation, so it is\n   required that the custom token proxy would need to pad its implementation\n   with reserved storages used by the Super Token implementation.\n - You will need to append your own proxy implementation after the base\n   - Refer to SETH.sol for an example how it is used."
+            },
+            "id": 14110,
+            "name": "StructuredDocumentation",
+            "src": "143:489:44"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "mutable",
+              "name": "_storagePaddings",
+              "scope": 14115,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "uint256[32]",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "uint256[32]"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 14111,
+                    "name": "ElementaryTypeName",
+                    "src": "756:7:44"
+                  },
+                  {
+                    "attributes": {
+                      "hexvalue": "3332",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "token": "number",
+                      "type": "int_const 32",
+                      "value": "32"
+                    },
+                    "id": 14112,
+                    "name": "Literal",
+                    "src": "764:2:44"
+                  }
+                ],
+                "id": 14113,
+                "name": "ArrayTypeName",
+                "src": "756:11:44"
+              }
+            ],
+            "id": 14114,
+            "name": "VariableDeclaration",
+            "src": "756:37:44"
+          }
+        ],
+        "id": 14115,
+        "name": "ContractDefinition",
+        "src": "633:163:44"
+      }
+    ],
+    "id": 14116,
+    "name": "SourceUnit",
+    "src": "35:762:44"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.7.6+commit.7338295f.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.4",
+  "updatedAt": "2022-02-01T14:35:44.345Z",
+  "devdoc": {
+    "details": "Custom super token base contract NOTE: - Because of how solidity is layouting its storages variables and custom   super token inherits the Super Token standard implementation, so it is   required that the custom token proxy would need to pad its implementation   with reserved storages used by the Super Token implementation. - You will need to append your own proxy implementation after the base   - Refer to SETH.sol for an example how it is used.",
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}

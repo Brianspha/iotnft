@@ -37,26 +37,7 @@ export default {
         case "4690":
           this.$store.state.connected = true;
           break;
-        default:
-          if (!this.$store.state.connected) {
-            window.ethereum.request({
-              method: "wallet_addEthereumChain",
-              params: [
-                {
-                  chainId: "0x1252",
-                  chainName: "IOTEXT Testnet",
-                  nativeCurrency: {
-                    name: "IOTEXT",
-                    symbol: "IOTX",
-                    decimals: 18,
-                  },
-                  rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                  blockExplorerUrls: ["https://testnet.iotexscan.io/"],
-                },
-              ],
-            });
-          }
-          break; /*;*/
+     
       }
     },
     "$store.state.selectedNFT.userAddress": async function(val) {
@@ -139,17 +120,7 @@ export default {
     authenticate() {
       this.$store.state.isLoading = true;
       let _this = this;
-      _this.$store.state.ceramicClient.did
-        .authenticate()
-        .then(async (res, error) => {
-          this.init()
-            .then(async (res, err) => {
-              _this.$store.state.isLoading = false;
-            })
-            .catch((error) => {
-              _this.$store.state.isLoading = false;
-            });
-        });
+      this.init()
     },
     getRandomInRange(from, to, fixed) {
       return (Math.random() * (to - from) + from).toFixed(fixed) * 1;

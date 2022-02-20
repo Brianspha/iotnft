@@ -1,80 +1,28 @@
-import { Contract, ContractFactory, BigNumber } from "ethers";
+const hre = require("hardhat");
 
-// Our contracts
-import IOTNFT from "../build/contracts/IOTNFT.json";
-import TokenContract from "../build/contracts/TokenContract.json";
+// We will deploy Token contract with Bob
+// It is going to have the pool of 1000000 tokens
+async function main() {
+  // define your testnet_account in hardhat.config.js and replace alice 
+  const testnetAccount = await hre.reef.getSignerByName("alice");
+  await testnetAccount.claimDefaultAccount();
 
-import setup from "./setup";
-
-const dollar = BigNumber.from("10000000000000");
-
-const main = async () => {
-  const { wallet, provider } = await setup();
-  const deployerAddress = await wallet.getAddress();
-
-  const tokenReef = await ContractFactory.fromSolidity(Token)
-    .connect(wallet)
-    .deploy(dollar.mul(1000));
-
-  const tokenErc = await ContractFactory.fromSolidity(Token)
-    .connect(wallet)
-    .deploy(dollar.mul(1000));
-
-  // deploy factory
-  const factory = await ContractFactory.fromSolidity(ReefswapFactory)
-    .connect(wallet)
-    .deploy(deployerAddress);
-
-  // deploy router
-  const router = await ContractFactory.fromSolidity(ReefswapRouter)
-    .connect(wallet)
-    .deploy(factory.address, tokenReef.address);
+  const TokenContract = await hre.reef.getContractFactory("TokenContract", testnetAccount);
+  const token = await TokenContract.deploy("IOTNFT", "IOTNFT");
 
   console.log("Deploy done");
   console.log({
-    tokenReef: tokenReef.address,
-    tokenErc: tokenErc.address,
-    factory: factory.address,
-    router: router.address,
-    deployerAddress: deployerAddress,
+    token: token.address,
   });
-
-  // approve
-  await tokenReef.approve(router.address, dollar.mul(100));
-  await tokenErc.approve(router.address, dollar.mul(100));
-
-  console.log("Approve successful");
-  // add liquidity
-  await router.addLiquidity(
-    tokenReef.address,
-    tokenErc.address,
-    dollar.mul(2),
-    dollar,
-    0,
-    0,
-    deployerAddress,
-    10000000000
-  );
-
-  console.log("AddLiquidity successful");
-  // check
-  const tradingPairAddress = await factory.getPair(
-    tokenReef.address,
-    tokenErc.address
-  );
-  const tradingPair = new Contract(tradingPairAddress, Token.abi, wallet);
-  const lpTokenAmount = await tradingPair.balanceOf(deployerAddress);
-  const reefAmount = await tokenReef.balanceOf(tradingPairAddress);
-  const ercAmount = await tokenErc.balanceOf(tradingPairAddress);
-
   console.log({
-    tradingPair: tradingPairAddress,
-    lpTokenAmount: lpTokenAmount.toString(),
-    liquidityPoolReefAmount: reefAmount.toString(),
-    liquidityPoolErcAmount: ercAmount.toString(),
+    name: await token.name(),
+    initialBalance: (await token.totalSupply()).toString(),
   });
+}
 
-  provider.api.disconnect();
-};
-
-main();
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

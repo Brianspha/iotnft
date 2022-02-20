@@ -7,7 +7,7 @@ import {
   import { createTestPairs } from "@polkadot/keyring/testingPairs";
   import { KeyringPair } from "@polkadot/keyring/types";
   
-  const WS_URL = process.env.WS_URL || "ws://127.0.0.1:9944";
+  const WS_URL = process.env.WS_URL || "wss://rpc-testnet.reefscan.com/ws";
   const seed = process.env.SEED;
   
   const setup = async () => {

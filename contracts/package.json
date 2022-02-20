@@ -10,7 +10,7 @@
     "iotex": "embark reset && embark build iotex",
     "ropsten": "embark reset && embark build ropsten",
     "harmony": "embark reset && embark build harmony",
-    "iotex-deploy":"truffle deploy --reset --network iotex"
+    "iotex-deploy": "truffle deploy --reset --network iotex"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
     "embarkjs": "^6.0.0",
     "embarkjs-ens": "^6.0.0",
     "embarkjs-web3": "^6.0.0",
+    "hardhat": "^2.8.4",
     "yarn-upgrade-all": "^0.5.4"
   },
   "dependencies": {
@@ -36,6 +37,8 @@
     "web3-eth": "^1.5.2",
     "web3-eth-contract": "^1.7.0",
     "web3-providers-http": "^1.7.0",
-    "web3-utils": "^1.4.0"
+    "web3-utils": "^1.4.0",
+    "@reef-defi/hardhat-reef": "^1.0.8"
+
   }
 }

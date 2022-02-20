@@ -97,6 +97,63 @@ const store = new Vuex.Store({
   plugins: [createPersistedState()],
   modules: {},
   actions: {
+    loadSkyData:async function(){
+      var content = await store.dispatch("getSkyData");
+  /*    content.data = [];
+      content.leaderboard = [];
+      await store.dispatch("saveSkyData", content);  */
+      console.log("foundData: ", content.data);
+      console.log("foundData: ", content.data);
+      for (var index in content.data) {
+        var data = content.data[index];
+        if (
+          data.userAddress.toUpperCase() ===
+          store.state.userAddress.toUpperCase()
+        ) {
+          store.state.userData = data;
+        }
+        data.data.map((nft) => {
+          nft.nfts.map((minted) => {
+            console.log("dappNFTs: ", minted);
+            store.state.dappNFTs.push(minted);
+          });
+        });
+      }
+      for (
+        var indexInner = 0;
+        indexInner < store.state.dappNFTs.length;
+        indexInner++
+      ) {
+        await store.state.ionftContract.methods
+          .getTokenDetails(store.state.dappNFTs[indexInner].tokenId)
+          .call({ from: store.state.userAddress, gas: 6000000 })
+          .then((details, error) => {
+            store.state.dappNFTs[indexInner].price = new bigNumber(
+              store.state.etherConverter(details[1], "wei", "eth")
+            ).toFixed(7);
+            store.state.dappNFTs[indexInner].originalPrice = new bigNumber(
+              store.state.etherConverter(details[2], "wei", "eth")
+            ).toFixed(7);
+            store.state.dappNFTs[indexInner].owner = details[0];
+            store.state.dappNFTs[indexInner].isDelegated = details[4];
+          })
+          .catch((error) => {
+            console.log("error getting token details: ", error);
+            delete store.state.dappNFTs[index];
+          });
+      }
+
+      /*  if (store.state.dappNFTs.length === 0) {
+        store.dispatch("warning", {
+          warning: "Seems like arent any listed IONFTs",
+          onTap: function() {},
+        });
+      }*/
+      console.log("dappNFTs: ", store.state.dappNFTs);
+      store.state.deviceData = store.state.dappNFTs;
+      store.state.allDAppNFTs = store.state.dappNFTs;
+      store.state.isLoading = false;
+    },
     loadData: async function() {
       console.log("fetching data");
       store.state.dappNFTs = [];
@@ -104,7 +161,7 @@ const store = new Vuex.Store({
       var content = await store.dispatch("getCeramicData");
       /*  content.data = [];
       content.leaderboard = [];
-      await store.dispatch("saveCeramicData", content);*/
+      await store.dispatch("saveSkyData", content);*/
       console.log("foundData: ", content.data);
       for (var index in content.data) {
         var data = content.data[index];

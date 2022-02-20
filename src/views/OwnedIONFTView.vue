@@ -108,7 +108,7 @@ export default {
       var content = await this.$store.dispatch("getCeramicData");
       /* content.data = [];
       content.leaderboard = [];
-      await this.$store.dispatch("saveCeramicData", content);*/
+      await this.$store.dispatch("saveSkyData", content);*/
       for (var index in content.data) {
         var data = content.data[index];
         if (data.userAddress === _this.$store.state.userAddress) {

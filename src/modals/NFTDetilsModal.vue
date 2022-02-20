@@ -321,7 +321,7 @@ export default {
                   ionfts_bought: price,
                 });
               }
-              await _this.$store.dispatch("saveCeramicData", content);
+              await _this.$store.dispatch("saveSkyData", content);
               _this.$store.state.isLoading = false;
               _this.$store.dispatch(
                 "success",
@@ -485,7 +485,7 @@ export default {
             console.log("content.data[index]: ", content.data[index]);
           }
 
-          await _this.$store.dispatch("saveCeramicData", content);
+          await _this.$store.dispatch("saveSkyData", content);
           _this.$store.state.isLoading = false;
           _this.$store.dispatch("success", "Succesfully burnt IOTNFT token");
           //_this.$store.state.showNFTDetailsDialog = false;

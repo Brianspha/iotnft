@@ -32,7 +32,7 @@
     "key-did-resolver": "^1.4.0",
     "leaflet": "^1.7.1",
     "local-cors-proxy": "^1.1.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "morgan": "^1.10.0",
     "node-random-name": "^1.0.1",
     "protobufjs": "^6.11.2",

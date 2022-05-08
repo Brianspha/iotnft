@@ -97,14 +97,50 @@ const store = new Vuex.Store({
   plugins: [createPersistedState()],
   modules: {},
   actions: {
+    getUserDevices: async function () {
+      store.state.isLoading = true;
+      const axios = require("axios").default;
+      var data = JSON.stringify({
+        operationName: "getDevices",
+        variables: {},
+        query: `query getDevices {\n  pebble_device(limit: 10, where: {owner: {_eq: "${store.state.userAddress}"}}) {\n    id\n    owner\n  }\n}\n`,
+      });
+      axios({
+        method: "post",
+        url: process.env.VUE_APP_APP_GRAPHQL_URL_DEV,
+        data: data,
+      })
+        .then(async (devices) => {
+          console.log("devices: ", devices);
+          if (
+            Object.prototype.hasOwnProperty.call(devices.data, "error") ||
+            devices.data.data.pebble_device.length === 0
+          ) {
+            console.log("no devices found for this user");
+            //  this.$store.state.userData.imeis=["100000000000225", "100000000000211"]
+          } else {
+            console.log("found user device: ", devices.data.data.pebble_device);
+            store.state.userData.imeis = devices.data.data.pebble_device.map(
+              (device) => {
+                return device.id;
+              }
+            );
+          }
+        })
+        .catch((error) => {
+          console.log("error getting user registred devices: ", error);
+          store.state.isLoading = false;
+        });
+    },
     loadData: async function() {
       console.log("fetching data");
       store.state.dappNFTs = [];
       store.state.isLoading = true;
       var content = await store.dispatch("getCeramicData");
-      /*  content.data = [];
-      content.leaderboard = [];
-      await store.dispatch("saveCeramicData", content);*/
+      /* content.data = [];
+         content.leaderboard = [];
+         await store.dispatch("saveCeramicData", content);
+      */
       console.log("foundData: ", content.data);
       for (var index in content.data) {
         var data = content.data[index];

@@ -7,25 +7,31 @@
       <v-spacer></v-spacer>
       <v-btn
         style="
-          background-color:#6bdcc6;color:
-            white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
+          background-color: #6bdcc6;
+          color: white;
+          border-radius: 5px;
+          font-style: italic;
+          border-color: #699c79;
+          border-width: 1px;
+          font-family: cursive;
+          font-weight: bold;
+          color: white;
         "
         outlined
         href="./index.html"
         >Home</v-btn
       >
-      <div style="padding-right:1.5%;"></div>
+      <div style="padding-right: 1.5%"></div>
     </v-row>
     <v-row>
       <div
         class="font-italic"
-        style="font-family:cursive; font-size:19px; font-weight:bold; color:rgb(82, 78, 78);"
+        style="
+          font-family: cursive;
+          font-size: 19px;
+          font-weight: bold;
+          color: rgb(82, 78, 78);
+        "
       >
         <span style="color: #ff0080">Visit</span> your favourite locations ,
         <span style="color: #68b37e">mint </span>your GPS positions,<span
@@ -36,56 +42,55 @@
       </div>
     </v-row>
 
-    <v-row style="padding-top:2%;"
+    <v-row style="padding-top: 2%"
       ><div
         class="font-italic"
-        style="
-            font-size: 25px;
-            font-family:cursive;
-            color:rgb(82, 78, 78);
-        "
+        style="font-size: 25px; font-family: cursive; color: rgb(82, 78, 78)"
       >
         On Sale:
       </div></v-row
     >
-    <v-row style="padding-top:1%;padding-bottom:1%;">
-      <div style="padding-left: .4%;"></div>
+    <v-row style="padding-top: 1%; padding-bottom: 1%">
+      <div style="padding-left: 0.4%"></div>
       <v-divider></v-divider>
-      <div style="padding-right: .9%;"></div>
+      <div style="padding-right: 0.9%"></div>
     </v-row>
-    <map-component :mapData="$store.state.dappNFTs" nonNFTIcon="https://siasky.net/EABBmSDVOAhhqOUk4yF5K5OqXNeGZXTEkrnDYmI72rvB0A"/>
-    <v-row style="padding-top: 5%;" align="center">
-      <div style="padding-left:1%;"></div>
+    <map-component
+      :mapData="$store.state.dappNFTs"
+      nonNFTIcon="https://siasky.net/EABBmSDVOAhhqOUk4yF5K5OqXNeGZXTEkrnDYmI72rvB0A"
+    />
+    <v-row style="padding-top: 5%" align="center">
+      <div style="padding-left: 1%"></div>
       <div
         v-if="$store.state.connected"
         style="
-                font-family:cursive;
-                font-style: italic;
-                padding-right:1%;
-                font-weight:bold;
-              "
+          font-family: cursive;
+          font-style: italic;
+          padding-right: 1%;
+          font-weight: bold;
+        "
       >
         {{
           $store.state.userAddress.substring(0, 5) +
-            "...." +
-            $store.state.userAddress.substring(
-              $store.state.userAddress.length - 4,
-              $store.state.userAddress.length
-            )
+          "...." +
+          $store.state.userAddress.substring(
+            $store.state.userAddress.length - 4,
+            $store.state.userAddress.length
+          )
         }}
       </div>
       <v-btn
         v-if="$store.state.connected"
         style="
-            background-color:#6bdcc6;color:
-            white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-
+          background-color: #6bdcc6;
+          color: white;
+          border-radius: 5px;
+          font-style: italic;
+          border-color: #699c79;
+          border-width: 1px;
+          font-family: cursive;
+          font-weight: bold;
+          color: white;
         "
         outlined
         disabled
@@ -94,18 +99,18 @@
       <v-btn
         v-else
         style="
-            background-color:#6bdcc6;color:
-            white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-
+          background-color: #6bdcc6;
+          color: white;
+          border-radius: 5px;
+          font-style: italic;
+          border-color: #699c79;
+          border-width: 1px;
+          font-family: cursive;
+          font-weight: bold;
+          color: white;
         "
         outlined
-        @click="connectWallet()"
+        @click="$store.dispatch('connectWallet')"
         >Connect Wallet</v-btn
       >
       <v-spacer></v-spacer>
@@ -117,21 +122,21 @@
         label="Show my locations only"
       ></v-switch>
     </v-row>
-    <v-row style="padding-top:2%;padding-bottom:2%;"
+    <v-row style="padding-top: 2%; padding-bottom: 2%"
       ><div
         class="font-italic"
         style="
-            font-size: 25px;
-            font-family:cursive;
-            color:rgb(82, 78, 78);
-            padding-left:1%;
+          font-size: 25px;
+          font-family: cursive;
+          color: rgb(82, 78, 78);
+          padding-left: 1%;
         "
       >
         On Sale:
       </div></v-row
     >
-    <v-divider style="padding-bottom:2%;"></v-divider>
-    <device-data-view/>
+    <v-divider style="padding-bottom: 2%"></v-divider>
+    <device-data-view />
     <MintNFTModal />
     <NFTDetilsModal />
     <DeviceDetailsModal />
@@ -151,8 +156,9 @@ import {
 import MintNFTModal from "../modals/MintNFTModal.vue";
 import NFTDetilsModal from "../modals/NFTDetilsModal.vue";
 import DeviceDetailsModal from "../modals/DeviceDetailsModal.vue";
-import MapComponent from '../components/MapComponent.vue';
-import DeviceDataView from './DeviceDataView.vue';
+import MapComponent from "../components/MapComponent.vue";
+import DeviceDataView from "./DeviceDataView.vue";
+
 export default {
   components: {
     LMap,
@@ -168,7 +174,7 @@ export default {
     DeviceDataView,
   },
   watch: {
-    "$store.state.showMyLocationsOnly": function(val) {
+    "$store.state.showMyLocationsOnly": function (val) {
       console.log("changed value: ", val);
     },
   },
@@ -182,7 +188,7 @@ export default {
   },
   data() {
     return {
-      deviceData:[],
+      deviceData: [],
       mapKey: 0,
       show: false,
       zoom: 3,
@@ -214,31 +220,9 @@ export default {
     };
   },
   created() {
-    this.$store.dispatch("loadData");
+    this.$store.dispatch("getSkyData");
   },
   methods: {
-    connectWallet: async function() {
-      this.$store.state.isLoading = true;
-      if (typeof ethereum !== "undefined") {
-        try {
-          await ethereum.enable();
-          this.$store.state.userAddress = window.web3.eth.getDefaultAccount;
-          this.$store.state.connected = true;
-          console.log("found default account: ", this.$store.state.userAddress);
-        } catch (error) {
-          this.$store.state.isLoading = false;
-          this.$store.dispatch("error", {
-            error: "There was an error getting enabling metamask",
-          });
-        }
-      } else {
-        this.$store.state.isLoading = false;
-        this.$store.dispatch(
-          "errorWithFooterMetamask",
-          "Seems like you dont have metamask installed please use the below link to download"
-        );
-      }
-    },
     zoomUpdate(zoom) {
       this.currentZoom = zoom;
     },

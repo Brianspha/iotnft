@@ -23,7 +23,6 @@
   </v-app>
 </template>
 <script>
-
 import Web3 from "web3";
 import EmbarkJS from "../contracts/embarkArtifacts/embarkjs";
 import MintNFTModal from "./modals/MintNFTModal.vue";
@@ -66,7 +65,7 @@ export default {
     "$store.state.connected": async function(val) {
       console.log("$store.state.connected changed value: ", val);
       if (val) {
-        await this.getUserDevices();
+        await this.$store.dispatch("getUserDevices");
         await this.$store.dispatch("loadData");
       }
     },
@@ -76,66 +75,11 @@ export default {
     this.authenticate();
   },
   mounted() {
-   /* this.$store.dispatch("warning", {
+    /* this.$store.dispatch("warning", {
       warning: "Please note the website is still under development",
     });*/
   },
   methods: {
-    getUserDevices: async function() {
-      this.$store.state.isLoading = true;
-      const axios = require("axios").default;
-      var data = JSON.stringify({
-        operationName: null,
-        variables: {
-          v1: {
-            _or: [
-              {
-                proposer: { _eq: this.$store.state.userAddress },
-              },
-              { owner: { _eq: this.$store.state.userAddress } },
-            ],
-          },
-          v2: 1,
-          v3: [{ timestamp: "desc" }],
-          v4: {
-            _or: [
-              {
-                proposer: { _eq: this.$store.state.userAddress },
-              },
-              { owner: { _eq: this.$store.state.userAddress } },
-            ],
-          },
-        },
-        query: `query($v1:pebble_device_bool_exp,$v2:Int,$v3:[pebble_device_record_order_by!],$v4:pebble_device_bool_exp){pebble_device(where:$v1){id,owner,address,proposer,firmware,real_firmware,name,avatar,type,status,state,updated_at,upload_period,total_gas,beep,bulk_upload,data_channel,deviceRecord(limit:$v2,order_by:$v3){vbat,gas_resistance,temperature,temperature2,pressure,humidity,light,gyroscope,latitude,longitude,timestamp}},pebble_device_aggregate(where:$v4){aggregate{count}}}`,
-
-        //  query: `query getDevices {\n  pebble_device(limit: 10, where: {owner: {_eq: ${this.$store.state.userAddress}}}) {\n    id\n    owner\n  }\n}\n`,
-      });
-      axios({
-        method: "post",
-        url: process.env.VUE_APP_APP_GRAPHQL_URL_DEV,
-        data: data,
-      })
-        .then(async (devices) => {
-          if (
-            Object.prototype.hasOwnProperty.call(devices.data, "error") ||
-            devices.data.data.pebble_device.length === 0
-          ) {
-            console.log("no devices found for this user");
-          //  this.$store.state.userData.imeis=["100000000000225", "100000000000211"]
-          } else {
-            console.log("found user device: ", devices.data.data.pebble_device);
-            this.$store.state.userData.imeis = devices.data.data.pebble_device.map(
-              (device) => {
-                return device.id;
-              }
-            );
-          }
-        })
-        .catch((error) => {
-          console.log("error getting user registred devices: ", error);
-          this.$store.state.isLoading = false;
-        });
-    },
     authenticate() {
       this.$store.state.isLoading = true;
       let _this = this;

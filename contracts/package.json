@@ -10,7 +10,7 @@
     "iotex": "embark reset && embark build iotex",
     "ropsten": "embark reset && embark build ropsten",
     "harmony": "embark reset && embark build harmony",
-    "iotex-deploy":"truffle deploy --reset --network iotex"
+    "iotex-deploy": "truffle deploy --reset --network iotex"
   },
   "keywords": [],
   "author": "",
@@ -28,7 +28,7 @@
     "yarn-upgrade-all": "^0.5.4"
   },
   "dependencies": {
-    "@truffle/hdwallet-provider": "^2.0.1",
+    "@truffle/hdwallet-provider": "^2.0.8",
     "bignumber.js": "^9.0.1",
     "dotenv": "^10.0.0",
     "embark-solc": "^6.0.0",

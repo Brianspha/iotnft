@@ -7,14 +7,13 @@
     >
       <v-card>
         <v-card-title
-          style=" font-size:25px;  font-style: italic;
-            font-family:cursive;"
+          style="font-size: 25px; font-style: italic; font-family: cursive"
         >
           NFT Details
         </v-card-title>
         <v-card-text
           ><v-form ref="form" v-model="valid" lazy-validation>
-            <v-row style="padding-bottom:40px;"
+            <v-row style="padding-bottom: 40px"
               ><vue-css-doodle
                 ref="doodle"
                 :key="$store.state.selectedNFT.colorPallet"
@@ -30,7 +29,7 @@
             ></v-text-field>
             <v-text-field
               v-model="$store.state.selectedNFT.price"
-              label="NFT Price (IOTEX)"
+              label="NFT Price (ETH)"
               readonly
               :color="$store.state.primaryColor"
             ></v-text-field>
@@ -50,14 +49,6 @@
               v-model="$store.state.selectedNFT.longitude"
               label="Latitude"
               readonly
-              :color="$store.state.primaryColor"
-            ></v-text-field>
-            <v-text-field
-              v-if="$store.state.userAddress !== $store.state.selectedNFT.owner"
-              v-model="offerPrice"
-              :rules="priceRules"
-              label="Price Offering (IOTEX)"
-              required
               :color="$store.state.primaryColor"
             ></v-text-field>
             <v-text-field
@@ -98,7 +89,7 @@
               <v-tooltip v-model="showToolTip" top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    style="padding-left:30px;"
+                    style="padding-left: 30px"
                     width="4px"
                     height="4px"
                     color="#699c79"
@@ -106,14 +97,12 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon small color="#699c79">
-                      mdi-alert-circle
-                    </v-icon>
+                    <v-icon small color="#699c79"> mdi-alert-circle </v-icon>
                   </v-btn>
                 </template>
                 <span
                   >Delagating to contract means you intend on allowing others to
-                  purchase the NFT from IONFT</span
+                  purchase the NFT from IOTNFT</span
                 >
               </v-tooltip></v-row
             >
@@ -122,33 +111,35 @@
         <v-row align="center" justify="center"
           ><v-btn
             style="
-            background-color:#383838;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-        "
+              background-color: #383838;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
             @click="save"
             >Save AS PNG</v-btn
           >
-          <div style="padding-left:15px;"></div>
+          <div style="padding-left: 15px"></div>
           <v-btn
             style="
-            background-color:#6bdcc6;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-        "
+              background-color: #6bdcc6;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
             v-if="
               valid &&
-                $store.state.userAddress === $store.state.selectedNFT.owner
+              $store.state.userAddress === $store.state.selectedNFT.owner
             "
             :color="$store.state.secondaryColor"
             @click="delegate"
@@ -159,6 +150,8 @@
                 : "Delegate"
             }}
           </v-btn>
+          <div style="padding-left: 1%"></div>
+       
         </v-row>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -173,19 +166,20 @@
           </v-btn>
           <v-btn
             style="
-            background-color:#6bdcc6;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-        "
+              background-color: #6bdcc6;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
             v-if="
               valid &&
-                $store.state.userAddress === $store.state.selectedNFT.owner &&
-                !$store.state.selectedNFT.isDelegated
+              $store.state.userAddress === $store.state.selectedNFT.owner &&
+              !$store.state.selectedNFT.isDelegated
             "
             @click="burnNFT"
           >
@@ -193,19 +187,42 @@
           </v-btn>
           <v-btn
             style="
-            background-color:#6bdcc6;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-        "
+              background-color: #a6dbd1;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
             v-if="
               valid &&
-                $store.state.userAddress !== $store.state.selectedNFT.owner &&
-                $store.state.selectedNFT.isDelegated
+              $store.state.userAddress !== $store.state.selectedNFT.owner &&
+              $store.state.selectedNFT.isDelegated
+            "
+            :color="$store.state.primaryColor"
+            @click="rentNFT"
+          >
+            Rent NFT
+          </v-btn>
+          <v-btn
+            style="
+              background-color: #6bdcc6;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
+            v-if="
+              valid &&
+              $store.state.userAddress !== $store.state.selectedNFT.owner &&
+              $store.state.selectedNFT.isDelegated
             "
             :color="$store.state.primaryColor"
             @click="purchase"
@@ -217,7 +234,6 @@
     </v-dialog>
   </v-row>
 </template>
-
 <script>
 import bigNumber from "bignumber.js";
 

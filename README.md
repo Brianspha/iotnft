@@ -7,8 +7,7 @@ Coming soon
 
 
 ### Demo (video click on image to open)
-<a href=https://siasky.net/AAA6pxsOZXghhQYr5SCj8ulCvimULeb9Vz_Gbx2x_AuQrg
-" title="video text"><img src="https://siasky.net/fAbpdNQG3NUbA6f8sX82S5WsAiZFi5UBvs2XtiWcH2XBvA" /></a>
+<a href=https://siasky.net/AAA6pxsOZXghhQYr5SCj8ulCvimULeb9Vz_Gbx2x_AuQrg" title="video text"><img src="https://siasky.net/fAbpdNQG3NUbA6f8sX82S5WsAiZFi5UBvs2XtiWcH2XBvA" /></a>
 
 
 ## Deployments (Contracts- IOTEX Testnet)

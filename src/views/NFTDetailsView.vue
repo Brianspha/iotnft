@@ -25,7 +25,7 @@
             ></v-text-field>
             <v-text-field
               v-model="$store.state.selectedNFT.price"
-              label="NFT Price (IOTEX)"
+              label="NFT Price (ETH)"
               readonly
               :color="$store.state.primaryColor"
             ></v-text-field>
@@ -51,7 +51,7 @@
               v-if="$store.state.userAddress !== $store.state.selectedNFT.owner"
               v-model="offerPrice"
               :rules="priceRules"
-              label="Price Offering (IOTEX)"
+              label="Price Offering (ETH)"
               required
               :color="$store.state.primaryColor"
             ></v-text-field>

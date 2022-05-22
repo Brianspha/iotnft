@@ -10,6 +10,7 @@
     "iotex": "embark reset && embark build iotex",
     "ropsten": "embark reset && embark build ropsten",
     "harmony": "embark reset && embark build harmony",
+    "matic": "embark reset && embark build matic",
     "iotex-deploy": "truffle deploy --reset --network iotex"
   },
   "keywords": [],

@@ -51,6 +51,12 @@
               readonly
               :color="$store.state.primaryColor"
             ></v-text-field>
+              <v-text-field
+               v-if="$store.state.userAddress !== $store.state.selectedNFT.owner"
+              v-model="offerPrice"
+              label="Offer Price (ETH)"
+              :color="$store.state.primaryColor"
+            ></v-text-field>
             <v-text-field
               v-if="$store.state.userAddress !== $store.state.selectedNFT.owner"
               v-model="twitterUserName"
@@ -185,28 +191,7 @@
           >
             Burn
           </v-btn>
-          <v-btn
-            style="
-              background-color: #a6dbd1;
-              color: white;
-              border-radius: 5px;
-              font-style: italic;
-              border-color: #699c79;
-              border-width: 1px;
-              font-family: cursive;
-              font-weight: bold;
-              color: white;
-            "
-            v-if="
-              valid &&
-              $store.state.userAddress !== $store.state.selectedNFT.owner &&
-              $store.state.selectedNFT.isDelegated
-            "
-            :color="$store.state.primaryColor"
-            @click="rentNFT"
-          >
-            Rent NFT
-          </v-btn>
+       
           <v-btn
             style="
               background-color: #6bdcc6;
@@ -316,7 +301,7 @@ export default {
                 "wei",
                 "eth"
               );
-              var content = await this.$store.dispatch("getCeramicData");
+              var content = await this.$store.dispatch("getTextileData");
               var found = false;
               _this.$store.state.selectedNFT.owner =
                 _this.$store.state.userAddress;
@@ -337,7 +322,7 @@ export default {
                   ionfts_bought: price,
                 });
               }
-              await _this.$store.dispatch("saveCeramicData", content);
+              await _this.$store.dispatch("saveTextileData", content);
               _this.$store.state.isLoading = false;
               _this.$store.dispatch(
                 "success",
@@ -345,6 +330,7 @@ export default {
               );
               _this.$store.state.reload = true;
               _this.$store.state.selectedNFT = {};
+              window.location.reload();
               //_this.$store.state.showNFTDetailsDialog = false;
             })
             .catch((error) => {
@@ -465,7 +451,7 @@ export default {
           gas: 6000000,
         })
         .then(async (receipt, error) => {
-          var content = await this.$store.dispatch("getCeramicData");
+          var content = await this.$store.dispatch("getTextileData");
           content.leaderboard.map((user) => {
             if (user.wallet === _this.$store.state.userAddress) {
               user.ionfts_minted--;
@@ -501,7 +487,7 @@ export default {
             console.log("content.data[index]: ", content.data[index]);
           }
 
-          await _this.$store.dispatch("saveCeramicData", content);
+          await _this.$store.dispatch("saveTextileData", content);
           _this.$store.state.isLoading = false;
           _this.$store.dispatch("success", "Succesfully burnt IOTNFT token");
           //_this.$store.state.showNFTDetailsDialog = false;

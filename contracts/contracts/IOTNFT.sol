@@ -25,10 +25,10 @@ contract IOTNFT is
 {
     using SafeMathV2 for uint256;
 
-    /*==========================================================Modifier definition start==========================================================*/
+    /*//************************************Modifier definition start//*************************************/
 
-    /*==========================================================Event definition start==========================================================*/
-    /*==========================================================Variable definition start==========================================================*/
+    /*//************************************Event definition start//*************************************/
+    /*//************************************Variable definition start//*************************************/
     uint256 public transactionFees = 0;
     uint256 public minMintCost = 0.01 ether;
     uint256 public contractCut = 3500;
@@ -39,7 +39,7 @@ contract IOTNFT is
     mapping(uint256 => IOTNFT) currentIONFTs;
     mapping(address => Minter) minters;
 
-    /*==========================================================Function definition start==========================================================*/
+    /*//************************************Function definition start//*************************************/
     constructor(address tokenAddress) public initializer {
         require(tokenAddress != address(0), "Invalid token address");
         require(msg.sender != address(0), "Invalid sender address");

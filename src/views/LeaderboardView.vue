@@ -43,12 +43,12 @@ export default {
           value: "rank",
         },
         {
-          text: "Wallet (IOTEX)",
+          text: "Wallet (ETH)",
           value: "wallet",
           sortable: false,
         },
         { text: "Twitter", value: "twitter_username" },
-        { text: "Total Bought(IOTEX)", value: "ionfts_bought" },
+        { text: "Total Bought(ETH)", value: "ionfts_bought" },
         { text: "IONFTS Minted", value: "ionfts_minted" },
       ];
     },
@@ -71,7 +71,7 @@ export default {
     init: async function() {
       this.$store.state.isLoading = true;
       let _this = this;
-      var data = await this.$store.dispatch("getCeramicData");
+      var data = await this.$store.dispatch("getTextileData");
       console.log("getCeramicData: ", data);
       if (data.leaderboard.length > 0) {
         this.data.users = data.leaderboard.sort(

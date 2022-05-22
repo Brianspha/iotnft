@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import Vue from "vue";
 import Vuex from "vuex";
 import swal from "sweetalert2";
@@ -10,7 +12,17 @@ import KeyDidResolver from "key-did-resolver";
 import ThreeIdResolver from "@ceramicnetwork/3id-did-resolver";
 import { DID } from "dids";
 import { TileDocument } from "@ceramicnetwork/stream-tile";
+import Web3 from 'web3'
+import detectEthereumProvider from "@metamask/detect-provider";
 const bigNumber = require("bignumber.js");
+import {
+  createNewClient,
+  getAllPebbles,
+  getThread,
+  updatePebble,
+  createEntity,
+  setup
+} from "../textile/textile"
 const resolver = {
   ...KeyDidResolver.getResolver(),
   ...ThreeIdResolver.getResolver(ceramic),
@@ -97,6 +109,43 @@ const store = new Vuex.Store({
   plugins: [createPersistedState()],
   modules: {},
   actions: {
+    connectWallet: async function () {
+      store.state.isLoading = true;
+      const provider = await detectEthereumProvider();
+      console.log("provider: ", provider);
+      if (provider) {
+        try {
+          var web3Instance = new Web3(window.web3.currentProvider);
+          window.web3 = web3Instance;
+          const accounts = await window.ethereum.request({
+            method: "eth_requestAccounts",
+          });
+          console.log("window.web3.eth.getDefaultAccount: ", accounts);
+          window.web3.eth.defaultAccount = accounts[0];
+          store.state.userAddress = window.web3.eth.defaultAccount;
+          console.log("found default account: ", store.state.userAddress);
+          store.state.isLoading = false;
+          store.state.connected = true;
+          await store.dispatch("getUserDevices");
+        } catch (error) {
+          console.log("error connectin wallet: ", error);
+          store.state.isLoading = false;
+          store.dispatch("error", {
+            error: "There was an error enabling metamask",
+          });
+        }
+      } else {
+        store.state.isLoading = false;
+        store.dispatch(
+          "errorWithFooterExtension", {
+            errorTitle:"Mising Extension",
+
+          message: "Seems like you dont have metamask installed please use the below link to download",
+          footer: `<a href= https://metamask.io> Download Metamask</a>`
+        }
+        );
+      }
+    },
     getUserDevices: async function () {
       store.state.isLoading = true;
       const axios = require("axios").default;
@@ -132,16 +181,31 @@ const store = new Vuex.Store({
           store.state.isLoading = false;
         });
     },
+    getTextileData: async function () {
+      var pebbles = await getAllPebbles()
+      console.log("pebbles: ",pebbles)
+      return pebbles[0]
+    },
+    saveTextileData: async function (context, data) {
+      console.log("saving textile data: ", data);
+      await updatePebble([data])
+    },
+    createNewTextTileData: async function (context, data) {
+      var createdData = await createEntity(data)
+      return true
+    },
     loadData: async function() {
       console.log("fetching data");
       store.state.dappNFTs = [];
       store.state.isLoading = true;
-      var content = await store.dispatch("getCeramicData");
-      /* content.data = [];
+      var content = await store.dispatch("getTextileData");
+  /*   console.log("contentcontentcontentcontentcontent: ",content)
+         content.data = [];
          content.leaderboard = [];
-         await store.dispatch("saveCeramicData", content);
-      */
-      console.log("foundData: ", content.data);
+         content._id = content.data._id
+         await store.dispatch("saveTextileData", content);
+          */
+         console.log("foundData: ", content.data);
       for (var index in content.data) {
         var data = content.data[index];
         if (
@@ -256,6 +320,7 @@ const store = new Vuex.Store({
       swal.fire("Error!", message.error, "error").then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
+          message.onTap()
         }
       });
     },
@@ -275,6 +340,16 @@ const store = new Vuex.Store({
         footer: `<a href= https://metamask.io> Download Metamask</a>`,
       });
     },
+    errorWithFooterExtension(context, message) {
+      swal.fire({
+        icon: "error",
+        title: message.errorTitle,
+        text: message.message,
+        footer: message.footer,
+      }).then((result) => {
+        window.location.reload()
+      });
+    }
   },
 });
 

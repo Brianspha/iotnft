@@ -1,6 +1,6 @@
 const bigNumber = require("bignumber.js");
 let initialAmount = new bigNumber(9991112121212111231190990211212).toFixed();
-console.log("initialAmount: ", initialAmount);
+
 module.exports = {
   // default applies to all environments
   default: {

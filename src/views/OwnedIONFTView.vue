@@ -105,10 +105,10 @@ export default {
       let _this = this;
       this.ownedNFTs = [];
       this.$store.state.isLoading = true;
-      var content = await this.$store.dispatch("getCeramicData");
+      var content = await this.$store.dispatch("getTextileData");
       /* content.data = [];
       content.leaderboard = [];
-      await this.$store.dispatch("saveCeramicData", content);*/
+      await this.$store.dispatch("saveTextileData", content);*/
       for (var index in content.data) {
         var data = content.data[index];
         if (data.userAddress === _this.$store.state.userAddress) {

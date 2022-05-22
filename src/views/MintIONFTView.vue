@@ -301,7 +301,7 @@ export default {
     loadData: async function() {
       let _this = this;
       this.$store.state.isLoading = true;
-      var content = await this.$store.dispatch("getCeramicData");
+      var content = await this.$store.dispatch("getTextileData");
       /* content.data = [];
       content.leaderboard = [];
       await this.$store.dispatch("saveSkyData", content); */

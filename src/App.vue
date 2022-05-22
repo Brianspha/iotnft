@@ -30,6 +30,11 @@ import MintNFTModal from "./modals/MintNFTModal.vue";
 export default {
   name: "App",
   watch: {
+    chainId: async function(chainId) {
+      if (chainId !== 80001) {
+        await this.switchNetworks();
+      }
+    },
     "window.ethereum.networkVersion": function(networkId) {
       console.log("networkId: ", networkId);
       switch (networkId.toString()) {
@@ -42,15 +47,15 @@ export default {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x1252",
-                  chainName: "IOTEXT Testnet",
+                  chainId: "0x13881",
+                  chainName: "Polygon Testnet",
                   nativeCurrency: {
-                    name: "IOTEXT",
-                    symbol: "IOTX",
+                    name: "Matic",
+                    symbol: "Matic",
                     decimals: 18,
                   },
-                  rpcUrls: ["https://babel-api.testnet.iotex.io"],
-                  blockExplorerUrls: ["https://testnet.iotexscan.io/"],
+                  rpcUrls: ["wss://ws-matic-mumbai.chainstacklabs.com"],
+                  blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
                 },
               ],
             });
@@ -82,93 +87,82 @@ export default {
   methods: {
     authenticate() {
       this.$store.state.isLoading = true;
-      let _this = this;
-      _this.$store.state.ceramicClient.did
-        .authenticate()
-        .then(async (res, error) => {
-          this.init()
-            .then(async (res, err) => {
-              _this.$store.state.isLoading = false;
-            })
-            .catch((error) => {
-              _this.$store.state.isLoading = false;
-            });
+      this.init();
+      //this.$store.state.isLoading = false;
+    },
+    detectPageReload() {
+      if (window.performance) {
+        console.info("window.performance works fine on this browser");
+      }
+      console.info(performance.navigation.type);
+      if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+        console.info("This page is reloaded");
+        window.location.href = "./index.html";
+      } else {
+        console.info("This page is not reloaded");
+      }
+    },
+    isMetaMaskConnected() {
+      //Have to check the ethereum binding on the window object to see if it's installed
+      const { ethereum } = window;
+      return Boolean(ethereum && ethereum.isMetaMask);
+    },
+    switchNetworks: async function() {
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x13881" }],
         });
-    },
-    getRandomInRange(from, to, fixed) {
-      return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
-      // .toFixed() returns string, so ' * 1' is a trick to convert to number
-    },
-    connectWallet: async function() {
-      this.$store.state.isLoading = true;
-      if (typeof ethereum !== "undefined") {
-        try {
-          await ethereum.enable();
-          this.$store.state.userAddress = window.web3.eth.getDefaultAccount;
-          this.$store.state.connected = true;
-          console.log("found default account: ", this.$store.state.userAddress);
-        } catch (error) {
-          this.$store.state.isLoading = false;
+      } catch (addError) {
+        console.log(addError);
+        if (addError.code === 4001) {
           this.$store.dispatch("error", {
-            error: "There was an error getting enabling metamask",
+            error: "The DApp only works on the Polygon Mumbai Testnetwork",
+            onTap: async () => {
+              window.location.reload();
+            },
           });
         }
-      } else {
-        this.$store.state.isLoading = false;
-        this.$store.dispatch(
-          "errorWithFooterMetamask",
-          "Seems like you dont have metamask installed please use the below link to download"
-        );
       }
     },
     init: async function() {
       return new Promise(async (resolve) => {
+        this.$store.state.isLoading = true;
         let _this = this;
-        if (window.performance) {
-          console.info("window.performance works fine on this browser");
-        }
-        console.info(performance.navigation.type);
-        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-          console.info("This page is reloaded");
-          window.location.href = "./index.html";
-        } else {
-          console.info("This page is not reloaded");
-        }
-        EmbarkJS.onReady(async (error) => {
-          var accounts = await require("../contracts/embarkArtifacts/embarkjs").default.enableEthereum();
-          console.log("accounts; ", accounts);
-          this.$store.state.userAddress = accounts[0];
-          this.$store.state.connected = true;
-
-          if (typeof ethereum !== "undefined") {
-            // Supports EIP-1102 injected Ethereum providers.
-            window.web3 = new Web3(ethereum);
-            console.log("in 1st if");
-          } else if (typeof web3 !== "undefined") {
-            console.log("in 2nd if");
-            // Supports legacy injected Ethereum providers.
-            window.web3 = new Web3(web3.currentProvider);
-          } else {
-            // Your preferred fallback.
-            console.log("in 3rd if");
-            window.web3 = new Web3(
-              new Web3.providers.HttpProvider("http://localhost:8546")
-            );
-          }
-          window.ethereum.on("accountsChanged", function(accounts) {
-            _this.$store.state.userAddress = accounts[0];
-            window.location.reload();
-          });
-          window.ethereum.on("networkChanged", function(netId) {
-            _this.$store.state.userAddress = accounts[0];
-            window.location.reload();
-          });
+        this.detectPageReload();
+        await this.$store.dispatch("connectWallet");
+        console.log("window: ", window.web3);
+        window.ethereum.on("accountsChanged", function(accounts) {
+          _this.$store.state.userAddress = accounts[0];
+          window.location.reload();
         });
+        this.chainId = await web3.eth.getChainId();
+        console.log("chainId: ", this.chainId);
+        /* */
+        window.ethereum.on("chainChanged", (chainId) => {
+          console.log("chainChanged: ", chainId);
+          if (chainId !== "0x13881" || chainId !== "0x13881") {
+            this.$store.dispatch("error", {
+              error: "The DApp only works on the Polygon Mumbai Testnetwork",
+              onTap: async () => {
+                await this.switchNetworks();
+              },
+            });
+          } else {
+            window.location.reload();
+          } /* */
+          // Handle the new chain.
+          // Correctly handling chain changes can be complicated.
+          // We recommend reloading the page unless you have good reason not to.
+        });
+        await this.$store.dispatch("loadData");
+        //this.$store.state.isLoading = false;
       });
     },
   },
   data: () => ({
     drawer: false,
+    chainId: 0,
   }),
 };
 </script>

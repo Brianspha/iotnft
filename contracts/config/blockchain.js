@@ -1,7 +1,6 @@
 // This file contains only the basic configuration you need to run Embark's node
 // For additional configurations, see: https://framework.embarklabs.io/docs/blockchain_configuration.html
 require("dotenv").config();
-
 module.exports = {
   // default applies to all environments
   default: {
@@ -52,7 +51,23 @@ module.exports = {
     endpoint: process.env.NODE_URL, // Endpoint of an node to connect to. Can be on localhost or on the internet
     accounts: [
       {
-        privateKey: process.env.PRIVATE_KEY,
+        privateKey: process.env.IOTEX_ACCOUNT_KEY,
+      },
+    ],
+  },
+  matic: {
+    endpoint: process.env.NODE_URL_POLYGON, // Endpoint of an node to connect to. Can be on localhost or on the internet
+    accounts: [
+      {
+        privateKey: process.env.IOTEX_ACCOUNT_KEY,
+      },
+    ],
+  },
+  meter: {
+    endpoint: process.env.NODE_URL_POLYGON, // Endpoint of an node to connect to. Can be on localhost or on the internet
+    accounts: [
+      {
+        privateKey: process.env.IOTEX_ACCOUNT_KEY,
       },
     ],
   },
@@ -67,7 +82,7 @@ module.exports = {
   },
   harmony: {
     endpoint: process.env.NODE_URL_HARMONY, // Endpoint of an node to connect to. Can be on localhost or on the internet
-    accounts: [{ privateKey: `${process.env.H_PRIVATE_KEY}` }],
+    accounts: [{ privateKey: `${process.env.IOTEX_ACCOUNT_KEY}` }],
   },
   testnet: {
     networkType: "testnet", // Can be: testnet(ropsten), rinkeby, livenet or custom, in which case, it will use the specified networkId

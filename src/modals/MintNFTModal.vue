@@ -3,14 +3,13 @@
     <v-dialog v-model="$store.state.mintNFTDialog" width="100vw">
       <v-card>
         <v-card-title
-          style=" font-size:25px;  font-style: italic;
-            font-family:cursive;"
+          style="font-size: 25px; font-style: italic; font-family: cursive"
         >
           NFT Details
         </v-card-title>
         <v-card-text
           ><v-form ref="form" v-model="valid" lazy-validation>
-            <v-row style="padding-bottom:40px;"
+            <v-row style="padding-bottom: 40px"
               ><vue-css-doodle
                 ref="doodle"
                 :key="$store.state.selectedNFT.colorPallet"
@@ -28,7 +27,7 @@
               type="number"
               :rules="priceRules"
               v-model="$store.state.selectedNFT.price"
-              label="NFT Price (IOTEX)"
+              label="NFT Price (ETH)"
               :color="$store.state.primaryColor"
             ></v-text-field>
             <v-text-field
@@ -68,7 +67,7 @@
               <v-tooltip v-model="showToolTip" top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
-                    style="padding-left:30px;"
+                    style="padding-left: 30px"
                     width="4px"
                     height="4px"
                     color="#699c79"
@@ -76,9 +75,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon small color="#699c79">
-                      mdi-alert-circle
-                    </v-icon>
+                    <v-icon small color="#699c79"> mdi-alert-circle </v-icon>
                   </v-btn>
                 </template>
                 <span
@@ -92,15 +89,16 @@
         <v-row align="center" justify="center"
           ><v-btn
             style="
-            background-color:#6bdcc6;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:white;
-        "
+              background-color: #6bdcc6;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: white;
+            "
             @click="save"
             >Save AS PNG</v-btn
           ></v-row
@@ -119,15 +117,16 @@
           <v-btn
             v-if="valid"
             style="
-            background-color:#6bdcc6;
-            color:white;border-radius: 5px;
-            font-style: italic;
-            border-color: #699c79;
-            border-width: 1px;
-            font-family:cursive;
-            font-weight:bold;
-            color:black;
-        "
+              background-color: #6bdcc6;
+              color: white;
+              border-radius: 5px;
+              font-style: italic;
+              border-color: #699c79;
+              border-width: 1px;
+              font-family: cursive;
+              font-weight: bold;
+              color: black;
+            "
             @click="mintNFT"
           >
             MINT NFT
@@ -180,7 +179,7 @@ export default {
     this.$store.state.isLoading = false;
   },
   watch: {
-    "$store.state.mintNFTDialog": function(val) {
+    "$store.state.mintNFTDialog": function (val) {
       if (val) {
         this.generateArt();
       }
@@ -263,7 +262,7 @@ export default {
                 _this.$store.state.selectedNFT.isNFT = true;
                 _this.$store.state.selectedNFT.tokenId =
                   receipt.events.newTokenMinted.returnValues.tokenId;
-                var content = await _this.$store.dispatch("getCeramicData");
+                var content = await _this.$store.dispatch("getTextileData");
                 _this.$store.state.selectedNFT.isNFT = true;
                 _this.$store.state.selectedNFT.isDelegated = _this.delegate;
                 if (content.data.length === 0) {
@@ -289,11 +288,14 @@ export default {
                   ];
                   // content.data.push(_this.$store.state.userData);
                 } else {
+                  var found = false;
+
                   for (var index in content.data) {
                     //@dev for some reason for works better than map
                     var record = content.data[index];
                     if (record.userAddress === _this.$store.state.userAddress) {
-                      record.data.map((minted) => {
+                      found = true;
+                      record = record.data.map((minted) => {
                         if (
                           minted.imei === _this.$store.state.selectedNFT.imei
                         ) {
@@ -303,7 +305,6 @@ export default {
                       });
                     }
                   }
-                  var found = false;
                   content.leaderboard.map((user) => {
                     if (user.wallet === _this.$store.state.userAddress) {
                       user.ionfts_minted++;
@@ -318,10 +319,20 @@ export default {
                       ionfts_minted: 1,
                       ionfts_bought: 0,
                     });
+                    content.data.push({
+                      userAddress: _this.$store.state.userAddress,
+                      imeis: [_this.$store.state.selectedNFT.imei],
+                      data: [
+                        {
+                          imei: _this.$store.state.selectedNFT.imei,
+                          nfts: [_this.$store.state.selectedNFT],
+                        },
+                      ],
+                    });
                   }
                 }
                 console.log("updatedContent: ", content);
-                await _this.$store.dispatch("saveCeramicData", content);
+                await _this.$store.dispatch("saveTextileData", content);
                 // _this.$store.state.mintNFTDialog = false;
                 if (_this.delegate) {
                   _this.$store.dispatch(
@@ -350,7 +361,7 @@ export default {
           });
       }
     },
-    transferToken: async function(tokenId) {
+    transferToken: async function (tokenId) {
       return new Promise((resolve) => {
         let _this = this;
         this.$store.state.tokenContract.methods
@@ -373,7 +384,7 @@ export default {
           });
       });
     },
-    save: async function() {
+    save: async function () {
       if (!this.tokenMinted) {
         const doodle = document.querySelector("css-doodle");
         console.log("doodle: ", doodle);

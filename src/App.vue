@@ -119,7 +119,7 @@ export default {
           this.$store.dispatch("error", {
             error: "The DApp only works on the Polygon Mumbai Testnetwork",
             onTap: async () => {
-              window.location.reload();
+              window.location.reload()
             },
           });
         }

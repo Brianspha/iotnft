@@ -37,7 +37,7 @@
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
     "node-random-name": "^1.0.1",
-    "protobufjs": "^6.11.2",
+    "protobufjs": "^6.11.3",
     "restana": "^4.9.1",
     "skynet-js": "^4.0.17-beta",
     "sweetalert2": "^11.1.7",

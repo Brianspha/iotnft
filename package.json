@@ -50,9 +50,9 @@
     "vuetify": "^2.4.1",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4",
-    "web3": "^1.5.3",
-    "web3-eth": "^1.5.2",
-    "web3-eth-accounts": "^1.5.3",
+    "web3": "^4.16.0",
+    "web3-eth": "^4.11.1",
+    "web3-eth-accounts": "^4.3.1",
     "web3-utils": "^1.4.0"
   },
   "devDependencies": {
